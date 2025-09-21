@@ -3,6 +3,7 @@
 #include "card.h"
 
 deck::deck(){
+    card newCard(1, SPADE);
 }
 
 void deck::shuffle() {

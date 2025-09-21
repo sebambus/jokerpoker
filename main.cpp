@@ -4,7 +4,7 @@
 deck d;
 
 void playlevel() {
-    d = deck();
+    return;
 }
 
 int main() {

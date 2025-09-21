@@ -1,5 +1,4 @@
-using namespace std;
-#include <string>
+#pragma once
 
 enum suit {
     SPADE,
@@ -10,9 +9,9 @@ enum suit {
 
 class card{
 public:
-    int cardValue;
-    suit cardSuit;
+    int cardValue = 0;
+    suit cardSuit = SPADE;
 
-    card(int value, suit suit);
+    card(int v, suit s);
     void print();
 };
