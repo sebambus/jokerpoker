@@ -3,7 +3,9 @@
 #include "card.h"
 
 deck::deck(){
-    card newCard(1, SPADE);
+    for (int i = 1; i < 14; i++)
+        for(int j = 0; j < 4; j++)  // using the integer version of the enum to make for loop easier
+            cards.push_back(card(i, (suit) j));
 }
 
 void deck::shuffle() {
