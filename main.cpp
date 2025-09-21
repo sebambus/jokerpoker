@@ -1,5 +1,6 @@
 #include <ncurses.h>
-#include "deck.h"
+#include "deck.cpp"
+#include "card.cpp"
 
 deck d;
 
