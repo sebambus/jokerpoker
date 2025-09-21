@@ -1,10 +1,21 @@
 #include <ncurses.h>
+#include "deck.h"
+
+deck d;
+
+void playlevel() {
+    d = deck();
+}
 
 int main() {
-    initscr();             // Start curses mode
+    initscr();             // Start curses modeee
     printw("Hello World !!!"); // Print Hello World
     refresh();             // Print it on to the real screen
-    getch();               // Wait for user input
+    printw("Hello World !!!"); // Print Hello World
+    refresh();             // Print it on to the real screen
+
+    playlevel();
+
     endwin();              // End curses mode
     return 0;
 }

@@ -9,8 +9,10 @@ enum suit {
 };
 
 class card{
+public:
     int cardValue;
     suit cardSuit;
 
     card(int value, suit suit);
+    void print();
 };
