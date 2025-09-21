@@ -6,9 +6,11 @@ enum suit {
     CLUB,
     HEART,
     DIAMOND
-}
+};
 
 class card{
-    int value;
+    int cardValue;
     suit cardSuit;
-}
+
+    card(int value, suit suit);
+};
