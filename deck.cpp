@@ -1,5 +1,9 @@
 #include <cstdlib>
 #include "deck.h"
+#include "card.h"
+
+deck::deck(){
+}
 
 void deck::shuffle() {
     for(int i = 0; i < cards.size(); i++) {

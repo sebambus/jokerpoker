@@ -9,6 +9,7 @@ enum suit {
 };
 
 class card{
+public:
     int cardValue;
     suit cardSuit;
 
