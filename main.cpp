@@ -7,7 +7,17 @@
 deck d;
 
 void printcard(card c) {
-    printw("%d ", c.cardValue);
+    char suitChar;
+    if (c.cardSuit == SPADE)
+        suitChar = 'S';
+    else if (c.cardSuit == HEART)
+        suitChar = 'H';
+    else if (c.cardSuit == CLUB)
+        suitChar = 'C';
+    else if (c.cardSuit == DIAMOND)
+        suitChar = 'D';
+
+    printw("%d%c ", c.cardValue, suitChar);
 }
 
 void playlevel() {
