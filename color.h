@@ -19,7 +19,7 @@ short decodecolor(int c) {
     case 7:
         return COLOR_WHITE; 
     }
-    return COLOR_BLACK;
+    return COLOR_WHITE;
 }
 
 int encodecolor(short c) {
@@ -41,7 +41,7 @@ int encodecolor(short c) {
     case COLOR_WHITE: 
         return 7;
     }
-    return COLOR_BLACK;
+    return COLOR_WHITE;
 }
 
 void initcolors() {
