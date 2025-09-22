@@ -8,13 +8,14 @@ deck d;
 
 void printcard(card c) {
     char suitChar;
-    if (c.cardSuit == SPADE)
+    suit cSuit = c.cardSuit;
+    if (cSuit == SPADE)
         suitChar = 'S';
-    else if (c.cardSuit == HEART)
+    else if (cSuit == HEART)
         suitChar = 'H';
-    else if (c.cardSuit == CLUB)
+    else if (cSuit == CLUB)
         suitChar = 'C';
-    else if (c.cardSuit == DIAMOND)
+    else if (cSuit == DIAMOND)
         suitChar = 'D';
 
     printw("%d%c ", c.cardValue, suitChar);
