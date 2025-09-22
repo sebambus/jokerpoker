@@ -2,6 +2,7 @@
 #include <vector>
 #include "deck.h"
 #include "card.h"
+#include "color.h"
 
 deck d;
 
