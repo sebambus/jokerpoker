@@ -1,6 +1,6 @@
-#include <cstdlib>
 #include "deck.h"
-#include "card.h"
+
+#include <cstdlib>
 
 deck::deck(){
     for (int i = 1; i < 14; i++)
