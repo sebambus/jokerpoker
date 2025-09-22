@@ -13,5 +13,4 @@ public:
     suit cardSuit = SPADE;
 
     card(int v, suit s);
-    void print();
 };

@@ -4,9 +4,9 @@
 #include "card.h"
 
 class deck {
-private:
-    std::vector<card> cards;
 public:
+    std::vector<card> cards;
+
     deck();
     void shuffle();
 };
