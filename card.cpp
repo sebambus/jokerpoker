@@ -31,5 +31,5 @@ void card::print() {
         suitChar = '?';
     }
 
-    printw("%d%c ", cardValue, suitChar);
+    printw("%d%c", cardValue, suitChar);
 }

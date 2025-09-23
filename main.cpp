@@ -13,6 +13,8 @@ void playlevel() {
         hand.push_back(d.cards.back());
         d.cards.pop_back();
         d.cards[i].print();
+        setcolor(COLOR_WHITE, COLOR_BLACK);
+        printw(" ");
     }
 }
 
