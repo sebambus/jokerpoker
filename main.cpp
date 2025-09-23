@@ -8,15 +8,26 @@ deck d;
 
 void printcard(card c) {
     char suitChar;
-    suit cSuit = c.cardSuit;
-    if (cSuit == SPADE)
+    switch (c.cardSuit) {
+    case SPADE:
         suitChar = 'S';
-    else if (cSuit == HEART)
+        setcolor(COLOR_BLACK, COLOR_WHITE);
+        break;
+    case HEART:
         suitChar = 'H';
-    else if (cSuit == CLUB)
+        setcolor(COLOR_RED, COLOR_WHITE);
+        break;
+    case CLUB:
         suitChar = 'C';
-    else if (cSuit == DIAMOND)
+        setcolor(COLOR_BLUE, COLOR_WHITE);
+        break;
+    case DIAMOND:
         suitChar = 'D';
+        setcolor(COLOR_YELLOW, COLOR_WHITE);
+        break;
+    default:
+        suitChar = '?';
+    }
 
     printw("%d%c ", c.cardValue, suitChar);
 }
@@ -33,6 +44,8 @@ void playlevel() {
 
 int main() {
     initscr();             // Start curses modeee
+    start_color();
+    initcolors();
 
     playlevel();
     refresh();             // Print it on to the real screen
