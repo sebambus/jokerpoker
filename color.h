@@ -1,3 +1,4 @@
+#pragma once
 #include <ncurses.h>
 
 short decodecolor(int c) {
