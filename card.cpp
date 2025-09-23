@@ -1,6 +1,6 @@
 #include "card.h"
 
-#include <ncurses.h>
+#include <ncursesw/ncurses.h>
 #include "color.h"
 
 card::card(int value, suit suit){
@@ -9,26 +9,27 @@ card::card(int value, suit suit){
 }
 
 void card::print() {
-    char suitChar, valChar;
+    char valChar;
+    const wchar_t* suitChar;
     switch (cardSuit) {
     case SPADE:
-        suitChar = 'S';
+        suitChar = L"\u2660";
         setcolor(COLOR_BLACK, COLOR_WHITE);
         break;
     case HEART:
-        suitChar = 'H';
+        suitChar = L"\u2665";
         setcolor(COLOR_RED, COLOR_WHITE);
         break;
     case CLUB:
-        suitChar = 'C';
+        suitChar = L"\u2663";
         setcolor(COLOR_BLUE, COLOR_WHITE);
         break;
     case DIAMOND:
-        suitChar = 'D';
+        suitChar = L"\u2666";
         setcolor(COLOR_YELLOW, COLOR_WHITE);
         break;
     default:
-        suitChar = '?';
+        suitChar = L"?";
     }
 
     switch (cardValue) {
@@ -51,5 +52,6 @@ void card::print() {
         valChar = '0' + cardValue;
     }
 
-    printw("%c%c", valChar, suitChar);
+    printw("%c", valChar);
+    mvaddwstr(getcury(stdscr), getcurx(stdscr), suitChar);
 }

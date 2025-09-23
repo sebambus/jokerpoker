@@ -7,6 +7,6 @@ class deck {
 public:
     std::vector<card> cards;
 
-    deck();
+    void fillDeck();
     void shuffle();
 };
