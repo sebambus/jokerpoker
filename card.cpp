@@ -9,7 +9,7 @@ card::card(int value, suit suit){
 }
 
 void card::print() {
-    char suitChar;
+    char suitChar, valChar;
     switch (cardSuit) {
     case SPADE:
         suitChar = 'S';
@@ -31,5 +31,25 @@ void card::print() {
         suitChar = '?';
     }
 
-    printw("%d%c", cardValue, suitChar);
+    switch (cardValue) {
+    case 13:
+        valChar = 'K';
+        break;
+    case 12:
+        valChar = 'Q';
+        break;
+    case 11:
+        valChar = 'J';
+        break;
+    case 10:
+        valChar = 'T';
+        break;
+    case 1:
+        valChar = 'A';
+        break;
+    default:
+        valChar = '0' + cardValue;
+    }
+
+    printw("%c%c", valChar, suitChar);
 }
