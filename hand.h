@@ -5,7 +5,10 @@
 class hand : public deck {
 public:
     std::vector<bool> selected;
+    int cursor;
 
+    hand();
+    hand(std::vector<card>);
     void add(card);
     card pop();
     std::vector<card> popSelected();

@@ -17,7 +17,31 @@ void playlevel() {
         h.add(d.cards.back());
         d.cards.pop_back();
     }
-    h.print();
+
+    hand played;    
+    while(true) {
+        clear();
+        h.print();
+        played.print();
+        refresh();
+        switch (getchar()) {
+            case 'q':
+                return;
+            case 'h':
+                h.cursor--;
+                break;
+            case 'l':
+                h.cursor++;
+                break;
+            case ' ':
+                h.selected[h.cursor] = !h.selected[h.cursor];
+                break;
+            case 'p':
+                played = hand(h.popSelected());
+                played.cursor = -1;
+                break;
+        }
+    }
 }
 
 int main() {
@@ -28,8 +52,6 @@ int main() {
 
     playlevel();
     refresh();             // Print it on to the real screen
-
-    getchar();
 
     endwin();              // End curses mode
     return 0;
