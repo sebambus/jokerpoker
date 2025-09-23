@@ -3,19 +3,18 @@
 #include "deck.h"
 #include "card.h"
 #include "color.h"
+#include "hand.h"
 
 deck d;
 
 void playlevel() {
     d.shuffle();
-    std::vector<card> hand;
+    hand h;
     for (int i = 0; i < 8; i++) {
-        hand.push_back(d.cards.back());
+        h.add(d.cards.back());
         d.cards.pop_back();
-        d.cards[i].print();
-        setcolor(COLOR_WHITE, COLOR_BLACK);
-        printw(" ");
     }
+    h.print();
 }
 
 int main() {
