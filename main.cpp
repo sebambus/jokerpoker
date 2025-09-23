@@ -8,6 +8,7 @@
 deck d;
 
 void playlevel() {
+    d.fillDeck();
     d.shuffle();
     hand h;
     for (int i = 0; i < 8; i++) {
