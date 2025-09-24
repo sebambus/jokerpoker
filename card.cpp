@@ -3,14 +3,17 @@
 #include <ncursesw/ncurses.h>
 #include "color.h"
 
+// new card of value "v" and suit "s"
 card::card(int value, suit suit){
     cardValue = value;
     cardSuit = suit;
 }
 
+// prints card in color with one rank char and one suit wchar_t
 void card::print() {
     char valChar;
-    const wchar_t* suitChar;
+    const wchar_t* suitChar; // unicode string
+
     switch (cardSuit) {
     case SPADE:
         suitChar = L"\u2660";
@@ -53,5 +56,6 @@ void card::print() {
     }
 
     printw("%c", valChar);
-    mvaddwstr(getcury(stdscr), getcurx(stdscr), suitChar);
+    // prints unicode string
+    addwstr(suitChar);
 }
