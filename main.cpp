@@ -8,6 +8,7 @@
 #include "hand.h"
 
 deck d;
+int score = 0;
 
 void playlevel() {
     d.fillDeck();
@@ -28,10 +29,10 @@ void playlevel() {
             case 'q':
                 return;
             case 'h':
-                h.cursor--;
+                h.moveCursor(-1);
                 break;
             case 'l':
-                h.cursor++;
+                h.moveCursor(1);
                 break;
             case ' ':
                 h.selected[h.cursor] = !h.selected[h.cursor];

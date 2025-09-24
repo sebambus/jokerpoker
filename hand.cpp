@@ -56,3 +56,10 @@ void hand::print() {
     }
     move(y+2, x);
 }
+
+void hand::moveCursor(int moveBy){
+    int newPosition = cursor + moveBy;
+    if (newPosition > selected.size() -1 || newPosition < 0)
+        return; //dont move cursor if attempting to move beyond hand
+    cursor += moveBy;
+}

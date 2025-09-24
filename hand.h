@@ -13,4 +13,5 @@ public:
     card pop();
     std::vector<card> popSelected();
     void print();
+    void moveCursor(int moveBy);
 };
