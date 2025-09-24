@@ -40,6 +40,10 @@ void playlevel() {
             case 'p':
                 played = hand(h.popSelected());
                 played.cursor = -1;
+                for (int i = 0; i < played.selected.size(); i++) { //draw new cards
+                    h.add(d.cards.back());
+                    d.cards.pop_back();
+                }
                 break;
         }
     }
