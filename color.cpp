@@ -49,6 +49,7 @@ int encodecolor(short c) {
 }
 
 // initializes every combo of 3-bit colors as colorpair
+// the first four bits of the pair id are the background, the last four bits are the foreground
 void initcolors() {
     for(int fg = 0; fg < 8; fg++)
         for(int bg = 0; bg < 8; bg++) {

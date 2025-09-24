@@ -12,6 +12,8 @@ public:
     int cardValue = 0;
     suit cardSuit = SPADE;
 
+    // new card of value "v" and suit "s"
     card(int v, suit s);
+    // prints card in color with one rank char and one suit wchar_t
     void print();
 };
