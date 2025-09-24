@@ -2,6 +2,7 @@
 
 #include <ncurses.h>
 
+// converts 3-bit color to ncurses constant
 short decodecolor(int c) {
     switch(c) {
     case 0:
@@ -24,6 +25,7 @@ short decodecolor(int c) {
     return COLOR_WHITE;
 }
 
+// converts ncurses constant to 3-bit color
 int encodecolor(short c) {
     switch(c) {
     case COLOR_BLACK: 
@@ -46,6 +48,7 @@ int encodecolor(short c) {
     return COLOR_WHITE;
 }
 
+// initializes every combo of 3-bit colors as colorpair
 void initcolors() {
     for(int fg = 0; fg < 8; fg++)
         for(int bg = 0; bg < 8; bg++) {
@@ -53,7 +56,7 @@ void initcolors() {
         }
 }
 
-// sets color mode, first arg is text and second arg is background
+// sets foreground (fg) and background (bg) with ncurses constants
 void setcolor(short fg, short bg) {
     attron(COLOR_PAIR(encodecolor(fg)+16*encodecolor(bg)));
 }
