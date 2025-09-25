@@ -7,11 +7,17 @@ public:
     std::vector<bool> selected;
     int cursor;
 
+    // creates blank hand
     hand();
+    // creates hand containing given cards
     hand(std::vector<card>);
     void add(card);
+    // deletes and returns last card in hand
     card pop();
+    // deletes and returns a vector of all selected cards
     std::vector<card> popSelected();
+    // prints all cards in hand, with cursor highlighted and selected cards shifted
     void print();
+    // moves cursor right by moveBy
     void moveCursor(int moveBy);
 };
