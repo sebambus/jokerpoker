@@ -71,6 +71,7 @@ void hand::sortBySuit(){
     std::vector<card> diamonds;
     std::vector<card> clubs;
 
+    //sort cards into vectors by suit
     for (int i = 0; i < cards.size(); i++)
     {
         suit cardSuit = cards.at(i).cardSuit;
@@ -90,26 +91,23 @@ void hand::sortBySuit(){
         }        
     }
 
-    cards.clear();
-
+    //sort each vector by value
     std::vector<card>sortedSpades = subsortByValue(spades);
     std::vector<card>sortedHearts = subsortByValue(hearts);
     std::vector<card>sortedDiamonds = subsortByValue(diamonds);
     std::vector<card>sortedClubs = subsortByValue(clubs);
+    std::vector<card> sortedVectors[4] = {sortedSpades, sortedHearts, sortedDiamonds, sortedClubs};
 
-    for (int i = 0; i < sortedSpades.size(); i++){
-        cards.push_back(sortedSpades.at(i));
+    //add them to hand
+    cards.clear();
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < sortedVectors[i].size(); j++)
+        {
+            cards.push_back(sortedVectors[i].at(j));
+        }
+        
     }
-    for (int i = 0; i < sortedHearts.size(); i++){
-        cards.push_back(sortedHearts.at(i));
-    }
-    for (int i = 0; i < sortedDiamonds.size(); i++){
-        cards.push_back(sortedDiamonds.at(i));
-    }
-    for (int i = 0; i < sortedClubs.size(); i++){
-        cards.push_back(sortedClubs.at(i));
-    }
-
     return;
 }
 
