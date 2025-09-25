@@ -44,7 +44,10 @@ void playlevel() {
                 break;
             // _ - select
             case ' ':
-                h.selected[h.cursor] = !h.selected[h.cursor];
+                if (h.cardsSelected() < 5) //maximum playable hand
+                    h.selected[h.cursor] = !h.selected[h.cursor];
+                else   
+                    h.selected[h.cursor] = false;
                 break;
             // p - play
             case 'p':

@@ -65,6 +65,17 @@ void hand::moveCursor(int moveBy){
     cursor += moveBy;
 }
 
+int hand::cardsSelected(){
+    int n;
+    for (int i = 0; i < selected.size(); i++)
+    {
+        if (selected.at(i) == true){
+            n++;
+        }
+    }
+    return n;
+}
+
 void hand::sortBySuit(){
     std::vector<card> spades;
     std::vector<card> hearts;
