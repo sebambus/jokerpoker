@@ -109,5 +109,24 @@ void hand::sortBySuit(){
 }
 
 void hand::sortByValue(){
+    std::vector<card> sortedVector;
+
+    for (int i = 1; i < 15; i++) //for each possible value, check each card
+    {
+        for (int j = 0; j < cards.size(); j++)
+        {
+            if (cards.at(j).cardValue == i) //if card is that value, add it the sorted vector
+                sortedVector.push_back(cards.at(j));
+        }
+    }
+    
+    cards.clear();
+
+    for (int i = 0; i < sortedVector.size(); i++)
+    {
+        cards.push_back(sortedVector.at(i));
+    }
+    
+
     return;
 }
