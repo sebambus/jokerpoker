@@ -41,6 +41,7 @@ std::vector<card> hand::popSelected() {
 }
 
 void hand::print() {
+    sortBySuit();
     int x, y;
     getyx(stdscr, y, x);
     for(int i = 0; i < cards.size(); i++) {
@@ -59,7 +60,54 @@ void hand::print() {
 
 void hand::moveCursor(int moveBy){
     int newPosition = cursor + moveBy;
-    if (newPosition > selected.size() -1 || newPosition < 0)
+    if (newPosition > cards.size() -1 || newPosition < 0)
         return; //dont move cursor if attempting to move beyond hand
     cursor += moveBy;
+}
+
+void hand::sortBySuit(){
+    std::vector<card> spades;
+    std::vector<card> hearts;
+    std::vector<card> diamonds;
+    std::vector<card> clubs;
+
+    for (int i = 0; i < cards.size(); i++)
+    {
+        suit cardSuit = cards.at(i).cardSuit;
+        switch (cardSuit){
+        case SPADE:
+            spades.push_back(cards.at(i));
+            break;
+        case HEART:
+            hearts.push_back(cards.at(i));
+            break;
+        case DIAMOND:
+            diamonds.push_back(cards.at(i));
+            break;
+        case CLUB:
+            clubs.push_back(cards.at(i));
+            break;
+        }        
+    }
+    
+    cards.clear();
+    
+    for (int i = 0; i < spades.size(); i++){
+        cards.push_back(spades.at(i));
+    }
+    for (int i = 0; i < hearts.size(); i++){
+        cards.push_back(hearts.at(i));
+    }
+    for (int i = 0; i < diamonds.size(); i++){
+        cards.push_back(diamonds.at(i));
+    }
+    for (int i = 0; i < clubs.size(); i++){
+        cards.push_back(clubs.at(i));
+    }
+
+    return;
+}
+
+void hand::sortByValue(){
+    return;
 }

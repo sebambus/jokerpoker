@@ -14,4 +14,6 @@ public:
     std::vector<card> popSelected();
     void print();
     void moveCursor(int moveBy);
+    void sortBySuit();
+    void sortByValue();
 };
