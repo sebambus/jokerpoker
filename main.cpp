@@ -44,12 +44,19 @@ void playlevel() {
                 break;
             // _ - select
             case ' ':
-                h.selected[h.cursor] = !h.selected[h.cursor];
+                if (h.cardsSelected() < 5) //maximum playable hand
+                    h.selected[h.cursor] = !h.selected[h.cursor];
+                else   
+                    h.selected[h.cursor] = false;
                 break;
             // p - play
             case 'p':
                 played = hand(h.popSelected());
                 played.cursor = -1;
+                for (int i = 0; i < played.selected.size(); i++) { //draw new cards
+                    h.add(d.cards.back());
+                    d.cards.pop_back();
+                }
                 break;
         }
     }

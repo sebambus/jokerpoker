@@ -1,5 +1,6 @@
 #include "deck.h"
-
+#include <random>
+#include <time.h>
 #include <cstdlib>
 
 // adds the standard 52 poker cards to the deck
@@ -11,6 +12,7 @@ void deck::fillDeck() {
 
 // shuffles cards using fisher-yates algorithm
 void deck::shuffle() {
+    srand(time(0)); //seed rand num generator
     for(int i = 0; i < cards.size(); i++) {
         int r = i + rand() % (cards.size() - i);
         card temp = cards[r];

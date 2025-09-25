@@ -20,4 +20,10 @@ public:
     void print();
     // moves cursor right by moveBy
     void moveCursor(int moveBy);
+    void sortBySuit();
+    void sortByValue();
+    int cardsSelected();
+private:
+    std::vector<card> subsortBySuit(std::vector<card> sub);
+    std::vector<card> subsortByValue(std::vector<card> sub);
 };

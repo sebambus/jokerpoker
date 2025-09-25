@@ -49,6 +49,7 @@ std::vector<card> hand::popSelected() {
 
 // prints all cards in hand, with cursor highlighted and selected cards shifted
 void hand::print() {
+    sortBySuit();
     int x, y;
     getyx(stdscr, y, x);
     for(int i = 0; i < cards.size(); i++) {
@@ -74,7 +75,110 @@ void hand::print() {
 // moves cursor right by moveBy
 void hand::moveCursor(int moveBy){
     int newPosition = cursor + moveBy;
-    if (newPosition > selected.size() -1 || newPosition < 0)
+    if (newPosition > cards.size() -1 || newPosition < 0)
         return; //dont move cursor if attempting to move beyond hand
     cursor += moveBy;
 }
+
+int hand::cardsSelected(){
+    int n;
+    for (int i = 0; i < selected.size(); i++)
+    {
+        if (selected.at(i) == true){
+            n++;
+        }
+    }
+    return n;
+}
+
+void hand::sortBySuit(){
+    std::vector<card> spades;
+    std::vector<card> hearts;
+    std::vector<card> diamonds;
+    std::vector<card> clubs;
+
+    //sort cards into vectors by suit
+    for (int i = 0; i < cards.size(); i++)
+    {
+        suit cardSuit = cards.at(i).cardSuit;
+        switch (cardSuit){
+        case SPADE:
+            spades.push_back(cards.at(i));
+            break;
+        case HEART:
+            hearts.push_back(cards.at(i));
+            break;
+        case DIAMOND:
+            diamonds.push_back(cards.at(i));
+            break;
+        case CLUB:
+            clubs.push_back(cards.at(i));
+            break;
+        }        
+    }
+
+    //sort each vector by value
+    std::vector<card>sortedSpades = subsortByValue(spades);
+    std::vector<card>sortedHearts = subsortByValue(hearts);
+    std::vector<card>sortedDiamonds = subsortByValue(diamonds);
+    std::vector<card>sortedClubs = subsortByValue(clubs);
+    std::vector<card> sortedVectors[4] = {sortedSpades, sortedHearts, sortedDiamonds, sortedClubs};
+
+    //add them to hand
+    cards.clear();
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < sortedVectors[i].size(); j++)
+        {
+            cards.push_back(sortedVectors[i].at(j));
+        }
+        
+    }
+    return;
+}
+
+
+
+void hand::sortByValue(){
+    std::vector<card> sortedVector;
+
+    for (int i = 1; i < 15; i++) //for each possible value, check each card
+    {
+        for (int j = 0; j < cards.size(); j++)
+        {
+            if (cards.at(j).cardValue == i) //if card is that value, add it the sorted vector
+                sortedVector.push_back(cards.at(j));
+        }
+    }
+    
+    cards.clear();
+
+    for (int i = 0; i < sortedVector.size(); i++)
+    {
+        cards.push_back(sortedVector.at(i));
+    }
+    
+
+    return;
+}
+
+//helper functions for sorting.
+//take vectors split up with one method, then sort them using the other
+std::vector<card> hand::subsortByValue(std::vector<card> sub){ //sorts each suit group by value
+    std::vector<card> sortedVector;
+    for (int i = 1; i < 15; i++) //for each possible value, check each card
+    {
+        for (int j = 0; j < sub.size(); j++)
+        {
+            if (sub.at(j).cardValue == i) //if card is that value, add it the sorted vector
+                sortedVector.push_back(sub.at(j));
+        }
+    }
+
+    return sortedVector;
+}
+
+std::vector<card> hand::subsortBySuit(std::vector<card> sub){
+    return sub;
+}
+
