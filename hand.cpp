@@ -89,24 +89,31 @@ void hand::sortBySuit(){
             break;
         }        
     }
-    
+
     cards.clear();
-    
-    for (int i = 0; i < spades.size(); i++){
-        cards.push_back(spades.at(i));
+
+    std::vector<card>sortedSpades = subsortByValue(spades);
+    std::vector<card>sortedHearts = subsortByValue(hearts);
+    std::vector<card>sortedDiamonds = subsortByValue(diamonds);
+    std::vector<card>sortedClubs = subsortByValue(clubs);
+
+    for (int i = 0; i < sortedSpades.size(); i++){
+        cards.push_back(sortedSpades.at(i));
     }
-    for (int i = 0; i < hearts.size(); i++){
-        cards.push_back(hearts.at(i));
+    for (int i = 0; i < sortedHearts.size(); i++){
+        cards.push_back(sortedHearts.at(i));
     }
-    for (int i = 0; i < diamonds.size(); i++){
-        cards.push_back(diamonds.at(i));
+    for (int i = 0; i < sortedDiamonds.size(); i++){
+        cards.push_back(sortedDiamonds.at(i));
     }
-    for (int i = 0; i < clubs.size(); i++){
-        cards.push_back(clubs.at(i));
+    for (int i = 0; i < sortedClubs.size(); i++){
+        cards.push_back(sortedClubs.at(i));
     }
 
     return;
 }
+
+
 
 void hand::sortByValue(){
     std::vector<card> sortedVector;
@@ -130,3 +137,24 @@ void hand::sortByValue(){
 
     return;
 }
+
+//helper functions for sorting.
+//take vectors split up with one method, then sort them using the other
+std::vector<card> hand::subsortByValue(std::vector<card> sub){ //sorts each suit group by value
+    std::vector<card> sortedVector;
+    for (int i = 1; i < 15; i++) //for each possible value, check each card
+    {
+        for (int j = 0; j < sub.size(); j++)
+        {
+            if (sub.at(j).cardValue == i) //if card is that value, add it the sorted vector
+                sortedVector.push_back(sub.at(j));
+        }
+    }
+
+    return sortedVector;
+}
+
+std::vector<card> hand::subsortBySuit(std::vector<card> sub){
+    return sub;
+}
+
