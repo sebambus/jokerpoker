@@ -4,7 +4,7 @@
 
 enum handtype {
     FIVE_FLUSH,
-    FIVE_HOUSE,
+    HOUSE_FLUSH,
     FIVE_KIND,
     ROYAL_FLUSH,
     STRAIGHT_FLUSH,

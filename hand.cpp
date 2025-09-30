@@ -183,31 +183,51 @@ std::vector<card> hand::subsortBySuit(std::vector<card> sub){
 }
 
 handtype hand::scoreType() {
+    // counting suits and ranks
     int suitCount[4];
-    for(card c : cards)
+    int rankCount[13];
+    for(card c : cards) {
         suitCount[(int) c.cardSuit]++;
+        rankCount[c.cardValue-1]++;
+    }
+
+    // finds top two rank counts
+    int max = 0;
+    int next = 0;
+    for(int x : rankCount) {
+        if(max < x) {
+            next = max;
+            max = x;
+        }
+        else if(next < x)
+            next = x;
+    }
+
+    // finds flush
     bool flush = false;
-    for(int i : suitCount)
-        if(suitCount[i] == 5)
+    for(int x : suitCount)
+        if(x == 5)
             flush = true;
 
-    int rankCount[13];
-    for(card c : cards)
-        if(c.cardValue > 0 && c.cardValue < 14)
-            rankCount[c.cardValue-1]++;
-    int maxRankCount = 0;
-    for(int x : rankCount)
-        if(maxRankCount > x)
-            maxRankCount = x;
-    // five of a kind
-    if(maxRankCount >= 5)
-        if(flush) return FIVE_KIND;
-        else return FIVE_FLUSH;
-    // four of a kind
-    if(maxRankCount == 4)
-        return FOUR_KIND;
-    // full house/three of a kind
-    if(maxRankCount == 3) {
+    bool straight;
+    bool royal;
+    // finds straight/royal straight TODO
+    royal == rankCount[0] | rankCount[12] | rankCount[11] | rankCount[10] | rankCount[9] != 0;
+    for(int i = 4; i < 13; i++)
+        if(rankCount[i] | rankCount[i-1] | rankCount[i-2] | rankCount[i-3] | rankCount[i-4] != 0)
+            straight == true;
 
-    }
+    if(flush && max == 5) return FIVE_FLUSH;
+    if(flush && max == 3 && next == 2) return HOUSE_FLUSH;
+    if(max == 5) return FIVE_KIND;
+    if(royal && straight && flush) return ROYAL_FLUSH;
+    if(straight && flush) return STRAIGHT_FLUSH;
+    if(max == 4) return FOUR_KIND;
+    if(max == 3 && next == 2) return FULL_HOUSE;
+    if(flush) return FLUSH;
+    if(straight) return STRAIGHT;
+    if(max == 3) return THREE_KIND;
+    if(max == 2 && next == 2) return TWO_PAIR;
+    if(max == 2) return PAIR;
+    else return HIGH;
 }
