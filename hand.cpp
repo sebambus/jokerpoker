@@ -183,6 +183,14 @@ std::vector<card> hand::subsortBySuit(std::vector<card> sub){
 }
 
 handtype hand::scoreType() {
+    int suitCount[4];
+    for(card c : cards)
+        suitCount[(int) c.cardSuit]++;
+    bool flush = false;
+    for(int i : suitCount)
+        if(suitCount[i] == 5)
+            flush = true;
+
     int rankCount[13];
     for(card c : cards)
         if(c.cardValue > 0 && c.cardValue < 14)
@@ -193,12 +201,13 @@ handtype hand::scoreType() {
             maxRankCount = x;
     // five of a kind
     if(maxRankCount >= 5)
-        return FIVE_KIND;
+        if(flush) return FIVE_KIND;
+        else return FIVE_FLUSH;
     // four of a kind
     if(maxRankCount == 4)
         return FOUR_KIND;
     // full house/three of a kind
     if(maxRankCount == 3) {
-        
+
     }
 }
