@@ -27,7 +27,6 @@ int scorekeep::calculateScore(hand played){
     int mult = scoreTable[type][1];
     int score = flat;
 
-
     for (int i = 0; i < played.cards.size(); i++)
     {
         score += played.cards[i].cardValue;

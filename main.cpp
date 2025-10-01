@@ -65,7 +65,9 @@ void playlevel() {
                 break;
             // p - play
             case 'p':
+                if (playsLeft == 0) break;
                 played = hand(h.popSelected());
+                if (played.cards.size() == 0) break;
                 played.cursor = -1;
                 for (int i = 0; i < played.selected.size(); i++) { //draw new cards
                     h.add(d.cards.back());
@@ -76,7 +78,9 @@ void playlevel() {
                 break;
             // d - discard
             case 'd':
+                if (discardsLeft == 0) break;
                 played = hand(h.popSelected());
+                if (played.cards.size() == 0) break;
                 played.cursor = -1;
                 for (int i = 0; i < played.selected.size(); i++) { //draw new cards
                     h.add(d.cards.back());
