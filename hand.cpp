@@ -244,13 +244,14 @@ handtype hand::scoreType() {
         if(x == 5)
             flush = true;
 
-    bool straight;
-    bool royal;
+    bool straight = false;
+    bool royal = false;
     // finds straight/royal straight TODO
-    royal == rankCount[0] | rankCount[12] | rankCount[11] | rankCount[10] | rankCount[9] != 0;
-    for(int i = 4; i < 13; i++)
-        if(rankCount[i] | rankCount[i-1] | rankCount[i-2] | rankCount[i-3] | rankCount[i-4] != 0)
-            straight == true;
+    royal = rankCount[0] * rankCount[12] * rankCount[11] * rankCount[10] * rankCount[9] != 0;
+    straight = royal;
+    for(int i = 0; i < 9; i++)
+        if(rankCount[i] * rankCount[i+1] * rankCount[i+2] * rankCount[i+3] * rankCount[i+4] != 0)
+            straight = true;
 
     if(flush && max == 5) return FIVE_FLUSH;
     if(flush && max == 3 && next == 2) return HOUSE_FLUSH;
