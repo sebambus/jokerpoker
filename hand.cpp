@@ -3,6 +3,8 @@
 #include <ncurses.h>
 #include "color.h"
 
+
+
 const char* handName(handtype h) {
     switch (h) {
     case FIVE_FLUSH:

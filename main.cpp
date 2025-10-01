@@ -6,9 +6,12 @@
 #include "card.h"
 #include "color.h"
 #include "hand.h"
+#include "scorekeep.h"
 
 deck d;
-int score = 0;
+int playsLeft = 4;
+int discardsLeft = 3;
+scorekeep scoreKeep;
 
 void playlevel() {
     d.fillDeck();
@@ -21,13 +24,22 @@ void playlevel() {
         d.cards.pop_back();
     }
 
-    hand played;    
+    hand played;
+    int addedScore = 0;    
     while(true) {
         // update screen
         clear();
+        printw("Score: %d\n", scoreKeep.currentScore);
+        printw("Plays: %d\n", playsLeft); printw("Discards: %d\n", discardsLeft);
         h.print();
-        printw("%s", handName(played.scoreType()));
-        printw("\n");
+        handtype scoredHandType = played.scoreType();
+
+        if (addedScore > 0){
+            printw("%s\n", handName(scoredHandType));
+            printw("+%d Score\n", addedScore);
+        }
+        
+
         played.print();
         refresh();
 
@@ -59,7 +71,20 @@ void playlevel() {
                     h.add(d.cards.back());
                     d.cards.pop_back();
                 }
+                addedScore = scoreKeep.calculateScore(played); //add score of hand
+                playsLeft--;
                 break;
+            // d - discard
+            case 'd':
+                played = hand(h.popSelected());
+                played.cursor = -1;
+                for (int i = 0; i < played.selected.size(); i++) { //draw new cards
+                    h.add(d.cards.back());
+                    d.cards.pop_back();
+                }
+                played = hand(); // "play" an empty hand
+                addedScore = 0;
+                discardsLeft--;
         }
     }
 }

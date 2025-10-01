@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "deck.h"
+#include <map>
 
 enum handtype {
     FIVE_FLUSH,
@@ -17,6 +18,7 @@ enum handtype {
     PAIR,
     HIGH
 };
+
 
 const char* handName(handtype h);
 
