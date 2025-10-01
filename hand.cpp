@@ -250,12 +250,6 @@ handtype hand::scoreType() {
         if(rankCount[i] | rankCount[i-1] | rankCount[i-2] | rankCount[i-3] | rankCount[i-4] != 0)
             straight == true;
 
-    printw("Rank Counts: ");
-    for(int x : rankCount) printw("%d, ", x);
-    printw("\nSuit Counts: ");
-    for(int x : suitCount) printw("%d, ", x);
-    printw("\nMax: %d, Min: %d, Flush? %d, Straight? %d, Royal? %d\n", max, next, (int) flush, (int) straight, (int) royal);
-
     if(flush && max == 5) return FIVE_FLUSH;
     if(flush && max == 3 && next == 2) return HOUSE_FLUSH;
     if(max == 5) return FIVE_KIND;
