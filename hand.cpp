@@ -3,8 +3,6 @@
 #include <ncurses.h>
 #include "color.h"
 
-
-
 const char* handName(handtype h) {
     switch (h) {
     case FIVE_FLUSH:
@@ -115,14 +113,16 @@ void hand::moveCursor(int moveBy){
     cursor += moveBy;
 }
 
-int hand::cardsSelected(){
-    int n;
+void hand::selectCursor() {
+    if(cursor >= 0 && cursor < selected.size())
+        selected[cursor] = !selected[cursor] && cardsSelected() < 5;
+}
+
+int hand::cardsSelected() {
+    int n = 0;
     for (int i = 0; i < selected.size(); i++)
-    {
-        if (selected.at(i) == true){
+        if (selected[i] == true)
             n++;
-        }
-    }
     return n;
 }
 

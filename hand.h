@@ -42,6 +42,8 @@ public:
     void moveCursor(int moveBy);
     void sortBySuit();
     void sortByValue();
+    // selects/deselects the card under the cursor
+    void selectCursor();
     int cardsSelected();
     handtype scoreType();
 private:

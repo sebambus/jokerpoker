@@ -10,10 +10,7 @@ void level::setupLevel() {
     threshold = 300;
     recentScore = 0;
 
-    for (int i = 0; i < 8; i++) {
-        h.add(d.cards.back());
-        d.cards.pop_back();
-    }
+    for (int i = 0; i < 8; i++) draw();
 }
 
 void level::printLevel() {
@@ -25,4 +22,36 @@ void level::printLevel() {
         printw("+%d Score\n", recentScore);
     }
     played.print();
+}
+
+void level::draw() {
+    if(d.cards.empty()) return;
+    h.add(d.cards.back());
+    d.cards.pop_back();
+}
+
+void level::playHand() {
+    if (plays == 0) return;
+    if (h.cardsSelected() == 0){
+        recentScore = 0;
+        return;
+    } 
+    played = hand(h.popSelected());
+    played.cursor = -1;
+    for (int i = 0; i < played.selected.size(); i++) draw();
+    recentScore = tally.calculateScore(played); //add score of hand
+    plays--;
+}
+
+void level::discardHand() {
+    if (discards == 0) return;
+    if (h.cardsSelected() == 0) {
+        recentScore = 0;
+        return;
+    }
+    played = hand(h.popSelected());
+    played.cursor = -1;
+    for (int i = 0; i < played.selected.size(); i++) draw();
+    played = hand(); // "play" an empty hand
+    discards--;
 }

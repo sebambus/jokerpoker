@@ -28,34 +28,13 @@ void playlevel() {
                 l.h.moveCursor(1);
                 break;
             case ' ': // select
-                if (l.h.cardsSelected() < 5) //maximum playable hand
-                    l.h.selected[l.h.cursor] = !l.h.selected[l.h.cursor];
-                else   
-                    l.h.selected[l.h.cursor] = false;
+                l.h.selectCursor();
                 break;
             case 'p': // play
-                if (l.plays == 0) break;
-                l.played = hand(l.h.popSelected());
-                if (l.played.cards.size() == 0){l.recentScore = 0; break;} 
-                l.played.cursor = -1;
-                for (int i = 0; i < l.played.selected.size(); i++) { //draw new cards
-                    l.h.add(l.d.cards.back()); //CAUSE OF SEG FAULT
-                    l.d.cards.pop_back();
-                }
-                l.recentScore = l.tally.calculateScore(l.played); //add score of hand
-                l.plays--;
+                l.playHand();
                 break;
             case 'd': // discard
-                if (l.discards == 0) break;
-                l.played = hand(l.h.popSelected());
-                if (l.played.cards.size() == 0){l.recentScore = 0; break;}
-                l.played.cursor = -1;
-                for (int i = 0; i < l.played.selected.size(); i++) { //draw new cards
-                    l.h.add(l.d.cards.back());
-                    l.d.cards.pop_back();
-                }
-                l.played = hand(); // "play" an empty hand
-                l.discards--;
+                l.discardHand();
                 break;
         }
         

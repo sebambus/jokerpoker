@@ -14,4 +14,7 @@ public:
 
     void setupLevel();
     void printLevel();
+    void draw();
+    void playHand();
+    void discardHand();
 };
