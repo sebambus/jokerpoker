@@ -27,6 +27,24 @@ void level::play() {
                 discardHand();
                 break;
         }
+        
+        if (plays ==  0) {
+            clear();
+            printw("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
+            printLevel();
+            refresh();
+            getchar();
+            break;
+        }
+
+        if (tally.currentScore > threshold) {
+            clear();
+            printw("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
+            printLevel();
+            refresh();
+            getchar();
+            break;
+        }
     }
 }
 
@@ -74,10 +92,8 @@ void level::playHand() {
 
 void level::discardHand() {
     if (discards == 0) return;
-    if (h.cardsSelected() == 0) {
-        recentScore = 0;
-        return;
-    }
+    recentScore = 0;
+    if (h.cardsSelected() == 0) return;
     played = hand(h.popSelected());
     played.cursor = -1;
     for (int i = 0; i < played.selected.size(); i++) draw();
