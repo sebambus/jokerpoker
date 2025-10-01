@@ -36,7 +36,7 @@ void playlevel() {
             case 'p': // play
                 if (l.plays == 0) break;
                 l.played = hand(l.h.popSelected());
-                if (l.played.cards.size() == 0) break;
+                if (l.played.cards.size() == 0){l.recentScore = 0; break;} 
                 l.played.cursor = -1;
                 for (int i = 0; i < l.played.selected.size(); i++) { //draw new cards
                     l.h.add(l.d.cards.back()); //CAUSE OF SEG FAULT
@@ -48,7 +48,7 @@ void playlevel() {
             case 'd': // discard
                 if (l.discards == 0) break;
                 l.played = hand(l.h.popSelected());
-                if (l.played.cards.size() == 0) break;
+                if (l.played.cards.size() == 0){l.recentScore = 0; break;}
                 l.played.cursor = -1;
                 for (int i = 0; i < l.played.selected.size(); i++) { //draw new cards
                     l.h.add(l.d.cards.back());
