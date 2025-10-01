@@ -9,8 +9,8 @@
 #include "scorekeep.h"
 
 deck d;
-int playsLeft = 4;
-int discardsLeft = 3;
+int playsLeft = 100;
+int discardsLeft = 100;
 scorekeep scoreKeep;
 
 void playlevel() {

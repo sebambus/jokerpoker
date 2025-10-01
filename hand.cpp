@@ -267,3 +267,106 @@ handtype hand::scoreType() {
     if(max == 2) return PAIR;
     else return HIGH;
 }
+
+//returns poker hand and cards within hand that should be scored
+std::pair<handtype, std::vector<card>> hand::scoreTypeAndCards(){
+    std::vector<card> scoredCards;
+     // counting suits and ranks
+    int suitCount[4] = { 0 };
+    int rankCount[13] = { 0 };
+    for(card c : cards) {
+        suitCount[(int) c.cardSuit]++;
+        rankCount[c.cardValue-1]++;
+    }
+
+    // finds top two rank counts
+    int max = 0;
+    int next = 0;
+    for(int x : rankCount) {
+        if(max < x) {
+            next = max;
+            max = x;
+        }
+        else if(next < x)
+            next = x;
+    }
+
+    int highestScoredValue = 0;
+    int secondHighestValue = 0;
+
+    for (int i = 0; i < 14; i++){
+        if (rankCount[i] == max){
+            if(highestScoredValue != 0){
+                secondHighestValue = i+1;
+            } else {
+                highestScoredValue = i+1;
+            }
+        }
+    }
+
+    // finds flush
+    bool flush = false;
+    for(int x : suitCount)
+        if(x == 5)
+            flush = true;
+
+    bool straight = false;
+    bool royal = false;
+    // finds straight/royal straight TODO
+    royal = rankCount[0] * rankCount[12] * rankCount[11] * rankCount[10] * rankCount[9] != 0;
+    straight = royal;
+    for(int i = 0; i < 9; i++)
+        if(rankCount[i] * rankCount[i+1] * rankCount[i+2] * rankCount[i+3] * rankCount[i+4] != 0)
+            straight = true;
+
+    if(flush && max == 5) return std::pair(FIVE_FLUSH, cards);
+    if(flush && max == 3 && next == 2) return std::pair(HOUSE_FLUSH, cards);
+    if(max == 5) return std::pair(FIVE_KIND, cards);
+    if(royal && straight && flush) return std::pair(ROYAL_FLUSH, cards);
+    if(straight && flush) return std::pair(STRAIGHT_FLUSH, cards);
+    if(max == 4){
+        for (card c : cards){
+            if (c.cardValue == highestScoredValue){
+                scoredCards.push_back(c);
+            }
+        }
+        return std::pair(FOUR_KIND, scoredCards);
+    } 
+    if(max == 3 && next == 2) return std::pair(FULL_HOUSE, cards);
+    if(flush) return std::pair(FLUSH, cards);
+    if(straight) return std::pair(STRAIGHT, cards);
+    if(max == 3){
+        for (card c : cards){
+            if (c.cardValue == highestScoredValue){
+                scoredCards.push_back(c);
+            }
+        }
+        return std::pair(THREE_KIND, scoredCards);
+    }
+    if(max == 2 && next == 2){
+        for (card c : cards){
+            if (c.cardValue == highestScoredValue || c.cardValue == secondHighestValue)
+                scoredCards.push_back(c);
+        }
+        return std::pair(TWO_PAIR, scoredCards);
+    } 
+    if(max == 2){         
+        for (card c : cards){
+            if (c.cardValue == highestScoredValue){
+                scoredCards.push_back(c);
+            }
+        }
+        return std::pair(PAIR, scoredCards);
+    }
+    else{
+        card greatestCard = cards[0];
+
+        for (card c : cards){
+            if (c.cardValue > greatestCard.cardValue)
+                greatestCard = c;
+        }
+        scoredCards.push_back(greatestCard);
+        return std::pair(HIGH, scoredCards);
+    }
+   
+}

@@ -44,6 +44,7 @@ public:
     void sortByValue();
     int cardsSelected();
     handtype scoreType();
+    std::pair<handtype, std::vector<card>> scoreTypeAndCards();
 private:
     std::vector<card> subsortBySuit(std::vector<card> sub);
     std::vector<card> subsortByValue(std::vector<card> sub);

@@ -22,17 +22,22 @@ scorekeep::scorekeep(){
 }
 
 int scorekeep::calculateScore(hand played){
-    handtype type = played.scoreType();
+    std::pair<handtype, std::vector<card>> scoringInfo;
+    scoringInfo = played.scoreTypeAndCards();
+    handtype type = scoringInfo.first;
+    std::vector<card> scoredCards = scoringInfo.second;
+    printf("Scoring %d card(s)", int(scoredCards.size()));
     int flat = scoreTable[type][0];
     int mult = scoreTable[type][1];
     int score = flat;
 
-    for (int i = 0; i < played.cards.size(); i++)
+    for (int i = 0; i < scoredCards.size(); i++)
     {
-        score += played.cards[i].cardValue;
+        score += scoredCards[i].cardValue;
     }
 
     score *= mult;
     currentScore += score;
+
     return score;
 }
