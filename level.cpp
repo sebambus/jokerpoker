@@ -2,7 +2,36 @@
 
 #include <ncursesw/ncurses.h>
 
-void level::setupLevel() {
+void level::play() {
+    while(true) {
+        clear();
+        printLevel();
+        refresh();
+
+        switch (getchar()) {
+            case 'q': // quit
+                return;
+            case 'h': // left (vim)
+                h.moveCursor(-1);
+                break;
+            case 'l': // right (vim)
+                h.moveCursor(1);
+                break;
+            case ' ': // select
+                h.selectCursor();
+                break;
+            case 'p': // play
+                playHand();
+                break;
+            case 'd': // discard
+                discardHand();
+                break;
+        }
+    }
+}
+
+void level::setupLevel()
+{
     d.fillDeck();
     d.shuffle();
     discards = 4;

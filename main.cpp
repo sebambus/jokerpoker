@@ -9,50 +9,15 @@
 #include "scorekeep.h"
 #include "level.h"
 
-deck d;
-int playsLeft = 100;
-int discardsLeft = 100;
-scorekeep scoreKeep;
-
-void playlevel() {
-    level l;
-    l.setupLevel();
-
-    while(true) {
-        clear();
-        l.printLevel();
-        refresh();
-
-        switch (getchar()) {
-            case 'q': // quit
-                return;
-            case 'h': // left (vim)
-                l.h.moveCursor(-1);
-                break;
-            case 'l': // right (vim)
-                l.h.moveCursor(1);
-                break;
-            case ' ': // select
-                l.h.selectCursor();
-                break;
-            case 'p': // play
-                l.playHand();
-                break;
-            case 'd': // discard
-                l.discardHand();
-                break;
-        }
-        
-    }
-}
-
 int main() {
     setlocale(LC_ALL, "");  // switch to UTF-8??
     initscr();              // boot ncurses
     start_color();          // boot ncurses-color
     initcolors();           // initialize colors for color.h
 
-    playlevel();
+    level l;
+    l.setupLevel();
+    l.play();
 
     endwin();               // close ncurses
     return 0;

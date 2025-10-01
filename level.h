@@ -12,6 +12,7 @@ public:
     hand h;
     hand played;
 
+    void play();
     void setupLevel();
     void printLevel();
     void draw();
