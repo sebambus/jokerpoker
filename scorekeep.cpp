@@ -26,7 +26,6 @@ int scorekeep::calculateScore(hand played){
     scoringInfo = played.scoreTypeAndCards();
     handtype type = scoringInfo.first;
     std::vector<card> scoredCards = scoringInfo.second;
-    printf("Scoring %d card(s)", int(scoredCards.size()));
     int flat = scoreTable[type][0];
     int mult = scoreTable[type][1];
     int score = flat;

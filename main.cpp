@@ -7,6 +7,7 @@
 #include "color.h"
 #include "hand.h"
 #include "scorekeep.h"
+#include "level.h"
 
 deck d;
 int playsLeft = 100;
