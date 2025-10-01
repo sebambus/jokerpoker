@@ -3,6 +3,39 @@
 #include <ncurses.h>
 #include "color.h"
 
+const char* handName(handtype h) {
+    switch (h) {
+    case FIVE_FLUSH:
+        return "Flush Five";
+    case HOUSE_FLUSH:
+        return "Flush House";
+    case FIVE_KIND:
+        return "Five of a Kind";
+    case ROYAL_FLUSH:
+        return "Royal Flush";
+    case STRAIGHT_FLUSH:
+        return "Straight Flush";
+    case FOUR_KIND:
+        return "Four of a Kind";
+    case FULL_HOUSE:
+        return "Full House";
+    case FLUSH:
+        return "Flush";
+    case STRAIGHT:
+        return "Straight";
+    case THREE_KIND:
+        return "Three of a Kind";
+    case TWO_PAIR:
+        return "Two Pair";
+    case PAIR:
+        return "Pair";
+    case HIGH:
+        return "High";
+    default:
+        return "Mystery Hand!!!";
+    }
+}
+
 // creates blank hand
 hand::hand() {
     cursor = 0;
@@ -184,8 +217,8 @@ std::vector<card> hand::subsortBySuit(std::vector<card> sub){
 
 handtype hand::scoreType() {
     // counting suits and ranks
-    int suitCount[4];
-    int rankCount[13];
+    int suitCount[4] = { 0 };
+    int rankCount[13] = { 0 };
     for(card c : cards) {
         suitCount[(int) c.cardSuit]++;
         rankCount[c.cardValue-1]++;
@@ -216,6 +249,12 @@ handtype hand::scoreType() {
     for(int i = 4; i < 13; i++)
         if(rankCount[i] | rankCount[i-1] | rankCount[i-2] | rankCount[i-3] | rankCount[i-4] != 0)
             straight == true;
+
+    printw("Rank Counts: ");
+    for(int x : rankCount) printw("%d, ", x);
+    printw("\nSuit Counts: ");
+    for(int x : suitCount) printw("%d, ", x);
+    printw("\nMax: %d, Min: %d, Flush? %d, Straight? %d, Royal? %d\n", max, next, (int) flush, (int) straight, (int) royal);
 
     if(flush && max == 5) return FIVE_FLUSH;
     if(flush && max == 3 && next == 2) return HOUSE_FLUSH;

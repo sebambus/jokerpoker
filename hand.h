@@ -18,6 +18,8 @@ enum handtype {
     HIGH
 };
 
+const char* handName(handtype h);
+
 class hand : public deck {
 public:
     std::vector<bool> selected;

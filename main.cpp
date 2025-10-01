@@ -26,6 +26,8 @@ void playlevel() {
         // update screen
         clear();
         h.print();
+        printw("%s", handName(played.scoreType()));
+        printw("\n");
         played.print();
         refresh();
 
