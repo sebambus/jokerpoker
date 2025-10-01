@@ -9,6 +9,11 @@
 #include "scorekeep.h"
 #include "level.h"
 
+deck d;
+int playsLeft = 100;
+int discardsLeft = 100;
+scorekeep scoreKeep;
+
 void playlevel() {
     level l;
     l.setupLevel();
