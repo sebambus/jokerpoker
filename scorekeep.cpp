@@ -22,7 +22,7 @@ scorekeep::scorekeep(){
 }
 
 int scorekeep::calculateScore(hand played){
-    handtype type = played.scoreType(); //returns the wrong kind of hand??
+    handtype type = played.scoreType();
     int flat = scoreTable[type][0];
     int mult = scoreTable[type][1];
     int score = flat;
@@ -35,6 +35,5 @@ int scorekeep::calculateScore(hand played){
 
     score *= mult;
     currentScore += score;
-    printf("was scored as %s", handName(type));
     return score;
 }
