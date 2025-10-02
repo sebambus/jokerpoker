@@ -37,7 +37,7 @@ void level::play() {
                 break;
         }
         
-        if (plays ==  0) {
+        if (plays ==  0 && tally.currentScore < threshold) {
             clear();
             printw("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
             printLevel();
@@ -46,7 +46,7 @@ void level::play() {
             break;
         }
 
-        if (tally.currentScore > threshold) {
+        if (tally.currentScore >= threshold) {
             clear();
             printw("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
             printLevel();
