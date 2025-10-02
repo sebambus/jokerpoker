@@ -1,5 +1,6 @@
 #pragma once
 #include "scorekeep.h"
+#include "game.h"
 
 class level {
 public:
@@ -12,6 +13,7 @@ public:
     hand h;
     hand played;
 
+    level(game, int);
     void play();
     void setupLevel();
     void printLevel();

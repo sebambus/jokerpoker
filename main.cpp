@@ -15,8 +15,7 @@ int main() {
     start_color();          // boot ncurses-color
     initcolors();           // initialize colors for color.h
 
-    level l;
-    l.setupLevel();
+    level l(game(), 300);
     l.play();
 
     endwin();               // close ncurses

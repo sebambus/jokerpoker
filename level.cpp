@@ -2,6 +2,17 @@
 
 #include <ncursesw/ncurses.h>
 
+level::level(game g, int threshold) {
+    plays = g.plays;
+    discards = g.discards;
+    d = deck(g.d);
+    d.shuffle();
+    this->threshold = threshold;
+    recentScore = 0;
+
+    for (int i = 0; i < 8; i++) draw();
+}
+
 void level::play() {
     while(true) {
         clear();
@@ -36,15 +47,6 @@ void level::play() {
                 h.sortByValue();
                 break;
         }
-        
-        if (plays ==  0 && tally.currentScore < threshold) {
-            clear();
-            printw("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
-            printLevel();
-            refresh();
-            getchar();
-            break;
-        }
 
         if (tally.currentScore >= threshold) {
             clear();
@@ -54,19 +56,16 @@ void level::play() {
             getchar();
             break;
         }
+        
+        if (plays ==  0) {
+            clear();
+            printw("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
+            printLevel();
+            refresh();
+            getchar();
+            break;
+        }
     }
-}
-
-void level::setupLevel()
-{
-    d.fillDeck();
-    d.shuffle();
-    discards = 4;
-    plays = 3;
-    threshold = 300;
-    recentScore = 0;
-
-    for (int i = 0; i < 8; i++) draw();
 }
 
 void level::printLevel() {
