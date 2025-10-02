@@ -82,7 +82,6 @@ std::vector<card> hand::popSelected() {
 
 // prints all cards in hand, with cursor highlighted and selected cards shifted
 void hand::print() {
-    sortBySuit();
     int x, y;
     getyx(stdscr, y, x);
     for(int i = 0; i < cards.size(); i++) {
@@ -215,6 +214,27 @@ std::vector<card> hand::subsortByValue(std::vector<card> sub){ //sorts each suit
 
 std::vector<card> hand::subsortBySuit(std::vector<card> sub){
     return sub;
+}
+
+
+void hand::swapSelected(){
+    if (cardsSelected() != 2) return; //if more than or less than 2 cards are selected
+    std::vector<int> positions;
+    for (int i = 0; i < selected.size(); i++){
+        if (selected[i]){
+            positions.push_back(i);
+        }
+    }
+
+    //swap cards
+    card c1 = cards[positions[0]];
+    card c2 = cards[positions[1]];
+
+    cards[positions[0]] = c2;
+    cards[positions[1]] = c1;
+
+    for (int x : positions) //unselect the selected cards
+        selected[x] = false;
 }
 
 handtype hand::scoreType() {

@@ -26,6 +26,15 @@ void level::play() {
             case 'd': // discard
                 discardHand();
                 break;
+            case 's': // swap
+                h.swapSelected();
+                break;
+            case 'z': // sort by suit
+                h.sortBySuit();
+                break;
+            case 'x': // sort by value
+                h.sortByValue();
+                break;
         }
         
         if (plays ==  0) {
@@ -69,6 +78,15 @@ void level::printLevel() {
         printw("+%d Score\n", recentScore);
     }
     played.print();
+
+    printw("h - Move cursor left\n");
+    printw("l - Move cursor right\n");
+    printw("Space - Select card\n");
+    printw("p - Play hand\n");
+    printw("d - Discard selected\n");
+    printw("s - Swap selected\n");
+    printw("z - sort by suit\n");
+    printw("x - Sort by value\n");
 }
 
 void level::draw() {

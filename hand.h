@@ -46,6 +46,7 @@ public:
     void selectCursor();
     int cardsSelected();
     handtype scoreType();
+    void swapSelected();
     std::pair<handtype, std::vector<card>> scoreTypeAndCards();
 private:
     std::vector<card> subsortBySuit(std::vector<card> sub);
