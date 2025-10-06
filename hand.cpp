@@ -30,7 +30,7 @@ const char* handName(handtype h) {
     case PAIR:
         return "Pair";
     case HIGH:
-        return "High";
+        return "High Card";
     default:
         return "Mystery Hand!!!";
     }
