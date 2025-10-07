@@ -3,10 +3,11 @@
 #include <ncursesw/ncurses.h>
 #include "window.h"
 
-level::level(game g, int threshold) {
-    plays = g.plays;
-    discards = g.discards;
-    d = deck(g.d);
+level::level(game* g, int threshold) {
+    this->g = g;
+    plays = g->plays;
+    discards = g->discards;
+    d = deck(g->d);
     d.shuffle();
     this->threshold = threshold;
     recentScore = 0;
@@ -93,30 +94,14 @@ void level::printWindowedLevel() {
     window levelInfo = window(10, 20, 0, 0, "Level Info");
     window gameInfo = window(10, 20, 10, 0, "Game Info");
 
-    levelInfo.print("Small Blind\n");
-    levelInfo.print("Threshold: %d\n", threshold);
-    levelInfo.print("Score: %d\n", tally.currentScore);
-    levelInfo.print("%s\n", handName(played.scoreType()));
-    levelInfo.print("+%d\n", recentScore);
-    levelInfo.print("Hands  Discards\n");
-    levelInfo.print("  %d       %d\n", plays, discards);
-
-    gameInfo.print("You start with\n");
-    gameInfo.print("Hands Discards\n");
-    gameInfo.print("  %d      %d\n", 3, 4);
-    gameInfo.print("Money: $%d\n", 0);
-    gameInfo.print("Ante %d/%d, Round %d\n", 1, 8, 1);
+    levelInfo.update(this);
+    gameInfo.update(g);
 
     move(2, 25);
     h.print();
     move(5, 25);
     played.print();
     refresh();
-
-    wrefresh(levelInfo.frame);
-    wrefresh(levelInfo.content);
-    wrefresh(gameInfo.frame);
-    wrefresh(gameInfo.content);
 }
 
 void level::draw() {

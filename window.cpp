@@ -8,6 +8,7 @@ window::window(int h, int w, int y, int x, char* title) {
     box(frame, 0, 0);
     wprintw(frame, "%s", title);
     refresh();
+    wrefresh(frame);
 }
 
 void window::print(const char* format, ...) {
@@ -15,4 +16,26 @@ void window::print(const char* format, ...) {
     va_start(args, format);
     vw_printw(content, format, args);
     va_end(args);
+}
+
+void window::update(level* l) {
+    werase(content);
+    print("Small Blind\n");
+    print("Threshold: %d\n", l->threshold);
+    print("Score: %d\n", l->tally.currentScore);
+    print("%s\n", handName(l->played.scoreType()));
+    print("+%d\n", l->recentScore);
+    print("Hands  Discards\n");
+    print("  %d       %d\n", l->plays, l->discards);
+    wrefresh(content);
+}
+
+void window::update(game *g) {
+    werase(content);
+    print("You start with\n");
+    print("Hands Discards\n");
+    print("  %d      %d\n", g->plays, g->plays);
+    print("Money: $%d\n", g->money);
+    print("Ante %d/%d, Round %d\n", 1, 8, 1);
+    wrefresh(content);
 }

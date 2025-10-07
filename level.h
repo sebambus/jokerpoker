@@ -4,6 +4,7 @@
 
 class level {
 public:
+    game* g;
     int discards;
     int plays;
     scorekeep tally;
@@ -13,7 +14,7 @@ public:
     hand h;
     hand played;
 
-    level(game, int);
+    level(game*, int);
     void play();
     void printLevel();
     void printWindowedLevel();
