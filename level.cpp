@@ -15,12 +15,25 @@ level::level(game* g, int threshold) {
     for (int i = 0; i < 8; i++) draw();
 }
 
-void level::play() {
-    while(true) {
-        clear();
-        printLevel();
-        refresh();
+void updateGameScreen(WINDOW* win, hand h, hand played) {
+    werase(win);
+    h.print(win);
+    wmove(win, 3, 0);
+    played.print(win);
+    wrefresh(win);
+}
 
+void level::play() {
+    window levelInfo = window(10, 20, 0, 0, "Level Info");
+    window gameInfo = window(10, 20, 10, 0, "Game Info");
+    window gameScreen = window(20, 80, 0, 20, "Game");
+
+    levelInfo.update(this);
+    gameInfo.update(g);
+
+    updateGameScreen(gameScreen.content, h, played);
+
+    while(true) {
         switch (getchar()) {
             case 'q': // quit
                 return;
@@ -35,9 +48,13 @@ void level::play() {
                 break;
             case 'p': // play
                 playHand();
+                levelInfo.update(this);
+                gameInfo.update(g);
                 break;
             case 'd': // discard
                 discardHand();
+                levelInfo.update(this);
+                gameInfo.update(g);
                 break;
             case 's': // swap
                 h.swapSelected();
@@ -49,39 +66,25 @@ void level::play() {
                 h.sortByValue();
                 break;
         }
+        
+        updateGameScreen(gameScreen.content, h, played);
 
         if (tally.currentScore >= threshold) {
-            clear();
-            printw("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
-            printLevel();
-            refresh();
+            window winPopup = window(4, 40, 8, 30, "");
+            winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
+            wrefresh(winPopup.content);
             getchar();
             break;
         }
         
         if (plays ==  0) {
-            clear();
-            printw("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
-            printLevel();
-            refresh();
+            window lossPopup = window(4, 40, 8, 30, "");
+            lossPopup.print("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
+            wrefresh(lossPopup.content);
             getchar();
             break;
         }
     }
-}
-
-void level::printLevel() {
-    window levelInfo = window(10, 20, 0, 0, "Level Info");
-    window gameInfo = window(10, 20, 10, 0, "Game Info");
-    window gameScreen = window(20, 80, 0, 20, "Game");
-
-    levelInfo.update(this);
-    gameInfo.update(g);
-
-    h.print(gameScreen.content);
-    wmove(gameScreen.content, 3, 0);
-    played.print(gameScreen.content);
-    wrefresh(gameScreen.content);
 }
 
 void level::draw() {

@@ -14,6 +14,7 @@ int main() {
     initscr();              // boot ncurses
     start_color();          // boot ncurses-color
     initcolors();           // initialize colors for color.h
+    curs_set(0);            // hides cursor
 
     level l(new game(), 300);
     l.play();
