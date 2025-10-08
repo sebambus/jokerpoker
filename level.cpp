@@ -18,7 +18,7 @@ level::level(game* g, int threshold) {
 void level::play() {
     while(true) {
         clear();
-        printWindowedLevel();
+        printLevel();
         refresh();
 
         switch (getchar()) {
@@ -71,37 +71,17 @@ void level::play() {
 }
 
 void level::printLevel() {
-    printw("Score: %d\n", tally.currentScore);
-    printw("Plays: %d, Discards %d\n", plays, discards);
-    h.print();
-    if(recentScore > 0) {
-        printw("%s\n", handName(played.scoreType()));
-        printw("+%d Score\n", recentScore);
-    }
-    played.print();
-
-    printw("h - Move cursor left\n");
-    printw("l - Move cursor right\n");
-    printw("Space - Select card\n");
-    printw("p - Play hand\n");
-    printw("d - Discard selected\n");
-    printw("s - Swap selected\n");
-    printw("z - sort by suit\n");
-    printw("x - Sort by value\n");
-}
-
-void level::printWindowedLevel() {
     window levelInfo = window(10, 20, 0, 0, "Level Info");
     window gameInfo = window(10, 20, 10, 0, "Game Info");
+    window gameScreen = window(20, 80, 0, 20, "Game");
 
     levelInfo.update(this);
     gameInfo.update(g);
 
-    move(2, 25);
-    h.print();
-    move(5, 25);
-    played.print();
-    refresh();
+    h.print(gameScreen.content);
+    wmove(gameScreen.content, 3, 0);
+    played.print(gameScreen.content);
+    wrefresh(gameScreen.content);
 }
 
 void level::draw() {

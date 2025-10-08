@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
-#include "deck.h"
+#include <ncurses.h>
 #include <map>
+#include "deck.h"
 
 enum handtype {
     FIVE_FLUSH,
@@ -37,7 +38,7 @@ public:
     // deletes and returns a vector of all selected cards
     std::vector<card> popSelected();
     // prints all cards in hand, with cursor highlighted and selected cards shifted
-    void print();
+    void print(WINDOW*);
     // moves cursor right by moveBy
     void moveCursor(int moveBy);
     void sortBySuit();

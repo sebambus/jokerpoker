@@ -1,7 +1,5 @@
 #include "color.h"
 
-#include <ncurses.h>
-
 // converts 3-bit color to ncurses constant
 short decodecolor(int c) {
     switch(c) {
@@ -58,6 +56,6 @@ void initcolors() {
 }
 
 // sets foreground (fg) and background (bg) with ncurses constants
-void setcolor(short fg, short bg) {
-    attron(COLOR_PAIR(encodecolor(fg)+16*encodecolor(bg)));
+void setcolor(WINDOW* win, short fg, short bg) {
+    wattron(win, COLOR_PAIR(encodecolor(fg)+16*encodecolor(bg)));
 }

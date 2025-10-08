@@ -1,6 +1,5 @@
 #include "hand.h"
 
-#include <ncurses.h>
 #include "color.h"
 
 const char* handName(handtype h) {
@@ -81,27 +80,27 @@ std::vector<card> hand::popSelected() {
 }
 
 // prints all cards in hand, with cursor highlighted and selected cards shifted
-void hand::print() {
+void hand::print(WINDOW* w) {
     int x, y;
-    getyx(stdscr, y, x);
+    getyx(w, y, x);
     for(int i = 0; i < cards.size(); i++) {
         //highlight cursor
-        if(i == cursor) attron(A_REVERSE);
+        if(i == cursor) wattron(w, A_REVERSE);
         // shift card up or down based on selection
         if(selected[i])
-            move(y+1, getcurx(stdscr));
+            wmove(w, y+1, getcurx(w));
         else
-            move(y, getcurx(stdscr));
+            wmove(w, y, getcurx(w));
 
-        cards[i].print();
+        cards[i].print(w);
         // reset color attributes
-        if(i == cursor) attroff(A_REVERSE);
-        setcolor(COLOR_WHITE, COLOR_BLACK);
+        if(i == cursor) wattroff(w, A_REVERSE);
+        setcolor(w, COLOR_WHITE, COLOR_BLACK);
         // spacing
-        printw(" ");
+        wprintw(w, " ");
     }
     // movve cursor to beneath
-    move(y+2, x);
+    wmove(w, y+2, x);
 }
 
 // moves cursor right by moveBy

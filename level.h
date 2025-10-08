@@ -17,7 +17,6 @@ public:
     level(game*, int);
     void play();
     void printLevel();
-    void printWindowedLevel();
     void draw();
     void playHand();
     void discardHand();
