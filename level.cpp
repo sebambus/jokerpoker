@@ -30,6 +30,9 @@ void level::play() {
     window gameInfo = window(10, 20, 10, 0, "Game Info");
     window gameScreen = window(20, 80, 0, 20, "Game");
 
+    window specialScreen = window(15,20,0,100, "Jokers and Tarot");
+    window cardInfo = window(15,20,15,100, "Card Info");
+
     levelInfo.update(this);
     gameInfo.update(g);
 
