@@ -12,4 +12,5 @@ public:
     void print(const char *format, ...);
     void update(level* l);
     void update(game* g);
+    void clear();
 };

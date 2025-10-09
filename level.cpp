@@ -74,6 +74,9 @@ void level::play() {
             winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
             wrefresh(winPopup.content);
             getchar();
+            levelInfo.clear();
+            gameInfo.clear();
+            gameScreen.clear();
             break;
         }
         

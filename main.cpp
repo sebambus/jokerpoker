@@ -8,6 +8,7 @@
 #include "hand.h"
 #include "scorekeep.h"
 #include "level.h"
+#include "shop.h"
 
 int main() {
     setlocale(LC_ALL, "");  // switch to UTF-8??
@@ -16,8 +17,10 @@ int main() {
     initcolors();           // initialize colors for color.h
     curs_set(0);            // hides cursor
 
-    level l(new game(), 300);
+    level l(new game(), 30);
     l.play();
+    shop s;
+    s.enter();
 
     endwin();               // close ncurses
     return 0;
