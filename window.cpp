@@ -39,3 +39,10 @@ void window::update(game *g) {
     print("Ante %d/%d, Round %d\n", g->ante, 8, g->round);
     wrefresh(content);
 }
+
+void window::clear(){
+    wclear(content);
+    wclear(frame);
+    wrefresh(content);
+    wrefresh(frame);
+}

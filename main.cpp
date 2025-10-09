@@ -8,6 +8,7 @@
 #include "hand.h"
 #include "scorekeep.h"
 #include "level.h"
+#include "shop.h"
 
 int main() {
     setlocale(LC_ALL, "");  // switch to UTF-8??
@@ -20,6 +21,8 @@ int main() {
 
     while(g.ante <= 8) {
         g.playNextLevel();
+        shop s;
+        s.enter();
     }
 
     endwin();               // close ncurses
