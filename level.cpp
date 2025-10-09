@@ -1,7 +1,9 @@
 #include "level.h"
 
 #include <ncursesw/ncurses.h>
+#include <cstdlib>
 #include "window.h"
+
 
 level::level(game* g, int threshold) {
     this->g = g;
@@ -36,6 +38,8 @@ void level::play() {
     while(true) {
         switch (getchar()) {
             case 'q': // quit
+                endwin();
+                exit(0);
                 return;
             case 'h': // left (vim)
                 h.moveCursor(-1);
