@@ -7,6 +7,9 @@ public:
     int discards;
     int money;
     deck d;
+    int ante;
+    int round;
 
     game();
+    void playNextLevel();
 };

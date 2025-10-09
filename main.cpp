@@ -16,8 +16,11 @@ int main() {
     initcolors();           // initialize colors for color.h
     curs_set(0);            // hides cursor
 
-    level l(new game(), 300);
-    l.play();
+    game g = game();
+
+    while(g.ante <= 8) {
+        g.playNextLevel();
+    }
 
     endwin();               // close ncurses
     return 0;
