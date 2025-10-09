@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <ncursesw/ncurses.h>
 
-shop::shop(){
-
+shop::shop(game *game){
+    g = game;
+    enter();
 }
 
 void shop::enter(){

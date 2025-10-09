@@ -1,7 +1,9 @@
 #pragma once
+#include "game.h"
 
 class shop{
 public:
-    shop();
+    game *g;
+    shop(game *g);
     void enter();
 };

@@ -21,8 +21,7 @@ int main() {
 
     while(g.ante <= 8) {
         g.playNextLevel();
-        shop s;
-        s.enter();
+        shop s(&g);
     }
 
     endwin();               // close ncurses
