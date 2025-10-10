@@ -28,10 +28,10 @@ void updateGameScreen(WINDOW* win, hand h, hand played) {
 }
 
 void level::play() {
-    g->levelInfo.update(this);
-    g->gameInfo.update(g);
+    g->levelInfo.updateLevelInfo(this);
+    g->gameInfo.updateGameInfo(g);
 
-    updateGameScreen(g->mainScreen.content, h, played);
+    g->mainScreen.updateLevelScreen(this);
 
     while(true) {
         switch (getchar()) {
@@ -50,13 +50,13 @@ void level::play() {
                 break;
             case 'p': // play
                 playHand();
-                g->levelInfo.update(this);
-                g->gameInfo.update(g);
+                g->levelInfo.updateLevelInfo(this);
+                g->gameInfo.updateGameInfo(g);
                 break;
             case 'd': // discard
                 discardHand();
-                g->levelInfo.update(this);
-                g->gameInfo.update(g);
+                g->levelInfo.updateLevelInfo(this);
+                g->gameInfo.updateGameInfo(g);
                 break;
             case 's': // swap
                 h.swapSelected();
@@ -69,16 +69,15 @@ void level::play() {
                 break;
         }
         
-        updateGameScreen(g->mainScreen.content, h, played);
+        g->mainScreen.updateLevelScreen(this);
 
         if (tally.currentScore >= threshold) {
             window winPopup = window(4, 40, 8, 30, "");
             winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
             wrefresh(winPopup.content);
             getchar();
-            g->levelInfo.clear();
-            g->gameInfo.clear();
-            g->mainScreen.clear();
+            delwin(winPopup.content);
+            delwin(winPopup.frame);
             break;
         }
         
@@ -87,6 +86,8 @@ void level::play() {
             lossPopup.print("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
             wrefresh(lossPopup.content);
             getchar();
+            delwin(lossPopup.content);
+            delwin(lossPopup.frame);
             break;
         }
     }
