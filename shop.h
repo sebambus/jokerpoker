@@ -7,5 +7,5 @@ public:
     game *g;
 
     shop(game *g);
-    void enter();
+    void run();
 };

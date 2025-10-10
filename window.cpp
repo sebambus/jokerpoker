@@ -36,7 +36,7 @@ void window::update(game *g) {
     werase(content);
     print("You start with\n");
     print("Hands Discards\n");
-    print("  %d      %d\n", g->plays, g->plays);
+    print("  %d      %d\n", g->getPlays(), g->getDiscards());
     print("Money: $%d\n", g->money);
     print("Ante %d/%d, Round %d\n", g->ante, 8, g->round);
     wrefresh(content);

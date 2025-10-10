@@ -9,8 +9,8 @@
 
 level::level(game* g, int threshold) {
     this->g = g;
-    plays = g->plays;
-    discards = g->discards;
+    plays = g->getPlays();
+    discards = g->getDiscards();
     d = deck(g->d);
     d.shuffle();
     this->threshold = threshold;

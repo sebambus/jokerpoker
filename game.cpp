@@ -9,9 +9,6 @@ game::game() :
     mainScreen(20, 80, 0, 20, ""),
     specialScreen(10, 20, 0, 100, "Jokers and Tarot"),
     cardInfo(10, 20, 10, 100, "Card Info") {
-    plays = 3;
-    discards = 4;
-    money = 0;
     ante = 1;
     round = 1;
     d.fillDeck();
@@ -29,4 +26,12 @@ void game::playNextLevel() {
         round = 1;
         ante++;
     }
+}
+
+int game::getPlays() {
+    return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG];
+}
+
+int game::getDiscards() {
+    return 4 + vouchers[WASTEFUL] + vouchers[RECYCLOMANCY];
 }

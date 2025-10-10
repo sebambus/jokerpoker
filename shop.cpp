@@ -4,10 +4,10 @@
 
 shop::shop(game *game){
     g = game;
-    enter();
+    run();
 }
 
-void shop::enter(){
+void shop::run(){
     printw("Entered the shop");
     getch();
     return;

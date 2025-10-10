@@ -1,14 +1,15 @@
 #pragma once
+#include <bitset>
 
 #include "deck.h"
 #include "window.h"
+#include "voucher.h"
 class game {
 public:
-    int plays;
-    int discards;
     int money;
     int ante;
     int round;
+    std::bitset<VOUCHER_COUNT> vouchers;
     deck d;
     window levelInfo;
     window gameInfo;
@@ -16,7 +17,8 @@ public:
     window specialScreen;
     window cardInfo;
 
-
     game();
     void playNextLevel();
+    int getPlays();
+    int getDiscards();
 };
