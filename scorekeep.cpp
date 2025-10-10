@@ -1,7 +1,9 @@
-#include "scorekeep.h"
-#include "hand.h"
 #include <iostream>
 #include <string>
+#include <map>
+#include "scorekeep.h"
+#include "hand.h"
+#include "card.h"
 
 scorekeep::scorekeep(){
     currentScore = 0;

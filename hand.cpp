@@ -1,6 +1,7 @@
 #include "hand.h"
 
 #include "color.h"
+#include "card.h"
 
 const char* handName(handtype h) {
     switch (h) {

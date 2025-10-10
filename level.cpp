@@ -3,7 +3,9 @@
 #include <ncursesw/ncurses.h>
 #include <cstdlib>
 #include "window.h"
-
+#include "game.h"
+#include "hand.h"
+#include "card.h"
 
 level::level(game* g, int threshold) {
     this->g = g;

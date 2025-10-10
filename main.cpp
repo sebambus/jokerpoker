@@ -9,6 +9,7 @@
 #include "scorekeep.h"
 #include "level.h"
 #include "shop.h"
+#include "game.h"
 
 int main() {
     setlocale(LC_ALL, "");  // switch to UTF-8??

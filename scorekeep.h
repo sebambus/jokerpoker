@@ -1,8 +1,10 @@
 #pragma once
 #include <map>
-#include "hand.h"
+#include <vector>
 
-
+enum handtype : int;
+class hand;
+class level;
 
 class scorekeep{
 public:

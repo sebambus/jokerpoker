@@ -1,7 +1,8 @@
 #pragma once
-
 #include <ncursesw/ncurses.h>
-#include "level.h"
+
+class level;
+class game;
 
 class window {
 public:

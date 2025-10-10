@@ -2,9 +2,10 @@
 #include <vector>
 #include <ncurses.h>
 #include <map>
-#include "deck.h"
 
-enum handtype {
+class card;
+
+enum handtype : int {
     FIVE_FLUSH,
     HOUSE_FLUSH,
     FIVE_KIND,
@@ -20,9 +21,9 @@ enum handtype {
     HIGH
 };
 
-
 const char* handName(handtype h);
 
+#include "deck.h"
 class hand : public deck {
 public:
     std::vector<bool> selected;

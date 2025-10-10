@@ -1,7 +1,10 @@
 #pragma once
-#include "scorekeep.h"
-#include "game.h"
 
+class game;
+
+#include "scorekeep.h"
+#include "deck.h"
+#include "hand.h"
 class level {
 public:
     game* g;

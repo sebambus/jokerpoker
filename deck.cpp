@@ -1,7 +1,9 @@
 #include "deck.h"
+
 #include <random>
 #include <time.h>
 #include <cstdlib>
+#include "card.h"
 
 // adds the standard 52 poker cards to the deck
 void deck::fillDeck() {

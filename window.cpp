@@ -1,6 +1,8 @@
 #include "window.h"
 
 #include <cstdarg>
+#include "level.h"
+#include "game.h"
 
 window::window(int h, int w, int y, int x, char* title) {
     frame = newwin(h, w, y, x);
