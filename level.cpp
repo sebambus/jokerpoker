@@ -28,17 +28,10 @@ void updateGameScreen(WINDOW* win, hand h, hand played) {
 }
 
 void level::play() {
-    window levelInfo = window(10, 20, 0, 0, "Level Info");
-    window gameInfo = window(10, 20, 10, 0, "Game Info");
-    window gameScreen = window(20, 80, 0, 20, "Game");
+    g->levelInfo.update(this);
+    g->gameInfo.update(g);
 
-    window specialScreen = window(15,20,0,100, "Jokers and Tarot");
-    window cardInfo = window(15,20,15,100, "Card Info");
-
-    levelInfo.update(this);
-    gameInfo.update(g);
-
-    updateGameScreen(gameScreen.content, h, played);
+    updateGameScreen(g->mainScreen.content, h, played);
 
     while(true) {
         switch (getchar()) {
@@ -57,13 +50,13 @@ void level::play() {
                 break;
             case 'p': // play
                 playHand();
-                levelInfo.update(this);
-                gameInfo.update(g);
+                g->levelInfo.update(this);
+                g->gameInfo.update(g);
                 break;
             case 'd': // discard
                 discardHand();
-                levelInfo.update(this);
-                gameInfo.update(g);
+                g->levelInfo.update(this);
+                g->gameInfo.update(g);
                 break;
             case 's': // swap
                 h.swapSelected();
@@ -76,16 +69,16 @@ void level::play() {
                 break;
         }
         
-        updateGameScreen(gameScreen.content, h, played);
+        updateGameScreen(g->mainScreen.content, h, played);
 
         if (tally.currentScore >= threshold) {
             window winPopup = window(4, 40, 8, 30, "");
             winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
             wrefresh(winPopup.content);
             getchar();
-            levelInfo.clear();
-            gameInfo.clear();
-            gameScreen.clear();
+            g->levelInfo.clear();
+            g->gameInfo.clear();
+            g->mainScreen.clear();
             break;
         }
         

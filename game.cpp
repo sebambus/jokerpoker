@@ -1,14 +1,20 @@
 #include "game.h"
 
 #include "level.h"
+#include "window.h"
 
-game::game() {
+game::game() :
+    levelInfo(10, 20, 0, 0, "Level Info"),
+    gameInfo(10, 20, 10, 0, "Game Info"),
+    mainScreen(20, 80, 0, 20, ""),
+    specialScreen(10, 20, 0, 100, "Jokers and Tarot"),
+    cardInfo(10, 20, 10, 100, "Card Info") {
     plays = 3;
     discards = 4;
     money = 0;
-    d.fillDeck();
     ante = 1;
     round = 1;
+    d.fillDeck();
 }
 
 void game::playNextLevel() {

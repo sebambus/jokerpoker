@@ -1,6 +1,7 @@
 #pragma once
 
 #include "deck.h"
+#include "window.h"
 class game {
 public:
     int plays;
@@ -9,6 +10,12 @@ public:
     int ante;
     int round;
     deck d;
+    window levelInfo;
+    window gameInfo;
+    window mainScreen;
+    window specialScreen;
+    window cardInfo;
+
 
     game();
     void playNextLevel();
