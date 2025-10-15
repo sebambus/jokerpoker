@@ -7,16 +7,20 @@
 #include "hand.h"
 #include "card.h"
 
-level::level(game* g, int threshold) {
+level::level(game* g) {
     this->g = g;
     plays = g->getPlays();
     discards = g->getDiscards();
     d = deck(g->d);
     d.shuffle();
-    this->threshold = threshold;
     recentScore = 0;
 
+    int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
+    threshold = antebases[g->ante] * (g->round+1)/2;
+
     for (int i = 0; i < 8; i++) draw();
+
+    play();
 }
 
 void updateGameScreen(WINDOW* win, hand h, hand played) {
@@ -72,6 +76,12 @@ void level::play() {
         g->mainScreen.updateLevelScreen(this);
 
         if (tally.currentScore >= threshold) {
+            g->round++;
+            if(g->round > 3) {
+                g->round = 1;
+                g->ante++;
+            }
+
             window winPopup = window(4, 40, 8, 30, "");
             winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
             wrefresh(winPopup.content);

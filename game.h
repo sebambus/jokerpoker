@@ -18,7 +18,6 @@ public:
     window cardInfo;
 
     game();
-    void playNextLevel();
     int getPlays();
     int getDiscards();
 };

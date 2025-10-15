@@ -15,20 +15,6 @@ game::game() :
     d.fillDeck();
 }
 
-void game::playNextLevel() {
-    int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
-    int threshold = antebases[ante] * (round+1)/2;
-
-    level l(this, threshold);
-    l.play();
-
-    round++;
-    if(round > 3) {
-        round = 1;
-        ante++;
-    }
-}
-
 int game::getPlays() {
     return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG];
 }

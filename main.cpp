@@ -22,7 +22,7 @@ int main() {
     game g = game();
 
     while(g.ante <= 8) {
-        g.playNextLevel();
+        level l(&g);
         shop s(&g);
     }
 

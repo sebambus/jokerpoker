@@ -17,7 +17,7 @@ public:
     hand h;
     hand played;
 
-    level(game*, int);
+    level(game*);
     void play();
     void draw();
     void playHand();
