@@ -8,23 +8,21 @@
 #include "card.h"
 #include "scorekeep.h"
 
-namespace {
-    game* g;
-    int discards;
-    int plays;
-    scorekeep tally;
-    int recentScore;
-    int threshold;
-    deck d;
-    hand h;
-    hand played;
+static game* g;
+static int discards;
+static int plays;
+static scorekeep tally;
+static int recentScore;
+static int threshold;
+static deck d;
+static hand h;
+static hand played;
 
-    void draw();
-    void playHand();
-    void discardHand();
-    void updateInfo(window);
-    void updateScreen(window);
-}
+static void draw();
+static void playHand();
+static void discardHand();
+static void updateInfo(window);
+static void updateScreen(window);
 
 void playlevel(game* ga) {
     g = ga;
@@ -110,54 +108,52 @@ void playlevel(game* ga) {
     }
 }
 
-namespace {
-    void draw() {
-        if(d.cards.empty()) return;
-        h.add(d.cards.back());
-        d.cards.pop_back();
-    }
-    
-    void playHand() {
-        if (plays == 0) return;
-        if (h.cardsSelected() == 0){
-            recentScore = 0;
-            return;
-        } 
-        played = hand(h.popSelected());
-        played.cursor = -1;
-        for (int i = 0; i < played.selected.size(); i++) draw();
-        recentScore = tally.calculateScore(played); //add score of hand
-        plays--;
-    }
-    
-    void discardHand() {
-        if (discards == 0) return;
+static void draw() {
+    if(d.cards.empty()) return;
+    h.add(d.cards.back());
+    d.cards.pop_back();
+}
+
+static void playHand() {
+    if (plays == 0) return;
+    if (h.cardsSelected() == 0){
         recentScore = 0;
-        if (h.cardsSelected() == 0) return;
-        played = hand(h.popSelected());
-        played.cursor = -1;
-        for (int i = 0; i < played.selected.size(); i++) draw();
-        played = hand(); // "play" an empty hand
-        discards--;
-    }
-    
-    void updateInfo(window w) {
-        werase(w.content);
-        w.print("Small Blind\n");
-        w.print("Threshold: %d\n", threshold);
-        w.print("Score: %d\n", tally.currentScore);
-        w.print("%s\n", handName(played.scoreType()));
-        w.print("+%d\n", recentScore);
-        w.print("Hands  Discards\n");
-        w.print("  %d       %d\n", plays, discards);
-        wrefresh(w.content);
-    }
-    
-    void updateScreen(window w) {
-        werase(w.content);
-        h.print(w.content);
-        wmove(w.content, 3, 0);
-        played.print(w.content);
-        wrefresh(w.content);
-    }
+        return;
+    } 
+    played = hand(h.popSelected());
+    played.cursor = -1;
+    for (int i = 0; i < played.selected.size(); i++) draw();
+    recentScore = tally.calculateScore(played); //add score of hand
+    plays--;
+}
+
+static void discardHand() {
+    if (discards == 0) return;
+    recentScore = 0;
+    if (h.cardsSelected() == 0) return;
+    played = hand(h.popSelected());
+    played.cursor = -1;
+    for (int i = 0; i < played.selected.size(); i++) draw();
+    played = hand(); // "play" an empty hand
+    discards--;
+}
+
+static void updateInfo(window w) {
+    werase(w.content);
+    w.print("Small Blind\n");
+    w.print("Threshold: %d\n", threshold);
+    w.print("Score: %d\n", tally.currentScore);
+    w.print("%s\n", handName(played.scoreType()));
+    w.print("+%d\n", recentScore);
+    w.print("Hands  Discards\n");
+    w.print("  %d       %d\n", plays, discards);
+    wrefresh(w.content);
+}
+
+static void updateScreen(window w) {
+    werase(w.content);
+    h.print(w.content);
+    wmove(w.content, 3, 0);
+    played.print(w.content);
+    wrefresh(w.content);
 }
