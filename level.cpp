@@ -6,9 +6,28 @@
 #include "game.h"
 #include "hand.h"
 #include "card.h"
+#include "scorekeep.h"
 
-level::level(game* g) {
-    this->g = g;
+namespace {
+    game* g;
+    int discards;
+    int plays;
+    scorekeep tally;
+    int recentScore;
+    int threshold;
+    deck d;
+    hand h;
+    hand played;
+
+    void draw();
+    void playHand();
+    void discardHand();
+    void updateInfo(window);
+    void updateScreen(window);
+}
+
+void playlevel(game* ga) {
+    g = ga;
     plays = g->getPlays();
     discards = g->getDiscards();
     d = deck(g->d);
@@ -91,52 +110,54 @@ level::level(game* g) {
     }
 }
 
-void level::draw() {
-    if(d.cards.empty()) return;
-    h.add(d.cards.back());
-    d.cards.pop_back();
-}
-
-void level::playHand() {
-    if (plays == 0) return;
-    if (h.cardsSelected() == 0){
+namespace {
+    void draw() {
+        if(d.cards.empty()) return;
+        h.add(d.cards.back());
+        d.cards.pop_back();
+    }
+    
+    void playHand() {
+        if (plays == 0) return;
+        if (h.cardsSelected() == 0){
+            recentScore = 0;
+            return;
+        } 
+        played = hand(h.popSelected());
+        played.cursor = -1;
+        for (int i = 0; i < played.selected.size(); i++) draw();
+        recentScore = tally.calculateScore(played); //add score of hand
+        plays--;
+    }
+    
+    void discardHand() {
+        if (discards == 0) return;
         recentScore = 0;
-        return;
-    } 
-    played = hand(h.popSelected());
-    played.cursor = -1;
-    for (int i = 0; i < played.selected.size(); i++) draw();
-    recentScore = tally.calculateScore(played); //add score of hand
-    plays--;
-}
-
-void level::discardHand() {
-    if (discards == 0) return;
-    recentScore = 0;
-    if (h.cardsSelected() == 0) return;
-    played = hand(h.popSelected());
-    played.cursor = -1;
-    for (int i = 0; i < played.selected.size(); i++) draw();
-    played = hand(); // "play" an empty hand
-    discards--;
-}
-
-void level::updateInfo(window w) {
-    werase(w.content);
-    w.print("Small Blind\n");
-    w.print("Threshold: %d\n", threshold);
-    w.print("Score: %d\n", tally.currentScore);
-    w.print("%s\n", handName(played.scoreType()));
-    w.print("+%d\n", recentScore);
-    w.print("Hands  Discards\n");
-    w.print("  %d       %d\n", plays, discards);
-    wrefresh(w.content);
-}
-
-void level::updateScreen(window w) {
-    werase(w.content);
-    h.print(w.content);
-    wmove(w.content, 3, 0);
-    played.print(w.content);
-    wrefresh(w.content);
+        if (h.cardsSelected() == 0) return;
+        played = hand(h.popSelected());
+        played.cursor = -1;
+        for (int i = 0; i < played.selected.size(); i++) draw();
+        played = hand(); // "play" an empty hand
+        discards--;
+    }
+    
+    void updateInfo(window w) {
+        werase(w.content);
+        w.print("Small Blind\n");
+        w.print("Threshold: %d\n", threshold);
+        w.print("Score: %d\n", tally.currentScore);
+        w.print("%s\n", handName(played.scoreType()));
+        w.print("+%d\n", recentScore);
+        w.print("Hands  Discards\n");
+        w.print("  %d       %d\n", plays, discards);
+        wrefresh(w.content);
+    }
+    
+    void updateScreen(window w) {
+        werase(w.content);
+        h.print(w.content);
+        wmove(w.content, 3, 0);
+        played.print(w.content);
+        wrefresh(w.content);
+    }
 }
