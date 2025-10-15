@@ -2,7 +2,6 @@
 
 #include <cstdarg>
 #include "game.h"
-#include "shop.h"
 
 window::window(int h, int w, int y, int x, const char* title) {
     frame = newwin(h, w, y, x);
@@ -16,12 +15,6 @@ void window::print(const char* format, ...) {
     va_start(args, format);
     vw_printw(content, format, args);
     va_end(args);
-}
-
-void window::updateShopScreen(shop *s) {
-    werase(content);
-    print("Vouchers:%s\n", voucherName(s->v));
-    wrefresh(content);
 }
 
 void window::clear(){

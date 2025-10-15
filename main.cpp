@@ -7,7 +7,6 @@
 #include "color.h"
 #include "hand.h"
 #include "scorekeep.h"
-#include "shop.h"
 #include "game.h"
 
 int main() {
@@ -22,7 +21,7 @@ int main() {
 
     while(g.ante <= 8) {
         g.playlevel();
-        shop s(&g);
+        g.runshop();
     }
 
     endwin();               // close ncurses

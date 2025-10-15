@@ -22,4 +22,5 @@ public:
     int getDiscards();
     void updateInfo(window);
     void playlevel();
+    void runshop();
 };
