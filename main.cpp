@@ -17,6 +17,7 @@ int main() {
     start_color();          // boot ncurses-color
     initcolors();           // initialize colors for color.h
     curs_set(0);            // hides cursor
+    srand(time(NULL));
 
     game g = game();
 

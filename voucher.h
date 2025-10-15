@@ -35,3 +35,5 @@ enum voucher : int {
     PALETTE,
     VOUCHER_COUNT
 };
+
+const char* voucherName(voucher);

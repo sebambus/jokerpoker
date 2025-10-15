@@ -3,6 +3,7 @@
 
 class level;
 class game;
+class shop;
 
 class window {
 public:
@@ -14,5 +15,7 @@ public:
     void updateLevelInfo(level* l);
     void updateGameInfo(game* g);
     void updateLevelScreen(level* l);
+    void updateShopScreen(shop* s);
     void clear();
+    void changeTitle(const char* title);
 };
