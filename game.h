@@ -21,4 +21,5 @@ public:
     int getPlays();
     int getDiscards();
     void updateInfo(window);
+    void playlevel();
 };

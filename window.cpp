@@ -1,7 +1,6 @@
 #include "window.h"
 
 #include <cstdarg>
-#include "level.h"
 #include "game.h"
 #include "shop.h"
 

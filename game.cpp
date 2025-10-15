@@ -1,6 +1,5 @@
 #include "game.h"
 
-#include "level.h"
 #include "window.h"
 
 game::game() :

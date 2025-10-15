@@ -7,7 +7,6 @@
 #include "color.h"
 #include "hand.h"
 #include "scorekeep.h"
-#include "level.h"
 #include "shop.h"
 #include "game.h"
 
@@ -22,7 +21,7 @@ int main() {
     game g;
 
     while(g.ante <= 8) {
-        playlevel(&g);
+        g.playlevel();
         shop s(&g);
     }
 

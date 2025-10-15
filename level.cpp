@@ -1,5 +1,3 @@
-#include "level.h"
-
 #include <ncursesw/ncurses.h>
 #include <cstdlib>
 #include "window.h"
@@ -8,7 +6,6 @@
 #include "card.h"
 #include "scorekeep.h"
 
-static game* g;
 static int discards;
 static int plays;
 static scorekeep tally;
@@ -24,23 +21,22 @@ static void discardHand();
 static void updateInfo(window);
 static void updateScreen(window);
 
-void playlevel(game* ga) {
-    g = ga;
-    plays = g->getPlays();
-    discards = g->getDiscards();
-    d = deck(g->d);
-    d.shuffle();
+void game::playlevel() {
+    plays = getPlays();
+    discards = getDiscards();
+    ::d = deck(this->d);
+    ::d.shuffle();
     recentScore = 0;
 
     int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
-    threshold = antebases[g->ante] * (g->round+1)/2;
+    threshold = antebases[ante] * (round+1)/2;
 
     for (int i = 0; i < 8; i++) draw();
 
-    updateInfo(g->levelInfo);
-    g->updateInfo(g->gameInfo);
+    updateInfo(levelInfo);
+    updateInfo(gameInfo);
 
-    updateScreen(g->mainScreen);
+    updateScreen(mainScreen);
 
     while(true) {
         switch (getchar()) {
@@ -59,13 +55,13 @@ void playlevel(game* ga) {
                 break;
             case 'p': // play
                 playHand();
-                updateInfo(g->levelInfo);
-                g->updateInfo(g->gameInfo);
+                updateInfo(levelInfo);
+                updateInfo(gameInfo);
                 break;
             case 'd': // discard
                 discardHand();
-                updateInfo(g->levelInfo);
-                g->updateInfo(g->gameInfo);
+                updateInfo(levelInfo);
+                updateInfo(gameInfo);
                 break;
             case 's': // swap
                 h.swapSelected();
@@ -78,13 +74,13 @@ void playlevel(game* ga) {
                 break;
         }
         
-        updateScreen(g->mainScreen);
+        updateScreen(mainScreen);
 
         if (tally.currentScore >= threshold) {
-            g->round++;
-            if(g->round > 3) {
-                g->round = 1;
-                g->ante++;
+            round++;
+            if(round > 3) {
+                round = 1;
+                ante++;
             }
 
             window winPopup = window(4, 40, 8, 30, "");
