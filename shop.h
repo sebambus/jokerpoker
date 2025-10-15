@@ -10,4 +10,5 @@ public:
 
     shop(game *g);
     void run();
+    void generatePurchaseables();
 };

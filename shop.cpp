@@ -8,7 +8,8 @@
 
 shop::shop(game *game){
     g = game;
-    v = (voucher) (rand() % VOUCHER_COUNT);
+    if(g->round = 1)
+        generatePurchaseables();
     run();
 }
 
@@ -17,4 +18,15 @@ void shop::run(){
     g->mainScreen.updateShopScreen(this);
     getch();
     return;
+}
+
+void shop::generatePurchaseables() {
+    auto genv = [](game* g, auto t) {
+        if(g->vouchers.all()) return VOUCHER_COUNT;
+        voucher v = (voucher) (rand() % (VOUCHER_COUNT)/2);
+        if(g->vouchers[v]) v = (voucher) (v + VOUCHER_COUNT/2);
+        if(g->vouchers[v]) v = t(g, t);
+        return v;
+    };
+    v = genv(g, genv);
 }
