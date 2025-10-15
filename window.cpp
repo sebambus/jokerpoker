@@ -19,36 +19,6 @@ void window::print(const char* format, ...) {
     va_end(args);
 }
 
-void window::updateLevelInfo(level* l) {
-    werase(content);
-    print("Small Blind\n");
-    print("Threshold: %d\n", l->threshold);
-    print("Score: %d\n", l->tally.currentScore);
-    print("%s\n", handName(l->played.scoreType()));
-    print("+%d\n", l->recentScore);
-    print("Hands  Discards\n");
-    print("  %d       %d\n", l->plays, l->discards);
-    wrefresh(content);
-}
-
-void window::updateGameInfo(game *g) {
-    werase(content);
-    print("You start with\n");
-    print("Hands Discards\n");
-    print("  %d      %d\n", g->getPlays(), g->getDiscards());
-    print("Money: $%d\n", g->money);
-    print("Ante %d/%d, Round %d\n", g->ante, 8, g->round);
-    wrefresh(content);
-}
-
-void window::updateLevelScreen(level *l) {
-    werase(content);
-    l->h.print(content);
-    wmove(content, 3, 0);
-    l->played.print(content);
-    wrefresh(content);
-}
-
 void window::updateShopScreen(shop *s) {
     werase(content);
     print("Vouchers:%s\n", voucherName(s->v));

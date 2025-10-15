@@ -20,14 +20,10 @@ level::level(game* g) {
 
     for (int i = 0; i < 8; i++) draw();
 
-    play();
-}
+    updateInfo(g->levelInfo);
+    g->updateInfo(g->gameInfo);
 
-void level::play() {
-    g->levelInfo.updateLevelInfo(this);
-    g->gameInfo.updateGameInfo(g);
-
-    g->mainScreen.updateLevelScreen(this);
+    updateScreen(g->mainScreen);
 
     while(true) {
         switch (getchar()) {
@@ -46,13 +42,13 @@ void level::play() {
                 break;
             case 'p': // play
                 playHand();
-                g->levelInfo.updateLevelInfo(this);
-                g->gameInfo.updateGameInfo(g);
+                updateInfo(g->levelInfo);
+                g->updateInfo(g->gameInfo);
                 break;
             case 'd': // discard
                 discardHand();
-                g->levelInfo.updateLevelInfo(this);
-                g->gameInfo.updateGameInfo(g);
+                updateInfo(g->levelInfo);
+                g->updateInfo(g->gameInfo);
                 break;
             case 's': // swap
                 h.swapSelected();
@@ -65,7 +61,7 @@ void level::play() {
                 break;
         }
         
-        g->mainScreen.updateLevelScreen(this);
+        updateScreen(g->mainScreen);
 
         if (tally.currentScore >= threshold) {
             g->round++;
@@ -123,4 +119,24 @@ void level::discardHand() {
     for (int i = 0; i < played.selected.size(); i++) draw();
     played = hand(); // "play" an empty hand
     discards--;
+}
+
+void level::updateInfo(window w) {
+    werase(w.content);
+    w.print("Small Blind\n");
+    w.print("Threshold: %d\n", threshold);
+    w.print("Score: %d\n", tally.currentScore);
+    w.print("%s\n", handName(played.scoreType()));
+    w.print("+%d\n", recentScore);
+    w.print("Hands  Discards\n");
+    w.print("  %d       %d\n", plays, discards);
+    wrefresh(w.content);
+}
+
+void level::updateScreen(window w) {
+    werase(w.content);
+    h.print(w.content);
+    wmove(w.content, 3, 0);
+    played.print(w.content);
+    wrefresh(w.content);
 }

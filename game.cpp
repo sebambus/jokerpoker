@@ -22,3 +22,13 @@ int game::getPlays() {
 int game::getDiscards() {
     return 4 + vouchers[WASTEFUL] + vouchers[RECYCLOMANCY];
 }
+
+void game::updateInfo(window w) {
+    werase(w.content);
+    w.print("You start with\n");
+    w.print("Hands Discards\n");
+    w.print("  %d      %d\n", getPlays(), getDiscards());
+    w.print("Money: $%d\n", money);
+    w.print("Ante %d/%d, Round %d\n", ante, 8, round);
+    wrefresh(w.content);
+}

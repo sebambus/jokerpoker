@@ -1,12 +1,13 @@
 #pragma once
 
 class game;
+class window;
 
 #include "scorekeep.h"
 #include "deck.h"
 #include "hand.h"
 class level {
-public:
+private:
     game* g;
     int discards;
     int plays;
@@ -17,9 +18,13 @@ public:
     hand h;
     hand played;
 
-    level(game*);
     void play();
     void draw();
     void playHand();
     void discardHand();
+    void updateInfo(window);
+    void updateScreen(window);
+
+public:
+    level(game*);
 };

@@ -20,4 +20,5 @@ public:
     game();
     int getPlays();
     int getDiscards();
+    void updateInfo(window);
 };
