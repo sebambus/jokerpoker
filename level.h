@@ -22,4 +22,6 @@ public:
     void draw();
     void playHand();
     void discardHand();
+    void win();
+    void lose();
 };

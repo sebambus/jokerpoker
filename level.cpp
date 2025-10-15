@@ -68,28 +68,12 @@ void level::play() {
         g->mainScreen.updateLevelScreen(this);
 
         if (tally.currentScore >= threshold) {
-            g->round++;
-            if(g->round > 3) {
-                g->round = 1;
-                g->ante++;
-            }
-
-            window winPopup = window(4, 40, 8, 30, "");
-            winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
-            wrefresh(winPopup.content);
-            getchar();
-            delwin(winPopup.content);
-            delwin(winPopup.frame);
+            win();
             break;
         }
         
         if (plays ==  0) {
-            window lossPopup = window(4, 40, 8, 30, "");
-            lossPopup.print("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
-            wrefresh(lossPopup.content);
-            getchar();
-            delwin(lossPopup.content);
-            delwin(lossPopup.frame);
+            lose();
             break;
         }
     }
@@ -123,4 +107,28 @@ void level::discardHand() {
     for (int i = 0; i < played.selected.size(); i++) draw();
     played = hand(); // "play" an empty hand
     discards--;
+}
+
+void level::win() {
+    g->round++;
+    if(g->round > 3) {
+        g->round = 1;
+        g->ante++;
+    }
+
+    window winPopup = window(4, 40, 8, 30, "");
+    winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
+    wrefresh(winPopup.content);
+    getchar();
+    delwin(winPopup.content);
+    delwin(winPopup.frame);
+}
+
+void level::lose() {
+    window lossPopup = window(4, 40, 8, 30, "");
+    lossPopup.print("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
+    wrefresh(lossPopup.content);
+    getchar();
+    delwin(lossPopup.content);
+    delwin(lossPopup.frame);
 }
