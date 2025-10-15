@@ -23,14 +23,6 @@ level::level(game* g) {
     play();
 }
 
-void updateGameScreen(WINDOW* win, hand h, hand played) {
-    werase(win);
-    h.print(win);
-    wmove(win, 3, 0);
-    played.print(win);
-    wrefresh(win);
-}
-
 void level::play() {
     g->levelInfo.updateLevelInfo(this);
     g->gameInfo.updateGameInfo(g);

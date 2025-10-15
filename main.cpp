@@ -19,7 +19,7 @@ int main() {
     curs_set(0);            // hides cursor
     srand(time(NULL));
 
-    game g = game();
+    game g;
 
     while(g.ante <= 8) {
         level l(&g);
