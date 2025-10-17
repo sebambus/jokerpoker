@@ -24,6 +24,9 @@ int main() {
     while(g.ante <= 8) {
         level l(&g);
         shop s(&g);
+        g.round++;
+        if (g.round >= 3)
+            g.round = 1;
     }
 
     endwin();               // close ncurses
