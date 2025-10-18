@@ -110,18 +110,31 @@ void level::discardHand() {
 }
 
 void level::win() {
+    // update round counter
     g->round++;
     if(g->round > 3) {
         g->round = 1;
         g->ante++;
     }
 
-    window winPopup = window(4, 40, 8, 30, "");
-    winPopup.print("YOU WIN (you scored over %d)\nPress any key to quit\n", threshold);
+    // earn round money
+    int handmoney = plays;
+    int interest = g->money / 5;
+    int roundreward = g->round + 2;
+    int earnings = handmoney + interest + roundreward;
+
+    // display win popup
+    window winPopup = window(8, 30, 6, 35, "");
+    winPopup.print("Cash Out: $%d\nBlind Reward: $%d\n", earnings, roundreward);
+    if(handmoney > 0) winPopup.print("Remaining Hands: $%d\n", handmoney);
+    if(interest > 0) winPopup.print("Interest: $%d\n", interest);
     wrefresh(winPopup.content);
     getchar();
     delwin(winPopup.content);
     delwin(winPopup.frame);
+
+    // add money on cash out
+    g->money += earnings;
 }
 
 void level::lose() {
