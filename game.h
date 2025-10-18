@@ -14,7 +14,7 @@ public:
     window levelInfo;
     window gameInfo;
     window mainScreen;
-    window specialScreen;
+    window consumableScreen;
     window cardInfo;
 
     game();
