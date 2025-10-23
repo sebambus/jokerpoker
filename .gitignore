@@ -1,5 +1,5 @@
 a.out
 *.txt
 .vscode
-obj/*.o
+obj/*
 jokerpoker
