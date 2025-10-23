@@ -64,5 +64,7 @@ const char* voucherName(voucher v) {
         return "Retcon";
     case PALETTE:
         return "Palette";
+    default:
+        return "INVALID_VOUCHER";
     }
 }
