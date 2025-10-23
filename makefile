@@ -4,8 +4,11 @@ OBJ=$(SRC:%.cpp=obj/%.o)
 DEP= $(OBJ:.o=.d)
 ODIR=obj
 
-jokerpoker: $(OBJ)
+jokerpoker: $(OBJ) | $(ODIR)
 	$(CXX) -o $@ $^ -lncursesw
+
+$(ODIR):
+	mkdir $(ODIR)
 
 $(ODIR)/%.d: %.cpp
 	@$(CXX) -MM -MT $(@:.d=.o) $< > $@
