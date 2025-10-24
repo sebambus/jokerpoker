@@ -15,7 +15,7 @@ struct consumable {
     consumabletype type;
 };
 
-enum planet : int{
+enum planet : int {
     PLUTO,
     MERCURY,
     URANUS,
