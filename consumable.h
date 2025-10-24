@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum consumableType : int{
+enum consumable : int{
     PLUTO,
     MERCURY,
     URANUS,
@@ -16,13 +16,5 @@ enum consumableType : int{
     ERIS
 };
 
-class consumable{
-public:
-    consumableType type;
-    const char* name;
-    const char* description;
-    consumable(consumableType name);
-};
-
-const char* consumableName(consumableType type);
-const char* consumableDescription(consumableType type);
+const char* consumableName(consumable type);
+const char* consumableDescription(consumable type);

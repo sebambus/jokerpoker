@@ -1,13 +1,6 @@
 #include "consumable.h"
 
-consumable::consumable(consumableType t){
-    type = t;
-    
-    name = consumableName(t);
-    description = consumableDescription(t);
-}
-
-const char* consumableName(consumableType t){
+const char* consumableName(consumable t){
     switch (t) {
         case PLUTO:
             return "Pluto";
@@ -37,7 +30,7 @@ const char* consumableName(consumableType t){
     return "ERROR";
 }
 
-const char* consumableDescription(consumableType t){
+const char* consumableDescription(consumable t){
     switch (t) {
         case PLUTO:
             return "Increases High Card hand value by +1 Mult and +10 Chips";
