@@ -135,6 +135,7 @@ void level::win() {
 
     // add money on cash out
     g->money += earnings;
+    g->gameInfo.updateGameInfo(g);
 }
 
 void level::lose() {

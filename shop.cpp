@@ -16,8 +16,17 @@ shop::shop(game *game){
 void shop::run(){
     g->mainScreen.changeTitle("Shop");
     g->mainScreen.updateShopScreen(this);
-    getch();
-    return;
+    char c = getchar();
+    if(c >= 'a' && c-'a' < v != VOUCHER_COUNT) {
+        if(g->money >= 10) {
+            g->vouchers[v] = true;
+            v = VOUCHER_COUNT;
+            g->money -= 10;
+        }
+    }
+    g->mainScreen.updateShopScreen(this);
+    g->gameInfo.updateGameInfo(g);
+    getchar();
 }
 
 void shop::generatePurchaseables() {

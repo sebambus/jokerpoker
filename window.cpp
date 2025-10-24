@@ -51,7 +51,9 @@ void window::updateLevelScreen(level *l) {
 
 void window::updateShopScreen(shop *s) {
     werase(content);
-    print("Vouchers:%s\n", voucherName(s->v));
+    char menuchar =  'a';
+    if(s->v != VOUCHER_COUNT)
+        print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, voucherName(s->v));
     wrefresh(content);
 }
 
