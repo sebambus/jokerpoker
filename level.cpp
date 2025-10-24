@@ -28,7 +28,8 @@ void level::play() {
     g->gameInfo.updateGameInfo(g);
 
     g->mainScreen.updateLevelScreen(this);
-    g->specialScreen.updateSpecialScreen(g);
+    g->specialScreen.updateSpecialScreen(g,0);
+    g->cardInfo.updateCardInfo(g,0);
 
     while(true) {
         switch (getchar()) {
@@ -63,6 +64,12 @@ void level::play() {
                 break;
             case 'x': // sort by value
                 h.sortByValue();
+                break;
+            case 'j':
+                changeConsumable(1);
+                break;
+            case 'k':
+                changeConsumable(-1);
                 break;
             case 'w':
                 tally.currentScore = threshold;
@@ -111,6 +118,16 @@ void level::discardHand() {
     for (int i = 0; i < played.selected.size(); i++) draw();
     played = hand(); // "play" an empty hand
     discards--;
+}
+
+void level::changeConsumable(int by){
+    int newConsumable = currConsumable + by;
+    int consSize = g->consumables.size()-1;
+    if (newConsumable > consSize || newConsumable < 0)
+        return;
+    
+    currConsumable = newConsumable;
+    g->specialScreen.updateSpecialScreen(g, currConsumable);
 }
 
 void level::win() {

@@ -16,12 +16,14 @@ public:
     deck d;
     hand h;
     hand played;
+    int currConsumable = 0;
 
     level(game*);
     void play();
     void draw();
     void playHand();
     void discardHand();
+    void changeConsumable(int by);
     void win();
     void lose();
 };

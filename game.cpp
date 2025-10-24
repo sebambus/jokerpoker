@@ -14,6 +14,19 @@ game::game() :
     ante = 1;
     round = 1;
     d.fillDeck();
+
+    //for debugging:
+    consumable a("a");
+    a.description = "this is consumable a";
+    consumable b("b");
+    b.description = "description for consumable b";
+    consumable c("c");
+    c.description = "this one is consumable c";
+
+    consumables.push_back(a);
+    consumables.push_back(b);
+    consumables.push_back(c);
+
 }
 
 int game::getPlays() {

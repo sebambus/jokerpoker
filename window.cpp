@@ -57,15 +57,31 @@ void window::updateShopScreen(shop *s) {
     wrefresh(content);
 }
 
-void window::updateSpecialScreen(game* g){
-    werase(content);\
+void window::updateSpecialScreen(game* g, int index){
+    if (g->consumables.size() == 0) //for when you start a level without any consumables
+        return;
+
+    werase(content);
     print("Consumables:\n");
     for (int i = 0; i < g->consumables.size(); i++){
+        if (i == index)
+            print("[x]");
+        else
+            print("[ ]");
         print("%s\n", g->consumables[i].name.c_str()); //must convert std::string to const char * for print function
     }
+    g->cardInfo.updateCardInfo(g, index);
     wrefresh(content);
 }
 
+void window::updateCardInfo(game* g, int index){
+    if (g->consumables.size() == 0)
+        return;
+
+    werase(content);
+    print(g->consumables[index].description.c_str());
+    wrefresh(content);
+}
 
 void window::clear(){
     wclear(content);
