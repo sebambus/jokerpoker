@@ -18,7 +18,8 @@ enum handtype : int {
     THREE_KIND,
     TWO_PAIR,
     PAIR,
-    HIGH
+    HIGH,
+    HAND_TYPE_COUNT
 };
 
 const char* handName(handtype h);

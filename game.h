@@ -11,7 +11,7 @@ public:
     int money;
     int ante;
     int round;
-    std::vector<consumable> consumables;
+    std::vector<item> consumables;
     std::bitset<VOUCHER_COUNT> vouchers;
     deck d;
     window levelInfo;

@@ -67,7 +67,7 @@ void window::updateSpecialScreen(game* g, int index){
             print("[x]");
         else
             print("[ ]");
-        print("%s\n", consumableName(g->consumables[i])); //must convert std::string to const char * for print function
+        print("%s\n", itemName(g->consumables[i])); //must convert std::string to const char * for print function
     }
     g->cardInfo.updateCardInfo(g, index);
     wrefresh(content);
@@ -78,7 +78,7 @@ void window::updateCardInfo(game* g, int index){
         return;
 
     werase(content);
-    print(consumableDescription(g->consumables[index]));
+    print(itemDescription(g->consumables[index]));
     wrefresh(content);
 }
 

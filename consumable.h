@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum consumabletype : int {
+enum itemtype : int {
     PLANET,
     TAROT,
     SPECTRAL,
@@ -10,9 +10,9 @@ enum consumabletype : int {
     VOUCHER
 };
 
-struct consumable {
+struct item {
     int val;
-    consumabletype type;
+    itemtype type;
 };
 
 enum planet : int {
@@ -30,5 +30,5 @@ enum planet : int {
     ERIS
 };
 
-const char* consumableName(consumable type);
-const char* consumableDescription(consumable type);
+const char* itemName(item type);
+const char* itemDescription(item type);

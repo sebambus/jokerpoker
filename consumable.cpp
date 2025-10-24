@@ -19,7 +19,7 @@ const char* readcsv(const char* f, int r, int c) {
     return res.c_str();
 }
 
-const char* consumableName(consumable t){
+const char* itemName(item t){
     switch (t.type) {
     case PLANET:
         return readcsv("planet.csv", t.val, 0);
@@ -27,7 +27,7 @@ const char* consumableName(consumable t){
     return "ERROR";
 }
 
-const char* consumableDescription(consumable t){
+const char* itemDescription(item t){
     switch (t.type) {
     case PLANET:
         return readcsv("planet.csv", t.val, 1);
