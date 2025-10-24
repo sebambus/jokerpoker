@@ -1,9 +1,28 @@
 #pragma once
 #include <string>
 
+enum consumableType : int{
+    PLUTO,
+    MERCURY,
+    URANUS,
+    VENUS,
+    SATURN,
+    JUPITER,
+    EARTH,
+    MARS,
+    NEPTUNE,
+    PLANET_X,
+    CERES,
+    ERIS
+};
+
 class consumable{
 public:
-    std::string name = "";
-    std::string description = "";
-    consumable(std::string name);
+    consumableType type;
+    const char* name;
+    const char* description;
+    consumable(consumableType name);
 };
+
+const char* consumableName(consumableType type);
+const char* consumableDescription(consumableType type);
