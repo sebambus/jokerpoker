@@ -1,7 +1,21 @@
 #pragma once
 #include <string>
 
-enum consumable : int{
+enum consumabletype : int {
+    PLANET,
+    TAROT,
+    SPECTRAL,
+    JOKER,
+    CARD,
+    VOUCHER
+};
+
+struct consumable {
+    int val;
+    consumabletype type;
+};
+
+enum planet : int{
     PLUTO,
     MERCURY,
     URANUS,

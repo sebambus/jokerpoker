@@ -16,9 +16,9 @@ game::game() :
     d.fillDeck();
 
     //for debugging consumables:
-    consumable a(PLUTO);
-    consumable b(MERCURY);
-    consumable c(PLANET_X);
+    consumable a = {PLUTO, PLANET};
+    consumable b = {MERCURY, PLANET};
+    consumable c = {PLANET_X, PLANET};
 
     consumables.push_back(a);
     consumables.push_back(b);

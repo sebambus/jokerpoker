@@ -1,7 +1,9 @@
 #include "consumable.h"
 
 const char* consumableName(consumable t){
-    switch (t) {
+    switch (t.type) {
+    case PLANET:
+        switch (t.val) {
         case PLUTO:
             return "Pluto";
         case MERCURY:
@@ -26,12 +28,15 @@ const char* consumableName(consumable t){
             return "Ceres";
         case ERIS:
             return "Eris";
+        }
     }
     return "ERROR";
 }
 
 const char* consumableDescription(consumable t){
-    switch (t) {
+    switch (t.type) {
+    case PLANET:
+        switch (t.val) {
         case PLUTO:
             return "Increases High Card hand value by +1 Mult and +10 Chips";
         case MERCURY:
@@ -56,6 +61,7 @@ const char* consumableDescription(consumable t){
             return "Increases Flush House hand value by +4 Mult and +40 Chips";
         case ERIS:
             return "Increases Flush Five hand value by +3 Mult and +50 Chips";
+        }
     }
     return "ERROR";
 }
