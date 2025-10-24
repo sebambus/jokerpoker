@@ -64,6 +64,9 @@ void level::play() {
             case 'x': // sort by value
                 h.sortByValue();
                 break;
+            case 'w':
+                tally.currentScore = threshold;
+                break;
         }
         
         g->mainScreen.updateLevelScreen(this);
