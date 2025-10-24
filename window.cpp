@@ -62,7 +62,6 @@ void window::updateSpecialScreen(game* g, int index){
         return;
 
     werase(content);
-    print("Consumables:\n");
     for (int i = 0; i < g->consumables.size(); i++){
         if (i == index)
             print("[x]");
