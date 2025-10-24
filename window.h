@@ -16,6 +16,7 @@ public:
     void updateGameInfo(game* g);
     void updateLevelScreen(level* l);
     void updateShopScreen(shop* s);
+    void updateSpecialScreen(game* g);
     void clear();
     void changeTitle(const char* title);
 };

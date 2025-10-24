@@ -7,7 +7,7 @@ ODIR=obj
 jokerpoker: $(OBJ) | $(ODIR)
 	$(CXX) -o $@ $^ -lncursesw
 
-$(ODIR):
+$(ODIR): #create obj directory if it doesn't exist
 	mkdir $(ODIR)
 
 $(ODIR)/%.d: %.cpp

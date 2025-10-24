@@ -57,6 +57,16 @@ void window::updateShopScreen(shop *s) {
     wrefresh(content);
 }
 
+void window::updateSpecialScreen(game* g){
+    werase(content);\
+    print("Consumables:\n");
+    for (int i = 0; i < g->consumables.size(); i++){
+        print("%s\n", g->consumables[i].name.c_str()); //must convert std::string to const char * for print function
+    }
+    wrefresh(content);
+}
+
+
 void window::clear(){
     wclear(content);
     wclear(frame);

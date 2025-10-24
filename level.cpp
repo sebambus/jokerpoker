@@ -28,6 +28,7 @@ void level::play() {
     g->gameInfo.updateGameInfo(g);
 
     g->mainScreen.updateLevelScreen(this);
+    g->specialScreen.updateSpecialScreen(g);
 
     while(true) {
         switch (getchar()) {
