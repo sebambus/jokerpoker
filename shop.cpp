@@ -8,7 +8,7 @@
 
 shop::shop(game *game){
     g = game;
-    if(g->round = 1)
+    if(g->round == 1)
         generatePurchaseables();
     run();
 }
@@ -38,4 +38,6 @@ void shop::generatePurchaseables() {
         return v;
     };
     v = genv(g, genv);
+
+
 }
