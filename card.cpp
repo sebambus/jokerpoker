@@ -8,6 +8,11 @@ card::card(int value, suit suit){
     cardSuit = suit;
 }
 
+card::card(item i) {
+    cardValue = i.val % 13;
+    cardSuit = (suit) (i.val / 13);
+}
+
 // prints card in color with one rank char and one suit wchar_t
 void card::print(WINDOW* win) {
     char valChar;
@@ -57,4 +62,8 @@ void card::print(WINDOW* win) {
     wprintw(win, "%c", valChar);
     // prints unicode string
     waddwstr(win, suitChar);
+}
+
+item card::asItem() {
+    return {cardSuit*13 + cardValue, CARD};
 }
