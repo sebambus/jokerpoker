@@ -3,7 +3,6 @@
 
 #include "deck.h"
 #include "window.h"
-#include "voucher.h"
 #include "item.h"
 
 class game {

@@ -63,7 +63,3 @@ void card::print(WINDOW* win) {
     // prints unicode string
     waddwstr(win, suitChar);
 }
-
-item card::asItem() {
-    return {cardSuit*13 + cardValue, CARD};
-}

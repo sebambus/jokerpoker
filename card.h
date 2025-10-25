@@ -20,5 +20,4 @@ public:
     card(item);
     // prints card in color with one rank char and one suit wchar_t
     void print(WINDOW*);
-    item asItem();
 };

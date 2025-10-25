@@ -4,6 +4,7 @@
 #include "level.h"
 #include "game.h"
 #include "shop.h"
+#include "item.h"
 
 window::window(int h, int w, int y, int x, const char* title) {
     frame = newwin(h, w, y, x);
@@ -53,7 +54,7 @@ void window::updateShopScreen(shop *s) {
     werase(content);
     char menuchar =  'a';
     if(s->v != VOUCHER_COUNT)
-        print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, voucherName(s->v));
+        print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());
     wrefresh(content);
 }
 
@@ -67,7 +68,7 @@ void window::updateSpecialScreen(game* g, int index){
             print("[x]");
         else
             print("[ ]");
-        print("%s\n", itemName(g->consumables[i])); //must convert std::string to const char * for print function
+        print("%s\n", g->consumables[i].name()); //must convert std::string to const char * for print function
     }
     g->cardInfo.updateCardInfo(g, index);
     wrefresh(content);
@@ -78,7 +79,7 @@ void window::updateCardInfo(game* g, int index){
         return;
 
     werase(content);
-    print(itemDescription(g->consumables[index]));
+    print(g->consumables[index].description());
     wrefresh(content);
 }
 

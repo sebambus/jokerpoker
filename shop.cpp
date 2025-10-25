@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <ncursesw/ncurses.h>
 #include "game.h"
-#include "voucher.h"
+#include "item.h"
 
 shop::shop(game *game){
     g = game;

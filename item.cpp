@@ -1,7 +1,6 @@
 #include "item.h"
 
 #include "readcsv.h"
-#include "voucher.h"
 #include "card.h"
 
 item::item(voucher v) {
