@@ -2,18 +2,18 @@
 
 #include "readcsv.h"
 
-const char* itemName(item t){
-    switch (t.type) {
+const char* item::name(){
+    switch (type) {
     case PLANET:
-        return readcsv("planet.csv", t.val, 0);
+        return readcsv("planet.csv", val, 0);
     }
     return "ERROR";
 }
 
-const char* itemDescription(item t){
-    switch (t.type) {
+const char* item::description(){
+    switch (type) {
     case PLANET:
-        return readcsv("planet.csv", t.val, 1);
+        return readcsv("planet.csv", val, 1);
     }
     return "ERROR";
 }

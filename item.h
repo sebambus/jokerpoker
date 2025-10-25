@@ -10,9 +10,13 @@ enum itemtype : int {
     VOUCHER
 };
 
-struct item {
+class item {
+public:
     int val;
     itemtype type;
+
+    const char* name();
+    const char* description();
 };
 
 enum planet : int {
@@ -29,6 +33,3 @@ enum planet : int {
     CERES,
     ERIS
 };
-
-const char* itemName(item type);
-const char* itemDescription(item type);
