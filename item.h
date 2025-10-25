@@ -15,6 +15,9 @@ public:
     int val;
     itemtype type;
 
+    item(voucher);
+    item(planet);
+    item(card);
     const char* name();
     const char* description();
 };
