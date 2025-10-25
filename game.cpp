@@ -2,7 +2,7 @@
 
 #include "level.h"
 #include "window.h"
-#include "consumable.h"
+#include "item.h"
 
 game::game() :
     levelInfo(10, 20, 0, 0, "Level Info"),
