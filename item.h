@@ -8,8 +8,8 @@ enum itemtype : int {
     TAROT,
     SPECTRAL,
     JOKER,
-    CARD,
-    VOUCHER
+    VOUCHER,
+    CARD
 };
 
 enum planet : int {
@@ -24,7 +24,26 @@ enum planet : int {
     NEPTUNE,
     PLANET_X,
     CERES,
-    ERIS
+    ERIS,
+    PLANET_COUNT
+};
+
+enum tarot : int {
+    TAROT_ONE,
+    TAROT_TWO,
+    TAROT_COUNT
+};
+
+enum spectral : int {
+    SPECTRAL_ONE,
+    SPECTRAL_TWO,
+    SPECTRAL_COUNT
+};
+
+enum joker : int {
+    JOKER_ONE,
+    JOKER_TWO,
+    JOKER_COUNT
 };
 
 enum voucher : int {
@@ -68,8 +87,11 @@ public:
     int val;
     itemtype type;
 
-    item(voucher);
     item(planet);
+    item(tarot);
+    item(spectral);
+    item(joker);
+    item(voucher);
     item(card);
     const char* name();
     const char* description();
