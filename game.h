@@ -26,6 +26,7 @@ public:
     window mainScreen;
     window specialScreen;
     window cardInfo;
+    window peekScreen;
 
     game();
     int getPlays();

@@ -10,4 +10,6 @@ public:
     void fillDeck();
     // shuffles cards using fisher-yates algorithm
     void shuffle();
+    int suitCount(suit s);
+    int cardCount(int v);
 };

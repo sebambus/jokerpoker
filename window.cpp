@@ -89,6 +89,11 @@ void window::updateCardInfo(game* g, int index){
     wrefresh(content);
 }
 
+void window::updatePeekScreen(game* g){
+    werase(content);
+    wrefresh(content);
+}
+
 void window::clear(){
     wclear(content);
     wclear(frame);

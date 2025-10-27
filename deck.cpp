@@ -22,3 +22,22 @@ void deck::shuffle() {
         cards[i] = temp;
     }
 }
+
+
+int deck::suitCount(suit s){
+    int sum = 0;
+    for (card c : cards){
+        if (c.cardSuit == s)
+            sum ++;
+    }
+    return sum;
+}
+
+int deck::cardCount(int v){
+    int sum = 0;
+    for (card c : cards){
+        if (c.cardValue == v)
+            sum ++;
+    }
+    return sum;
+}

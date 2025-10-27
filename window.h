@@ -18,6 +18,7 @@ public:
     void updateShopScreen(shop* s);
     void updateSpecialScreen(game* g, int index);
     void updateCardInfo(game* g, int index);
+    void updatePeekScreen(game* g);
     void clear();
     void changeTitle(const char* title);
 };
