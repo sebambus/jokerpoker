@@ -50,9 +50,9 @@ static const char* info(item* i, int x) {
 }
 
 const char* item::name() {
-    info(this, 0);
+    return info(this, 0);
 }
 
 const char* item::description(){
-    info(this, 1);
+    return info(this, 1);
 }

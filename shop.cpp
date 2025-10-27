@@ -8,7 +8,7 @@
 
 shop::shop(game *game){
     g = game;
-    if(g->round == 1)
+    //if(g->round == 1)
         generatePurchaseables();
     run();
 }
@@ -39,5 +39,27 @@ void shop::generatePurchaseables() {
     };
     v = genv(g, genv);
 
-
+    for(int i = 0; i < 3; i++) {
+        int jokerodds = 20;
+        int tarotodds = 4;
+        int planetodds = 4;
+        int cardodds = 0;
+        int n = rand() & (jokerodds + tarotodds + planetodds + cardodds);
+        if(n < jokerodds) {
+            items.push_back(item((joker) (n%JOKER_COUNT)));
+            continue;
+        } else n -= jokerodds;
+        if(n < tarotodds) {
+            items.push_back(item((tarot) (n%JOKER_COUNT)));
+            continue;
+        } else n -= tarotodds;
+        if(n < planetodds) {
+            items.push_back(item((planet) (n%JOKER_COUNT)));
+            continue;
+        } else n -= planetodds;
+        if(n < cardodds) {
+            items.push_back(item(card(rand()%13, (suit) (rand()%4))));
+            continue;
+        } else n -= cardodds;
+    }
 }

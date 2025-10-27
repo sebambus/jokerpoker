@@ -53,6 +53,12 @@ void window::updateLevelScreen(level *l) {
 void window::updateShopScreen(shop *s) {
     werase(content);
     char menuchar =  'a';
+    if(s->items.size() > 0) {
+        print("Items:\n");
+    }
+    for(item i : s->items) {
+        print("%c - $%d %s\n", menuchar++, 3, i.name());
+    }
     if(s->v != VOUCHER_COUNT)
         print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());
     wrefresh(content);

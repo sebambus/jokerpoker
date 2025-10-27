@@ -1,12 +1,14 @@
 #pragma once
+#include <vector>
+#include "item.h"
 
 class game;
-enum voucher : int;
 
-class shop{
+class shop {
 public:
     game *g;
     voucher v;
+    std::vector<item> items;
 
     shop(game *g);
     void run();
