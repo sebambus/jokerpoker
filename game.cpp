@@ -11,7 +11,7 @@ game::game() :
     mainScreen(20, 80, 0, 20, ""),
     specialScreen(10, 20, 0, 100, "Consumables"),
     cardInfo(10, 20, 10, 100, "Card Info"),
-    peekScreen(10, 80, 20, 20, "Peek") {
+    peekScreen(10, 100, 20, 20, "Peek") {
     money = 0;
     ante = 1;
     round = 1;

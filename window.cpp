@@ -89,8 +89,59 @@ void window::updateCardInfo(game* g, int index){
     wrefresh(content);
 }
 
-void window::updatePeekScreen(game* g){
+void window::updatePeekScreen(level* l){
     werase(content);
+    print("   ");
+    for (int i = 1; i < 14; i++){
+        char c;
+        switch (i){
+        case 1:
+            c = 'A';
+            break;
+        case 10:
+            c = 'T';
+            break;
+        case 11:
+            c = 'J';
+            break;
+        case 12:
+            c = 'Q';
+            break;
+        case 13:
+            c = 'K';
+            break;
+        default:
+            c = i + '0';
+            break;
+        }
+        print("  %c ", c);
+    }
+    print("\n");
+
+
+    for (int i = 0; i < 4; i++){
+        suit s = static_cast<suit>(i);
+
+        char c;
+        if (s == SPADE) c = 'S';
+        else if (s == CLUB) c = 'C';
+        else if (s == DIAMOND) c = 'D';
+        else if (s == HEART) c = 'H';
+
+        print("%c: |", c);
+
+        for (int j = 1; j < 14; j++){
+            print(" %d |", l->d.specificCount(s,j));
+        }
+        print(" %d", l->d.suitCount(s));
+        print("\n");
+    }
+
+    print("   ");
+    for (int i = 1; i < 14; i++){
+        print("  %d ", l->d.cardCount(i));
+    }
+
     wrefresh(content);
 }
 

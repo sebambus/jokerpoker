@@ -32,7 +32,7 @@ void level::play() {
     g->mainScreen.updateLevelScreen(this);
     g->specialScreen.updateSpecialScreen(g,0);
     g->cardInfo.updateCardInfo(g,0);
-    g->peekScreen.updatePeekScreen(g);
+    g->peekScreen.updatePeekScreen(this);
 
     while(true) {
         switch (getchar()) {
@@ -53,11 +53,13 @@ void level::play() {
                 playHand();
                 g->levelInfo.updateLevelInfo(this);
                 g->gameInfo.updateGameInfo(g);
+                g->peekScreen.updatePeekScreen(this);
                 break;
             case 'd': // discard
                 discardHand();
                 g->levelInfo.updateLevelInfo(this);
                 g->gameInfo.updateGameInfo(g);
+                g->peekScreen.updatePeekScreen(this);
                 break;
             case 's': // swap
                 h.swapSelected();
@@ -106,7 +108,6 @@ void level::playHand() {
         return;
     } 
     played = hand(h.popSelected());
-    played.cursor = -1;
     for (int i = 0; i < played.selected.size(); i++) draw();
     recentScore = calculateScore(played); //add score of hand
     plays--;
