@@ -1,5 +1,6 @@
 #pragma once
 #include <ncursesw/ncurses.h>
+#include <string>
 
 class level;
 class game;
@@ -10,8 +11,11 @@ public:
     WINDOW* frame;
     WINDOW* content;
 
+    int width = 0;
+
     window(int h, int w, int y, int x, const char* title);
     void print(const char *format, ...);
+    std::string textWrap(const char*);
     void updateLevelInfo(level* l);
     void updateGameInfo(game* g);
     void updateLevelScreen(level* l);

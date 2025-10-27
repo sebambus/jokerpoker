@@ -1,6 +1,8 @@
 #include "window.h"
 
 #include <cstdarg>
+#include <string>
+#include <sstream>
 #include "level.h"
 #include "game.h"
 #include "shop.h"
@@ -9,6 +11,7 @@
 window::window(int h, int w, int y, int x, const char* title) {
     frame = newwin(h, w, y, x);
     content = newwin(h-2, w-2, y+1, x+1);
+    width = w-2;
     refresh();
     changeTitle(title);
 }
@@ -18,6 +21,33 @@ void window::print(const char* format, ...) {
     va_start(args, format);
     vw_printw(content, format, args);
     va_end(args);
+}
+
+std::string window::textWrap(const char* cstring){
+    std::string str(cstring);
+    std::stringstream ss(str);
+    std::string word;
+    std::vector<std::string> words;
+    std::string newstr = "";
+
+    while (ss >> word){
+        words.push_back(word);
+    }
+
+    int lineSize = 0;
+    for (std::string w : words){
+        w += " ";
+        if (lineSize + w.size() >= width){
+            newstr += "\n" + w;
+            lineSize = w.size() - 1; // -1 becuse newline character is a character
+        }
+        else {
+            newstr += w;
+            lineSize += w.size();
+        }      
+    }
+
+    return newstr;
 }
 
 void window::updateLevelInfo(level* l) {
@@ -85,7 +115,7 @@ void window::updateCardInfo(game* g, int index){
         return;
 
     werase(content);
-    print(g->consumables[index].description());
+    print(textWrap(g->consumables[index].description()).c_str());
     wrefresh(content);
 }
 
