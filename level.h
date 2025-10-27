@@ -2,7 +2,6 @@
 
 class game;
 
-#include "scorekeep.h"
 #include "deck.h"
 #include "hand.h"
 class level {
