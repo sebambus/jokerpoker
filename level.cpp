@@ -13,6 +13,7 @@ level::level(game* g) {
     discards = g->getDiscards();
     d = deck(g->d);
     d.shuffle();
+    currentScore = 0;
     recentScore = 0;
 
     int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
@@ -72,13 +73,13 @@ void level::play() {
                 changeConsumable(-1);
                 break;
             case 'w':
-                tally.currentScore = threshold;
+                currentScore = threshold;
                 break;
         }
         
         g->mainScreen.updateLevelScreen(this);
 
-        if (tally.currentScore >= threshold) {
+        if (currentScore >= threshold) {
             win();
             break;
         }
@@ -105,7 +106,7 @@ void level::playHand() {
     played = hand(h.popSelected());
     played.cursor = -1;
     for (int i = 0; i < played.selected.size(); i++) draw();
-    recentScore = tally.calculateScore(played); //add score of hand
+    recentScore = calculateScore(played); //add score of hand
     plays--;
 }
 
@@ -128,6 +129,27 @@ void level::changeConsumable(int by){
     
     currConsumable = newConsumable;
     g->specialScreen.updateSpecialScreen(g, currConsumable);
+}
+
+int level::calculateScore(hand played){
+    std::pair<handtype, std::vector<card>> scoringInfo;
+    scoringInfo = played.scoreTypeAndCards();
+    handtype type = scoringInfo.first;
+    std::vector<card> scoredCards = scoringInfo.second;
+    int flat = g->handTable[type][FLAT];
+    int mult = g->handTable[type][MULT];
+    g->handTable[type][TIMES_PLAYED] += 1;
+    int score = flat;
+
+    for (int i = 0; i < scoredCards.size(); i++)
+    {
+        score += scoredCards[i].cardValue;
+    }
+
+    score *= mult;
+    currentScore += score;
+
+    return score;
 }
 
 void level::win() {

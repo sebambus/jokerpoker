@@ -24,7 +24,7 @@ void window::updateLevelInfo(level* l) {
     werase(content);
     print("Small Blind\n");
     print("Threshold: %d\n", l->threshold);
-    print("Score: %d\n", l->tally.currentScore);
+    print("Score: %d\n", l->currentScore);
     print("%s\n", handName(l->played.scoreType()));
     print("+%d\n", l->recentScore);
     print("Hands  Discards\n");

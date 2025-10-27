@@ -10,7 +10,7 @@ public:
     game* g;
     int discards;
     int plays;
-    scorekeep tally;
+    int currentScore;
     int recentScore;
     int threshold;
     deck d;
@@ -24,6 +24,7 @@ public:
     void playHand();
     void discardHand();
     void changeConsumable(int by);
+    int calculateScore(hand played);
     void win();
     void lose();
 };

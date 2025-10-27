@@ -3,6 +3,7 @@
 #include "level.h"
 #include "window.h"
 #include "item.h"
+#include "readcsv.h"
 
 game::game() :
     levelInfo(10, 20, 0, 0, "Level Info"),
@@ -14,6 +15,7 @@ game::game() :
     ante = 1;
     round = 1;
     d.fillDeck();
+    initHandTable();
 
     //for debugging consumables:
     item a = item(PLUTO);
@@ -24,6 +26,16 @@ game::game() :
     consumables.push_back(b);
     consumables.push_back(c);
 
+}
+
+void game::initHandTable(){
+    for (int i = 0; i < HAND_TYPE_COUNT; i++)
+    {
+        for (int j = 0; j < 4; j++){
+            handTable[i][j] = atoi(readcsv("handtable.csv", i, j));
+        }
+    }
+    
 }
 
 int game::getPlays() {
