@@ -130,6 +130,7 @@ void window::updateJokerScreen(game* g, int index){
     wrefresh(content);
 }
 
+// prints info on item based on game's focusScreen and the items position in it's respective vector
 void window::updateCardInfo(game* g, int index, int s){
     if (g->consumables.size() == 0)
         return;
