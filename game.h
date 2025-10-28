@@ -18,6 +18,7 @@ public:
     int ante;
     int round;
     std::vector<item> consumables;
+    std::vector<item> jokers;
     int handTable[13][4]; //13 hands, 4 fields, example: handtable[HIGH][MULT]
     std::bitset<VOUCHER_COUNT> vouchers;
     deck d;
@@ -25,6 +26,7 @@ public:
     window gameInfo;
     window mainScreen;
     window specialScreen;
+    window jokerScreen;
     window cardInfo;
     window peekScreen;
 

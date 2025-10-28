@@ -10,6 +10,7 @@ game::game() :
     gameInfo(10, 20, 10, 0, "Game Info"),
     mainScreen(12, 80, 0, 20, ""),
     specialScreen(10, 20, 0, 100, "Consumables"),
+    jokerScreen(10, 20, 0, 120, "Jokers"),
     cardInfo(10, 20, 10, 100, "Card Info"),
     peekScreen(8, 80, 12, 20, "Peek") {
     money = 0;
@@ -27,6 +28,10 @@ game::game() :
     consumables.push_back(b);
     consumables.push_back(c);
 
+    jokers.push_back(a);
+    jokers.push_back(b);
+    jokers.push_back(c);
+
 }
 
 void game::initHandTable(){
@@ -38,6 +43,7 @@ void game::initHandTable(){
     }
     
 }
+
 
 int game::getPlays() {
     return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG];

@@ -108,16 +108,40 @@ void window::updateSpecialScreen(game* g, int index){
             print("[ ]");
         print("%s\n", g->consumables[i].name());
     }
-    g->cardInfo.updateCardInfo(g, index);
+    g->cardInfo.updateCardInfo(g, index, static_cast<int>(CONSUMABLE_SCREEN));
     wrefresh(content);
 }
 
-void window::updateCardInfo(game* g, int index){
+void window::updateJokerScreen(game* g, int index){
+    werase(content);
+    if (g->jokers.size() == 0) //for when you start a level without any consumables
+        return;
+
+    werase(content);
+    for (int i = 0; i < g->jokers.size(); i++){
+        if (i == index)
+            print("[x]");
+        else
+            print("[ ]");
+        print("%s\n", g->jokers[i].name());
+    }
+    g->cardInfo.updateCardInfo(g, index, static_cast<int>(JOKER_SCREEN));
+    wrefresh(content);
+    wrefresh(content);
+}
+
+void window::updateCardInfo(game* g, int index, int s){
     if (g->consumables.size() == 0)
         return;
 
     werase(content);
-    print(textWrap(g->consumables[index].description()).c_str()); // wrap text and convert back to char* before printing
+    const char* desc;
+    if (s == static_cast<int>(CONSUMABLE_SCREEN))
+        desc = g->consumables[index].description();
+    else
+        desc = g->jokers[index].description();
+
+    print(textWrap(desc).c_str()); // wrap text and convert back to char* before printing
     wrefresh(content);
 }
 

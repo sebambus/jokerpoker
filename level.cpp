@@ -30,8 +30,9 @@ void level::play() {
     g->gameInfo.updateGameInfo(g);
 
     g->mainScreen.updateLevelScreen(this);
+    g->jokerScreen.updateJokerScreen(g,-1);
     g->specialScreen.updateSpecialScreen(g,0);
-    g->cardInfo.updateCardInfo(g,0);
+    g->cardInfo.updateCardInfo(g,0, static_cast<int>(CONSUMABLE_SCREEN));
     g->peekScreen.updatePeekScreen(this);
 
     while(true) {
@@ -71,10 +72,19 @@ void level::play() {
                 h.sortByValue();
                 break;
             case 'j':
-                changeConsumable(1);
+                if (focusScreen == CONSUMABLE_SCREEN)
+                    changeConsumable(1);
+                else
+                    changeJoker(1);
                 break;
             case 'k':
-                changeConsumable(-1);
+                if (focusScreen == CONSUMABLE_SCREEN)
+                    changeConsumable(-1);
+                else
+                    changeJoker(-1);
+                break;
+            case ';':
+                swapFocus();
                 break;
             case 'w':
                 currentScore = threshold;
@@ -132,6 +142,31 @@ void level::changeConsumable(int by){
     
     currConsumable = newConsumable;
     g->specialScreen.updateSpecialScreen(g, currConsumable);
+}
+
+void level:: changeJoker(int by){
+    int newJokerInd = currJoker + by;
+    int jokersSize = g->jokers.size()-1;
+    if (newJokerInd > jokersSize || newJokerInd < 0)
+        return;
+    
+    currJoker = newJokerInd;
+    g->jokerScreen.updateJokerScreen(g, currJoker);
+}
+
+void level::swapFocus(){
+    if (focusScreen == CONSUMABLE_SCREEN){
+        focusScreen = JOKER_SCREEN;
+        g->specialScreen.updateSpecialScreen(g, -1);
+        g->jokerScreen.updateJokerScreen(g,0);
+        currJoker = 0;
+    }
+    else{
+        focusScreen = CONSUMABLE_SCREEN;
+        g->jokerScreen.updateJokerScreen(g, -1);
+        g->specialScreen.updateSpecialScreen(g,0);
+        currConsumable = 0;
+    }
 }
 
 int level::calculateScore(hand played){

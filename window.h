@@ -21,7 +21,8 @@ public:
     void updateLevelScreen(level* l);
     void updateShopScreen(shop* s);
     void updateSpecialScreen(game* g, int index);
-    void updateCardInfo(game* g, int index);
+    void updateJokerScreen(game* g, int index);
+    void updateCardInfo(game* g, int index, int s);
     void updatePeekScreen(level* l);
     void clear();
     void changeTitle(const char* title);
