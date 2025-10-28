@@ -63,3 +63,36 @@ void card::print(WINDOW* win) {
     // prints unicode string
     waddwstr(win, suitChar);
 }
+
+char suitToChar(suit s){
+    switch(s){
+        case SPADE:
+            return 'S';
+        case DIAMOND:
+            return 'D';
+        case HEART:
+            return 'H';
+        case CLUB:
+            return 'C';
+    }
+    return 'X';
+}
+
+char valueToChar(int v){
+    if (v > 1 && v < 10){
+        return '0' + v;
+    }
+    switch(v){
+        case 1:
+            return 'A';
+        case 10:
+            return 'T';
+        case 11:
+            return 'J';
+        case 12:
+            return 'Q';
+        case 13:
+            return 'K';
+    }
+    return 'X';
+}

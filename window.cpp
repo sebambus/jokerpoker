@@ -7,6 +7,7 @@
 #include "game.h"
 #include "shop.h"
 #include "item.h"
+#include "card.h"
 
 window::window(int h, int w, int y, int x, const char* title) {
     frame = newwin(h, w, y, x);
@@ -30,18 +31,19 @@ std::string window::textWrap(const char* cstring){
     std::vector<std::string> words;
     std::string newstr = "";
 
-    while (ss >> word){
+    while (ss >> word){ // create vector of individual words in string
         words.push_back(word);
     }
 
-    int lineSize = 0;
+    int lineSize = 0; // keep track of characters in current line
     for (std::string w : words){
-        w += " ";
+        w += " "; 
+        // if adding the next word would exceed the size of the window
         if (lineSize + w.size() >= width){
-            newstr += "\n" + w;
-            lineSize = w.size() - 1; // -1 becuse newline character is a character
+            newstr += "\n" + w; // add a newline before the word
+            lineSize = w.size() - 1; // now the size of the new line is the size of that word minus \n
         }
-        else {
+        else { // add word to string as normal
             newstr += w;
             lineSize += w.size();
         }      
@@ -104,7 +106,7 @@ void window::updateSpecialScreen(game* g, int index){
             print("[x]");
         else
             print("[ ]");
-        print("%s\n", g->consumables[i].name()); //must convert std::string to const char * for print function
+        print("%s\n", g->consumables[i].name());
     }
     g->cardInfo.updateCardInfo(g, index);
     wrefresh(content);
@@ -115,36 +117,15 @@ void window::updateCardInfo(game* g, int index){
         return;
 
     werase(content);
-    print(textWrap(g->consumables[index].description()).c_str());
+    print(textWrap(g->consumables[index].description()).c_str()); // wrap text and convert back to char* before printing
     wrefresh(content);
 }
 
 void window::updatePeekScreen(level* l){
     werase(content);
     print("   ");
-    for (int i = 1; i < 14; i++){
-        char c;
-        switch (i){
-        case 1:
-            c = 'A';
-            break;
-        case 10:
-            c = 'T';
-            break;
-        case 11:
-            c = 'J';
-            break;
-        case 12:
-            c = 'Q';
-            break;
-        case 13:
-            c = 'K';
-            break;
-        default:
-            c = i + '0';
-            break;
-        }
-        print("  %c ", c);
+    for (int i = 1; i < 14; i++){ // 
+        print("  %c ", valueToChar(i)); // print collumn headers
     }
     print("\n");
 
@@ -152,24 +133,18 @@ void window::updatePeekScreen(level* l){
     for (int i = 0; i < 4; i++){
         suit s = static_cast<suit>(i);
 
-        char c;
-        if (s == SPADE) c = 'S';
-        else if (s == CLUB) c = 'C';
-        else if (s == DIAMOND) c = 'D';
-        else if (s == HEART) c = 'H';
-
-        print("%c: |", c);
+        print("%c: |", suitToChar(s)); // print row headers
 
         for (int j = 1; j < 14; j++){
-            print(" %d |", l->d.specificCount(s,j));
+            print(" %d |", l->d.specificCount(s,j)); // print cells
         }
-        print(" %d", l->d.suitCount(s));
+        print(" %d", l->d.suitCount(s)); // print suit row total
         print("\n");
     }
 
     print("   ");
     for (int i = 1; i < 14; i++){
-        print("  %d ", l->d.cardCount(i));
+        print("  %d ", l->d.cardCount(i)); // print value collumn total
     }
 
     wrefresh(content);

@@ -23,7 +23,7 @@ void deck::shuffle() {
     }
 }
 
-int deck::suitCount(suit s){
+int deck::suitCount(suit s){ // count all cards of suit s
     int sum = 0;
     for (card c : cards){
         if (c.cardSuit == s)
@@ -32,7 +32,7 @@ int deck::suitCount(suit s){
     return sum;
 }
 
-int deck::cardCount(int v){
+int deck::cardCount(int v){ // count all cards of value v
     int sum = 0;
     for (card c : cards){
         if (c.cardValue == v)
@@ -41,7 +41,7 @@ int deck::cardCount(int v){
     return sum;
 }
 
-int deck::specificCount(suit s, int v){
+int deck::specificCount(suit s, int v){ // count all cards of suit s and value v
     int sum = 0;
     for (card c : cards){
         if (c.cardSuit == s && c.cardValue == v)
