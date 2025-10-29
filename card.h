@@ -24,4 +24,5 @@ public:
 
 };
     char suitToChar(suit s);
+    int suitToColor(suit s);
     char valueToChar(int v);

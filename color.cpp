@@ -59,3 +59,7 @@ void initcolors() {
 void setcolor(WINDOW* win, short fg, short bg) {
     wattron(win, COLOR_PAIR(encodecolor(fg)+16*encodecolor(bg)));
 }
+
+void unsetcolor(WINDOW* win, short fg, short bg){
+    wattroff(win, COLOR_PAIR(encodecolor(fg)+16*encodecolor(bg)));
+}

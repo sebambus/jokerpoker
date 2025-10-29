@@ -8,6 +8,7 @@
 #include "shop.h"
 #include "item.h"
 #include "card.h"
+#include "color.h"
 
 window::window(int h, int w, int y, int x, const char* title) {
     frame = newwin(h, w, y, x);
@@ -69,7 +70,10 @@ void window::updateGameInfo(game *g) {
     print("You start with\n");
     print("Hands Discards\n");
     print("  %d      %d\n", g->getPlays(), g->getDiscards());
-    print("Money: $%d\n", g->money);
+    print("Money: ");
+    setcolor(content, COLOR_YELLOW, COLOR_BLACK);
+    print("$%d\n", g->money);
+    unsetcolor(content, COLOR_YELLOW, COLOR_BLACK);
     print("Ante %d/%d, Round %d\n", g->ante, 8, g->round);
     wrefresh(content);
 }
@@ -158,6 +162,8 @@ void window::updatePeekScreen(level* l){
 
     for (int i = 0; i < 4; i++){
         suit s = static_cast<suit>(i);
+        int suitColor = suitToColor(s);
+        setcolor(content, suitColor, COLOR_BLACK); // color line with suit color
 
         print("%c: |", suitToChar(s)); // print row headers
 
@@ -166,6 +172,8 @@ void window::updatePeekScreen(level* l){
         }
         print(" %d", l->d.suitCount(s)); // print suit row total
         print("\n");
+
+        unsetcolor(content, suitColor, COLOR_BLACK);
     }
 
     print("   ");

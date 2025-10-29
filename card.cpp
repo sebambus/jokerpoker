@@ -78,6 +78,20 @@ char suitToChar(suit s){
     return 'X';
 }
 
+int suitToColor(suit s){
+    switch (s){
+        case SPADE:
+            return COLOR_BLACK;
+        case HEART:
+            return COLOR_RED;
+        case CLUB:
+            return COLOR_BLUE;
+        case DIAMOND:
+            return COLOR_YELLOW;
+    }
+    return COLOR_BLACK;
+}
+
 char valueToChar(int v){
     if (v > 1 && v < 10){
         return '0' + v;
