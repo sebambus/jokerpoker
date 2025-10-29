@@ -16,7 +16,36 @@ shop::shop(game *game){
 void shop::run(){
     g->mainScreen.changeTitle("Shop");
     g->mainScreen.updateShopScreen(this);
-    char c = getchar();
+
+    while(true) {
+        char c = getchar();
+
+        g->mainScreen.updateShopScreen(this);
+        g->gameInfo.updateGameInfo(g);
+
+        if(c >= 'a' && c <= 'z') {
+            int n = c - 'a';
+            if(n < items.size()) { // if item selected
+                if(g->money >= 3) {
+                    g->consumables.push_back(items[n]);
+                    items.erase(items.begin()+n);
+                    g->money -= 3;
+                }
+                continue;
+            } else n -= items.size();
+            if(n == 0 && v != VOUCHER_COUNT) { // if voucher selected
+                if(g->money >= 10) {
+                    g->vouchers[v] = true;
+                    v = VOUCHER_COUNT;
+                    g->money -= 10;
+                } else continue;
+            } else if(v != VOUCHER_COUNT) n--;
+        }
+
+        if(c == 'q') break;
+    }
+
+    /*
     if(c >= 'a' && c-'a' < v != VOUCHER_COUNT) {
         if(g->money >= 10) {
             g->vouchers[v] = true;
@@ -24,9 +53,7 @@ void shop::run(){
             g->money -= 10;
         }
     }
-    g->mainScreen.updateShopScreen(this);
-    g->gameInfo.updateGameInfo(g);
-    getchar();
+    */
 }
 
 void shop::generatePurchaseables() {
