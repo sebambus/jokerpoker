@@ -9,3 +9,4 @@ int encodecolor(short c);
 void initcolors();
 // sets foreground (fg) and background (bg) with ncurses constants
 void setcolor(WINDOW* win, short fg, short bg);
+void unsetcolor(WINDOW* win, short fg, short bg);
