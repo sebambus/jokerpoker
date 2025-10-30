@@ -131,7 +131,6 @@ void window::updateJokerScreen(game* g, int index){
     }
     g->cardInfo.updateCardInfo(g, index, static_cast<int>(JOKER_SCREEN));
     wrefresh(content);
-    wrefresh(content);
 }
 
 // prints info on item based on game's focusScreen and the items position in it's respective vector
