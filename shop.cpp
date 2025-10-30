@@ -42,21 +42,16 @@ void shop::run(){
                     v = VOUCHER_COUNT;
                     g->money -= 10;
                 }
+                continue;
             }
         }
 
-        if(c == 'Q') break;
-    }
-
-    /*
-    if(c >= 'a' && c-'a' < v != VOUCHER_COUNT) {
-        if(g->money >= 10) {
-            g->vouchers[v] = true;
-            v = VOUCHER_COUNT;
-            g->money -= 10;
+        if(c == 'C') break;
+        if(c == 'q') {
+            endwin();
+            exit(0);
         }
     }
-    */
 }
 
 void shop::generatePurchaseables() {
