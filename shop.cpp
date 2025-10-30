@@ -25,24 +25,17 @@ void shop::run(){
 
         if(c >= 'a' && c <= 'z') {
             int n = c - 'a';
+
             if(n < items.size()) { // if item selected
                 if(g->money >= 3) {
                     g->consumables.push_back(items[n]);
                     items.erase(items.begin()+n);
                     g->money -= 3;
                 }
-                continue;
-            } else n -= items.size();
-            if(n == 0 && v != VOUCHER_COUNT) { // if voucher selected
-                if(g->money >= 10) {
-                    g->vouchers[v] = true;
-                    v = VOUCHER_COUNT;
-                    g->money -= 10;
-                } else continue;
-            } else if(v != VOUCHER_COUNT) n--;
+            }
         }
 
-        if(c == 'q') break;
+        if(c == 'Q') break;
     }
 
     /*
@@ -71,7 +64,7 @@ void shop::generatePurchaseables() {
         int tarotodds = 4;
         int planetodds = 4;
         int cardodds = 0;
-        int n = rand() & (jokerodds + tarotodds + planetodds + cardodds);
+        int n = rand() % (jokerodds + tarotodds + planetodds + cardodds);
         if(n < jokerodds) {
             items.push_back(item((joker) (n%JOKER_COUNT)));
             continue;
