@@ -29,10 +29,10 @@ void shop::run(){
             int n = c - 'a';
 
             if(n < items.size()) { // if item selected
-                if(g->money >= 3) {
+                if(g->money >= items[n].cost) {
                     g->consumables.push_back(items[n]);
                     items.erase(items.begin()+n);
-                    g->money -= 3;
+                    g->money -= items[n].cost;
                 }
                 continue;
             } else n-= items.size();

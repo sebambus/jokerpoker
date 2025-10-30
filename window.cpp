@@ -93,7 +93,7 @@ void window::updateShopScreen(shop *s) {
         print("Items:\n");
     }
     for(item i : s->items) {
-        print("%c - $%d %s\n", menuchar++, 3, i.name());
+        print("%c - $%d %s\n", menuchar++, i.cost, i.name());
     }
     if(s->v != VOUCHER_COUNT)
         print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());

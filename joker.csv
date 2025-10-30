@@ -1,150 +1,150 @@
-8 Ball,$5,Common
-Abstract Joker,$4,Common
-Acrobat,$6,Uncommon
-Ancient Joker,$8,Rare
-Arrowhead,$7,Uncommon
-Astronomer,$8,Uncommon
-Banner,$5,Common
-Baron,$8,Rare
-Baseball Card,$8,Rare
-Blackboard,$6,Uncommon
-Bloodstone,$7,Uncommon
-Blue Joker,$5,Common
-Blueprint,$10,Rare
-Bootstraps,$7,Uncommon
-Brainstorm,$10,Rare
-Bull,$6,Uncommon
-Burglar,$6,Uncommon
-Burnt Joker,$6,Rare
-Business Card,$4,Common
-Campfire,$9,Rare
-Canio,N/A,Legendary
-Card Sharp,$6,Uncommon
-Cartomancer,$6,Uncommon
-Castle,$6,Uncommon
-Cavendish,$4,Common
-Ceremonial Dagger,$6,Uncommon
-Certificate,$6,Uncommon
-Chaos the Clown,$4,Common
-Chicot,N/A,Legendary
-Clever Joker,$4,Common
-Cloud 9,$7,Uncommon
-Constellation,$6,Uncommon
-Crafty Joker,$4,Common
-Crazy Joker,$4,Common
-Credit Card,$1,Common
-Delayed Gratification,$4,Common
-Devious Joker,$4,Common
-Diet Cola,$6,Uncommon
-DNA,$8,Rare
-Driver's License,$7,Rare
-Droll Joker,$4,Common
-Drunkard,$4,Common
-Dusk,$5,Uncommon
-Egg,$4,Common
-Erosion,$6,Uncommon
-Even Steven,$4,Common
-Faceless Joker,$4,Common
-Fibonacci,$8,Uncommon
-Flash Card,$5,Uncommon
-Flower Pot,$6,Uncommon
-Fortune Teller,$6,Common
-Four Fingers,$7,Uncommon
-Gift Card,$6,Uncommon
-Glass Joker,$6,Uncommon
-Gluttonous Joker,$5,Common
-Golden Joker,$6,Common
-Golden Ticket,$5,Common
-Greedy Joker,$5,Common
-Green Joker,$4,Common
-Gros Michel,$5,Common
-Hack,$6,Uncommon
-Half Joker,$5,Common
-Hallucination,$4,Common
-Hanging Chad,$4,Common
-Hiker,$5,Uncommon
-Hit the Road,$8,Rare
-Hologram,$7,Uncommon
-Ice Cream,$5,Common
-Invisible Joker,$8,Rare
-Joker,$2,Common
-Joker Stencil,$8,Uncommon
-Jolly Joker,$3,Common
-Juggler,$4,Common
-Loyalty Card,$5,Uncommon
-Luchador,$5,Uncommon
-Lucky Cat,$6,Uncommon
-Lusty Joker,$5,Common
-Mad Joker,$4,Common
-Madness,$7,Uncommon
-Mail-In Rebate,$5,Common
-Marble Joker,$6,Uncommon
-Matador,$7,Uncommon
-Merry Andy,$7,Uncommon
-Midas Mask,$7,Uncommon
-Mime,$5,Uncommon
-Misprint,$4,Common
-Mr. Bones,$5,Uncommon
-Mystic Summit,$5,Common
-Obelisk,$8,Rare
-Odd Todd,$4,Common
-Onyx Agate,$7,Uncommon
-Oops! All 6s,$4,Uncommon
-Pareidolia,$5,Uncommon
-Perkeo,N/A,Legendary
-Photograph,$5,Common
-Popcorn,$5,Common
-Raised Fist,$5,Common
-Ramen,$6,Uncommon
-Red Card,$5,Common
-Reserved Parking,$6,Common
-Ride the Bus,$6,Common
-Riff-Raff,$6,Common
-Rocket,$6,Uncommon
-Rough Gem,$7,Uncommon
-Runner,$5,Common
-Satellite,$6,Uncommon
-Scary Face,$4,Common
-Scholar,$4,Common
-Séance,$6,Uncommon
-Seeing Double,$6,Uncommon
-Seltzer,$6,Uncommon
-Shoot the Moon,$5,Common
-Shortcut,$7,Uncommon
-Showman,$5,Uncommon
-Sixth Sense,$6,Uncommon
-Sly Joker,$3,Common
-Smeared Joker,$7,Uncommon
-Smiley Face,$4,Common
-Sock and Buskin,$6,Uncommon
-Space Joker,$5,Uncommon
-Spare Trousers,$6,Uncommon
-Splash,$3,Common
-Square Joker,$5,Common
-Steel Joker,$7,Uncommon
-Stone Joker,$6,Uncommon
-Stuntman,$6,Uncommon
-Supernova,$5,Common
-Superposition,$4,Common
-Swashbuckler,$4,Common
-The Duo,$8,Rare
-The Family,$8,Rare
-The Idol,$6,Uncommon
-The Order,$8,Rare
-The Tribe,$8,Rare
-The Trio,$8,Rare
-Throwback,$6,Uncommon
-To Do List,$4,Common
-To the Moon,$5,Uncommon
-Trading Card,$6,Uncommon
-Triboulet,N/A,Legendary
-Troubadour,$6,Uncommon
-Turtle Bean,$6,Uncommon
-Vagabond,$8,Rare
-Vampire,$7,Rare
-Walkie Talkie,$4,Common
-Wee Joker,$8,Rare
-Wily Joker,$4,Common
-Wrathful Joker,$5,Common
-Yorick,N/A,Legendary
-Zany Joker,$4,Common
+8 Ball,5,Common
+Abstract Joker,4,Common
+Acrobat,6,Uncommon
+Ancient Joker,8,Rare
+Arrowhead,7,Uncommon
+Astronomer,8,Uncommon
+Banner,5,Common
+Baron,8,Rare
+Baseball Card,8,Rare
+Blackboard,6,Uncommon
+Bloodstone,7,Uncommon
+Blue Joker,5,Common
+Blueprint,10,Rare
+Bootstraps,7,Uncommon
+Brainstorm,10,Rare
+Bull,6,Uncommon
+Burglar,6,Uncommon
+Burnt Joker,6,Rare
+Business Card,4,Common
+Campfire,9,Rare
+Canio,20,Legendary
+Card Sharp,6,Uncommon
+Cartomancer,6,Uncommon
+Castle,6,Uncommon
+Cavendish,4,Common
+Ceremonial Dagger,6,Uncommon
+Certificate,6,Uncommon
+Chaos the Clown,4,Common
+Chicot,20,Legendary
+Clever Joker,4,Common
+Cloud 9,7,Uncommon
+Constellation,6,Uncommon
+Crafty Joker,4,Common
+Crazy Joker,4,Common
+Credit Card,1,Common
+Delayed Gratification,4,Common
+Devious Joker,4,Common
+Diet Cola,6,Uncommon
+DNA,8,Rare
+Driver's License,7,Rare
+Droll Joker,4,Common
+Drunkard,4,Common
+Dusk,5,Uncommon
+Egg,4,Common
+Erosion,6,Uncommon
+Even Steven,4,Common
+Faceless Joker,4,Common
+Fibonacci,8,Uncommon
+Flash Card,5,Uncommon
+Flower Pot,6,Uncommon
+Fortune Teller,6,Common
+Four Fingers,7,Uncommon
+Gift Card,6,Uncommon
+Glass Joker,6,Uncommon
+Gluttonous Joker,5,Common
+Golden Joker,6,Common
+Golden Ticket,5,Common
+Greedy Joker,5,Common
+Green Joker,4,Common
+Gros Michel,5,Common
+Hack,6,Uncommon
+Half Joker,5,Common
+Hallucination,4,Common
+Hanging Chad,4,Common
+Hiker,5,Uncommon
+Hit the Road,8,Rare
+Hologram,7,Uncommon
+Ice Cream,5,Common
+Invisible Joker,8,Rare
+Joker,2,Common
+Joker Stencil,8,Uncommon
+Jolly Joker,3,Common
+Juggler,4,Common
+Loyalty Card,5,Uncommon
+Luchador,5,Uncommon
+Lucky Cat,6,Uncommon
+Lusty Joker,5,Common
+Mad Joker,4,Common
+Madness,7,Uncommon
+Mail-In Rebate,5,Common
+Marble Joker,6,Uncommon
+Matador,7,Uncommon
+Merry Andy,7,Uncommon
+Midas Mask,7,Uncommon
+Mime,5,Uncommon
+Misprint,4,Common
+Mr. Bones,5,Uncommon
+Mystic Summit,5,Common
+Obelisk,8,Rare
+Odd Todd,4,Common
+Onyx Agate,7,Uncommon
+Oops! All 6s,4,Uncommon
+Pareidolia,5,Uncommon
+Perkeo,20,Legendary
+Photograph,5,Common
+Popcorn,5,Common
+Raised Fist,5,Common
+Ramen,6,Uncommon
+Red Card,5,Common
+Reserved Parking,6,Common
+Ride the Bus,6,Common
+Riff-Raff,6,Common
+Rocket,6,Uncommon
+Rough Gem,7,Uncommon
+Runner,5,Common
+Satellite,6,Uncommon
+Scary Face,4,Common
+Scholar,4,Common
+Séance,6,Uncommon
+Seeing Double,6,Uncommon
+Seltzer,6,Uncommon
+Shoot the Moon,5,Common
+Shortcut,7,Uncommon
+Showman,5,Uncommon
+Sixth Sense,6,Uncommon
+Sly Joker,3,Common
+Smeared Joker,7,Uncommon
+Smiley Face,4,Common
+Sock and Buskin,6,Uncommon
+Space Joker,5,Uncommon
+Spare Trousers,6,Uncommon
+Splash,3,Common
+Square Joker,5,Common
+Steel Joker,7,Uncommon
+Stone Joker,6,Uncommon
+Stuntman,6,Uncommon
+Supernova,5,Common
+Superposition,4,Common
+Swashbuckler,4,Common
+The Duo,8,Rare
+The Family,8,Rare
+The Idol,6,Uncommon
+The Order,8,Rare
+The Tribe,8,Rare
+The Trio,8,Rare
+Throwback,6,Uncommon
+To Do List,4,Common
+To the Moon,5,Uncommon
+Trading Card,6,Uncommon
+Triboulet,20,Legendary
+Troubadour,6,Uncommon
+Turtle Bean,6,Uncommon
+Vagabond,8,Rare
+Vampire,7,Rare
+Walkie Talkie,4,Common
+Wee Joker,8,Rare
+Wily Joker,4,Common
+Wrathful Joker,5,Common
+Yorick,20,Legendary
+Zany Joker,4,Common

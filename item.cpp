@@ -6,31 +6,37 @@
 item::item(planet p) {
     type = PLANET;
     val = p;
+    cost = 3;
 }
 
 item::item(tarot t) {
     type = TAROT;
     val = t;
+    cost = 3;
 }
 
 item::item(spectral s) {
     type = SPECTRAL;
     val = s;
+    cost = 3;
 }
 
 item::item(joker j) {
     type = JOKER;
     val = j;
+    cost = atoi(readcsv("joker.csv", j, 1));
 }
 
 item::item(voucher v) {
     type = VOUCHER;
     val = v;
+    cost = 10;
 }
 
 item::item(card c) {
     type = CARD;
     val = c.cardSuit*13 + c.cardValue;
+    cost = 3;
 }
 
 static const char* info(item* i, int x) {

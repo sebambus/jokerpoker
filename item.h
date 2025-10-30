@@ -234,6 +234,7 @@ class item {
 public:
     int val;
     itemtype type;
+    int cost;
 
     item(planet);
     item(tarot);
