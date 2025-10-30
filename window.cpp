@@ -112,7 +112,7 @@ void window::updateSpecialScreen(game* g, int index){
             print("[ ]");
         print("%s\n", g->consumables[i].name());
     }
-    g->cardInfo.updateCardInfo(g, index, static_cast<int>(CONSUMABLE_SCREEN));
+    if (index != -1) g->cardInfo.updateCardInfo(g, index, static_cast<int>(CONSUMABLE_SCREEN));
     wrefresh(content);
 }
 
@@ -129,7 +129,8 @@ void window::updateJokerScreen(game* g, int index){
             print("[ ]");
         print("%s\n", g->jokers[i].name());
     }
-    g->cardInfo.updateCardInfo(g, index, static_cast<int>(JOKER_SCREEN));
+
+    if (index != -1) g->cardInfo.updateCardInfo(g, index, static_cast<int>(JOKER_SCREEN));
     wrefresh(content);
 }
 
