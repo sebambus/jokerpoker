@@ -1,6 +1,7 @@
 #include "shop.h"
 
 #include <stdio.h>
+#include <iostream>
 #include <stdlib.h>
 #include <ncursesw/ncurses.h>
 #include "game.h"
@@ -18,10 +19,11 @@ void shop::run(){
     g->mainScreen.updateShopScreen(this);
 
     while(true) {
-        char c = getchar();
-
         g->mainScreen.updateShopScreen(this);
         g->gameInfo.updateGameInfo(g);
+        g->specialScreen.updateSpecialScreen(g, 0);
+
+        char c = getchar();
 
         if(c >= 'a' && c <= 'z') {
             int n = c - 'a';
@@ -31,6 +33,14 @@ void shop::run(){
                     g->consumables.push_back(items[n]);
                     items.erase(items.begin()+n);
                     g->money -= 3;
+                }
+                continue;
+            } else n-= items.size();
+            if(n == 0 && v != VOUCHER_COUNT) {
+                if(g->money >= 10) {
+                    g->vouchers[v] = true;
+                    v = VOUCHER_COUNT;
+                    g->money -= 10;
                 }
             }
         }
