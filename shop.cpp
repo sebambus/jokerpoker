@@ -22,6 +22,7 @@ void shop::run(){
         g->mainScreen.updateShopScreen(this);
         g->gameInfo.updateGameInfo(g);
         g->specialScreen.updateSpecialScreen(g, 0);
+        g->jokerScreen.updateJokerScreen(g,0);
 
         char c = getchar();
 
