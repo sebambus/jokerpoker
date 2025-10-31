@@ -55,8 +55,24 @@ enum tarot : int {
 };
 
 enum spectral : int {
-    SPECTRAL_ONE,
-    SPECTRAL_TWO,
+    FAMILIAR,
+    GRIM,
+    INCANTATION,
+    TALISMAN,
+    AURA,
+    WRAITH,
+    SIGIL,
+    OUIJA,
+    ECTOPLASM,
+    IMMOLATE,
+    ANKH,
+    DEJA_VU,
+    HEX,
+    TRANCE,
+    MEDIUM,
+    CRYPTID,
+    SOUL,
+    BLACK_HOLE,
     SPECTRAL_COUNT
 };
 
