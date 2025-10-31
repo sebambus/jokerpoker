@@ -29,8 +29,28 @@ enum planet : int {
 };
 
 enum tarot : int {
-    TAROT_ONE,
-    TAROT_TWO,
+    FOOL,
+    MAGICIAN,
+    HIGH_PRIESTESS,
+    EMPRESS,
+    EMPEROR,
+    HIEROPHANT,
+    LOVERS,
+    CHARIOT,
+    JUSTICE,
+    HERMIT,
+    WHEEL_OF_FORTUNE,
+    STRENGTH,
+    HANGED_MAN,
+    DEATH,
+    TEMPERANCE,
+    DEVIL,
+    TOWER,
+    STAR,
+    MOON,
+    SUN,
+    JUDGEMENT,
+    WORLD,
     TAROT_COUNT
 };
 
