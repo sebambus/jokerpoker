@@ -1,5 +1,5 @@
 name,description,cost,rarity,unlock,type,activation,id,
-Joker,4 Mult,2,Common,Available from start.,additive mult jokers,independent,1,
+Basic Joker,4 Mult,2,Common,Available from start.,additive mult jokers,independent,1,
 Greedy Joker,Played cards with Diamond suit give +3 Mult when scored,5,Common,Available from start.,additive mult jokers,on scored,2,
 Lusty Joker,Played cards with Heart suit give +3 Mult when scored,5,Common,Available from start.,additive mult jokers,on scored,3,
 Wrathful Joker,Played cards with Spade suit give +3 Mult when scored,5,Common,Available from start.,additive mult jokers,on scored,4,

@@ -10,8 +10,11 @@ jokerpoker: $(OBJ) | $(ODIR)
 $(ODIR): #create obj directory if it doesn't exist
 	mkdir $(ODIR)
 
+obj/%.h: %.csv
+	./enummaker.sh $< $@
+
 $(ODIR)/%.d: %.cpp
-	@$(CXX) -MM -MT $(@:.d=.o) $< > $@
+	$(CXX) -MM -MT $(@:.d=.o) -MG $< >> $@
 
 include $(DEP)
 
