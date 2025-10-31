@@ -71,15 +71,15 @@ void shop::generatePurchaseables() {
         int cardodds = 0;
         int n = rand() % (jokerodds + tarotodds + planetodds + cardodds);
         if(n < jokerodds) {
-            items.push_back(item((joker) (n%JOKER_COUNT)));
+            items.push_back(item((joker) (rand()%JOKER_COUNT)));
             continue;
         } else n -= jokerodds;
         if(n < tarotodds) {
-            items.push_back(item((tarot) (n%JOKER_COUNT)));
+            items.push_back(item((tarot) (rand()%TAROT_COUNT)));
             continue;
         } else n -= tarotodds;
         if(n < planetodds) {
-            items.push_back(item((planet) (n%JOKER_COUNT)));
+            items.push_back(item((planet) (rand()%PLANET_COUNT)));
             continue;
         } else n -= planetodds;
         if(n < cardodds) {

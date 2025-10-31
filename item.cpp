@@ -18,7 +18,7 @@ item::item(tarot t) {
 item::item(spectral s) {
     type = SPECTRAL;
     val = s;
-    cost = 3;
+    cost = 4;
 }
 
 item::item(joker j) {
@@ -36,7 +36,7 @@ item::item(voucher v) {
 item::item(card c) {
     type = CARD;
     val = c.cardSuit*13 + c.cardValue;
-    cost = 3;
+    cost = 1;
 }
 
 static const char* info(item* i, int x) {
