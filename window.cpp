@@ -43,6 +43,25 @@ void window::printAndAutoColor(const char* str){
         words.push_back(word);
     }
     
+    // if there are any 'words' with a newline, split them
+    // a jank workaround, but it works for now
+    std::vector<std::string> copy;
+    copy = words;
+    words.clear();
+
+    for (std::string w : copy){
+        int pos = w.find('\n');
+        if (pos == std::string::npos)
+            words.push_back(w);
+        else {
+            std::string s1 = w.substr(0,pos);
+            std::string s2 = w.substr(pos, w.size() - pos);
+            words.push_back(s1);
+            words.push_back(s2);
+        }
+    }
+
+    // print word one by one
     for (int i = 0; i < words.size(); i++)
     {
         std::string w = words[i];
@@ -72,32 +91,27 @@ void window::printWordInColor(const char* w, short fg, short bg){
 
 
 std::string window::textWrap(const char* cstring){
-    std::string str(cstring);
-    std::stringstream ss(str);
-    std::string word;
-    std::vector<std::string> words;
-    std::string newstr = "";
+    std::string newstr(cstring);
+    std::vector<std::string> lines;
 
-    while (ss >> word){ // create vector of individual words in string
-        words.push_back(word);
-    }
-
-    int lineSize = 0; // keep track of characters in current line
-    for (std::string w : words){
-        w += " "; 
-        if (lineSize + w.size() == width) lineSize = 0;
-        // if adding the next word would exceed the size of the window
-        if (lineSize + w.size() > width){
-            newstr += "\n" + w; // add a newline before the word
-            lineSize = w.size(); // now the size of the new line is the size of that word minus \n
+    while (newstr != ""){
+        int i = width - 1;
+        while (newstr[i] != ' '){
+            i--;
         }
-        else { // add word to string as normal
-            newstr += w;
-            lineSize += w.size();
-        }      
+        lines.push_back(newstr.substr(0, i));
+        newstr.erase(0,i+1);
+        
     }
 
-    return newstr;
+    std::string final = "";
+    for (int i = 0; i < lines.size(); i++)
+    {
+        final += lines[i] + "\n";
+    }
+    
+
+    return final;
 }
 
 void window::updateLevelInfo(level* l) {
