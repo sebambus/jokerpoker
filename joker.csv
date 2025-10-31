@@ -1,3 +1,4 @@
+name,description,cost,rarity,unlock,type,activiation,id,
 Joker,4 Mult,Cost: $2,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 1,
 Greedy Joker,Played cards with Diamond suit give +3 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 2,
 Lusty Joker,Played cards with Heart suit give +3 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 3,

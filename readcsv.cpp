@@ -7,6 +7,7 @@ const char* readcsv(const char* f, int r, int c) {
     static std::string res;
     std::ifstream file(f);
     std::string line;
+    std::getline(file, line);
     for (int i = 0; i <= r && std::getline(file, line); i++)
         if (i == r) {
             std::vector<std::string> cols;
