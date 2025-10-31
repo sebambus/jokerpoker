@@ -18,20 +18,14 @@ game::game() :
     round = 1;
     d.fillDeck();
     initHandTable();
+}
 
-    //for debugging consumables:
-    item a = item(PLUTO);
-    item b = item(MERCURY);
-    item c = item(PLANET_X);
+int game::getPlays() {
+    return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG];
+}
 
-    consumables.push_back(a);
-    consumables.push_back(b);
-    consumables.push_back(c);
-
-    jokers.push_back(a);
-    jokers.push_back(b);
-    jokers.push_back(c);
-
+int game::getDiscards() {
+    return 4 + vouchers[WASTEFUL] + vouchers[RECYCLOMANCY];
 }
 
 void game::initHandTable(){
@@ -44,11 +38,27 @@ void game::initHandTable(){
     
 }
 
-
-int game::getPlays() {
-    return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG];
+void game::gain(item i) {
+    switch(i.type) {
+    case PLANET:
+    case TAROT:
+    case SPECTRAL:
+        consumables.push_back(i);
+        break;
+    case JOKER:
+        jokers.push_back(i);
+        break;
+    case VOUCHER:
+        vouchers[i.val] = true;
+        break;
+    case CARD:
+        d.cards.push_back(card(i));
+    }
 }
 
-int game::getDiscards() {
-    return 4 + vouchers[WASTEFUL] + vouchers[RECYCLOMANCY];
+bool game::buy(item i) {
+    if(money < i.cost) return false;
+    money -= i.cost;
+    gain(i);
+    return true;
 }

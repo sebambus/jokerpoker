@@ -34,4 +34,6 @@ public:
     int getPlays();
     int getDiscards();
     void initHandTable();
+    void gain(item);
+    bool buy(item);
 };

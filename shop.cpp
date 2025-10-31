@@ -29,19 +29,13 @@ void shop::run(){
             int n = c - 'a';
 
             if(n < items.size()) { // if item selected
-                if(g->money >= items[n].cost) {
-                    g->consumables.push_back(items[n]);
+                if(g->buy(items[n]))
                     items.erase(items.begin()+n);
-                    g->money -= items[n].cost;
-                }
                 continue;
             } else n-= items.size();
             if(n == 0 && v != VOUCHER_COUNT) {
-                if(g->money >= 10) {
-                    g->vouchers[v] = true;
+                if(g->buy(item(v)))
                     v = VOUCHER_COUNT;
-                    g->money -= 10;
-                }
                 continue;
             }
         }
