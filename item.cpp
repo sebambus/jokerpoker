@@ -24,7 +24,7 @@ item::item(spectral s) {
 item::item(joker j) {
     type = JOKER;
     val = j;
-    cost = atoi(readcsv("joker.csv", j, 1));
+    cost = atoi(readcsv("joker.csv", j, 2));
 }
 
 item::item(voucher v) {
