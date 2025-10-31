@@ -15,6 +15,8 @@ public:
 
     window(int h, int w, int y, int x, const char* title);
     void print(const char *format, ...);
+    void printAndAutoColor(const char* str);
+    void printWordInColor(const char* w, short fg, short bg);
     std::string textWrap(const char*);
     void updateLevelInfo(level* l);
     void updateGameInfo(game* g);
