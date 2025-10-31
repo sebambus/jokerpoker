@@ -70,6 +70,16 @@ void window::printAndAutoColor(const char* str){
             printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
         else if (w.find("Chip") != std::string::npos) // if word is "Chips"
             printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
+        else if (w.find("$") != std::string::npos)
+            printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
+        else if (w.find("Spade") != std::string::npos)
+            printWordInColor(cstr, COLOR_WHITE, COLOR_BLACK);
+        else if (w.find("Heart") != std::string::npos)
+            printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
+        else if (w.find("Club") != std::string::npos)
+            printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
+        else if (w.find("Diamond") != std::string::npos)
+            printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
         else if (w.find("+") != std::string::npos){ // if word has a plus, check to see whats after
             if (words[i + 1].find("Mult") != std::string::npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
