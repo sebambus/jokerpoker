@@ -31,27 +31,35 @@ void window::printAndAutoColor(const char* str){
     std::vector<int> spaces; 
 
     spaces.push_back(-1);
-    for (int i = 0; i < text.size(); i++){
+    for (int i = 0; i < text.size(); i++){ // find position of all spaces
         if (text[i] == ' ')
             spaces.push_back(i);
     }
     spaces.push_back(text.size() + 1);
 
-    for (int i = 0; i < spaces.size() - 1; i++)
+    for (int i = 0; i < spaces.size() - 1; i++) // split text by spaces
     {
         std::string word = text.substr(spaces[i] + 1, spaces[i+1] - spaces[i]);
         words.push_back(word);
     }
     
-    for (std::string w : words){
+    for (int i = 0; i < words.size(); i++)
+    {
+        std::string w = words[i];
         const char* cstr = w.c_str();
-        if (w.find("Mult") != std::string::npos)
+        if (w.find("Mult") != std::string::npos) // if word is "Mult"
             printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-        else if (w.find("Chips") != std::string::npos)
+        else if (w.find("Chips") != std::string::npos) // if word is "Chips"
             printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
+        else if (w.find("+") != std::string::npos){ // if word has a plus, check to see whats after
+            if (words[i + 1].find("Mult") != std::string::npos)
+                printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
+            else if (words[i + 1].find("Chips") != std::string::npos){
+                printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
+            }
+        }
         else 
             print(cstr);
-
     }
 
 }
