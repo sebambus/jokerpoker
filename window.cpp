@@ -49,12 +49,12 @@ void window::printAndAutoColor(const char* str){
         const char* cstr = w.c_str();
         if (w.find("Mult") != std::string::npos) // if word is "Mult"
             printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-        else if (w.find("Chips") != std::string::npos) // if word is "Chips"
+        else if (w.find("Chip") != std::string::npos) // if word is "Chips"
             printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
         else if (w.find("+") != std::string::npos){ // if word has a plus, check to see whats after
             if (words[i + 1].find("Mult") != std::string::npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-            else if (words[i + 1].find("Chips") != std::string::npos){
+            else if (words[i + 1].find("Chip") != std::string::npos){
                 printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
             }
         }
@@ -85,10 +85,11 @@ std::string window::textWrap(const char* cstring){
     int lineSize = 0; // keep track of characters in current line
     for (std::string w : words){
         w += " "; 
+        if (lineSize + w.size() == width) lineSize = 0;
         // if adding the next word would exceed the size of the window
-        if (lineSize + w.size() >= width){
+        if (lineSize + w.size() > width){
             newstr += "\n" + w; // add a newline before the word
-            lineSize = w.size() - 1; // now the size of the new line is the size of that word minus \n
+            lineSize = w.size(); // now the size of the new line is the size of that word minus \n
         }
         else { // add word to string as normal
             newstr += w;
@@ -193,7 +194,8 @@ void window::updateCardInfo(game* g, int index, int s){
     else
         desc = g->jokers[index].description();
 
-    printAndAutoColor(textWrap(desc).c_str()); // wrap text and convert back to char* before printing
+    printAndAutoColor(textWrap(desc).c_str()); // wrap text and convert back to char* before printing;
+    
     wrefresh(content);
 }
 
