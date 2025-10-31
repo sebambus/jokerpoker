@@ -95,22 +95,20 @@ std::string window::textWrap(const char* cstring){
     std::vector<std::string> lines;
 
     while (newstr != ""){
-        int i = width - 1;
-        while (newstr[i] != ' '){
+        int i = width - 1; // start looking at 1 less than the width
+        while (newstr[i] != ' '){ // move backwards until you find a space
             i--;
         }
-        lines.push_back(newstr.substr(0, i));
-        newstr.erase(0,i+1);
-        
+        lines.push_back(newstr.substr(0, i)); // once you find one, save everything before that space
+        newstr.erase(0,i+1); // clear that area from the string, repeat the loop
     }
 
     std::string final = "";
-    for (int i = 0; i < lines.size(); i++)
+    for (int i = 0; i < lines.size(); i++) // add all the lines back to a single string, now with newlines
     {
         final += lines[i] + "\n";
     }
     
-
     return final;
 }
 
