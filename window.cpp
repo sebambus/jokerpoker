@@ -61,29 +61,30 @@ void window::printAndAutoColor(const char* str){
         }
     }
 
+    long unsigned int npos = std::string::npos;
     // print word one by one
     for (int i = 0; i < words.size(); i++)
     {
         std::string w = words[i];
         const char* cstr = w.c_str();
-        if (w.find("Mult") != std::string::npos) // if word is "Mult"
+        if (w.find("Mult") != npos) // if word is "Mult"
             printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-        else if (w.find("Chip") != std::string::npos) // if word is "Chips"
+        else if (w.find("Chip") != npos) // if word is "Chips"
             printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
-        else if (w.find("$") != std::string::npos)
+        else if (w.find("$") != npos)
             printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
-        else if (w.find("Spade") != std::string::npos)
+        else if (w.find("Spade") != npos)
             printWordInColor(cstr, COLOR_WHITE, COLOR_BLACK);
-        else if (w.find("Heart") != std::string::npos)
+        else if (w.find("Heart") != npos)
             printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-        else if (w.find("Club") != std::string::npos)
+        else if (w.find("Club") != npos)
             printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
-        else if (w.find("Diamond") != std::string::npos)
+        else if (w.find("Diamond") != npos)
             printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
-        else if (w.find("+") != std::string::npos){ // if word has a plus, check to see whats after
-            if (words[i + 1].find("Mult") != std::string::npos)
+        else if (w.find("+") != npos || w.find("X") != npos){ // if word has a plus or X, check to see whats after
+            if (words[i + 1].find("Mult") != npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-            else if (words[i + 1].find("Chip") != std::string::npos){
+            else if (words[i + 1].find("Chip") != npos){
                 printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
             }
         }
