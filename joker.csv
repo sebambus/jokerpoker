@@ -1,150 +1,150 @@
-8 Ball,5,Common
-Abstract Joker,4,Common
-Acrobat,6,Uncommon
-Ancient Joker,8,Rare
-Arrowhead,7,Uncommon
-Astronomer,8,Uncommon
-Banner,5,Common
-Baron,8,Rare
-Baseball Card,8,Rare
-Blackboard,6,Uncommon
-Bloodstone,7,Uncommon
-Blue Joker,5,Common
-Blueprint,10,Rare
-Bootstraps,7,Uncommon
-Brainstorm,10,Rare
-Bull,6,Uncommon
-Burglar,6,Uncommon
-Burnt Joker,6,Rare
-Business Card,4,Common
-Campfire,9,Rare
-Canio,20,Legendary
-Card Sharp,6,Uncommon
-Cartomancer,6,Uncommon
-Castle,6,Uncommon
-Cavendish,4,Common
-Ceremonial Dagger,6,Uncommon
-Certificate,6,Uncommon
-Chaos the Clown,4,Common
-Chicot,20,Legendary
-Clever Joker,4,Common
-Cloud 9,7,Uncommon
-Constellation,6,Uncommon
-Crafty Joker,4,Common
-Crazy Joker,4,Common
-Credit Card,1,Common
-Delayed Gratification,4,Common
-Devious Joker,4,Common
-Diet Cola,6,Uncommon
-DNA,8,Rare
-Driver's License,7,Rare
-Droll Joker,4,Common
-Drunkard,4,Common
-Dusk,5,Uncommon
-Egg,4,Common
-Erosion,6,Uncommon
-Even Steven,4,Common
-Faceless Joker,4,Common
-Fibonacci,8,Uncommon
-Flash Card,5,Uncommon
-Flower Pot,6,Uncommon
-Fortune Teller,6,Common
-Four Fingers,7,Uncommon
-Gift Card,6,Uncommon
-Glass Joker,6,Uncommon
-Gluttonous Joker,5,Common
-Golden Joker,6,Common
-Golden Ticket,5,Common
-Greedy Joker,5,Common
-Green Joker,4,Common
-Gros Michel,5,Common
-Hack,6,Uncommon
-Half Joker,5,Common
-Hallucination,4,Common
-Hanging Chad,4,Common
-Hiker,5,Uncommon
-Hit the Road,8,Rare
-Hologram,7,Uncommon
-Ice Cream,5,Common
-Invisible Joker,8,Rare
-Joker,2,Common
-Joker Stencil,8,Uncommon
-Jolly Joker,3,Common
-Juggler,4,Common
-Loyalty Card,5,Uncommon
-Luchador,5,Uncommon
-Lucky Cat,6,Uncommon
-Lusty Joker,5,Common
-Mad Joker,4,Common
-Madness,7,Uncommon
-Mail-In Rebate,5,Common
-Marble Joker,6,Uncommon
-Matador,7,Uncommon
-Merry Andy,7,Uncommon
-Midas Mask,7,Uncommon
-Mime,5,Uncommon
-Misprint,4,Common
-Mr. Bones,5,Uncommon
-Mystic Summit,5,Common
-Obelisk,8,Rare
-Odd Todd,4,Common
-Onyx Agate,7,Uncommon
-Oops! All 6s,4,Uncommon
-Pareidolia,5,Uncommon
-Perkeo,20,Legendary
-Photograph,5,Common
-Popcorn,5,Common
-Raised Fist,5,Common
-Ramen,6,Uncommon
-Red Card,5,Common
-Reserved Parking,6,Common
-Ride the Bus,6,Common
-Riff-Raff,6,Common
-Rocket,6,Uncommon
-Rough Gem,7,Uncommon
-Runner,5,Common
-Satellite,6,Uncommon
-Scary Face,4,Common
-Scholar,4,Common
-Séance,6,Uncommon
-Seeing Double,6,Uncommon
-Seltzer,6,Uncommon
-Shoot the Moon,5,Common
-Shortcut,7,Uncommon
-Showman,5,Uncommon
-Sixth Sense,6,Uncommon
-Sly Joker,3,Common
-Smeared Joker,7,Uncommon
-Smiley Face,4,Common
-Sock and Buskin,6,Uncommon
-Space Joker,5,Uncommon
-Spare Trousers,6,Uncommon
-Splash,3,Common
-Square Joker,5,Common
-Steel Joker,7,Uncommon
-Stone Joker,6,Uncommon
-Stuntman,6,Uncommon
-Supernova,5,Common
-Superposition,4,Common
-Swashbuckler,4,Common
-The Duo,8,Rare
-The Family,8,Rare
-The Idol,6,Uncommon
-The Order,8,Rare
-The Tribe,8,Rare
-The Trio,8,Rare
-Throwback,6,Uncommon
-To Do List,4,Common
-To the Moon,5,Uncommon
-Trading Card,6,Uncommon
-Triboulet,20,Legendary
-Troubadour,6,Uncommon
-Turtle Bean,6,Uncommon
-Vagabond,8,Rare
-Vampire,7,Rare
-Walkie Talkie,4,Common
-Wee Joker,8,Rare
-Wily Joker,4,Common
-Wrathful Joker,5,Common
-Yorick,20,Legendary
-Zany Joker,4,Common
+Joker,4 Mult,Cost: $2,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 1,
+Greedy Joker,Played cards with Diamond suit give +3 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 2,
+Lusty Joker,Played cards with Heart suit give +3 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 3,
+Wrathful Joker,Played cards with Spade suit give +3 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 4,
+Gluttonous Joker,Played cards with Club suit give +3 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 5,
+Jolly Joker,+8 Mult if played hand contains a Pair,Cost: $3,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 6,
+Zany Joker,+12 Mult if played hand contains a Three of a Kind,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 7,
+Mad Joker,+10 Mult if played hand contains a Two Pair,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 8,
+Crazy Joker,+12 Mult if played hand contains a Straight,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 9,
+Droll Joker,+10 Mult if played hand contains a Flush,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 10,
+Sly Joker,+50 Chips if played hand contains a Pair,Cost: $3,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 11,
+Wily Joker,+100 Chips if played hand contains a Three of a Kind,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 12,
+Clever Joker,+80 Chips if played hand contains a Two Pair,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 13,
+Devious Joker,+100 Chips if played hand contains a Straight,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 14,
+Crafty Joker,+80 Chips if played hand contains a Flush,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 15,
+Half Joker,+20 Mult if played hand contains 3 or fewer cards.,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 16,
+Joker Stencil,X1 Mult for each empty Joker slot. Joker Stencil included (Currently X1 Mult),Cost: $8,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 17,
+Four Fingers,All Flushes and Straights can be made with 4 cards,Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 18,
+Mime,Retrigger all card held in hand abilities,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: retrigger jokers,Activiation: on held,Id: 19,
+Credit Card,Go up to -$20 in debt,Cost: $1,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 20,
+Ceremonial Dagger,When Blind is selected{ destroy Joker to the right and permanently add double its sell value to this Mult(Currently +0 Mult),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 21,
+Banner,+30 Chips for each remaining discard,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 22,
+Mystic Summit,+15 Mult when 0 discards remaining,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 23,
+Marble Joker,Adds one Stone card to the deck when Blind is selected,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 24,
+Loyalty Card,x4 Mult every 6 hands played ; 5 remaining,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 25,
+8 Ball,1 in 4 chance for each played 8 to create a Tarot card when scored (Must have room),Cost: $5,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: on scored,Id: 26,
+Misprint,+? Mult,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 27,
+Dusk,Retrigger all played cards in final hand of the round,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: retrigger jokers,Activiation: on scored,Id: 28,
+Raised Fist,Adds double the rank of lowest ranked card held in hand to Mult,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on held,Id: 29,
+Chaos the Clown,1 free Reroll per shop,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 30,
+Fibonacci,Each played Ace{ 2{ 3{ 5{ or 8 gives +8 Mult when scored,Cost: $8,Rarity: Uncommon,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 31,
+Steel Joker,Gives X0.2 Mult for each Steel Card in your full deck (Currently X1 Mult),Cost: $7,Rarity: Uncommon,Unlock: Available from start. (Will not appear in the shop unless the player has a Steel Card in their deck.),Type: multiplicative mult jokers,Activiation: independent,Id: 32,
+Scary Face,Played face cards give +30 Chips when scored,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: on scored,Id: 33,
+Abstract Joker,+3 Mult for each Joker card (Currently +0 Mult),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 34,
+Delayed Gratification,Earn $2 per discard if no discards are used by end of the round,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 35,
+Hack,Retrigger each played 2{ 3{ 4{ or 5,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: retrigger jokers,Activiation: on scored,Id: 36,
+Pareidolia,All cards are considered face cards,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 37,
+Gros Michel,+15 Mult; 1 in 6 chance this is destroyed at the end of round.,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 38,
+Even Steven,Played cards with even rank give +4 Mult when scored (10{ 8{ 6{ 4{ 2),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 39,
+Odd Todd,Played cards with odd rank give +31 Chips when scored (A{ 9{ 7{ 5{ 3),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: on scored,Id: 40,
+Scholar,Played Aces give +20 Chips and +4 Mult when scored,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips & additive mult jokers,Activiation: on scored,Id: 41,
+Business Card,Played face cards have a 1 in 2 chance to give $2 when scored,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: on scored,Id: 42,
+Supernova,Adds the number of times poker hand has been played this run to Mult,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 43,
+Ride the Bus,This Joker gains +1 Mult per consecutive hand played without a scoring face card (Currently +0 Mult),Cost: $6,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: mixed,Id: 44,
+Space Joker,1 in 4 chance to upgrade level of played poker hand,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: on played,Id: 45,
+Egg,Gains $3 of sell value at end of round,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 46,
+Burglar,When Blind is selected{ gain +3Hands and lose all discards,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 47,
+Blackboard,X3 Mult if all cards held in hand are Spades or Clubs,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 48,
+Runner,Gains +15 Chips if played hand contains a Straight (Currently +0 Chips),Cost: $5,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: mixed,Id: 49,
+Ice Cream,+100 Chips; -5 Chips for every hand played,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 50,
+DNA,If first hand of round has only 1 card{ add a permanent copy to deck and draw it to handCost: $8,Rarity: Rare,Unlock: Available from start.,Type: effect jokers,Activiation: on played,Id: 51,
+Splash,Every played card counts in scoring,Cost: $3,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 52,
+Blue Joker,+2 Chips for each remaining card in deck (Currently +104 Chips),Cost: $5,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 53,
+Sixth Sense,If first hand of round is a single 6{ destroy it and create a Spectral card (Must have room),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 54,
+Constellation,This Joker gains X0.1 Mult every time a Planet card is used (Currently X1 Mult),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 55,
+Hiker,Every played card permanently gains +5 Chips when scored,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: chips jokers,Activiation: on scored,Id: 56,
+Faceless Joker,Earn $5 if 3 or more face cards are discarded at the same time,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: on discard,Id: 57,
+Green Joker,+1 Mult per hand played; -1 Mult per discard (Currently +0 Mult),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: mixed,Id: 58,
+Superposition,Create a Tarot card if poker hand contains an Ace and a Straight (Must have room),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: independent,Id: 59,
+To Do List,Earn $4 if poker hand is a [Poker Hand]{ poker hand changes at end of round,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: on played,Id: 60,
+Cavendish,X3 Mult; 1 in 1000 chance this card is destroyed at the end of round,Cost: $4,Rarity: Common,Unlock: Available from start. (Will not appear in the shop unless Gros Michel has destroyed itself during the current run.),Type: multiplicative mult jokers,Activiation: independent,Id: 61,
+Card Sharp,X3 Mult if played poker hand has already been played this round,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 62,
+Red Card,This Joker gains +3 Mult when any Booster Pack is skipped (Currently +0 Mult),Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 63,
+Madness,When Small Blind or Big Blind is selected{ gain X0.5 Mult and destroy a random Joker (Currently X1 Mult),Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 64,
+Square Joker,This Joker gains +4 Chips if played hand has exactly 4 cards (Currently 0 Chips),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips jokers,Activiation: mixed,Id: 65,
+Séance,If poker hand is a Straight Flush{ create a random Spectral card (Must have room),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: independent,Id: 66,
+Riff-Raff,When Blind is selected{ create 2 Common Jokers (Must have room),Cost: $6,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 67,
+Vampire,This Joker gains X0.1 Mult per scoring Enhanced card played{ removes card Enhancement (Currently X1 Mult),Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: mixed,Id: 68,
+Shortcut,Allows Straights to be made with gaps of 1 rank (ex: 10 8 6 5 3),Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 69,
+Hologram,This Joker gains X0.25 Mult every time a playing card is added to your deck (Currently X1 Mult),Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 70,
+Vagabond,Create a Tarot card if hand is played with $4 or less,Cost: $8,Rarity: Rare,Unlock: Available from start.,Type: effect jokers,Activiation: independent,Id: 71,
+Baron,Each King held in hand gives X1.5 Mult,Cost: $8,Rarity: Rare,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: on held,Id: 72,
+Cloud 9,Earn $1 for each 9 in your full deck at end of round (Currently $4),Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 73,
+Rocket,Earn $1 at end of round. Payout increases by $2 when Boss Blind is defeated,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 74,
+Obelisk,This Joker gains X0.2 Mult per consecutive hand played without playing your most played poker hand (Currently X1 Mult),Cost: $8,Rarity: Rare,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: mixed,Id: 75,
+Midas Mask,All played face cards become Gold cards when scored,Cost: $7,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: on played,Id: 76,
+Luchador,Sell this card to disable the current Boss Blind,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 77,
+Photograph,First played face card gives X2 Mult when scored,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: on scored,Id: 78,
+Gift Card,Add $1 of sell value to every Joker and Consumable card at end of round,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 79,
+Turtle Bean,+5 hand size{ reduces by 1 each round,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 80,
+Erosion,+4 Mult for each card below [the deck's starting size] in your full deck (Currently +0 Mult),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 81,
+Reserved Parking,Each face card held in hand has a 1 in 2 chance to give $1,Cost: $6,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: on held,Id: 82,
+Mail-In Rebate,Earn $5 for each discarded [rank]{ rank changes every round,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: on discard,Id: 83,
+To the Moon,Earn an extra $1 of interest for every $5 you have at end of round,Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 84,
+Hallucination,1 in 2 chance to create a Tarot card when any Booster Pack is opened (Must have room),Cost: $4,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 85,
+Fortune Teller,+1 Mult per Tarot card used this run (Currently +0),Cost: $6,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 86,
+Juggler,+1 hand size,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 87,
+Drunkard,+1 discard each round,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 88,
+Stone Joker,Gives +25 Chips for each Stone Card in your full deck (Currently +0 Chips),Cost: $6,Rarity: Uncommon,Unlock: Available from start. (Will not appear in the shop unless the player has a Stone Card in their deck.),Type: chips jokers,Activiation: independent,Id: 89,
+Golden Joker,Earn $4 at end of round,Cost: $6,Rarity: Common,Unlock: Available from start.,Type: economy jokers,Activiation: n/a,Id: 90,
+Lucky Cat,This Joker gains X0.25 Mult every time a Lucky card successfully triggers (Currently X1 Mult),Cost: $6,Rarity: Uncommon,Unlock: Available from start. (Will not appear in the shop unless the player has a Lucky Card in their deck.),Type: multiplicative mult jokers,Activiation: mixed,Id: 91,
+Baseball Card,Uncommon Jokers each give X1.5 Mult,Cost: $8,Rarity: Rare,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: on other jokers,Id: 92,
+Bull,+2 Chips for each $1 you have (Currently +0 Chips),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: chips jokers,Activiation: independent,Id: 93,
+Diet Cola,Sell this card to create a free Double Tag,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: effect jokers,Activiation: n/a,Id: 94,
+Trading Card,If first discard of round has only 1 card{ destroy it and earn $3,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: economy jokers,Activiation: on discard,Id: 95,
+Flash Card,This Joker gains +2 Mult per reroll in the shop (Currently +0 Mult),Cost: $5,Rarity: Uncommon,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 96,
+Popcorn,+20 Mult; -4 Mult per round played,Cost: $5,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: independent,Id: 97,
+Spare Trousers,This Joker gains +2 Mult if played hand contains a Two Pair (Currently +0 Mult),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: additive mult jokers,Activiation: mixed,Id: 98,
+Ancient Joker,Each played card with [suit] gives X1.5 Mult when scored{ suit changes at end of round,Cost: $8,Rarity: Rare,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: on scored,Id: 99,
+Ramen,X2 Mult{ loses X0.01 Mult per card discarded,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: mixed,Id: 100,
+Walkie Talkie,Each played 10 or 4 gives +10 Chips and +4 Mult when scored,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: chips & additive mult jokers,Activiation: on scored,Id: 101,
+Seltzer,Retrigger all cards played for the next 10 hands,Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: retrigger jokers,Activiation: on scored,Id: 102,
+Castle,This Joker gains +3 Chips per discarded [suit] card{ suit changes every round (Currently +0 Chips),Cost: $6,Rarity: Uncommon,Unlock: Available from start.,Type: chips jokers,Activiation: mixed,Id: 103,
+Smiley Face,Played face cards give +5 Mult when scored,Cost: $4,Rarity: Common,Unlock: Available from start.,Type: additive mult jokers,Activiation: on scored,Id: 104,
+Campfire,This Joker gains X0.25 Mult for each card sold{ resets when Boss Blind is defeated (Currently X1 Mult),Cost: $9,Rarity: Rare,Unlock: Available from start.,Type: multiplicative mult jokers,Activiation: independent,Id: 105,
+Golden Ticket,Played Gold cards earn $4 when scored,Cost: $5,Rarity: Common,Unlock: Play a 5 card hand that contains only Gold cards. (The player must also have a Gold Card in their deck for it to appear in the shop.),Type: economy jokers,Activiation: on scored,Id: 106,
+Mr. Bones,Prevents Death if chips scored are at least 25% of required chips self destructs,Cost: $5,Rarity: Uncommon,Unlock: Lose five runs.,Type: effect jokers,Activiation: n/a,Id: 107,
+Acrobat,X3 Mult on final hand of round,Cost: $6,Rarity: Uncommon,Unlock: Play 200 hands,Type: multiplicative mult jokers,Activiation: independent,Id: 108,
+Sock and Buskin,Retrigger all played face cards,Cost: $6,Rarity: Uncommon,Unlock: Play 300 face cards across all runs.,Type: retrigger jokers,Activiation: on scored,Id: 109,
+Swashbuckler,Adds the sell value of all other owned Jokers to Mult (Currently +1 Mult),Cost: $4,Rarity: Common,Unlock: Sell 20 Jokers.,Type: additive mult jokers,Activiation: independent,Id: 110,
+Troubadour,+2 hand size; -1 hand per round,Cost: $6,Rarity: Uncommon,Unlock: Win 5 consecutive rounds by playing only a single hand in each. (Discards are fine.),Type: effect jokers,Activiation: n/a,Id: 111,
+Certificate,When round begins{ add a random playing card with a random seal to your hand,Cost: $6,Rarity: Uncommon,Unlock: Have a Gold card with a Gold Seal.,Type: effect jokers,Activiation: n/a,Id: 112,
+Smeared Joker,Hearts and Diamonds count as the same suit{ Spades and Clubs count as the same suit,Cost: $7,Rarity: Uncommon,Unlock: Have 3 or more Wild Cards in your deck.,Type: effect jokers,Activiation: n/a,Id: 113,
+Throwback,X0.25 Mult for each Blind skipped this run (Currently X1 Mult),Cost: $6,Rarity: Uncommon,Unlock: Continue a run from the Main Menu.,Type: multiplicative mult jokers,Activiation: independent,Id: 114,
+Hanging Chad,Retrigger first played card used in scoring 2 additional times,Cost: $4,Rarity: Common,Unlock: Beat a Boss Blind with a High Card hand.,Type: retrigger jokers,Activiation: on scored,Id: 115,
+Rough Gem,Played cards with Diamond suit earn $1 when scored,Cost: $7,Rarity: Uncommon,Unlock: Have at least 30 Diamonds in your deck,Type: economy jokers,Activiation: on scored,Id: 116,
+Bloodstone,1 in 2 chance for played cards with Heart suit to give X1.5 Mult when scored,Cost: $7,Rarity: Uncommon,Unlock: Have at least 30 Hearts in your deck.,Type: multiplicative mult jokers,Activiation: on scored,Id: 117,
+Arrowhead,Played cards with Spade suit give +50 Chips when scored,Cost: $7,Rarity: Uncommon,Unlock: Have at least 30 Spades in your deck.,Type: chips jokers,Activiation: on scored,Id: 118,
+Onyx Agate,Played cards with Club suit give +7 Mult when scored,Cost: $7,Rarity: Uncommon,Unlock: Have at least 30 Clubs in your deck,Type: additive mult jokers,Activiation: on scored,Id: 119,
+Glass Joker,This Joker gains X0.75 Mult for every Glass Card that is destroyed (Currently X1 Mult),Cost: $6,Rarity: Uncommon,Unlock: Have 5 or more Glass cards in your deck. (The player must also have a Glass Card in their deck for it to appear in the shop.),Type: multiplicative mult jokers,Activiation: independent,Id: 120,
+Showman,Joker{ Tarot{ Planet{ and Spectral cards may appear multiple times,Cost: $5,Rarity: Uncommon,Unlock: Reach Ante level 4,Type: effect jokers,Activiation: n/a,Id: 121,
+Flower Pot,X3 Mult if poker hand contains a Diamond card{ Club card{ Heart card{ and Spade card,Cost: $6,Rarity: Uncommon,Unlock: Reach Ante Level 8,Type: multiplicative mult jokers,Activiation: independent,Id: 122,
+Blueprint,Copies ability of Joker to the right,Cost: $10,Rarity: Rare,Unlock: Win 1 run.,Type: effect jokers,Activiation: ,Id: 123,
+Wee Joker,This Joker gains +8 Chips when each played 2 is scored (Currently +0 Chips),Cost: $8,Rarity: Rare,Unlock: Win a run in 18 or fewer rounds.,Type: chips jokers,Activiation: mixed,Id: 124,
+Merry Andy,+3 discards each round; -1 hand size,Cost: $7,Rarity: Uncommon,Unlock: Win a run in 12 or fewer rounds,Type: effect jokers,Activiation: n/a,Id: 125,
+Oops! All 6s,Doubles all listed probabilities (ex: 1 in 3 -> 2 in 3),Cost: $4,Rarity: Uncommon,Unlock: Earn at least 10{000 Chips in a single hand.,Type: effect jokers,Activiation: n/a,Id: 126,
+The Idol,Each played [rank] of [suit] gives X2 Mult when scored; Card changes every round,Cost: $6,Rarity: Uncommon,Unlock: In one hand{ earn at least 1{000{000 Chips.,Type: multiplicative mult jokers,Activiation: on scored,Id: 127,
+Seeing Double,X2 Mult if played hand has a scoring Club card and a scoring card of any other suit,Cost: $6,Rarity: Uncommon,Unlock: Play a hand that contains four 7 of Clubs. Other suits that count as clubs (e.g. wild suits) with rank 7 will also count.,Type: multiplicative mult jokers,Activiation: independent,Id: 128,
+Matador,Earn $8 if played hand triggers the Boss Blind ability,Cost: $7,Rarity: Uncommon,Unlock: Defeat a Boss Blind in one hand{ without using discards.,Type: economy jokers,Activiation: independent,Id: 129,
+Hit the Road,This Joker gains X0.5 Mult for every Jack discarded this round (Currently X1 Mult),Cost: $8,Rarity: Rare,Unlock: Discard *5 Jacks* at the same time.,Type: multiplicative mult jokers,Activiation: mixed,Id: 130,
+The Duo,x2 Mult if played hand contains a Pair,Cost: $8,Rarity: Rare,Unlock: Win a run without playing a Pair.,Type: multiplicative mult jokers,Activiation: independent,Id: 131,
+The Trio,X3 Mult if played hand contains a Three of a Kind,Cost: $8,Rarity: Rare,Unlock: Win a run without playing a *Three of a Kind*.,Type: multiplicative mult jokers,Activiation: independent,Id: 132,
+The Family,X4 Mult if played hand contains a Four of a Kind,Cost: $8,Rarity: Rare,Unlock: Win a run without playing a *Four of a Kind*.,Type: multiplicative mult jokers,Activiation: independent,Id: 133,
+The Order,X3 Mult if played hand contains a Straight,Cost: $8,Rarity: Rare,Unlock: Win a run without playing a Straight.,Type: multiplicative mult jokers,Activiation: independent,Id: 134,
+The Tribe,x2 Mult if played hand contains a Flush,Cost: $8,Rarity: Rare,Unlock: Win a run without playing a Flush.,Type: multiplicative mult jokers,Activiation: independent,Id: 135,
+Stuntman,+250 Chips; -2 hand size,Cost: $7,Rarity: Rare,Unlock: Earn at least 100 million (100{000{000) Chips in a single hand.,Type: chips jokers,Activiation: independent,Id: 136,
+Invisible Joker,After 2 rounds{ sell this card to Duplicate a random Joker (Currently 0/2) (Removes Negative from copy),Cost: $8,Rarity: Rare,Unlock: Win a game while never having more than 4 jokers.,Type: effect jokers,Activiation: n/a,Id: 137,
+Brainstorm,Copies the ability of leftmost Joker,Cost: $10,Rarity: Rare,Unlock: Discard a *Royal Flush*.,Type: effect jokers,Activiation: ,Id: 138,
+Satellite,Earn $1 at end of round per unique Planet card used this run,Cost: $6,Rarity: Uncommon,Unlock: Have at least $400.,Type: economy jokers,Activiation: n/a,Id: 139,
+Shoot the Moon,Each Queen held in hand gives +13 Mult,Cost: $5,Rarity: Common,Unlock: Play every Heart card in your deck in one round.,Type: additive mult jokers,Activiation: on held,Id: 140,
+Driver's License,x3 Mult if you have at least 16 Enhanced cards in your full deck (Currently 0),Cost: $7,Rarity: Rare,Unlock: Enhance 16 cards in your deck,Type: multiplicative mult jokers,Activiation: independent,Id: 141,
+Cartomancer,Create a Tarot card when Blind is selected (Must have room),Cost: $6,Rarity: Uncommon,Unlock: Discover every Tarot Card.,Type: effect jokers,Activiation: n/a,Id: 142,
+Astronomer,All Planet cards and Celestial Packs in the shop are free,Cost: $8,Rarity: Uncommon,Unlock: Discover all Planet cards.,Type: effect jokers,Activiation: n/a,Id: 143,
+Burnt Joker,Upgrade the level of the first discarded poker hand each round,Cost: $8,Rarity: Rare,Unlock: Sell 50 cards.,Type: effect jokers,Activiation: on discard,Id: 144,
+Bootstraps,+2 Mult for every $5 you have (Currently +0 Mult),Cost: $7,Rarity: Uncommon,Unlock: Have at least *2**Polychrome* Jokers at the same time.,Type: additive mult jokers,Activiation: independent,Id: 145,
+Canio,This Joker gains X1 Mult when a face card is destroyed (Currently X1 Mult),Cost: $N/A,Rarity: Legendary,Unlock: Find this *Joker* from the *Soul* card.,Type: multiplicative mult jokers,Activiation: independent,Id: 146,
+Triboulet,Played Kings and Queens each give x2 Mult when scored,Cost: $N/A,Rarity: Legendary,Unlock: Find this *Joker* from the *Soul* card.,Type: multiplicative mult jokers,Activiation: on scored,Id: 147,
+Yorick,This Joker gains X1 Mult every 23[23] cards discarded (Currently X1 Mult),Cost: $N/A,Rarity: Legendary,Unlock: Find this *Joker* from the *Soul* card.,Type: multiplicative mult jokers,Activiation: mixed,Id: 148,
+Chicot,Disables effect of every Boss Blind,Cost: $N/A,Rarity: Legendary,Unlock: Find this *Joker* from the *Soul* card.,Type: effect jokers,Activiation: n/a,Id: 149,
+Perkeo,Creates a Negative copy of 1 random consumable card in your possession at the end of the shop,Cost: $N/A,Rarity: Legendary,Unlock: Find this *Joker* from the *Soul* card.,Type: effect jokers,Activiation: n/a,Id: 150,
