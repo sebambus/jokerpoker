@@ -7,11 +7,11 @@ Crystal Ball,+1 consumable slot,Already Unlocked,NOT COMPLETED
 Telescope,Celestial Packs always contain the Planet card for your most played poker hand,Already Unlocked,NOT COMPLETED
 Grabber,Permanently gain +1 hand per round,Already Unlocked,
 Wasteful,Permanently gain +1 discard each round,Already Unlocked,
-Tarot Merchant,Tarot cards appear 2x more frequently in the shop,Already Unlocked,NOT COMPLETED
-Planet Merchant,Planet cards appear 2x more frequently in the shop,Already Unlocked,NOT COMPLETED
+Tarot Merchant,Tarot cards appear 2x more frequently in the shop,Already Unlocked,
+Planet Merchant,Planet cards appear 2x more frequently in the shop,Already Unlocked,
 Seed Money,Raise the cap on interest earned in each round to $10,Already Unlocked,NOT COMPLETED
-Blank,Does nothing?,Already Unlocked,NOT COMPLETED
-Magic Trick,Playing cards can be purchased from the shop,Already Unlocked,NOT COMPLETED
+Blank,Does nothing?,Already Unlocked,
+Magic Trick,Playing cards can be purchased from the shop,Already Unlocked,
 Hieroglyph,-1 Ante{ -1 hand each round,Already Unlocked,NOT COMPLETED
 Director's Cut,Reroll boss blind 1 time per Ante{ $10 per roll,Already Unlocked,NOT COMPLETED
 Paint Brush,+1 hand size,Already Unlocked,NOT COMPLETED
@@ -23,8 +23,8 @@ Omen Globe,Spectral cards may appear in any of the Arcana Packs,Use a total of 2
 Observatory,Planet cards in your consumable area give 1.5X Mult for their speficied poker hand,Use a total of 25 planet cards from booster packs,NOT COMPLETED
 Nacho Tong,Permanently gain an additional +1 hand per round,Play a total of 2500 cards,
 Recyclomancy,Permanently gain an additional +1 discard each round,Discard a total of 2500 cards,
-Tarot Tycoon,Tarot cards appear 4x more frequently in the shop,Buy a total of 50 Tarot cards from the shop,NOT COMPLETED
-Planet Tycoon,Planet cards appear 4x more frequently in the shop,Buy a total of 50 planet cards from the shop,NOT COMPLETED
+Tarot Tycoon,Tarot cards appear 4x more frequently in the shop,Buy a total of 50 Tarot cards from the shop,
+Planet Tycoon,Planet cards appear 4x more frequently in the shop,Buy a total of 50 planet cards from the shop,
 Money Tree,Raise the cap on interest earned in each round to $20,Max out the interest per round earnings for ten consecutive rounds,NOT COMPLETED
 Antimatter,+1 Joker slot,Redeem Blank 10 total times,NOT COMPLETED
 Illusion,Playing cards in shop may have an Enhancement{ Edition{ and/or a Seal,Buy a total of 20 Playing cards from the shop,NOT COMPLETED

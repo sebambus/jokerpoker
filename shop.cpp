@@ -70,7 +70,9 @@ item shop::generateItem(itemtype i) {
 }
 
 item shop::generateItem() {
-    int odds[TYPE_COUNT] = {4, 4, 0, 20, 0, 0};
+    int odds[TYPE_COUNT] = {20+28*g->vouchers[PLANET_MERCHANT]+112*g->vouchers[PLANET_TYCOON],
+                            20+28*g->vouchers[TAROT_MERCHANT]+112*g->vouchers[TAROT_TYCOON],
+                            0, 100, 0, 4*g->vouchers[MAGIC_TRICK]};
     int w = 0;
     for(int i : odds) w += i;
     int n = rand() % w;
