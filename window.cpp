@@ -87,6 +87,8 @@ void window::printAndAutoColor(const char* str){
             else if (words[i + 1].find("Chip") != npos){
                 printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
             }
+            else 
+                print(cstr);
         }
         else 
             print(cstr);
