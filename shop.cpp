@@ -44,8 +44,7 @@ void shop::run(){
             }
         }
 
-        if(c == 'R' && g->money >= 5 + rerollCount - g->vouchers[REROLL_SURPLUS] - g->vouchers[REROLL_GLUT]) {
-            g->money -= 5 + rerollCount - g->vouchers[REROLL_SURPLUS] - g->vouchers[REROLL_GLUT];
+        if(c == 'R' && g->spend(5 + rerollCount - g->vouchers[REROLL_SURPLUS] - g->vouchers[REROLL_GLUT])) {
             reroll();
             rerollCount++;
         }

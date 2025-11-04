@@ -36,4 +36,5 @@ public:
     void initHandTable();
     void gain(item);
     bool buy(item);
+    bool spend(int);
 };
