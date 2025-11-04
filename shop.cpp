@@ -32,6 +32,11 @@ void shop::run(){
                     items.erase(items.begin()+n);
                 continue;
             } else n-= items.size();
+            if(n < packs.size()) {
+                if(open(packs[n]))
+                    items.erase(items.begin()+n);
+                continue;
+            } else n-= packs.size();
             if(n == 0 && v != VOUCHER_COUNT) {
                 if(g->buy(item(v)))
                     v = VOUCHER_COUNT;
@@ -47,24 +52,33 @@ void shop::run(){
     }
 }
 
-item shop::generateItem() {
-    int jokerodds = 20;
-    int tarotodds = 4;
-    int planetodds = 4;
-    int cardodds = 0;
-    int n = rand() % (jokerodds + tarotodds + planetodds + cardodds);
-    if(n < jokerodds) {
-        return item((joker) (rand()%JOKER_COUNT));
-    } else n -= jokerodds;
-    if(n < tarotodds) {
-        return item((tarot) (rand()%TAROT_COUNT));
-    } else n -= tarotodds;
-    if(n < planetodds) {
+item shop::generateItem(itemtype i) {
+    switch (i)  {
+    case PLANET:
         return item((planet) (rand()%PLANET_COUNT));
-    } else n -= planetodds;
-    if(n < cardodds) {
+    case TAROT:
+        return item((tarot) (rand()%TAROT_COUNT));
+    case SPECTRAL:
+        return item((spectral) (rand()%SPECTRAL_COUNT));
+    case JOKER:
+        return item((joker) (rand()%JOKER_COUNT));
+    case VOUCHER:
+        return item(generateVoucher());
+    case CARD:
         return item(card(rand()%13, (suit) (rand()%4)));
-    } else n -= cardodds;
+    }
+}
+
+item shop::generateItem() {
+    int odds[TYPE_COUNT] = {4, 4, 0, 20, 0, 0};
+    int w = 0;
+    for(int i : odds) w += i;
+    int n = rand() % w;
+    for(itemtype i = (itemtype)0; i < TYPE_COUNT; i = (itemtype) (i+1)) {
+        if(n < odds[i])
+            return generateItem(i);
+        else n -= odds[i];
+    }
 }
 
 voucher shop::generateVoucher() {
@@ -78,9 +92,73 @@ voucher shop::generateVoucher() {
     return genv(g, genv);
 }
 
-void shop::refresh() {
-    items.clear();
+pack shop::generatePack() {
+    int n = rand();
+    itemtype i;
+    int s;
+    if(n%69 < 20)
+        i = CARD;
+    else if(n%69 < 40)
+        i = TAROT;
+    else if(n%69 < 60)
+        i = PLANET;
+    else if(n%69 < 66)
+        i = JOKER;
+    else i = SPECTRAL;
+    if(n/69%13 < 8)
+        s = 0;
+    else if(n/69%13 < 12)
+        s = 1;
+    else s = 2;
+    return {i, s};
+}
 
+bool shop::open(pack p) {
+    if(g->money < 2*(p.size+2)) return false;
+    g->money -= 2*(p.size+2);
+
+    int n = 2;
+    int x = 1;
+    if(p.size != 0) n += 2;
+    if(p.size == 2) x++;   
+    std::vector<item> contents;
+    while(contents.size() < n)
+        contents.push_back(generateItem(p.type));
+
+    window packPopup = window(2+n, 20, 5-n/2, 50, "PACK");
+    while(x > 0) {
+        for(char c = 'a'; c < 'a' + contents.size(); c++)
+            packPopup.print("%c - %s\n", c, contents[c-'a'].name());
+        wrefresh(packPopup.content);
+
+        char c = getchar();
+        switch (c) {
+        case 'C':
+            return true;
+        case 'q':
+            exit(0);
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'd':
+            g->gain(contents[c-'a']);
+            contents.erase(contents.begin()+c-'a');
+            x--;
+        }
+    }
+
+    return true;
+}
+
+void shop::reroll() {
+    items.clear();
     while(items.size() < 3)
         items.push_back(generateItem());
+}
+
+void shop::reopen() {
+    reroll();
+    packs.clear();
+    while(packs.size() < 2)
+        packs.push_back(generatePack());
 }

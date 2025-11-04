@@ -199,7 +199,7 @@ void level::win() {
     int earnings = handmoney + interest + roundreward;
 
     // display win popup
-    window winPopup = window(8, 30, 6, 35, "");
+    window winPopup = window(8, 30, 2, 35, "");
     winPopup.print("Cash Out: $%d\nBlind Reward: $%d\n", earnings, roundreward);
     if(handmoney > 0) winPopup.print("Remaining Hands: $%d\n", handmoney);
     if(interest > 0) winPopup.print("Interest: $%d\n", interest);

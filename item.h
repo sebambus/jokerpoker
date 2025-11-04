@@ -16,7 +16,8 @@ enum itemtype : int {
     SPECTRAL,
     JOKER,
     VOUCHER,
-    CARD
+    CARD,
+    TYPE_COUNT
 };
 
 class item {

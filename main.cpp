@@ -24,7 +24,7 @@ int main() {
         shop s(&g);
         while(g.round <= 3) {
             if(g.round + g.ante > 2) {
-                s.refresh();
+                s.reopen();
                 s.run();
             }
             level l(&g);
