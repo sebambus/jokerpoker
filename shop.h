@@ -15,6 +15,7 @@ public:
     voucher v;
     std::vector<item> items;
     std::vector<pack> packs;
+    int rerollCount;
 
     shop(game *g);
     void run();

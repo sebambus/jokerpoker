@@ -44,6 +44,11 @@ void shop::run(){
             }
         }
 
+        if(c == 'R' && g->money >= 5 + rerollCount - g->vouchers[REROLL_SURPLUS] - g->vouchers[REROLL_GLUT]) {
+            g->money -= 5 + rerollCount - g->vouchers[REROLL_SURPLUS] - g->vouchers[REROLL_GLUT];
+            reroll();
+            rerollCount++;
+        }
         if(c == 'C') break;
         if(c == 'q') {
             endwin();
@@ -138,6 +143,7 @@ bool shop::open(pack p) {
         case 'C':
             return true;
         case 'q':
+            endwin();
             exit(0);
         case 'a':
         case 'b':
@@ -163,4 +169,5 @@ void shop::reopen() {
     packs.clear();
     while(packs.size() < 2)
         packs.push_back(generatePack());
+    rerollCount = 0;
 }

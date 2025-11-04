@@ -2,7 +2,7 @@ name,description,unlock,completed?
 Overstock,+1 card slot available in shop (to 3 slots),Already Unlocked,NOT COMPLETED
 Clearance Sale,All cards and packs in shop are 25% off,Already Unlocked,NOT COMPLETED
 Hone,Foil{ Holographic{ and Polychrome cards appear 2x more often,Already Unlocked,NOT COMPLETED
-Reroll Surplus,Rerolls cost $2 less,Already Unlocked,NOT COMPLETED
+Reroll Surplus,Rerolls cost $2 less,Already Unlocked,
 Crystal Ball,+1 consumable slot,Already Unlocked,NOT COMPLETED
 Telescope,Celestial Packs always contain the Planet card for your most played poker hand,Already Unlocked,NOT COMPLETED
 Grabber,Permanently gain +1 hand per round,Already Unlocked,
@@ -18,7 +18,7 @@ Paint Brush,+1 hand size,Already Unlocked,NOT COMPLETED
 Overstock Plus,+1 card slot available in shop (to 4 slots),Spend a total of $2500 at the shop,NOT COMPLETED
 Liquidation,All cards and packs in shop are 50% off,Redeem at least 10 voucher cards in one run,NOT COMPLETED
 Glow Up,Foil{ Holographic{ and Polychrome cards appear 4x more often,Have at least 5 Joker cards with Foil{ Holographic{ or Polychrome (or Negative) effect,NOT COMPLETED
-Reroll Glut,Rerolls cost an additional $2 less,Reroll the shop a total of 100 times,NOT COMPLETED
+Reroll Glut,Rerolls cost an additional $2 less,Reroll the shop a total of 100 times,
 Omen Globe,Spectral cards may appear in any of the Arcana Packs,Use a total of 25 Tarot cards from booster packs,NOT COMPLETED
 Observatory,Planet cards in your consumable area give 1.5X Mult for their speficied poker hand,Use a total of 25 planet cards from booster packs,NOT COMPLETED
 Nacho Tong,Permanently gain an additional +1 hand per round,Play a total of 2500 cards,
