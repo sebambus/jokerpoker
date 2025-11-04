@@ -37,7 +37,7 @@ void shop::run(){
             if(n < packs.size()) {
                 if(g->spend(2*(packs[n].size+2)))
                     open(packs[n]);
-                    items.erase(items.begin()+n);
+                    packs.erase(packs.begin()+n);
                 continue;
             } else n-= packs.size();
             if(n == 0 && v != VOUCHER_COUNT) {
@@ -133,7 +133,7 @@ void shop::open(pack p) {
     while(contents.size() < n)
         contents.push_back(generateItem(p.type));
 
-    window packPopup = window(2+n, 20, 5-n/2, 50, "PACK");
+    window packPopup = window(2+n, 26, 5-n/2, 47, "PACK");
     while(x > 0) {
         for(char c = 'a'; c < 'a' + contents.size(); c++)
             packPopup.print("%c - %s\n", c, contents[c-'a'].name());
