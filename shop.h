@@ -23,7 +23,7 @@ public:
     item generateItem();
     voucher generateVoucher();
     pack generatePack();
-    bool open(pack);
+    void open(pack);
     void reroll();
     void reopen();
 };

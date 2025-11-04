@@ -56,13 +56,6 @@ void game::gain(item i) {
     }
 }
 
-bool game::buy(item i) {
-    if(spend(i.cost))
-        gain(i);
-    else return false;
-    return true;
-}
-
 bool game::spend(int x) {
     if(x > money)
         return false;

@@ -28,18 +28,23 @@ void shop::run(){
             int n = c - 'a';
 
             if(n < items.size()) { // if item selected
-                if(g->buy(items[n]))
+                if(g->spend(items[n].cost)) {
+                    g->gain(items[n]);
                     items.erase(items.begin()+n);
+                }
                 continue;
             } else n-= items.size();
             if(n < packs.size()) {
-                if(open(packs[n]))
+                if(g->spend(2*(packs[n].size+2)))
+                    open(packs[n]);
                     items.erase(items.begin()+n);
                 continue;
             } else n-= packs.size();
             if(n == 0 && v != VOUCHER_COUNT) {
-                if(g->buy(item(v)))
+                if(g->spend(item(v).cost)) {
+                    g->gain(item(v));
                     v = VOUCHER_COUNT;
+                }
                 continue;
             }
         }
@@ -119,10 +124,7 @@ pack shop::generatePack() {
     return {i, s};
 }
 
-bool shop::open(pack p) {
-    if(g->money < 2*(p.size+2)) return false;
-    g->money -= 2*(p.size+2);
-
+void shop::open(pack p) {
     int n = 2;
     int x = 1;
     if(p.size != 0) n += 2;
@@ -140,7 +142,7 @@ bool shop::open(pack p) {
         char c = getchar();
         switch (c) {
         case 'C':
-            return true;
+            return;
         case 'q':
             endwin();
             exit(0);
@@ -153,8 +155,6 @@ bool shop::open(pack p) {
             x--;
         }
     }
-
-    return true;
 }
 
 void shop::reroll() {
