@@ -192,13 +192,6 @@ int level::calculateScore(hand played){
 }
 
 void level::win() {
-    // update round counter
-    g->round++;
-    if(g->round > 3) {
-        g->round = 1;
-        g->ante++;
-    }
-
     // earn round money
     int handmoney = plays;
     int interest = g->money / 5;
