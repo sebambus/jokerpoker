@@ -12,5 +12,8 @@ public:
 
     shop(game *g);
     void run();
+    item generateItem();
+    voucher generateVoucher();
     void generatePurchaseables();
+    void refresh();
 };

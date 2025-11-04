@@ -21,11 +21,15 @@ int main() {
     game g;
 
     while(g.ante <= 8) {
-        level l(&g);
         shop s(&g);
-        g.round++;
-        if (g.round >= 3)
-            g.round = 1;
+        while(g.round <= 3) {
+            level l(&g);
+            s.refresh();
+            s.run();
+            g.round++;
+        }
+        g.ante++;
+        g.round = 1;
     }
 
     endwin();               // close ncurses

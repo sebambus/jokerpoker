@@ -9,9 +9,7 @@
 
 shop::shop(game *game){
     g = game;
-    //if(g->round == 1)
-        generatePurchaseables();
-    run();
+    v = generateVoucher();
 }
 
 void shop::run(){
@@ -49,7 +47,27 @@ void shop::run(){
     }
 }
 
-void shop::generatePurchaseables() {
+item shop::generateItem() {
+    int jokerodds = 20;
+    int tarotodds = 4;
+    int planetodds = 4;
+    int cardodds = 0;
+    int n = rand() % (jokerodds + tarotodds + planetodds + cardodds);
+    if(n < jokerodds) {
+        return item((joker) (rand()%JOKER_COUNT));
+    } else n -= jokerodds;
+    if(n < tarotodds) {
+        return item((tarot) (rand()%TAROT_COUNT));
+    } else n -= tarotodds;
+    if(n < planetodds) {
+        return item((planet) (rand()%PLANET_COUNT));
+    } else n -= planetodds;
+    if(n < cardodds) {
+        return item(card(rand()%13, (suit) (rand()%4)));
+    } else n -= cardodds;
+}
+
+voucher shop::generateVoucher() {
     auto genv = [](game* g, auto t) {
         if(g->vouchers.all()) return VOUCHER_COUNT;
         voucher v = (voucher) (rand() % (VOUCHER_COUNT)/2);
@@ -57,29 +75,12 @@ void shop::generatePurchaseables() {
         if(g->vouchers[v]) v = t(g, t);
         return v;
     };
-    v = genv(g, genv);
+    return genv(g, genv);
+}
 
-    for(int i = 0; i < 3; i++) {
-        int jokerodds = 20;
-        int tarotodds = 4;
-        int planetodds = 4;
-        int cardodds = 0;
-        int n = rand() % (jokerodds + tarotodds + planetodds + cardodds);
-        if(n < jokerodds) {
-            items.push_back(item((joker) (rand()%JOKER_COUNT)));
-            continue;
-        } else n -= jokerodds;
-        if(n < tarotodds) {
-            items.push_back(item((tarot) (rand()%TAROT_COUNT)));
-            continue;
-        } else n -= tarotodds;
-        if(n < planetodds) {
-            items.push_back(item((planet) (rand()%PLANET_COUNT)));
-            continue;
-        } else n -= planetodds;
-        if(n < cardodds) {
-            items.push_back(item(card(rand()%13, (suit) (rand()%4))));
-            continue;
-        } else n -= cardodds;
-    }
+void shop::refresh() {
+    items.clear();
+
+    while(items.size() < 3)
+        items.push_back(generateItem());
 }
