@@ -2,10 +2,42 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include <stdlib.h>
 #include <ncursesw/ncurses.h>
 #include "game.h"
 #include "item.h"
+
+const char* name(pack p) {
+    std::string s;
+    switch (p.size) {
+    case 1:
+        s += "Jumbo ";
+        break;
+    case 2:
+        s += "Mega";
+        break;
+    }
+    switch (p.type) {
+    case PLANET:
+        s += "Celestial";
+        break;
+    case TAROT:
+        s += "Arcana";
+        break;
+    case SPECTRAL:
+        s += "Spectral";
+        break;
+    case JOKER:
+        s += "Buffoon";
+        break;
+    case CARD:
+        s += "Standard";
+        break;
+    }
+    s += " Pack";
+    return s.c_str();
+}
 
 shop::shop(game *game){
     g = game;
@@ -133,7 +165,7 @@ void shop::open(pack p) {
     while(contents.size() < n)
         contents.push_back(generateItem(p.type));
 
-    window packPopup = window(2+n, 26, 5-n/2, 47, "PACK");
+    window packPopup = window(2+n, 26, 5-n/2, 47, name(p));
     while(x > 0) {
         for(char c = 'a'; c < 'a' + contents.size(); c++)
             packPopup.print("%c - %s\n", c, contents[c-'a'].name());

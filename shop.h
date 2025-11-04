@@ -8,6 +8,7 @@ typedef struct pack {
     itemtype type;
     int size;
 } pack;
+const char* name(pack);
 
 class shop {
 public:
