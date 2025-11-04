@@ -21,5 +21,7 @@ const char* readcsv(const char* f, int r, int c) {
         }
     }
     res = "ERROR";
+    while(res.find("{") != std::string::npos)
+        res.replace(res.find("{"), 1, ",");
     return res.c_str();
 }
