@@ -10,10 +10,17 @@ enum suit {
     DIAMOND
 };
 
+enum enhancement {
+    BASE_CARD,
+    BONUS_CARD,
+    MULT_CARD
+};
+
 class card{
 public:
     int cardValue = 0;
     suit cardSuit = SPADE;
+    enhancement cardEnhancement = BASE_CARD;
 
     // new card of value "v" and suit "s"
     card(int v, suit s);
