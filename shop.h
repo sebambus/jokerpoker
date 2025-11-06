@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "item.h"
+#include <string>
 
 class game;
 
@@ -8,7 +9,7 @@ typedef struct pack {
     itemtype type;
     int size;
 } pack;
-const char* name(pack);
+std::string name(pack);
 
 class shop {
 public:

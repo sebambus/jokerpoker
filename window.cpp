@@ -170,7 +170,7 @@ void window::updateShopScreen(shop *s) {
     if(s->packs.size() > 0)
         print("Packs:\n");
     for(pack p : s->packs)
-        print("%c - $%d %s\n", menuchar++, 2*(p.size+2), name(p));
+        print("%c - $%d %s\n", menuchar++, 2*(p.size+2), name(p).c_str());
 
     if(s->v != VOUCHER_COUNT)
         print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());

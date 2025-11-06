@@ -8,14 +8,14 @@
 #include "game.h"
 #include "item.h"
 
-const char* name(pack p) {
-    std::string s;
+std::string name(pack p) {
+    std::string s = "";
     switch (p.size) {
     case 1:
         s += "Jumbo ";
         break;
     case 2:
-        s += "Mega";
+        s += "Mega ";
         break;
     }
     switch (p.type) {
@@ -36,7 +36,7 @@ const char* name(pack p) {
         break;
     }
     s += " Pack";
-    return s.c_str();
+    return s;
 }
 
 shop::shop(game *game){
@@ -165,7 +165,7 @@ void shop::open(pack p) {
     while(contents.size() < n)
         contents.push_back(generateItem(p.type));
 
-    window packPopup = window(2+n, 26, 5-n/2, 47, name(p));
+    window packPopup = window(2+n, 26, 5-n/2, 47, name(p).c_str());
     while(x > 0) {
         for(char c = 'a'; c < 'a' + contents.size(); c++)
             packPopup.print("%c - %s\n", c, contents[c-'a'].name());
