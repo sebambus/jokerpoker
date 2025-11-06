@@ -13,7 +13,12 @@ enum suit {
 enum enhancement {
     BASE_CARD,
     BONUS_CARD,
-    MULT_CARD
+    WILD_CARD,
+    GLASS_CARD,
+    STEEL_CARD,
+    STONE_CARD,
+    GOLD_CARD,
+    LUCKY_CARD
 };
 
 class card{
