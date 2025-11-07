@@ -48,9 +48,9 @@ public:
     // selects/deselects the card under the cursor
     void selectCursor();
     int cardsSelected();
-    handtype scoreType();
     void swapSelected();
-    std::pair<handtype, std::vector<card>> scoreTypeAndCards();
+    std::vector<card> scoreCards();
+    handtype pokerHand = HAND_TYPE_COUNT;
 private:
     std::vector<card> subsortBySuit(std::vector<card> sub);
     std::vector<card> subsortByValue(std::vector<card> sub);

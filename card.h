@@ -21,11 +21,20 @@ enum enhancement {
     LUCKY_CARD
 };
 
+enum seal {
+    NO_SEAL,
+    GOLD_SEAL,
+    RED_SEAL,
+    BLUE_SEAL,
+    PURPLE_SEAL
+};
+
 class card{
 public:
     int cardValue = 0;
     suit cardSuit = SPADE;
-    enhancement cardEnhancement = BASE_CARD;
+    enhancement cardEnhancement = WILD_CARD;
+    seal cardSeal = NO_SEAL;
 
     // new card of value "v" and suit "s"
     card(int v, suit s);

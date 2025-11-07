@@ -136,7 +136,7 @@ void window::updateLevelInfo(level* l) {
     print("Small Blind\n");
     print("Threshold: %d\n", l->threshold);
     print("Score: %d\n", l->currentScore);
-    print("%s\n", handName(l->played.scoreType()));
+    print("%s\n", handName(l->played.pokerHand));
     print("+%d\n", l->recentScore);
     print("Hands  Discards\n");
     print("  %d       %d\n", l->plays, l->discards);
