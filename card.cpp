@@ -49,7 +49,8 @@ void card::print(WINDOW* win) {
     waddwstr(win, suitChar);
     wprintw(win, "%c", valueToChar(cardValue));
 
-    setcolor(win, suitToColor(cardSuit), COLOR_WHITE);
+    unsetcolor(win, suitToColor(cardSuit), COLOR_WHITE);
+    wmove(win, y, x+4);
 }
 
 char suitToChar(suit s){

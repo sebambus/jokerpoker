@@ -153,7 +153,7 @@ void window::updateGameInfo(game *g) {
 void window::updateLevelScreen(level *l) {
     werase(content);
     l->h.print(content);
-    wmove(content, 3, 0);
+    wmove(content, 5, 0);
     l->played.print(content);
     wrefresh(content);
 }

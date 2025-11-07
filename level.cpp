@@ -118,6 +118,7 @@ void level::playHand() {
         return;
     } 
     played = hand(h.popSelected());
+    played.cursor = -1;
     for (int i = 0; i < played.selected.size(); i++) draw();
     recentScore = calculateScore(played); //add score of hand
     plays--;
