@@ -34,11 +34,11 @@ void window::printAndAutoColor(const char* str){
     for (int i = 0; i < text.size(); i++) // check each letter
     {
         char c = text[i];
-        if (c == ' '){ // if it's a space, add the accumulated word to the vector
+        if (c == ' ' || c == '\n'){ // if it's a space or newline, add it and the word to the vector
             word += c;
             words.push_back(word);
             word = "";
-        } else if (c == '(' || c == ')' || c == ',' || c == '.' || c == '\n') {
+        } else if (c == '(' || c == ')' || c == ',') {
             if (word.size() != 0) words.push_back(word); // push back whatever was before it
             word = c;
             words.push_back(word); // add special character as it's own word, for proper coloring down the road
@@ -69,7 +69,7 @@ void window::printAndAutoColor(const char* str){
             printWordInColor(cstr, COLOR_BLACK, COLOR_BLUE);
         else if (w.find("Diamond") != npos)
             printWordInColor(cstr, COLOR_WHITE, COLOR_YELLOW);
-        else if (w.find("+") != npos || w.find("X") != npos){ // if word has a plus or X, check to see whats after
+        else if (w.find("+") != npos || w.find("X") != npos || w.find("-") != npos){ // if word has a plus or X, check to see whats after
             if (words[i + 1].find("Mult") != npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
             else if (words[i + 1].find("Chip") != npos){
