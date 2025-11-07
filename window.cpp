@@ -107,7 +107,7 @@ std::string window::textWrap(const char* cstring){
     std::string newstr(cstring);
     std::vector<std::string> lines;
 
-    while (newstr != ""){
+    while (newstr.size() > width){
         int i = width - 1; // start looking at 1 less than the width
         while (newstr[i] != ' '){ // move backwards until you find a space
             i--;
@@ -115,6 +115,7 @@ std::string window::textWrap(const char* cstring){
         lines.push_back(newstr.substr(0, i)); // once you find one, save everything before that space
         newstr.erase(0,i+1); // clear that area from the string, repeat the loop
     }
+    lines.push_back(newstr); // add remainder
 
     std::string final = "";
     for (int i = 0; i < lines.size(); i++) // add all the lines back to a single string, now with newlines
