@@ -15,53 +15,41 @@ card::card(item i) {
 
 // prints card in color with one rank char and one suit wchar_t
 void card::print(WINDOW* win) {
-    char valChar;
     const wchar_t* suitChar; // unicode string
+
+    int x, y;
+    getyx(win, y, x);
 
     switch (cardSuit) {
     case SPADE:
         suitChar = L"\u2660";
-        setcolor(win, COLOR_BLACK, COLOR_WHITE);
         break;
     case HEART:
         suitChar = L"\u2665";
-        setcolor(win, COLOR_RED, COLOR_WHITE);
         break;
     case CLUB:
         suitChar = L"\u2663";
-        setcolor(win, COLOR_BLUE, COLOR_WHITE);
         break;
     case DIAMOND:
         suitChar = L"\u2666";
-        setcolor(win, COLOR_YELLOW, COLOR_WHITE);
         break;
     default:
         suitChar = L"?";
     }
 
-    switch (cardValue) {
-    case 13:
-        valChar = 'K';
-        break;
-    case 12:
-        valChar = 'Q';
-        break;
-    case 11:
-        valChar = 'J';
-        break;
-    case 10:
-        valChar = 'T';
-        break;
-    case 1:
-        valChar = 'A';
-        break;
-    default:
-        valChar = '0' + cardValue;
-    }
+    setcolor(win, suitToColor(cardSuit), COLOR_WHITE);
 
-    wprintw(win, "%c", valChar);
-    // prints unicode string
+    wprintw(win, "%c", valueToChar(cardValue));
     waddwstr(win, suitChar);
+    wprintw(win, "  ");
+    wmove(win, y+1, x);
+    wprintw(win, "    ");
+    wmove(win, y+2, x);
+    wprintw(win, "  ");
+    waddwstr(win, suitChar);
+    wprintw(win, "%c", valueToChar(cardValue));
+
+    setcolor(win, suitToColor(cardSuit), COLOR_WHITE);
 }
 
 char suitToChar(suit s){
