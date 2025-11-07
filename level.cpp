@@ -180,7 +180,12 @@ int level::calculateScore(hand* played){
 
     for (int i = 0; i < scoredCards.size(); i++)
     {
-        score += scoredCards[i].cardValue;
+        card c = scoredCards[i];
+        score += c.cardValue;
+        if (c.cardEnhancement == BONUS_CARD)
+            score += 30;
+        if (c.cardEnhancement == MULT_CARD)
+            mult += 4;
     }
 
     score *= mult;

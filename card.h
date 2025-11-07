@@ -13,6 +13,7 @@ enum suit {
 enum enhancement {
     BASE_CARD,
     BONUS_CARD,
+    MULT_CARD,
     WILD_CARD,
     GLASS_CARD,
     STEEL_CARD,
