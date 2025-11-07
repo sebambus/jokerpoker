@@ -38,7 +38,7 @@ void window::printAndAutoColor(const char* str){
             word += c;
             words.push_back(word);
             word = "";
-        } else if (c == '(' || c == ')' || c == ',' || c == '.') {
+        } else if (c == '(' || c == ')' || c == ',' || c == '.' || c == '\n') {
             if (word.size() != 0) words.push_back(word); // push back whatever was before it
             word = c;
             words.push_back(word); // add special character as it's own word, for proper coloring down the road
@@ -62,13 +62,13 @@ void window::printAndAutoColor(const char* str){
         else if (w.find("$") != npos)
             printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
         else if (w.find("Spade") != npos)
-            printWordInColor(cstr, COLOR_WHITE, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_BLACK, COLOR_WHITE);
         else if (w.find("Heart") != npos)
-            printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_BLACK, COLOR_RED);
         else if (w.find("Club") != npos)
-            printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_BLACK, COLOR_BLUE);
         else if (w.find("Diamond") != npos)
-            printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_WHITE, COLOR_YELLOW);
         else if (w.find("+") != npos || w.find("X") != npos){ // if word has a plus or X, check to see whats after
             if (words[i + 1].find("Mult") != npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
