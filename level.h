@@ -22,6 +22,9 @@ public:
     deck d;
     hand h;
     hand played;
+
+    int recentChips = 0;
+    int recentMult = 0;
     
     selectableScreen focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;

@@ -188,6 +188,9 @@ int level::calculateScore(hand* played){
             mult += 4;
     }
 
+    recentChips = score;
+    recentMult = mult;
+
     score *= mult;
     currentScore += score;
 

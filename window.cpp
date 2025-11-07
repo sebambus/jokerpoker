@@ -136,8 +136,17 @@ void window::updateLevelInfo(level* l) {
     print("Small Blind\n");
     print("Threshold: %d\n", l->threshold);
     print("Score: %d\n", l->currentScore);
-    print("%s\n", handName(l->played.pokerHand));
-    print("+%d\n", l->recentScore);
+    if (l->played.pokerHand == HAND_TYPE_COUNT) // for when level starts
+        print("\n\n\n");
+    else{
+        print("%s\n", handName(l->played.pokerHand));
+        setcolor(content, COLOR_BLACK, COLOR_RED);
+        print("Mult: %d ",l->recentMult);
+        setcolor(content, COLOR_BLACK, COLOR_BLUE);
+        print("Chips: %d\n", l->recentChips);
+        unsetcolor(content, COLOR_BLACK, COLOR_BLUE);
+        print("+%d\n", l->recentScore);
+    }
     print("Hands  Discards\n");
     print("  %d       %d\n", l->plays, l->discards);
     wrefresh(content);
