@@ -69,6 +69,8 @@ void window::printAndAutoColor(const char* str){
             printWordInColor(cstr, COLOR_BLACK, COLOR_BLUE);
         else if (w.find("Diamond") != npos)
             printWordInColor(cstr, COLOR_WHITE, COLOR_YELLOW);
+        else if (w.find("Tarot") != npos || w.find("Planet") != npos)
+            printWordInColor(cstr, COLOR_MAGENTA, COLOR_BLACK);
         else if (w.find("+") != npos || w.find("X") != npos || w.find("-") != npos){ // if word has a plus or X, check to see whats after
             if (words[i + 1].find("Mult") != npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
