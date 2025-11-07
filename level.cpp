@@ -120,7 +120,7 @@ void level::playHand() {
     played = hand(h.popSelected());
     played.cursor = -1;
     for (int i = 0; i < played.selected.size(); i++) draw();
-    recentScore = calculateScore(played); //add score of hand
+    recentScore = calculateScore(&played); //add score of hand
     plays--;
 }
 
@@ -171,11 +171,9 @@ void level::swapFocus(){
     }
 }
 
-int level::calculateScore(hand played){
-    std::pair<handtype, std::vector<card>> scoringInfo;
-    scoringInfo = played.scoreTypeAndCards();
-    handtype type = scoringInfo.first;
-    std::vector<card> scoredCards = scoringInfo.second;
+int level::calculateScore(hand* played){
+    std::vector<card> scoredCards = played->scoreCards();
+    handtype type = played->pokerHand;
     int flat = g->handTable[type][FLAT];
     int mult = g->handTable[type][MULT];
     g->handTable[type][TIMES_PLAYED] += 1;
@@ -183,8 +181,16 @@ int level::calculateScore(hand played){
 
     for (int i = 0; i < scoredCards.size(); i++)
     {
-        score += scoredCards[i].cardValue;
+        card c = scoredCards[i];
+        score += c.cardValue;
+        if (c.cardEnhancement == BONUS_CARD)
+            score += 30;
+        if (c.cardEnhancement == MULT_CARD)
+            mult += 4;
     }
+
+    recentChips = score;
+    recentMult = mult;
 
     score *= mult;
     currentScore += score;

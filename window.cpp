@@ -28,38 +28,26 @@ void window::print(const char* format, ...) {
 void window::printAndAutoColor(const char* str){
     std::string text(str);
     std::vector<std::string> words;
-    std::vector<int> spaces; 
-
-    spaces.push_back(-1);
-    for (int i = 0; i < text.size(); i++){ // find position of all spaces
-        if (text[i] == ' ')
-            spaces.push_back(i);
-    }
-    spaces.push_back(text.size() + 1);
-
-    for (int i = 0; i < spaces.size() - 1; i++) // split text by spaces
-    {
-        std::string word = text.substr(spaces[i] + 1, spaces[i+1] - spaces[i]);
-        words.push_back(word);
-    }
     
-    // if there are any 'words' with a newline, split them
-    // a jank workaround, but it works for now
-    std::vector<std::string> copy;
-    copy = words;
-    words.clear();
-
-    for (std::string w : copy){
-        int pos = w.find('\n');
-        if (pos == std::string::npos)
-            words.push_back(w);
-        else {
-            std::string s1 = w.substr(0,pos);
-            std::string s2 = w.substr(pos, w.size() - pos);
-            words.push_back(s1);
-            words.push_back(s2);
+    // create vector of words
+    std::string word = "";
+    for (int i = 0; i < text.size(); i++) // check each letter
+    {
+        char c = text[i];
+        if (c == ' ' || c == '\n'){ // if it's a space or newline, add it and the word to the vector
+            word += c;
+            words.push_back(word);
+            word = "";
+        } else if (c == '(' || c == ')' || c == ',') {
+            if (word.size() != 0) words.push_back(word); // push back whatever was before it
+            word = c;
+            words.push_back(word); // add special character as it's own word, for proper coloring down the road
+            word = "";
+        } else { // normal character, append to word
+            word += c;
         }
     }
+    words.push_back(word);
 
     long unsigned int npos = std::string::npos;
     // print word one by one
@@ -74,21 +62,23 @@ void window::printAndAutoColor(const char* str){
         else if (w.find("$") != npos)
             printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
         else if (w.find("Spade") != npos)
-            printWordInColor(cstr, COLOR_WHITE, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_BLACK, COLOR_WHITE);
         else if (w.find("Heart") != npos)
-            printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_BLACK, COLOR_RED);
         else if (w.find("Club") != npos)
-            printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
+            printWordInColor(cstr, COLOR_BLACK, COLOR_BLUE);
         else if (w.find("Diamond") != npos)
-            printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
-        else if (w.find("+") != npos || w.find("X") != npos){ // if word has a plus or X, check to see whats after
+            printWordInColor(cstr, COLOR_WHITE, COLOR_YELLOW);
+        else if (w.find("Tarot") != npos || w.find("Planet") != npos)
+            printWordInColor(cstr, COLOR_MAGENTA, COLOR_BLACK);
+        else if (w.find("+") != npos || w.find("X") != npos || w.find("-") != npos){ // if word has a plus or X, check to see whats after
             if (words[i + 1].find("Mult") != npos)
                 printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
             else if (words[i + 1].find("Chip") != npos){
                 printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
             }
             else 
-                print(cstr);
+                print(cstr);  
         }
         else 
             print(cstr);
@@ -97,17 +87,34 @@ void window::printAndAutoColor(const char* str){
 }
 
 void window::printWordInColor(const char* w, short fg, short bg){
+    char* word = (char*)w;
     setcolor(content, fg, bg);
-    print(w);
-    unsetcolor(content, fg, bg);
+    bool hasSpace = false;
+    int wSize = 0;
+    for (int i = 0; word[i] != '\0'; i++){
+        if (word[i] == ' ')
+            hasSpace = true;
+        wSize++;
+    }
+    
+    // if the word has a space, print it without the space, then unset color and print the space
+    // this is so highlighting words looks correct, only the word and no spaces are highlighted
+    if (hasSpace){
+        word[wSize-1] = '\0';
+        print(word);
+        unsetcolor(content, fg, bg);
+        print(" ");    
+    } else{
+        print(word);
+        unsetcolor(content, fg, bg);
+    }
 }
-
 
 std::string window::textWrap(const char* cstring){
     std::string newstr(cstring);
     std::vector<std::string> lines;
 
-    while (newstr != ""){
+    while (newstr.size() > width){
         int i = width - 1; // start looking at 1 less than the width
         while (newstr[i] != ' '){ // move backwards until you find a space
             i--;
@@ -115,6 +122,7 @@ std::string window::textWrap(const char* cstring){
         lines.push_back(newstr.substr(0, i)); // once you find one, save everything before that space
         newstr.erase(0,i+1); // clear that area from the string, repeat the loop
     }
+    lines.push_back(newstr); // add remainder
 
     std::string final = "";
     for (int i = 0; i < lines.size(); i++) // add all the lines back to a single string, now with newlines
@@ -130,8 +138,17 @@ void window::updateLevelInfo(level* l) {
     print("Small Blind\n");
     print("Threshold: %d\n", l->threshold);
     print("Score: %d\n", l->currentScore);
-    print("%s\n", handName(l->played.scoreType()));
-    print("+%d\n", l->recentScore);
+    if (l->played.pokerHand == HAND_TYPE_COUNT) // for when level starts
+        print("\n\n\n");
+    else{
+        print("%s\n", handName(l->played.pokerHand));
+        setcolor(content, COLOR_BLACK, COLOR_RED);
+        print("Mult: %d ",l->recentMult);
+        setcolor(content, COLOR_BLACK, COLOR_BLUE);
+        print("Chips: %d\n", l->recentChips);
+        unsetcolor(content, COLOR_BLACK, COLOR_BLUE);
+        print("+%d\n", l->recentScore);
+    }
     print("Hands  Discards\n");
     print("  %d       %d\n", l->plays, l->discards);
     wrefresh(content);

@@ -22,6 +22,9 @@ public:
     deck d;
     hand h;
     hand played;
+
+    int recentChips = 0;
+    int recentMult = 0;
     
     selectableScreen focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;
@@ -35,7 +38,7 @@ public:
     void swapFocus();
     void changeConsumable(int by);
     void changeJoker(int by);
-    int calculateScore(hand played);
+    int calculateScore(hand* played);
     void win();
     void lose();
 };
