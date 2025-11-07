@@ -88,7 +88,7 @@ void window::printAndAutoColor(const char* str){
                 printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
             }
             else 
-                print(cstr);
+                print(cstr);  
         }
         else 
             print(cstr);
@@ -97,11 +97,28 @@ void window::printAndAutoColor(const char* str){
 }
 
 void window::printWordInColor(const char* w, short fg, short bg){
+    char* word = (char*)w;
     setcolor(content, fg, bg);
-    print(w);
-    unsetcolor(content, fg, bg);
+    bool hasSpace = false;
+    int wSize = 0;
+    for (int i = 0; word[i] != '\0'; i++){
+        if (word[i] == ' ')
+            hasSpace = true;
+        wSize++;
+    }
+    
+    // if the word has a space, print it without the space, then unset color and print the space
+    // this is so highlighting words looks correct, only the word and no spaces are highlighted
+    if (hasSpace){
+        word[wSize-1] = '\0';
+        print(word);
+        unsetcolor(content, fg, bg);
+        print(" ");    
+    } else{
+        print(word);
+        unsetcolor(content, fg, bg);
+    }
 }
-
 
 std::string window::textWrap(const char* cstring){
     std::string newstr(cstring);

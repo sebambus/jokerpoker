@@ -18,6 +18,9 @@ game::game() :
     round = 1;
     d.fillDeck();
     initHandTable();
+    gain(BASIC_JOKER);
+    gain(PLUTO);
+    gain(TEMPERANCE);
 }
 
 int game::getPlays() {
