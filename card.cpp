@@ -15,41 +15,59 @@ card::card(item i) {
 
 // prints card in color with one rank char and one suit wchar_t
 void card::print(WINDOW* win) {
-    const wchar_t* suitChar; // unicode string
+    wchar_t suitChar; // unicode string
 
     int x, y;
     getyx(win, y, x);
 
     switch (cardSuit) {
     case SPADE:
-        suitChar = L"\u2660";
+        suitChar = L'\u2660';
         break;
     case HEART:
-        suitChar = L"\u2665";
+        suitChar = L'\u2665';
         break;
     case CLUB:
-        suitChar = L"\u2663";
+        suitChar = L'\u2663';
         break;
     case DIAMOND:
-        suitChar = L"\u2666";
+        suitChar = L'\u2666';
         break;
     default:
-        suitChar = L"?";
+        suitChar = L'?';
     }
 
-    setcolor(win, suitToColor(cardSuit), COLOR_WHITE);
+    for(int i = 0; i < 3; i++) {
+        wmove(win, y+i, x);
+        for(int j = 0; j < 4; j++) {
+            short fg = suitToColor(cardSuit);
+            short bg = COLOR_WHITE;
+            wchar_t c = ' ';
 
-    wprintw(win, "%c", valueToChar(cardValue));
-    waddwstr(win, suitChar);
-    wprintw(win, "  ");
-    wmove(win, y+1, x);
-    wprintw(win, "    ");
-    wmove(win, y+2, x);
-    wprintw(win, "  ");
-    waddwstr(win, suitChar);
-    wprintw(win, "%c", valueToChar(cardValue));
+            switch (cardEnhancement) {
+            case GOLD_CARD:
+                //bg = COLOR_YELLOW;
+                break;
+            }
 
-    unsetcolor(win, suitToColor(cardSuit), COLOR_WHITE);
+            if(i*3-j*2 == 0)
+                c = valueToChar(cardValue);
+            if(2*j-i == 2)
+                c = suitChar;
+            if(j-i == 3) {
+                if(cardSeal == GOLD_SEAL) fg = COLOR_YELLOW;
+                if(cardSeal == RED_SEAL) fg = COLOR_RED;
+                if(cardSeal == BLUE_SEAL) fg = COLOR_BLUE;
+                if(cardSeal == PURPLE_SEAL) fg = COLOR_MAGENTA;
+                if(cardSeal != NO_SEAL) c = L'\u25cf';
+            }
+
+            cchar_t cch;
+            setcchar(&cch, &c, 0, fg+16*bg, NULL);
+            wadd_wch(win, &cch);
+        }
+    }
+
     wmove(win, y, x+4);
 }
 
