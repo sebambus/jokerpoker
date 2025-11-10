@@ -46,7 +46,29 @@ void card::print(WINDOW* win) {
 
             switch (cardEnhancement) {
             case GOLD_CARD:
-                //bg = COLOR_YELLOW;
+                bg = COLOR_YELLOW;
+                break;
+            case BONUS_CARD:
+                if(j%3 == 0)
+                    bg = COLOR_BLUE;
+                break;
+            case MULT_CARD:
+                if(i == 1)
+                    bg = COLOR_RED;
+                break;
+            case WILD_CARD:
+                suitChar = '*';
+                break;
+            case GLASS_CARD:
+                bg = COLOR_BLACK;
+                break;
+            case STEEL_CARD:
+            case STONE_CARD:
+                bg = COLOR_BLUE;
+                break;
+            case LUCKY_CARD:
+                if((i+j)%2 == 0)
+                    bg = COLOR_YELLOW;
                 break;
             }
 
