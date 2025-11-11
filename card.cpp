@@ -6,6 +6,7 @@
 card::card(int value, suit suit){
     cardValue = value;
     cardSuit = suit;
+    cardEnhancement = STONE_CARD;
 }
 
 card::card(item i) {

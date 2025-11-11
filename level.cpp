@@ -119,8 +119,8 @@ void level::playHand() {
     } 
     played = hand(h.popSelected());
     played.cursor = -1;
+    recentScore = calculateScore(&played, &h); //add score of hand
     for (int i = 0; i < played.selected.size(); i++) draw();
-    recentScore = calculateScore(&played); //add score of hand
     plays--;
 }
 
@@ -171,7 +171,7 @@ void level::swapFocus(){
     }
 }
 
-int level::calculateScore(hand* played){
+int level::calculateScore(hand* played, hand* h){
     std::vector<card> scoredCards = played->scoreCards();
     handtype type = played->pokerHand;
     int flat = g->handTable[type][FLAT];
@@ -179,15 +179,52 @@ int level::calculateScore(hand* played){
     g->handTable[type][TIMES_PLAYED] += 1;
     int score = flat;
 
+    std::vector<card> glassCards;
+
     for (int i = 0; i < scoredCards.size(); i++)
     {
         card c = scoredCards[i];
-        score += c.cardValue;
-        if (c.cardEnhancement == BONUS_CARD)
+        enhancement e = c.cardEnhancement;
+
+        if (e == STONE_CARD) c.cardValue = 50;        
+        score += c.cardValue; // base score of the card
+
+        switch (e){
+        case BONUS_CARD:
             score += 30;
-        if (c.cardEnhancement == MULT_CARD)
+            break;
+        case MULT_CARD:
             mult += 4;
+            break;
+        case GLASS_CARD:
+            mult *= 2;
+            if (rand() % 2 == 1)
+                glassCards.push_back(c);
+            break;
+        case LUCKY_CARD:
+            if (rand() % 5 == 1){
+                mult += 20;
+            }
+            if (rand() % 15 == 1){
+                g->money += 20;
+            }
+            break;
+        }
     }
+
+    // "held in hand" conditions
+    for (card c : h->cards){
+        enhancement e = c.cardEnhancement;
+        switch(e){
+            case GOLD_CARD:
+                g->money += 3;
+                break;
+            case STEEL_CARD:
+                mult *= 1.5;
+        }
+    }
+
+    // TODO: destroying glass cards
 
     recentChips = score;
     recentMult = mult;
