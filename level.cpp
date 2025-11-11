@@ -186,7 +186,7 @@ int level::calculateScore(hand* played, hand* h){
         card c = scoredCards[i];
         enhancement e = c.cardEnhancement;
 
-        if (e == STONE_CARD) c.cardValue = 50;        
+        if (e == STONE_CARD) c.cardValue = 50; // if there's a stone card, change it's score        
         score += c.cardValue; // base score of the card
 
         switch (e){

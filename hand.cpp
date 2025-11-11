@@ -242,7 +242,8 @@ void hand::swapSelected(){
 std::vector<card> hand::scoreCards(){
     std::vector<card> scoredCards;
     
-    // finding stone cards. they are always scored, so remove them, then add them back at the end
+    // finding stone cards. they are always scored, so remove them before running the algorithm
+    // add them to the list of cards to be scored
     std::vector<card> stoneCards;
     for (int i = 0; i < cards.size(); i++){
         if (cards[i].cardEnhancement == STONE_CARD){
