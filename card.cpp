@@ -72,9 +72,9 @@ void card::print(WINDOW* win) {
                 break;
             }
 
-            if(i*3-j*2 == 0)
+            if(i*3-j*2 == 0 && cardEnhancement != STONE_CARD)
                 c = valueToChar(cardValue);
-            if(2*j-i == 2)
+            if(2*j-i == 2 && cardEnhancement != STONE_CARD)
                 c = suitChar;
             if(j-i == 3) {
                 if(cardSeal == GOLD_SEAL) fg = COLOR_YELLOW;
