@@ -31,6 +31,10 @@ public:
     window peekScreen;
 
     game();
+    void run();
+    void runinit();
+    void runswitch();
+    void runupdate();
     int getPlays();
     int getDiscards();
     void initHandTable();

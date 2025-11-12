@@ -44,6 +44,7 @@ shop::shop(game *game){
     v = generateVoucher();
 }
 
+/*
 void shop::run(){
     g->mainScreen.changeTitle("Shop");
     g->mainScreen.updateShopScreen(this);
@@ -92,6 +93,7 @@ void shop::run(){
         }
     }
 }
+*/
 
 item shop::generateItem(itemtype i) {
     switch (i)  {

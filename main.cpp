@@ -19,20 +19,7 @@ int main() {
     srand(time(NULL));
 
     game g;
-
-    while(g.ante <= 8) {
-        shop s(&g);
-        while(g.round <= 3) {
-            if(g.round + g.ante > 2) {
-                s.reopen();
-                s.run();
-            }
-            level l(&g);
-            g.round++;
-        }
-        g.ante++;
-        g.round = 1;
-    }
+    g.run();
 
     endwin();               // close ncurses
     return 0;

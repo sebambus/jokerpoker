@@ -20,10 +20,9 @@ level::level(game* g) {
     threshold = antebases[g->ante] * (g->round+1)/2;
 
     for (int i = 0; i < 8; i++) draw();
-
-    play();
 }
 
+/*
 void level::play() {
     g->mainScreen.changeTitle("");
     g->levelInfo.updateLevelInfo(this);
@@ -104,6 +103,7 @@ void level::play() {
         }
     }
 }
+*/
 
 void level::draw() {
     if(d.cards.empty()) return;
