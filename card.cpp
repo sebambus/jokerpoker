@@ -6,7 +6,6 @@
 card::card(int value, suit suit){
     cardValue = value;
     cardSuit = suit;
-    cardEnhancement = GLASS_CARD;
 }
 
 card::card(item i) {
@@ -63,8 +62,9 @@ void card::print(WINDOW* win) {
             case GLASS_CARD:
                 bg = COLOR_BLACK;
                 break;
-            case STEEL_CARD:
             case STONE_CARD:
+                fg = COLOR_WHITE;
+            case STEEL_CARD:
                 bg = COLOR_BLUE;
                 break;
             case LUCKY_CARD:
