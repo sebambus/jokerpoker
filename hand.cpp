@@ -241,7 +241,19 @@ void hand::swapSelected(){
 //returns poker hand and cards within hand that should be scored
 std::vector<card> hand::scoreCards(){
     std::vector<card> scoredCards;
-     // counting suits and ranks
+    
+    // finding stone cards. they are always scored, so remove them before running the algorithm
+    // add them to the list of cards to be scored
+    std::vector<card> stoneCards;
+    for (int i = 0; i < cards.size(); i++){
+        if (cards[i].cardEnhancement == STONE_CARD){
+            stoneCards.push_back(cards[i]);
+            scoredCards.push_back(cards[i]);
+            cards.erase(cards.begin() + i);
+        }
+    }
+    
+    // counting suits and ranks
     int suitCount[4] = { 0 };
     int rankCount[13] = { 0 };
     for(card c : cards) {
@@ -272,6 +284,11 @@ std::vector<card> hand::scoreCards(){
                 highestScoredValue = i+1;
             }
         }
+    }
+
+    // add stone cards back to cards
+    for (card c : stoneCards){
+        cards.push_back(c);
     }
 
     // finds flush

@@ -38,7 +38,7 @@ public:
     void swapFocus();
     void changeConsumable(int by);
     void changeJoker(int by);
-    int calculateScore(hand* played);
+    int calculateScore(hand* played, hand * h);
     void win();
     void lose();
 };
