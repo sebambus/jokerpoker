@@ -49,3 +49,14 @@ int deck::specificCount(suit s, int v){ // count all cards of suit s and value v
     }
     return sum;
 }
+
+void deck::removeCard(card c){
+    for (int i = 0; i < cards.size(); i++){
+        card x = cards[i];
+        if (c.cardValue == x.cardValue &&
+        c.cardSuit == x.cardSuit &&
+        c.cardEnhancement == x.cardEnhancement &&
+        c.cardSeal == x.cardSeal)
+            cards.erase(cards.begin()+i);
+    }
+}

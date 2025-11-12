@@ -186,8 +186,10 @@ int level::calculateScore(hand* played, hand* h){
         card c = scoredCards[i];
         enhancement e = c.cardEnhancement;
 
-        if (e == STONE_CARD) c.cardValue = 50; // if there's a stone card, change it's score        
-        score += c.cardValue; // base score of the card
+        if (e == STONE_CARD) 
+            score += 50; // if there's a stone card, add 50 instead of card value        
+        else 
+            score += c.cardValue; // base score of the card
 
         switch (e){
         case BONUS_CARD:
@@ -225,6 +227,9 @@ int level::calculateScore(hand* played, hand* h){
     }
 
     // TODO: destroying glass cards
+    for (card c : glassCards){
+        g->d.removeCard(c);
+    }
 
     recentChips = score;
     recentMult = mult;

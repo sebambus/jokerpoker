@@ -13,4 +13,5 @@ public:
     int suitCount(suit s);
     int cardCount(int v);
     int specificCount(suit s, int v);
+    void removeCard(card c);
 };
