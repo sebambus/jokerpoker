@@ -44,57 +44,6 @@ shop::shop(game *game){
     v = generateVoucher();
 }
 
-/*
-void shop::run(){
-    g->mainScreen.changeTitle("Shop");
-    g->mainScreen.updateShopScreen(this);
-
-    while(true) {
-        g->mainScreen.updateShopScreen(this);
-        g->gameInfo.updateGameInfo(g);
-        g->specialScreen.updateSpecialScreen(g, 0);
-        g->jokerScreen.updateJokerScreen(g,0);
-
-        char c = getchar();
-
-        if(c >= 'a' && c <= 'z') {
-            int n = c - 'a';
-
-            if(n < items.size()) { // if item selected
-                if(g->spend(items[n].cost)) {
-                    g->gain(items[n]);
-                    items.erase(items.begin()+n);
-                }
-                continue;
-            } else n-= items.size();
-            if(n < packs.size()) {
-                if(g->spend(2*(packs[n].size+2)))
-                    open(packs[n]);
-                    packs.erase(packs.begin()+n);
-                continue;
-            } else n-= packs.size();
-            if(n == 0 && v != VOUCHER_COUNT) {
-                if(g->spend(item(v).cost)) {
-                    g->gain(item(v));
-                    v = VOUCHER_COUNT;
-                }
-                continue;
-            }
-        }
-
-        if(c == 'R' && g->spend(5 + rerollCount - g->vouchers[REROLL_SURPLUS] - g->vouchers[REROLL_GLUT])) {
-            reroll();
-            rerollCount++;
-        }
-        if(c == 'C') break;
-        if(c == 'q') {
-            endwin();
-            exit(0);
-        }
-    }
-}
-*/
-
 item shop::generateItem(itemtype i) {
     switch (i)  {
     case PLANET:
