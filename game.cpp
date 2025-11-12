@@ -48,135 +48,135 @@ void game::run() {
 }
 
 void game::runinit() {
-                gameInfo.updateGameInfo(this);
-                jokerScreen.updateJokerScreen(this,-1);
-                specialScreen.updateSpecialScreen(this,0);
+    gameInfo.updateGameInfo(this);
+    jokerScreen.updateJokerScreen(this,-1);
+    specialScreen.updateSpecialScreen(this,0);
 
-                if(p == SHOP_PHASE) {
-                    s.reopen();
-                    mainScreen.changeTitle("Shop");
-                    mainScreen.updateShopScreen(&s);
-                }
-                if(p == LEVEL_PHASE) {
-                    l = level(this);
+    if(p == SHOP_PHASE) {
+        s.reopen();
+        mainScreen.changeTitle("Shop");
+        mainScreen.updateShopScreen(&s);
+    }
+    if(p == LEVEL_PHASE) {
+        l = level(this);
 
-                    mainScreen.changeTitle("");
-                    levelInfo.updateLevelInfo(&l);
-                
-                    mainScreen.updateLevelScreen(&l);
-                    peekScreen.updatePeekScreen(&l);
-                    cardInfo.updateCardInfo(this,0, static_cast<int>(l.focusScreen));
-                }
+        mainScreen.changeTitle("");
+        levelInfo.updateLevelInfo(&l);
+    
+        mainScreen.updateLevelScreen(&l);
+        peekScreen.updatePeekScreen(&l);
+        cardInfo.updateCardInfo(this,0, static_cast<int>(l.focusScreen));
+    }
 }
 
 void game::runswitch() {
-                    char c = getchar();
+    char c = getchar();
 
-                    switch (c) {
-                    case 'q': // quit
-                        endwin();
-                        exit(0);
-                    }
+    switch (c) {
+    case 'q': // quit
+        endwin();
+        exit(0);
+    }
 
-                    if(p == SHOP_PHASE) {
-                        int n;
-                        switch(c) {
-                        case 'a':
-                        case 'b':
-                        case 'c':
-                        case 'd':
-                        case 'e':
-                        case 'f':
-                        case 'g':
-                        case 'h':
-                        case 'i':
-                        case 'j':
-                            n = c - 'a';
-                
-                            if(n < s.items.size()) { // if item selected
-                                if(spend(s.items[n].cost)) {
-                                    gain(s.items[n]);
-                                    s.items.erase(s.items.begin()+n);
-                                }
-                                return;
-                            } else n-= s.items.size();
-                            if(n < s.packs.size()) {
-                                if(spend(2*(s.packs[n].size+2)))
-                                    s.open(s.packs[n]);
-                                    s.packs.erase(s.packs.begin()+n);
-                                return;
-                            } else n-= s.packs.size();
-                            if(n == 0 && s.v != VOUCHER_COUNT) {
-                                if(spend(item(s.v).cost)) {
-                                    gain(item(s.v));
-                                    s.v = VOUCHER_COUNT;
-                                }
-                                return;
-                            }
-                            break;
-                        case 'R':
-                            if(spend(5 + s.rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
-                                s.reroll();
-                                s.rerollCount++;
-                            }
-                            break;
-                        case 'C':
-                            running = false;
-                            break;
-                        }
-                    }
-                    if(p == LEVEL_PHASE) {
-                        switch (c) {
-                            case 'h': // left (vim)
-                                l.h.moveCursor(-1);
-                                break;
-                            case 'l': // right (vim)
-                                l.h.moveCursor(1);
-                                break;
-                            case ' ': // select
-                                l.h.selectCursor();
-                                break;
-                            case 'p': // play
-                                l.playHand();
-                                levelInfo.updateLevelInfo(&l);
-                                gameInfo.updateGameInfo(this);
-                                peekScreen.updatePeekScreen(&l);
-                                break;
-                            case 'd': // discard
-                                l.discardHand();
-                                levelInfo.updateLevelInfo(&l);
-                                gameInfo.updateGameInfo(this);
-                                peekScreen.updatePeekScreen(&l);
-                                break;
-                            case 's': // swap
-                                l.h.swapSelected();
-                                break;
-                            case 'z': // sort by suit
-                                l.h.sortBySuit();
-                                break;
-                            case 'x': // sort by value
-                                l.h.sortByValue();
-                                break;
-                            case 'j':
-                                if (l.focusScreen == CONSUMABLE_SCREEN)
-                                    l.changeConsumable(1);
-                                else
-                                    l.changeJoker(1);
-                                break;
-                            case 'k':
-                                if (l.focusScreen == CONSUMABLE_SCREEN)
-                                    l.changeConsumable(-1);
-                                else
-                                    l.changeJoker(-1);
-                                break;
-                            case ';':
-                                l.swapFocus();
-                                break;
-                            case 'w':
-                                l.currentScore = l.threshold;
-                                break;
-                        }
-                    }
+    if(p == SHOP_PHASE) {
+        int n;
+        switch(c) {
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'd':
+        case 'e':
+        case 'f':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+            n = c - 'a';
+
+            if(n < s.items.size()) { // if item selected
+                if(spend(s.items[n].cost)) {
+                    gain(s.items[n]);
+                    s.items.erase(s.items.begin()+n);
+                }
+                return;
+            } else n-= s.items.size();
+            if(n < s.packs.size()) {
+                if(spend(2*(s.packs[n].size+2)))
+                    s.open(s.packs[n]);
+                    s.packs.erase(s.packs.begin()+n);
+                return;
+            } else n-= s.packs.size();
+            if(n == 0 && s.v != VOUCHER_COUNT) {
+                if(spend(item(s.v).cost)) {
+                    gain(item(s.v));
+                    s.v = VOUCHER_COUNT;
+                }
+                return;
+            }
+            break;
+        case 'R':
+            if(spend(5 + s.rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
+                s.reroll();
+                s.rerollCount++;
+            }
+            break;
+        case 'C':
+            running = false;
+            break;
+        }
+    }
+    if(p == LEVEL_PHASE) {
+        switch (c) {
+        case 'h': // left (vim)
+            l.h.moveCursor(-1);
+            break;
+        case 'l': // right (vim)
+            l.h.moveCursor(1);
+            break;
+        case ' ': // select
+            l.h.selectCursor();
+            break;
+        case 'p': // play
+            l.playHand();
+            levelInfo.updateLevelInfo(&l);
+            gameInfo.updateGameInfo(this);
+            peekScreen.updatePeekScreen(&l);
+            break;
+        case 'd': // discard
+            l.discardHand();
+            levelInfo.updateLevelInfo(&l);
+            gameInfo.updateGameInfo(this);
+            peekScreen.updatePeekScreen(&l);
+            break;
+        case 's': // swap
+            l.h.swapSelected();
+            break;
+        case 'z': // sort by suit
+            l.h.sortBySuit();
+            break;
+        case 'x': // sort by value
+            l.h.sortByValue();
+            break;
+        case 'j':
+            if (l.focusScreen == CONSUMABLE_SCREEN)
+                l.changeConsumable(1);
+            else
+                l.changeJoker(1);
+            break;
+        case 'k':
+            if (l.focusScreen == CONSUMABLE_SCREEN)
+                l.changeConsumable(-1);
+            else
+                l.changeJoker(-1);
+            break;
+        case ';':
+            l.swapFocus();
+            break;
+        case 'w':
+            l.currentScore = l.threshold;
+            break;
+        }
+    }
 }
 
 void game::runupdate() {
