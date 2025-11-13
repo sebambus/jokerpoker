@@ -90,7 +90,6 @@ void game::runswitch() {
         case 'g':
         case 'h':
         case 'i':
-        case 'j':
             n = c - 'a';
 
             if(n < s.items.size()) { // if item selected
@@ -122,6 +121,21 @@ void game::runswitch() {
             break;
         case 'C':
             running = false;
+            break;
+        case 'j':
+            if (focusScreen == CONSUMABLE_SCREEN)
+                changeConsumable(1);
+            else
+                changeJoker(1);
+            break;
+        case 'k':
+            if (focusScreen == CONSUMABLE_SCREEN)
+                changeConsumable(-1);
+            else
+                changeJoker(-1);
+            break;
+        case ';':
+            swapFocus();
             break;
         }
     }
@@ -156,21 +170,6 @@ void game::runswitch() {
             break;
         case 'x': // sort by value
             l.h.sortByValue();
-            break;
-        case 'j':
-            if (focusScreen == CONSUMABLE_SCREEN)
-                changeConsumable(1);
-            else
-                changeJoker(1);
-            break;
-        case 'k':
-            if (focusScreen == CONSUMABLE_SCREEN)
-                changeConsumable(-1);
-            else
-                changeJoker(-1);
-            break;
-        case ';':
-            swapFocus();
             break;
         case 'w':
             l.currentScore = l.threshold;
