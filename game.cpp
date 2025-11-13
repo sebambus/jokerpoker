@@ -180,26 +180,26 @@ void game::runswitch() {
 }
 
 void game::runupdate() {
-                    if(p == SHOP_PHASE) {
-                        mainScreen.updateShopScreen(&s);
-                        specialScreen.updateSpecialScreen(this, 0);
-                        jokerScreen.updateJokerScreen(this,0);
-                    }
-                    if(p == LEVEL_PHASE) {
-                        mainScreen.updateLevelScreen(&l);
-                
-                        if (l.currentScore >= l.threshold) {
-                            l.win();
-                            running = false;
-                            return;
-                        }
-                        
-                        if (l.plays ==  0) {
-                            l.lose();
-                            running = false;
-                            return;
-                        }
-                    }
+    if(p == SHOP_PHASE) {
+        mainScreen.updateShopScreen(&s);
+        specialScreen.updateSpecialScreen(this, 0);
+        jokerScreen.updateJokerScreen(this,0);
+    }
+    if(p == LEVEL_PHASE) {
+        mainScreen.updateLevelScreen(&l);
+    
+        if (l.currentScore >= l.threshold) {
+            l.win();
+            running = false;
+            return;
+        }
+        
+        if (l.plays ==  0) {
+            l.lose();
+            running = false;
+            return;
+        }
+    }
 }
 
 int game::getPlays() {
