@@ -4,6 +4,8 @@
 #include "deck.h"
 #include "window.h"
 #include "item.h"
+#include "shop.h"
+#include "level.h"
 
 enum handTableIndices : int{
     MULT,
@@ -34,6 +36,8 @@ public:
     window jokerScreen;
     window cardInfo;
     window peekScreen;
+    shop s;
+    level l;
     
     selectableScreen focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;

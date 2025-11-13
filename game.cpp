@@ -13,7 +13,9 @@ game::game() :
     specialScreen(10, 20, 0, 100, "Consumables"),
     jokerScreen(10, 20, 0, 120, "Jokers"),
     cardInfo(10, 20, 10, 100, "Card Info"),
-    peekScreen(8, 80, 12, 20, "Peek") {
+    peekScreen(8, 80, 12, 20, "Peek"),
+    s(this),
+    l(this) {
     money = 0;
     d.fillDeck();
     initHandTable();
@@ -27,12 +29,10 @@ enum phase {
 
 int p;
 bool running;
-shop s(new game());
-level l(new game());
 
 void game::run() {
     for(ante = 1; ante <= 8; ante++) {
-        s = shop(s);
+        s = shop(this);
         for(round = 1; round <= 3; round++) {
             for(p = SHOP_PHASE; p != PHASE_COUNT; p++) {
                 if(p == SHOP_PHASE && ante+round == 2) continue;
