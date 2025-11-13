@@ -6,10 +6,6 @@ class game;
 #include "hand.h"
 #include "window.h"
 
-enum selectableScreen : int{
-    CONSUMABLE_SCREEN,
-    JOKER_SCREEN
-};
 
 class level {
 public:

@@ -12,6 +12,11 @@ enum handTableIndices : int{
     TIMES_PLAYED
 };
 
+enum selectableScreen : int{
+    CONSUMABLE_SCREEN,
+    JOKER_SCREEN
+};
+
 class game {
 public:
     int money;
