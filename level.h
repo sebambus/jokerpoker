@@ -25,19 +25,12 @@ public:
 
     int recentChips = 0;
     int recentMult = 0;
-    
-    selectableScreen focusScreen = CONSUMABLE_SCREEN;
-    int currConsumable = 0;
-    int currJoker = 0;
 
     level(game*);
     void play();
     void draw();
     void playHand();
     void discardHand();
-    void swapFocus();
-    void changeConsumable(int by);
-    void changeJoker(int by);
     int calculateScore(hand* played, hand * h);
     void win();
     void lose();

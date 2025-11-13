@@ -65,7 +65,7 @@ void game::runinit() {
     
         mainScreen.updateLevelScreen(&l);
         peekScreen.updatePeekScreen(&l);
-        cardInfo.updateCardInfo(this,0, static_cast<int>(l.focusScreen));
+        cardInfo.updateCardInfo(this,0, static_cast<int>(focusScreen));
     }
 }
 
@@ -158,19 +158,19 @@ void game::runswitch() {
             l.h.sortByValue();
             break;
         case 'j':
-            if (l.focusScreen == CONSUMABLE_SCREEN)
-                l.changeConsumable(1);
+            if (focusScreen == CONSUMABLE_SCREEN)
+                changeConsumable(1);
             else
-                l.changeJoker(1);
+                changeJoker(1);
             break;
         case 'k':
-            if (l.focusScreen == CONSUMABLE_SCREEN)
-                l.changeConsumable(-1);
+            if (focusScreen == CONSUMABLE_SCREEN)
+                changeConsumable(-1);
             else
-                l.changeJoker(-1);
+                changeJoker(-1);
             break;
         case ';':
-            l.swapFocus();
+            swapFocus();
             break;
         case 'w':
             l.currentScore = l.threshold;
@@ -243,4 +243,40 @@ bool game::spend(int x) {
         return false;
     else money -= x;
     return true;
+}
+
+void game::changeConsumable(int by){
+    int newConsumable = currConsumable + by;
+    int consSize = consumables.size()-1;
+    if (newConsumable > consSize || newConsumable < 0) // if player attempt to move outside of bounds
+        return;
+    
+    currConsumable = newConsumable;
+    specialScreen.updateSpecialScreen(this, currConsumable);
+}
+
+void game::changeJoker(int by){
+    int newJokerInd = currJoker + by;
+    int jokersSize = jokers.size()-1;
+    if (newJokerInd > jokersSize || newJokerInd < 0)
+        return;
+    
+    currJoker = newJokerInd;
+    jokerScreen.updateJokerScreen(this, currJoker);
+}
+
+// swaps the controlled screen
+void game::swapFocus(){
+    if (focusScreen == CONSUMABLE_SCREEN){ // swap to joker screen
+        focusScreen = JOKER_SCREEN;
+        specialScreen.updateSpecialScreen(this, -1); // hide cursor on special screen
+        jokerScreen.updateJokerScreen(this,0);
+        currJoker = 0;
+    }
+    else{ // swap to consumable screen
+        focusScreen = CONSUMABLE_SCREEN;
+        jokerScreen.updateJokerScreen(this, -1);
+        specialScreen.updateSpecialScreen(this,0);
+        currConsumable = 0;
+    }
 }

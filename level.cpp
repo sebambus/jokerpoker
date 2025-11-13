@@ -52,42 +52,6 @@ void level::discardHand() {
     discards--;
 }
 
-void level::changeConsumable(int by){
-    int newConsumable = currConsumable + by;
-    int consSize = g->consumables.size()-1;
-    if (newConsumable > consSize || newConsumable < 0) // if player attempt to move outside of bounds
-        return;
-    
-    currConsumable = newConsumable;
-    g->specialScreen.updateSpecialScreen(g, currConsumable);
-}
-
-void level:: changeJoker(int by){
-    int newJokerInd = currJoker + by;
-    int jokersSize = g->jokers.size()-1;
-    if (newJokerInd > jokersSize || newJokerInd < 0)
-        return;
-    
-    currJoker = newJokerInd;
-    g->jokerScreen.updateJokerScreen(g, currJoker);
-}
-
-// swaps the controlled screen
-void level::swapFocus(){
-    if (focusScreen == CONSUMABLE_SCREEN){ // swap to joker screen
-        focusScreen = JOKER_SCREEN;
-        g->specialScreen.updateSpecialScreen(g, -1); // hide cursor on special screen
-        g->jokerScreen.updateJokerScreen(g,0);
-        currJoker = 0;
-    }
-    else{ // swap to consumable screen
-        focusScreen = CONSUMABLE_SCREEN;
-        g->jokerScreen.updateJokerScreen(g, -1);
-        g->specialScreen.updateSpecialScreen(g,0);
-        currConsumable = 0;
-    }
-}
-
 int level::calculateScore(hand* played, hand* h){
     std::vector<card> scoredCards = played->scoreCards();
     handtype type = played->pokerHand;

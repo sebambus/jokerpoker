@@ -29,6 +29,10 @@ public:
     window jokerScreen;
     window cardInfo;
     window peekScreen;
+    
+    selectableScreen focusScreen = CONSUMABLE_SCREEN;
+    int currConsumable = 0;
+    int currJoker = 0;
 
     game();
     void run();
@@ -40,4 +44,7 @@ public:
     void initHandTable();
     void gain(item);
     bool spend(int);
+    void swapFocus();
+    void changeConsumable(int by);
+    void changeJoker(int by);
 };
