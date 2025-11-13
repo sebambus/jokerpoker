@@ -2,6 +2,7 @@
 
 #include <ncursesw/ncurses.h>
 #include <cstdlib>
+#include <chrono>
 #include "window.h"
 #include "game.h"
 #include "hand.h"
@@ -67,8 +68,10 @@ int level::calculateScore(hand* played, hand* h){
         card c = scoredCards[i];
         enhancement e = c.cardEnhancement;
 
-        if (e == STONE_CARD) c.cardValue = 50; // if there's a stone card, change it's score        
-        score += c.cardValue; // base score of the card
+        if (e == STONE_CARD) 
+            score += 50; // if there's a stone card, add 50 instead of card value        
+        else 
+            score += c.cardValue; // base score of the card
 
         switch (e){
         case BONUS_CARD:
@@ -79,14 +82,16 @@ int level::calculateScore(hand* played, hand* h){
             break;
         case GLASS_CARD:
             mult *= 2;
-            if (rand() % 2 == 1)
+            srand(time(0));
+            if (rand() % 2 == 0) // 1 in 2 chance
                 glassCards.push_back(c);
             break;
         case LUCKY_CARD:
-            if (rand() % 5 == 1){
+            srand(time(0));
+            if (rand() % 5 == 0){ // 1 in 5 chance
                 mult += 20;
             }
-            if (rand() % 15 == 1){
+            if (rand() % 15 == 0){ // 1 in 15 chance
                 g->money += 20;
             }
             break;
@@ -106,6 +111,9 @@ int level::calculateScore(hand* played, hand* h){
     }
 
     // TODO: destroying glass cards
+    for (card c : glassCards){
+        g->d.removeCard(c); // need some way to tell the user that the card broke
+    }
 
     recentChips = score;
     recentMult = mult;

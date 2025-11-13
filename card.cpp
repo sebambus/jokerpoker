@@ -6,6 +6,8 @@
 card::card(int value, suit suit){
     cardValue = value;
     cardSuit = suit;
+    cardEnhancement = BASE_CARD;
+    cardSeal = NO_SEAL;
 }
 
 card::card(item i) {
