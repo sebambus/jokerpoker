@@ -257,7 +257,11 @@ std::vector<card> hand::scoreCards(){
     int suitCount[4] = { 0 };
     int rankCount[13] = { 0 };
     for(card c : cards) {
-        suitCount[(int) c.cardSuit]++;
+        if (c.cardEnhancement == WILD_CARD){
+            for (int i = 0; i < 4; i++) suitCount[i]++;
+        }
+        else 
+            suitCount[(int) c.cardSuit]++;
         rankCount[c.cardValue-1]++;
     }
 
