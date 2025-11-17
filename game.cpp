@@ -175,6 +175,20 @@ void game::runswitch() {
         case 'w':
             l->currentScore = l->threshold;
             break;
+        case 'j':
+            if (focusScreen == CONSUMABLE_SCREEN)
+                changeConsumable(1);
+            else
+                changeJoker(1);
+            break;
+        case 'k':
+            if (focusScreen == CONSUMABLE_SCREEN)
+                changeConsumable(-1);
+            else
+                changeJoker(-1);
+            break;
+        case ';':
+            swapFocus();
         }
     }
 }
