@@ -36,8 +36,8 @@ public:
     window jokerScreen;
     window cardInfo;
     window peekScreen;
-    shop s;
-    level l;
+    shop* s;
+    level* l;
     
     selectableScreen focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;

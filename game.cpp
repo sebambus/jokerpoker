@@ -13,9 +13,12 @@ game::game() :
     specialScreen(10, 20, 0, 100, "Consumables"),
     jokerScreen(10, 20, 0, 120, "Jokers"),
     cardInfo(10, 20, 10, 100, "Card Info"),
-    peekScreen(8, 80, 12, 20, "Peek"),
-    s(this),
-    l(this) {
+    peekScreen(8, 80, 12, 20, "Peek")
+    //s(this),
+    //l(this) 
+    {
+    s = new shop(this);
+    l = new level(this);
     money = 0;
     d.fillDeck();
     initHandTable();
@@ -32,7 +35,7 @@ bool running;
 
 void game::run() {
     for(ante = 1; ante <= 8; ante++) {
-        s = shop(this);
+        s = new shop(this);
         for(round = 1; round <= 3; round++) {
             for(p = SHOP_PHASE; p != PHASE_COUNT; p++) {
                 if(p == SHOP_PHASE && ante+round == 2) continue;
@@ -53,18 +56,18 @@ void game::runinit() {
     specialScreen.updateSpecialScreen(this,0);
 
     if(p == SHOP_PHASE) {
-        s.reopen();
+        s->reopen();
         mainScreen.changeTitle("Shop");
-        mainScreen.updateShopScreen(&s);
+        mainScreen.updateShopScreen(s);
     }
     if(p == LEVEL_PHASE) {
-        l = level(this);
+        l = new level(this);
 
         mainScreen.changeTitle("");
-        levelInfo.updateLevelInfo(&l);
+        levelInfo.updateLevelInfo(l);
     
-        mainScreen.updateLevelScreen(&l);
-        peekScreen.updatePeekScreen(&l);
+        mainScreen.updateLevelScreen(l);
+        peekScreen.updatePeekScreen(l);
         cardInfo.updateCardInfo(this,0, static_cast<int>(focusScreen));
     }
 }
@@ -92,31 +95,31 @@ void game::runswitch() {
         case 'i':
             n = c - 'a';
 
-            if(n < s.items.size()) { // if item selected
-                if(spend(s.items[n].cost)) {
-                    gain(s.items[n]);
-                    s.items.erase(s.items.begin()+n);
+            if(n < s->items.size()) { // if item selected
+                if(spend(s->items[n].cost)) {
+                    gain(s->items[n]);
+                    s->items.erase(s->items.begin()+n);
                 }
                 return;
-            } else n-= s.items.size();
-            if(n < s.packs.size()) {
-                if(spend(2*(s.packs[n].size+2)))
-                    s.open(s.packs[n]);
-                    s.packs.erase(s.packs.begin()+n);
+            } else n-= s->items.size();
+            if(n < s->packs.size()) {
+                if(spend(2*(s->packs[n].size+2)))
+                    s->open(s->packs[n]);
+                    s->packs.erase(s->packs.begin()+n);
                 return;
-            } else n-= s.packs.size();
-            if(n == 0 && s.v != VOUCHER_COUNT) {
-                if(spend(item(s.v).cost)) {
-                    gain(item(s.v));
-                    s.v = VOUCHER_COUNT;
+            } else n-= s->packs.size();
+            if(n == 0 && s->v != VOUCHER_COUNT) {
+                if(spend(item(s->v).cost)) {
+                    gain(item(s->v));
+                    s->v = VOUCHER_COUNT;
                 }
                 return;
             }
             break;
         case 'R':
-            if(spend(5 + s.rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
-                s.reroll();
-                s.rerollCount++;
+            if(spend(5 + s->rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
+                s->reroll();
+                s->rerollCount++;
             }
             break;
         case 'C':
@@ -142,37 +145,37 @@ void game::runswitch() {
     if(p == LEVEL_PHASE) {
         switch (c) {
         case 'h': // left (vim)
-            l.h.moveCursor(-1);
+            l->h.moveCursor(-1);
             break;
         case 'l': // right (vim)
-            l.h.moveCursor(1);
+            l->h.moveCursor(1);
             break;
         case ' ': // select
-            l.h.selectCursor();
+            l->h.selectCursor();
             break;
         case 'p': // play
-            l.playHand();
-            levelInfo.updateLevelInfo(&l);
+            l->playHand();
+            levelInfo.updateLevelInfo(l);
             gameInfo.updateGameInfo(this);
-            peekScreen.updatePeekScreen(&l);
+            peekScreen.updatePeekScreen(l);
             break;
         case 'd': // discard
-            l.discardHand();
-            levelInfo.updateLevelInfo(&l);
+            l->discardHand();
+            levelInfo.updateLevelInfo(l);
             gameInfo.updateGameInfo(this);
-            peekScreen.updatePeekScreen(&l);
+            peekScreen.updatePeekScreen(l);
             break;
         case 's': // swap
-            l.h.swapSelected();
+            l->h.swapSelected();
             break;
         case 'z': // sort by suit
-            l.h.sortBySuit();
+            l->h.sortBySuit();
             break;
         case 'x': // sort by value
-            l.h.sortByValue();
+            l->h.sortByValue();
             break;
         case 'w':
-            l.currentScore = l.threshold;
+            l->currentScore = l->threshold;
             break;
         }
     }
@@ -180,21 +183,21 @@ void game::runswitch() {
 
 void game::runupdate() {
     if(p == SHOP_PHASE) {
-        mainScreen.updateShopScreen(&s);
+        mainScreen.updateShopScreen(s);
         specialScreen.updateSpecialScreen(this, 0);
         jokerScreen.updateJokerScreen(this,0);
     }
     if(p == LEVEL_PHASE) {
-        mainScreen.updateLevelScreen(&l);
+        mainScreen.updateLevelScreen(l);
     
-        if (l.currentScore >= l.threshold) {
-            l.win();
+        if (l->currentScore >= l->threshold) {
+            l->win();
             running = false;
             return;
         }
         
-        if (l.plays ==  0) {
-            l.lose();
+        if (l->plays ==  0) {
+            l->lose();
             running = false;
             return;
         }
