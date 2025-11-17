@@ -14,8 +14,6 @@ game::game() :
     jokerScreen(10, 20, 0, 120, "Jokers"),
     cardInfo(10, 20, 10, 100, "Card Info"),
     peekScreen(8, 80, 12, 20, "Peek")
-    //s(this),
-    //l(this) 
     {
     s = new shop(this);
     l = new level(this);
