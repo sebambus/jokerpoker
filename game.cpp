@@ -182,6 +182,7 @@ void game::runswitch() {
 void game::runupdate() {
     if(p == SHOP_PHASE) {
         mainScreen.updateShopScreen(s);
+        gameInfo.updateGameInfo(this);
         specialScreen.updateSpecialScreen(this, 0);
         jokerScreen.updateJokerScreen(this,0);
     }
