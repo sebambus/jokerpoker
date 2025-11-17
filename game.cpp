@@ -285,13 +285,13 @@ void game::swapFocus(){
     if (focusScreen == CONSUMABLE_SCREEN){ // swap to joker screen
         focusScreen = JOKER_SCREEN;
         specialScreen.updateSpecialScreen(this, -1); // hide cursor on special screen
-        jokerScreen.updateJokerScreen(this,0);
         currJoker = 0;
+        jokerScreen.updateJokerScreen(this,0);
     }
     else{ // swap to consumable screen
         focusScreen = CONSUMABLE_SCREEN;
         jokerScreen.updateJokerScreen(this, -1);
-        specialScreen.updateSpecialScreen(this,0);
         currConsumable = 0;
+        specialScreen.updateSpecialScreen(this,0);
     }
 }
