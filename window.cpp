@@ -231,7 +231,7 @@ void window::updateJokerScreen(game* g, int index){
 // prints info on item based on game's focusScreen and the items position in it's respective vector
 // s is screen. when calling this, cast a selectableScreen to an int
 void window::updateCardInfo(game* g, int index, int s){
-    if (s == static_cast<int>(CONSUMABLE_SCREEN))
+    if (s == static_cast<int>(CONSUMABLE_SCREEN)) // don't display anything if screen is empty
         if (g->consumables.size() == 0)
             return;
 

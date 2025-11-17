@@ -251,12 +251,12 @@ void game::gain(item i) {
     case PLANET:
     case TAROT:
     case SPECTRAL:
-        focusScreen = CONSUMABLE_SCREEN;
+        focusScreen = CONSUMABLE_SCREEN; // display the consumable you just bought
         consumables.push_back(i);
         currConsumable = consumables.size()-1;
         break;
     case JOKER:
-        focusScreen = JOKER_SCREEN;
+        focusScreen = JOKER_SCREEN; // display the joker you just bought
         jokers.push_back(i);
         currJoker = jokers.size()-1;
         break;
