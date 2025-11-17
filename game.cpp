@@ -50,8 +50,14 @@ void game::run() {
 
 void game::runinit() {
     gameInfo.updateGameInfo(this);
-    jokerScreen.updateJokerScreen(this,-1);
-    specialScreen.updateSpecialScreen(this,0);
+    if (focusScreen == CONSUMABLE_SCREEN){
+        jokerScreen.updateJokerScreen(this,-1);
+        specialScreen.updateSpecialScreen(this,currConsumable);
+    }
+    else{
+        specialScreen.updateSpecialScreen(this,-1);
+        jokerScreen.updateJokerScreen(this,currJoker);
+    }
 
     if(p == SHOP_PHASE) {
         s->reopen();
@@ -66,7 +72,6 @@ void game::runinit() {
     
         mainScreen.updateLevelScreen(l);
         peekScreen.updatePeekScreen(l);
-        cardInfo.updateCardInfo(this,0, static_cast<int>(focusScreen));
     }
 }
 
@@ -197,8 +202,14 @@ void game::runupdate() {
     if(p == SHOP_PHASE) {
         mainScreen.updateShopScreen(s);
         gameInfo.updateGameInfo(this);
-        specialScreen.updateSpecialScreen(this, 0);
-        jokerScreen.updateJokerScreen(this,0);
+        if (focusScreen == CONSUMABLE_SCREEN){
+            jokerScreen.updateJokerScreen(this,-1);
+            specialScreen.updateSpecialScreen(this,currConsumable);
+        }
+        else {
+            specialScreen.updateSpecialScreen(this,-1);
+            jokerScreen.updateJokerScreen(this,currJoker);
+        }
     }
     if(p == LEVEL_PHASE) {
         mainScreen.updateLevelScreen(l);
@@ -240,10 +251,14 @@ void game::gain(item i) {
     case PLANET:
     case TAROT:
     case SPECTRAL:
+        focusScreen = CONSUMABLE_SCREEN;
         consumables.push_back(i);
+        currConsumable = consumables.size()-1;
         break;
     case JOKER:
+        focusScreen = JOKER_SCREEN;
         jokers.push_back(i);
+        currJoker = jokers.size()-1;
         break;
     case VOUCHER:
         vouchers[i.val] = true;
@@ -283,12 +298,14 @@ void game::changeJoker(int by){
 // swaps the controlled screen
 void game::swapFocus(){
     if (focusScreen == CONSUMABLE_SCREEN){ // swap to joker screen
+        if (jokers.size() == 0) return;
         focusScreen = JOKER_SCREEN;
         specialScreen.updateSpecialScreen(this, -1); // hide cursor on special screen
         currJoker = 0;
         jokerScreen.updateJokerScreen(this,0);
     }
     else{ // swap to consumable screen
+        if (consumables.size() == 0) return;
         focusScreen = CONSUMABLE_SCREEN;
         jokerScreen.updateJokerScreen(this, -1);
         currConsumable = 0;
