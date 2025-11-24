@@ -42,6 +42,7 @@ public:
     selectableScreen focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;
     int currJoker = 0;
+    int currShopItem = 0;
 
     game();
     void run();
@@ -56,4 +57,5 @@ public:
     void swapFocus();
     void changeConsumable(int by);
     void changeJoker(int by);
+    void changeShopItem(int by);
 };

@@ -151,5 +151,60 @@ void shop::reopen() {
     packs.clear();
     while(packs.size() < 2)
         packs.push_back(generatePack());
+    fillShopItems();
     rerollCount = 0;
+}
+
+void shop::fillShopItems(){
+    shopItems.clear();
+    for (item i: items){
+        shopItem si(i);
+        shopItems.push_back(si);
+    }
+
+    for (pack p: packs){
+        shopItem si(p);
+        shopItems.push_back(si);
+    }
+
+    shopItem si(v);
+    shopItems.push_back(si);
+
+}
+
+shopItem::shopItem(item n){
+    typeOfItem = 0;
+    i = n;
+}
+
+shopItem::shopItem(pack n){
+    typeOfItem = 1;
+    p = n;
+}
+
+shopItem::shopItem(voucher n){
+    typeOfItem = 2;
+    v = n;
+}
+
+std::string shopItem::getName(){
+    const char* cstring;
+    std::string s;
+    switch (typeOfItem){
+    case 0:
+        cstring = i.name();
+        break;
+    case 1:
+        s = name(p);
+        break;
+    case 2:
+        cstring = item(v).name();
+        break;
+    }
+
+    if (!s.empty())
+        return s;
+    
+    std::string name(cstring);    
+    return name;
 }

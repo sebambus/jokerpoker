@@ -11,12 +11,27 @@ typedef struct pack {
 } pack;
 std::string name(pack);
 
+// this is a hacky solution to the hop, so i could have a vector of everything in the shop
+class shopItem{
+public:
+    int typeOfItem = 0; // 0 for item, 1 for pack, 2 for voucher
+    item i = PLUTO;
+    pack p;
+    voucher v;
+
+    std::string getName();
+    shopItem(item n);
+    shopItem(pack n);
+    shopItem(voucher n);
+};
+
 class shop {
 public:
     game *g;
     voucher v;
     std::vector<item> items;
     std::vector<pack> packs;
+    std::vector<shopItem> shopItems;
     int rerollCount;
 
     shop(game *g);
@@ -28,4 +43,5 @@ public:
     void open(pack);
     void reroll();
     void reopen();
+    void fillShopItems();
 };

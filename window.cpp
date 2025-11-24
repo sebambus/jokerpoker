@@ -175,22 +175,38 @@ void window::updateLevelScreen(level *l) {
     wrefresh(content);
 }
 
-void window::updateShopScreen(shop *s) {
+void window::updateShopScreen(shop *s, int index) {
     werase(content);
-    char menuchar =  'a';
+    // char menuchar =  'a';
 
-    if(s->items.size() > 0)
-        print("Items:\n");
-    for(item i : s->items)
-        print("%c - $%d %s\n", menuchar++, i.cost, i.name());
+    // if(s->items.size() > 0)
+    //     print("Items:\n");
+    // for(item i : s->items)
+    //     print("%c - $%d %s\n", menuchar++, i.cost, i.name());
 
-    if(s->packs.size() > 0)
-        print("Packs:\n");
-    for(pack p : s->packs)
-        print("%c - $%d %s\n", menuchar++, 2*(p.size+2), name(p).c_str());
+    // if(s->packs.size() > 0)
+    //     print("Packs:\n");
+    // for(pack p : s->packs)
+    //     print("%c - $%d %s\n", menuchar++, 2*(p.size+2), name(p).c_str());
 
-    if(s->v != VOUCHER_COUNT)
-        print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());
+    // if(s->v != VOUCHER_COUNT)
+    //     print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());
+
+    int currSection = -1;
+    std::string sectionNames[3] = {"Items:","Packs:","Vouchers:"};
+
+    for (int i = 0; i < s->shopItems.size(); i++){
+        shopItem si = s->shopItems[i];
+        if (si.typeOfItem > currSection){
+            currSection = si.typeOfItem;
+            print("%s\n",sectionNames[currSection].c_str());
+        }
+        if (i == index)
+            print("[x] %s\n", si.getName().c_str());
+        else
+            print("[ ] %s\n", si.getName().c_str());
+    }
+
     wrefresh(content);
 }
 
