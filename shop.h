@@ -18,6 +18,7 @@ public:
     item i = PLUTO;
     pack p;
     voucher v;
+    int cost = 0;
 
     std::string getName();
     shopItem(item n);

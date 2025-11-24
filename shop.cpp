@@ -175,16 +175,19 @@ void shop::fillShopItems(){
 shopItem::shopItem(item n){
     typeOfItem = 0;
     i = n;
+    cost = i.cost;
 }
 
 shopItem::shopItem(pack n){
     typeOfItem = 1;
     p = n;
+    cost = 2 * (n.size + 2);
 }
 
 shopItem::shopItem(voucher n){
     typeOfItem = 2;
     v = n;
+    cost = 10;
 }
 
 std::string shopItem::getName(){

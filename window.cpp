@@ -175,7 +175,10 @@ void window::updateLevelScreen(level *l) {
     wrefresh(content);
 }
 
-void window::updateShopScreen(shop *s, int index) {
+void window::updateShopScreen(game *g, int index) {
+    if (g->p == LEVEL_PHASE) // dont do anything if your not in the shop
+        return;
+
     werase(content);
     // char menuchar =  'a';
 
@@ -195,17 +198,23 @@ void window::updateShopScreen(shop *s, int index) {
     int currSection = -1;
     std::string sectionNames[3] = {"Items:","Packs:","Vouchers:"};
 
-    for (int i = 0; i < s->shopItems.size(); i++){
-        shopItem si = s->shopItems[i];
+    for (int i = 0; i < g->s->shopItems.size(); i++){
+        shopItem si = g->s->shopItems[i];
         if (si.typeOfItem > currSection){
             currSection = si.typeOfItem;
             print("%s\n",sectionNames[currSection].c_str());
         }
         if (i == index)
-            print("[x] %s\n", si.getName().c_str());
+            print("[x] ");
         else
-            print("[ ] %s\n", si.getName().c_str());
+            print("[ ] ");
+        print("%s ", si.getName().c_str());
+        printWordInColor(("$"+std::to_string(si.cost)).c_str(), COLOR_YELLOW, COLOR_BLACK);
+        print("\n");
     }
+
+    
+    if (index != -1) g->cardInfo.updateShopCardInfo(g,index);
 
     wrefresh(content);
 }
@@ -266,6 +275,28 @@ void window::updateCardInfo(game* g, int index, int s){
     
     wrefresh(content);
 }
+
+// specifically for printing out the description of the selected item in shop
+// needs to be it's own function for how much differently it works than updateCardInfo
+void window::updateShopCardInfo(game* g, int index){
+    werase(content);
+    shopItem si = g->s->shopItems[index];
+    
+    const char* desc;
+
+    if (si.typeOfItem == 0){ // item
+        desc = si.i.description();
+    } else if (si.typeOfItem == 1){
+        desc = "";
+    } else if (si.typeOfItem == 2){
+        desc = "";
+    }
+
+    printAndAutoColor(textWrap(desc).c_str());
+
+    wrefresh(content);
+}
+
 
 void window::updatePeekScreen(level* l){
     werase(content);

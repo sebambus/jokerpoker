@@ -22,11 +22,7 @@ game::game() :
     initHandTable();
 }
 
-enum phase {
-    SHOP_PHASE,
-    LEVEL_PHASE,
-    PHASE_COUNT
-};
+
 
 int p;
 bool running;
@@ -50,19 +46,11 @@ void game::run() {
 
 void game::runinit() {
     gameInfo.updateGameInfo(this);
-    if (focusScreen == CONSUMABLE_SCREEN){
-        jokerScreen.updateJokerScreen(this,-1);
-        specialScreen.updateSpecialScreen(this,currConsumable);
-    }
-    else{
-        specialScreen.updateSpecialScreen(this,-1);
-        jokerScreen.updateJokerScreen(this,currJoker);
-    }
 
     if(p == SHOP_PHASE) {
         s->reopen();
         mainScreen.changeTitle("Shop");
-        mainScreen.updateShopScreen(s,0);
+        changeFocus(SHOP_SCREEN);
     }
     if(p == LEVEL_PHASE) {
         l = new level(this);
@@ -72,6 +60,11 @@ void game::runinit() {
     
         mainScreen.updateLevelScreen(l);
         peekScreen.updatePeekScreen(l);
+
+        if (consumables.size() == 0) // switch to whichever has items
+            changeFocus(JOKER_SCREEN);
+        else   
+            changeFocus(CONSUMABLE_SCREEN);
     }
 }
 
@@ -86,45 +79,24 @@ void game::runswitch() {
 
     // input loop for the shop
     if(p == SHOP_PHASE) {
-        int n;
         shopItem si = s->shopItems[currShopItem];
         switch(c) {
-        case 'b':
-            // n = c - 'a';
-
-            // if(n < s->items.size()) { // if item selected
-            //     if(spend(s->items[n].cost)) {
-            //         gain(s->items[n]);
-            //         s->items.erase(s->items.begin()+n);
-            //     }
-            //     return;
-            // } else n-= s->items.size();
-            // if(n < s->packs.size()) {
-            //     if(spend(2*(s->packs[n].size+2)))
-            //         s->open(s->packs[n]);
-            //         s->packs.erase(s->packs.begin()+n);
-            //     return;
-            // } else n-= s->packs.size();
-            // if(n == 0 && s->v != VOUCHER_COUNT) {
-            //     if(spend(item(s->v).cost)) {
-            //         gain(item(s->v));
-            //         s->v = VOUCHER_COUNT;
-            //     }
-            //     return;
-            // }
+        case 'b': // buy item from shop
+            if (focusScreen != SHOP_SCREEN) break;
             if (si.typeOfItem == 0){ // item
-                if (spend(si.i.cost)){
+                if (spend(si.cost)){
                     gain(si.i);
                     s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 }
                 return;
             } else if (si.typeOfItem == 1){ // pack
-                // check spend, not sure how to do that with packs right now
+                if (spend(si.cost)){
                 s->open(si.p);
                 s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                }
                 return;
             } else if (si.typeOfItem == 2){ // voucher
-                if (spend(item(si.v).cost)){
+                if (spend(si.cost)){
                     gain(si.v);
                     s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 }
@@ -141,25 +113,25 @@ void game::runswitch() {
             running = false;
             break;
         case 'j':
-            if (focusScreen == CONSUMABLE_SCREEN)
-                changeConsumable(1);
-            else
-                changeJoker(1);
+            moveMenuCursor(1);
             break;
         case 'k':
-            if (focusScreen == CONSUMABLE_SCREEN)
-                changeConsumable(-1);
-            else
-                changeJoker(-1);
-            break;
-        case ';':
-            swapFocus();
+            moveMenuCursor(-1);
             break;
         case '-':
             changeShopItem(-1);
             break;
         case '=':
             changeShopItem(1);
+            break;
+        case '1':
+            changeFocus(SHOP_SCREEN);
+            break;
+        case '2':
+            changeFocus(CONSUMABLE_SCREEN);
+            break;
+        case '3':
+            changeFocus(JOKER_SCREEN);
             break;
         }
     }
@@ -201,35 +173,25 @@ void game::runswitch() {
             l->currentScore = l->threshold;
             break;
         case 'j':
-            if (focusScreen == CONSUMABLE_SCREEN)
-                changeConsumable(1);
-            else
-                changeJoker(1);
+            moveMenuCursor(1);
             break;
         case 'k':
-            if (focusScreen == CONSUMABLE_SCREEN)
-                changeConsumable(-1);
-            else
-                changeJoker(-1);
+            moveMenuCursor(-1);
             break;
-        case ';':
-            swapFocus();
+        case '2':
+            changeFocus(CONSUMABLE_SCREEN);
+            break;
+        case '3':
+            changeFocus(JOKER_SCREEN);
+            break;
         }
     }
 }
 
 void game::runupdate() {
     if(p == SHOP_PHASE) {
-        mainScreen.updateShopScreen(s,currShopItem);
         gameInfo.updateGameInfo(this);
-        if (focusScreen == CONSUMABLE_SCREEN){
-            jokerScreen.updateJokerScreen(this,-1);
-            specialScreen.updateSpecialScreen(this,currConsumable);
-        }
-        else {
-            specialScreen.updateSpecialScreen(this,-1);
-            jokerScreen.updateJokerScreen(this,currJoker);
-        }
+        updateMenuScreens();
     }
     if(p == LEVEL_PHASE) {
         mainScreen.updateLevelScreen(l);
@@ -271,14 +233,10 @@ void game::gain(item i) {
     case PLANET:
     case TAROT:
     case SPECTRAL:
-        focusScreen = CONSUMABLE_SCREEN; // display the consumable you just bought
         consumables.push_back(i);
-        currConsumable = consumables.size()-1;
         break;
     case JOKER:
-        focusScreen = JOKER_SCREEN; // display the joker you just bought
         jokers.push_back(i);
-        currJoker = jokers.size()-1;
         break;
     case VOUCHER:
         vouchers[i.val] = true;
@@ -294,6 +252,39 @@ bool game::spend(int x) {
     else money -= x;
     return true;
 }
+
+void game::updateMenuScreens(){
+    if (focusScreen == CONSUMABLE_SCREEN){
+        jokerScreen.updateJokerScreen(this,-1);
+        specialScreen.updateSpecialScreen(this,currConsumable);
+        mainScreen.updateShopScreen(this,-1);
+    }
+    else if (focusScreen == JOKER_SCREEN) {
+        specialScreen.updateSpecialScreen(this,-1);
+        jokerScreen.updateJokerScreen(this,currJoker);
+        mainScreen.updateShopScreen(this,-1);
+    }
+    else if (focusScreen = SHOP_SCREEN){
+        specialScreen.updateSpecialScreen(this,-1);
+        jokerScreen.updateJokerScreen(this,-1);
+        mainScreen.updateShopScreen(this,currShopItem);
+    }
+}
+
+void game::moveMenuCursor(int by){
+    switch(focusScreen){
+        case CONSUMABLE_SCREEN:
+            changeConsumable(by);
+            break;
+        case JOKER_SCREEN:
+            changeJoker(by);
+            break;
+        case SHOP_SCREEN:
+            changeShopItem(by);
+            break;
+    }
+}
+
 
 void game::changeConsumable(int by){
     int newConsumable = currConsumable + by;
@@ -322,9 +313,37 @@ void game::changeShopItem(int by){
         return;
 
     currShopItem = newShopItemInd;
-    mainScreen.updateShopScreen(s, currShopItem);
+    mainScreen.updateShopScreen(this, currShopItem);
 }
 
+void game::changeFocus(selectableScreen scr){
+    if (scr == SHOP_SCREEN){
+        if (s->shopItems.size() == 0) return;
+        focusScreen = SHOP_SCREEN;
+        specialScreen.updateSpecialScreen(this,-1);
+        jokerScreen.updateJokerScreen(this,-1);
+        currShopItem = 0;
+        mainScreen.updateShopScreen(this,0);
+    }
+
+    if (scr == JOKER_SCREEN){
+        if (jokers.size() == 0) return;
+        focusScreen = JOKER_SCREEN;
+        specialScreen.updateSpecialScreen(this,-1);
+        mainScreen.updateShopScreen(this,-1);
+        currJoker = 0;
+        jokerScreen.updateJokerScreen(this,0);
+    }
+
+    if (scr == CONSUMABLE_SCREEN){
+        if (consumables.size() == 0) return;
+        focusScreen = CONSUMABLE_SCREEN;
+        mainScreen.updateShopScreen(this,-1);
+        jokerScreen.updateJokerScreen(this,-1);
+        currConsumable = 0;
+        specialScreen.updateSpecialScreen(this,0);
+    }
+}
 
 // swaps the controlled screen
 void game::swapFocus(){

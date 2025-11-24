@@ -16,7 +16,14 @@ enum handTableIndices : int{
 
 enum selectableScreen : int{
     CONSUMABLE_SCREEN,
-    JOKER_SCREEN
+    JOKER_SCREEN,
+    SHOP_SCREEN
+};
+
+enum phase : int{
+    SHOP_PHASE,
+    LEVEL_PHASE,
+    PHASE_COUNT
 };
 
 class game {
@@ -24,6 +31,7 @@ public:
     int money;
     int ante;
     int round;
+    int p; // phase
     std::vector<item> consumables;
     std::vector<item> jokers;
     int handTable[13][4]; //13 hands, 4 fields, example: handtable[HIGH][MULT]
@@ -55,6 +63,9 @@ public:
     void gain(item);
     bool spend(int);
     void swapFocus();
+    void changeFocus(selectableScreen scr);
+    void moveMenuCursor(int by);
+    void updateMenuScreens();
     void changeConsumable(int by);
     void changeJoker(int by);
     void changeShopItem(int by);
