@@ -75,6 +75,21 @@ void game::runswitch() {
     case 'q': // quit
         endwin();
         exit(0);
+    case ';':
+        swapFocus();
+        break;
+    case '2':
+        changeFocus(CONSUMABLE_SCREEN);
+        break;
+    case '3':
+        changeFocus(JOKER_SCREEN);
+        break;
+    case 'j':
+        moveMenuCursor(1);
+        break;
+    case 'k':
+        moveMenuCursor(-1);
+        break;
     }
 
     // input loop for the shop
@@ -91,8 +106,8 @@ void game::runswitch() {
                 return;
             } else if (si.typeOfItem == 1){ // pack
                 if (spend(si.cost)){
-                s->open(si.p);
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                    s->open(si.p);
+                    s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 }
                 return;
             } else if (si.typeOfItem == 2){ // voucher
@@ -112,12 +127,6 @@ void game::runswitch() {
         case 'C':
             running = false;
             break;
-        case 'j':
-            moveMenuCursor(1);
-            break;
-        case 'k':
-            moveMenuCursor(-1);
-            break;
         case '-':
             changeShopItem(-1);
             break;
@@ -126,12 +135,6 @@ void game::runswitch() {
             break;
         case '1':
             changeFocus(SHOP_SCREEN);
-            break;
-        case '2':
-            changeFocus(CONSUMABLE_SCREEN);
-            break;
-        case '3':
-            changeFocus(JOKER_SCREEN);
             break;
         }
     }
@@ -171,18 +174,6 @@ void game::runswitch() {
             break;
         case 'w':
             l->currentScore = l->threshold;
-            break;
-        case 'j':
-            moveMenuCursor(1);
-            break;
-        case 'k':
-            moveMenuCursor(-1);
-            break;
-        case '2':
-            changeFocus(CONSUMABLE_SCREEN);
-            break;
-        case '3':
-            changeFocus(JOKER_SCREEN);
             break;
         }
     }
