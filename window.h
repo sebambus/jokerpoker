@@ -6,27 +6,48 @@ class level;
 class game;
 class shop;
 
+enum screentype : int{
+    LEVEL_SCREEN,
+    SHOP_SCREEN,
+    CONSUMABLE_SCREEN,
+    JOKER_SCREEN,
+    LEVEL_INFO_SCREEN,
+    GAME_INFO_SCREEN,
+    CARD_INFO_SCREEN,
+    SHOP_CARD_INFO_SCREEN,
+    PEEK_SCREEN,
+    SCREEN_TYPE_COUNT
+};
+
 class window {
 public:
     WINDOW* frame;
     WINDOW* content;
+    screentype type;
+    game* g;
 
     int width = 0;
 
-    window(int h, int w, int y, int x, const char* title);
+    window(int h, int w, int y, int x, const char* title, game* g);
+    window(int h, int w, int y, int x, const char* title, game* g, screentype type);
     void print(const char *format, ...);
     void printAndAutoColor(const char* str);
     void printWordInColor(const char* w, short fg, short bg);
     std::string textWrap(const char*);
-    void updateLevelInfo(level* l);
-    void updateGameInfo(game* g);
-    void updateLevelScreen(level* l);
-    void updateShopScreen(game* g, int index);
-    void updateSpecialScreen(game* g, int index);
-    void updateJokerScreen(game* g, int index);
-    void updateCardInfo(game* g, int index, int s);
-    void updateShopCardInfo(game* g, int index);
-    void updatePeekScreen(level* l);
+
+    void update(void*, int, int);
+
+    void updateLevelInfo();
+    void updateGameInfo();
+    void updateLevelScreen();
+    void updateShopScreen(int index);
+    void updateSpecialScreen(int index);
+    void updateJokerScreen(int index);
+    void updateCardInfo(int index, int s);
+    void updateShopCardInfo(int index);
+    void updatePeekScreen();
+
+
     void clear();
     void changeTitle(const char* title);
 };

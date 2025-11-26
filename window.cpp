@@ -10,12 +10,24 @@
 #include "card.h"
 #include "color.h"
 
-window::window(int h, int w, int y, int x, const char* title) {
+window::window(int h, int w, int y, int x, const char *title, game *g) {
     frame = newwin(h, w, y, x);
     content = newwin(h-2, w-2, y+1, x+1);
     width = w-2;
     refresh();
     changeTitle(title);
+    this->type = SCREEN_TYPE_COUNT;
+    this->g = g;
+}
+
+window::window(int h, int w, int y, int x, const char *title, game *g, screentype type) {
+    frame = newwin(h, w, y, x);
+    content = newwin(h-2, w-2, y+1, x+1);
+    width = w-2;
+    refresh();
+    changeTitle(title);
+    this->g = g;
+    this->type = type;
 }
 
 void window::print(const char* format, ...) {
@@ -133,28 +145,44 @@ std::string window::textWrap(const char* cstring){
     return final;
 }
 
-void window::updateLevelInfo(level* l) {
+/*
+void window::update(void* context, int index, int s) {
+    switch(type) {
+    case LEVEL_SCREEN:
+    case SHOP_SCREEN:
+    case CONSUMABLE_SCREEN:
+    case JOKER_SCREEN:
+    case LEVEL_INFO_SCREEN:
+    case GAME_INFO_SCREEN:
+    case CARD_INFO_SCREEN:
+    case SHOP_CARD_INFO_SCREEN:
+    case PEEK_SCREEN:
+    }
+}
+*/
+
+void window::updateLevelInfo() {
     werase(content);
     print("Small Blind\n");
-    print("Threshold: %d\n", l->threshold);
-    print("Score: %d\n", l->currentScore);
-    if (l->played.pokerHand == HAND_TYPE_COUNT) // for when level starts
+    print("Threshold: %d\n", g->l->threshold);
+    print("Score: %d\n", g->l->currentScore);
+    if (g->l->played.pokerHand == HAND_TYPE_COUNT) // for when level starts
         print("\n\n\n");
     else{
-        print("%s\n", handName(l->played.pokerHand));
+        print("%s\n", handName(g->l->played.pokerHand));
         setcolor(content, COLOR_BLACK, COLOR_RED);
-        print("Mult: %d ",l->recentMult);
+        print("Mult: %d ",g->l->recentMult);
         setcolor(content, COLOR_BLACK, COLOR_BLUE);
-        print("Chips: %d\n", l->recentChips);
+        print("Chips: %d\n", g->l->recentChips);
         unsetcolor(content, COLOR_BLACK, COLOR_BLUE);
-        print("+%d\n", l->recentScore);
+        print("+%d\n", g->l->recentScore);
     }
     print("Hands  Discards\n");
-    print("  %d       %d\n", l->plays, l->discards);
+    print("  %d       %d\n", g->l->plays, g->l->discards);
     wrefresh(content);
 }
 
-void window::updateGameInfo(game *g) {
+void window::updateGameInfo() {
     werase(content);
     print("You start with\n");
     print("Hands Discards\n");
@@ -167,15 +195,15 @@ void window::updateGameInfo(game *g) {
     wrefresh(content);
 }
 
-void window::updateLevelScreen(level *l) {
+void window::updateLevelScreen() {
     werase(content);
-    l->h.print(content);
+    g->l->h.print(content);
     wmove(content, 5, 0);
-    l->played.print(content);
+    g->l->played.print(content);
     wrefresh(content);
 }
 
-void window::updateShopScreen(game *g, int index) {
+void window::updateShopScreen(int index) {
     if (g->p == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
 
@@ -214,12 +242,12 @@ void window::updateShopScreen(game *g, int index) {
     }
 
     
-    if (index != -1) g->cardInfo.updateShopCardInfo(g,index);
+    if (index != -1) g->cardInfo.updateShopCardInfo(index);
 
     wrefresh(content);
 }
 
-void window::updateSpecialScreen(game* g, int index){
+void window::updateSpecialScreen(int index){
     if (g->consumables.size() == 0) //for when you start a level without any consumables
         return;
 
@@ -231,11 +259,11 @@ void window::updateSpecialScreen(game* g, int index){
             print("[ ]");
         print("%s\n", g->consumables[i].name());
     }
-    if (index != -1) g->cardInfo.updateCardInfo(g, index, static_cast<int>(CONSUMABLE_SCREEN));
+    if (index != -1) g->cardInfo.updateCardInfo(index, static_cast<int>(CONSUMABLE_SCREEN));
     wrefresh(content);
 }
 
-void window::updateJokerScreen(game* g, int index){
+void window::updateJokerScreen(int index){
     werase(content);
     if (g->jokers.size() == 0) //for when you start a level without any consumables
         return;
@@ -249,13 +277,13 @@ void window::updateJokerScreen(game* g, int index){
         print("%s\n", g->jokers[i].name());
     }
 
-    if (index != -1) g->cardInfo.updateCardInfo(g, index, static_cast<int>(JOKER_SCREEN));
+    if (index != -1) g->cardInfo.updateCardInfo(index, static_cast<int>(JOKER_SCREEN));
     wrefresh(content);
 }
 
 // prints info on item based on game's focusScreen and the items position in it's respective vector
-// s is screen. when calling this, cast a selectableScreen to an int
-void window::updateCardInfo(game* g, int index, int s){
+// s is screen. when calling this, cast a screentype to an int
+void window::updateCardInfo(int index, int s){
     if (s == static_cast<int>(CONSUMABLE_SCREEN)) // don't display anything if screen is empty
         if (g->consumables.size() == 0)
             return;
@@ -278,7 +306,7 @@ void window::updateCardInfo(game* g, int index, int s){
 
 // specifically for printing out the description of the selected item in shop
 // needs to be it's own function for how much differently it works than updateCardInfo
-void window::updateShopCardInfo(game* g, int index){
+void window::updateShopCardInfo(int index){
     werase(content);
     shopItem si = g->s->shopItems[index];
     
@@ -298,7 +326,7 @@ void window::updateShopCardInfo(game* g, int index){
 }
 
 
-void window::updatePeekScreen(level* l){
+void window::updatePeekScreen(){
     werase(content);
     print("   ");
     for (int i = 1; i < 14; i++){ // 
@@ -315,9 +343,9 @@ void window::updatePeekScreen(level* l){
         print("%c: |", suitToChar(s)); // print row headers
 
         for (int j = 1; j < 14; j++){
-            print(" %d |", l->d.specificCount(s,j)); // print cells
+            print(" %d |", g->l->d.specificCount(s,j)); // print cells
         }
-        print(" %d", l->d.suitCount(s)); // print suit row total
+        print(" %d", g->l->d.suitCount(s)); // print suit row total
         print("\n");
 
         unsetcolor(content, suitColor, COLOR_BLACK);
@@ -325,7 +353,7 @@ void window::updatePeekScreen(level* l){
 
     print("   ");
     for (int i = 1; i < 14; i++){
-        print("  %d ", l->d.cardCount(i)); // print value collumn total
+        print("  %d ", g->l->d.cardCount(i)); // print value collumn total
     }
 
     wrefresh(content);

@@ -14,11 +14,7 @@ enum handTableIndices : int{
     TIMES_PLAYED
 };
 
-enum selectableScreen : int{
-    CONSUMABLE_SCREEN,
-    JOKER_SCREEN,
-    SHOP_SCREEN
-};
+enum screentype;
 
 enum phase : int{
     SHOP_PHASE,
@@ -47,7 +43,7 @@ public:
     shop* s;
     level* l;
     
-    selectableScreen focusScreen = CONSUMABLE_SCREEN;
+    screentype focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;
     int currJoker = 0;
     int currShopItem = 0;
@@ -63,7 +59,7 @@ public:
     void gain(item);
     bool spend(int);
     void swapFocus();
-    void changeFocus(selectableScreen scr);
+    void changeFocus(screentype scr);
     void moveMenuCursor(int by);
     void updateMenuScreens();
     void changeConsumable(int by);
