@@ -24,9 +24,9 @@ enum phase : int{
 
 class game {
 public:
-    int money;
-    int ante;
-    int round;
+    int money = 0;
+    int ante = 1;
+    int round = 1;
     int phase; 
     std::vector<item> consumables;
     std::vector<item> jokers;

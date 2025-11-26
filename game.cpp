@@ -5,6 +5,7 @@
 #include "item.h"
 #include "readcsv.h"
 #include "shop.h"
+#include "debug.h"
 
 game::game() :
     levelInfo(10, 20, 0, 0, "Level Info", this, LEVEL_INFO_SCREEN),
@@ -16,7 +17,6 @@ game::game() :
     peekScreen(8, 80, 12, 20, "Peek", this, PEEK_SCREEN) {
     s = new shop(this);
     l = new level(this);
-    money = 0;
     d.fillDeck();
     initHandTable();
 }

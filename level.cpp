@@ -7,6 +7,7 @@
 #include "game.h"
 #include "hand.h"
 #include "card.h"
+#include "debug.h"
 
 level::level(game* g) {
     this->g = g;
@@ -19,7 +20,6 @@ level::level(game* g) {
 
     int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
     threshold = antebases[g->ante] * (g->round+1)/2;
-
     for (int i = 0; i < 8; i++) draw();
 }
 
