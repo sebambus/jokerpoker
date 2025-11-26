@@ -52,6 +52,9 @@ public:
     void run();
     void runinit();
     void runswitch();
+    void universalInput(char c);
+    void levelInput(char c);
+    void shopInput(char c);
     void runupdate();
     int getPlays();
     int getDiscards();

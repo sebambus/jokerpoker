@@ -250,7 +250,8 @@ void window::updateShopScreen(int index) {
         else
             print("[ ] ");
         print("%s ", si.getName().c_str());
-        printWordInColor(("$"+std::to_string(si.cost)).c_str(), COLOR_YELLOW, COLOR_BLACK);
+        if (si.cost != 0)
+            printWordInColor(("$"+std::to_string(si.cost)).c_str(), COLOR_YELLOW, COLOR_BLACK);
         print("\n");
     }
 

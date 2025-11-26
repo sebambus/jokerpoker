@@ -68,72 +68,77 @@ void game::runinit() {
 
 void game::runswitch() {
     char c = getchar();
+    universalInput(c);
+    if (phase == SHOP_PHASE) shopInput(c);
+    if (phase == LEVEL_PHASE) levelInput(c);
+}
 
+void game::universalInput(char c){
     switch (c) {
-    case 'q': // quit
-        endwin();
-        exit(0);
-    case ';':
-        swapFocus();
-        break;
-    case '2':
-        changeFocus(CONSUMABLE_SCREEN);
-        break;
-    case '3':
-        changeFocus(JOKER_SCREEN);
-        break;
-    case 'j':
-        moveMenuCursor(1);
-        break;
-    case 'k':
-        moveMenuCursor(-1);
-        break;
+        case 'q': // quit
+            endwin();
+            exit(0);
+        case ';':
+            swapFocus();
+            break;
+        case '2':
+            changeFocus(CONSUMABLE_SCREEN);
+            break;
+        case '3':
+            changeFocus(JOKER_SCREEN);
+            break;
+        case 'j':
+            moveMenuCursor(1);
+            break;
+        case 'k':
+            moveMenuCursor(-1);
+            break;
     }
+ 
+}
 
-    // input loop for the shop
-    if(phase == SHOP_PHASE) {
-        shopItem si = s->shopItems[currShopItem];
-        switch(c) {
-        case 'b': // buy item from shop
-            if (focusScreen != MAIN_SCREEN) break;
-            if (si.typeOfItem == 0){ // item
-                if (spend(si.cost)){
-                    gain(si.i);
-                    s->shopItems.erase(s->shopItems.begin()+currShopItem);
-                }
-                return;
-            } else if (si.typeOfItem == 1){ // pack
-                if (spend(si.cost)){
-                    s->open(si.p);
-                    s->shopItems.erase(s->shopItems.begin()+currShopItem);
-                }
-                return;
-            } else if (si.typeOfItem == 2){ // voucher
-                if (spend(si.cost)){
-                    gain(si.v);
-                    s->shopItems.erase(s->shopItems.begin()+currShopItem);
-                }
-                return;
+void game::shopInput(char c){
+    shopItem si = s->shopItems[currShopItem];
+    switch(c) {
+    case 'b': // buy item from shop
+        if (focusScreen != MAIN_SCREEN) break;
+        if (si.typeOfItem == 0){ // item
+            if (spend(si.cost)){
+                gain(si.i);
+                s->shopItems.erase(s->shopItems.begin()+currShopItem);
             }
-            break;
-        case 'R':
-            if(spend(5 + s->rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
-                s->reroll();
-                s->rerollCount++;
+            return;
+        } else if (si.typeOfItem == 1){ // pack
+            if (spend(si.cost)){
+                s->open(si.p);
+                s->shopItems.erase(s->shopItems.begin()+currShopItem);
             }
-            break;
-        case 'C':
-            running = false;
-            break;
-        case '1':
-            changeFocus(MAIN_SCREEN);
-            break;
+            return;
+        } else if (si.typeOfItem == 2){ // voucher
+            if (spend(si.cost)){
+                gain(si.v);
+                s->shopItems.erase(s->shopItems.begin()+currShopItem);
+            }
+            return;
         }
+        break;
+    case 'R':
+        if(spend(5 + s->rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
+            s->reroll();
+            s->rerollCount++;
+        }
+        break;
+    case 'C':
+        running = false;
+        break;
+    case '1':
+        changeFocus(MAIN_SCREEN);
+        break;
     }
+}
 
-    // input loop for the gameplay
-    if(phase == LEVEL_PHASE) {
-        switch (c) {
+void game::levelInput(char c){
+    switch (c) {
         case 'h': // left (vim)
             l->h.moveCursor(-1);
             break;
@@ -167,7 +172,6 @@ void game::runswitch() {
         case 'w':
             l->currentScore = l->threshold;
             break;
-        }
     }
 }
 
