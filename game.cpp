@@ -125,12 +125,6 @@ void game::runswitch() {
         case 'C':
             running = false;
             break;
-        case '-':
-            changeShopItem(-1);
-            break;
-        case '=':
-            changeShopItem(1);
-            break;
         case '1':
             changeFocus(MAIN_SCREEN);
             break;
@@ -253,7 +247,7 @@ void game::updateMenuScreens(){
         jokerScreen.updateJokerScreen(currJoker);
         mainScreen.updateShopScreen(-1);
     }
-    else if (focusScreen = MAIN_SCREEN){
+    else if (focusScreen == MAIN_SCREEN){
         specialScreen.updateSpecialScreen(-1);
         jokerScreen.updateJokerScreen(-1);
         mainScreen.updateShopScreen(currShopItem);

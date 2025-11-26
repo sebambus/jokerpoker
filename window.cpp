@@ -9,6 +9,7 @@
 #include "item.h"
 #include "card.h"
 #include "color.h"
+#include "debug.h"
 
 window::window(int h, int w, int y, int x, const char *title, game *g, screentype type) {
     frame = newwin(h, w, y, x);
