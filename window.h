@@ -7,8 +7,7 @@ class game;
 class shop;
 
 enum screentype : int{
-    LEVEL_SCREEN,
-    SHOP_SCREEN,
+    MAIN_SCREEN,
     CONSUMABLE_SCREEN,
     JOKER_SCREEN,
     LEVEL_INFO_SCREEN,
@@ -28,14 +27,15 @@ public:
 
     int width = 0;
 
-    window(int h, int w, int y, int x, const char* title, game* g);
     window(int h, int w, int y, int x, const char* title, game* g, screentype type);
     void print(const char *format, ...);
     void printAndAutoColor(const char* str);
     void printWordInColor(const char* w, short fg, short bg);
     std::string textWrap(const char*);
+    void clear();
+    void changeTitle(const char* title);
 
-    void update(void*, int, int);
+    void update(int, int);
 
     void updateLevelInfo();
     void updateGameInfo();
@@ -46,8 +46,4 @@ public:
     void updateCardInfo(int index, int s);
     void updateShopCardInfo(int index);
     void updatePeekScreen();
-
-
-    void clear();
-    void changeTitle(const char* title);
 };

@@ -116,7 +116,7 @@ void shop::open(pack p) {
     while(contents.size() < n)
         contents.push_back(generateItem(p.type));
 
-    window packPopup = window(2+n, 26, 5-n/2, 47, name(p).c_str(), g);
+    window packPopup = window(2+n, 26, 5-n/2, 47, name(p).c_str(), g, SCREEN_TYPE_COUNT);
     while(x > 0) {
         for(char c = 'a'; c < 'a' + contents.size(); c++)
             packPopup.print("%c - %s\n", c, contents[c-'a'].name());

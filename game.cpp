@@ -7,14 +7,13 @@
 #include "shop.h"
 
 game::game() :
-    levelInfo(10, 20, 0, 0, "Level Info", this),
-    gameInfo(10, 20, 10, 0, "Game Info", this),
-    mainScreen(12, 80, 0, 20, "", this),
-    specialScreen(10, 20, 0, 100, "Consumables", this),
-    jokerScreen(10, 20, 0, 120, "Jokers", this),
-    cardInfo(10, 20, 10, 100, "Card Info", this),
-    peekScreen(8, 80, 12, 20, "Peek", this)
-    {
+    levelInfo(10, 20, 0, 0, "Level Info", this, LEVEL_INFO_SCREEN),
+    gameInfo(10, 20, 10, 0, "Game Info", this, GAME_INFO_SCREEN),
+    mainScreen(12, 80, 0, 20, "", this, MAIN_SCREEN),
+    specialScreen(10, 20, 0, 100, "Consumables", this, CONSUMABLE_SCREEN),
+    jokerScreen(10, 20, 0, 120, "Jokers", this, JOKER_SCREEN),
+    cardInfo(10, 20, 10, 100, "Card Info", this, CARD_INFO_SCREEN),
+    peekScreen(8, 80, 12, 20, "Peek", this, PEEK_SCREEN) {
     s = new shop(this);
     l = new level(this);
     money = 0;
@@ -24,15 +23,14 @@ game::game() :
 
 
 
-int p;
 bool running;
 
 void game::run() {
     for(ante = 1; ante <= 8; ante++) {
         s = new shop(this);
         for(round = 1; round <= 3; round++) {
-            for(p = SHOP_PHASE; p != PHASE_COUNT; p++) {
-                if(p == SHOP_PHASE && ante+round == 2) continue;
+            for(phase = SHOP_PHASE; phase != PHASE_COUNT; phase++) {
+                if(phase == SHOP_PHASE && ante+round == 2) continue;
                 runinit();
                 running = true;
                 while(running) {
@@ -47,12 +45,12 @@ void game::run() {
 void game::runinit() {
     gameInfo.updateGameInfo();
 
-    if(p == SHOP_PHASE) {
+    if(phase == SHOP_PHASE) {
         s->reopen();
         mainScreen.changeTitle("Shop");
-        changeFocus(SHOP_SCREEN);
+        changeFocus(MAIN_SCREEN);
     }
-    if(p == LEVEL_PHASE) {
+    if(phase == LEVEL_PHASE) {
         l = new level(this);
 
         mainScreen.changeTitle("");
@@ -93,11 +91,11 @@ void game::runswitch() {
     }
 
     // input loop for the shop
-    if(p == SHOP_PHASE) {
+    if(phase == SHOP_PHASE) {
         shopItem si = s->shopItems[currShopItem];
         switch(c) {
         case 'b': // buy item from shop
-            if (focusScreen != SHOP_SCREEN) break;
+            if (focusScreen != MAIN_SCREEN) break;
             if (si.typeOfItem == 0){ // item
                 if (spend(si.cost)){
                     gain(si.i);
@@ -134,13 +132,13 @@ void game::runswitch() {
             changeShopItem(1);
             break;
         case '1':
-            changeFocus(SHOP_SCREEN);
+            changeFocus(MAIN_SCREEN);
             break;
         }
     }
 
     // input loop for the gameplay
-    if(p == LEVEL_PHASE) {
+    if(phase == LEVEL_PHASE) {
         switch (c) {
         case 'h': // left (vim)
             l->h.moveCursor(-1);
@@ -180,11 +178,11 @@ void game::runswitch() {
 }
 
 void game::runupdate() {
-    if(p == SHOP_PHASE) {
+    if(phase == SHOP_PHASE) {
         gameInfo.updateGameInfo();
         updateMenuScreens();
     }
-    if(p == LEVEL_PHASE) {
+    if(phase == LEVEL_PHASE) {
         mainScreen.updateLevelScreen();
     
         if (l->currentScore >= l->threshold) {
@@ -255,7 +253,7 @@ void game::updateMenuScreens(){
         jokerScreen.updateJokerScreen(currJoker);
         mainScreen.updateShopScreen(-1);
     }
-    else if (focusScreen = SHOP_SCREEN){
+    else if (focusScreen = MAIN_SCREEN){
         specialScreen.updateSpecialScreen(-1);
         jokerScreen.updateJokerScreen(-1);
         mainScreen.updateShopScreen(currShopItem);
@@ -270,7 +268,7 @@ void game::moveMenuCursor(int by){
         case JOKER_SCREEN:
             changeJoker(by);
             break;
-        case SHOP_SCREEN:
+        case MAIN_SCREEN:
             changeShopItem(by);
             break;
     }
@@ -308,9 +306,9 @@ void game::changeShopItem(int by){
 }
 
 void game::changeFocus(screentype scr){
-    if (scr == SHOP_SCREEN){
+    if (scr == MAIN_SCREEN){
         if (s->shopItems.size() == 0) return;
-        focusScreen = SHOP_SCREEN;
+        focusScreen = MAIN_SCREEN;
         specialScreen.updateSpecialScreen(-1);
         jokerScreen.updateJokerScreen(-1);
         currShopItem = 0;

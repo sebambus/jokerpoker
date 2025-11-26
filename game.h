@@ -27,7 +27,7 @@ public:
     int money;
     int ante;
     int round;
-    int p; // phase
+    int phase; 
     std::vector<item> consumables;
     std::vector<item> jokers;
     int handTable[13][4]; //13 hands, 4 fields, example: handtable[HIGH][MULT]

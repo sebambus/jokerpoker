@@ -10,16 +10,6 @@
 #include "card.h"
 #include "color.h"
 
-window::window(int h, int w, int y, int x, const char *title, game *g) {
-    frame = newwin(h, w, y, x);
-    content = newwin(h-2, w-2, y+1, x+1);
-    width = w-2;
-    refresh();
-    changeTitle(title);
-    this->type = SCREEN_TYPE_COUNT;
-    this->g = g;
-}
-
 window::window(int h, int w, int y, int x, const char *title, game *g, screentype type) {
     frame = newwin(h, w, y, x);
     content = newwin(h-2, w-2, y+1, x+1);
@@ -145,21 +135,43 @@ std::string window::textWrap(const char* cstring){
     return final;
 }
 
-/*
-void window::update(void* context, int index, int s) {
+void window::clear(){
+    wclear(content);
+    wclear(frame);
+    wrefresh(content);
+    wrefresh(frame);
+}
+
+void window::changeTitle(const char *title) {
+    werase(frame);
+    box(frame, 0, 0);
+    wprintw(frame, "%s", title);
+    wrefresh(frame);
+}
+
+void window::update(int index, int s) {
     switch(type) {
-    case LEVEL_SCREEN:
-    case SHOP_SCREEN:
+    case MAIN_SCREEN:
+        if(g->phase == LEVEL_PHASE)
+            updateLevelScreen();
+        if(g->phase == SHOP_PHASE)
+            updateShopScreen(index);
     case CONSUMABLE_SCREEN:
+        updateSpecialScreen(index);
     case JOKER_SCREEN:
+        updateJokerScreen(index);
     case LEVEL_INFO_SCREEN:
+        updateLevelInfo();
     case GAME_INFO_SCREEN:
+        updateGameInfo();
     case CARD_INFO_SCREEN:
+        updateCardInfo(index, s);
     case SHOP_CARD_INFO_SCREEN:
+        updateShopCardInfo(index);
     case PEEK_SCREEN:
+        updatePeekScreen();
     }
 }
-*/
 
 void window::updateLevelInfo() {
     werase(content);
@@ -204,7 +216,7 @@ void window::updateLevelScreen() {
 }
 
 void window::updateShopScreen(int index) {
-    if (g->p == LEVEL_PHASE) // dont do anything if your not in the shop
+    if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
 
     werase(content);
@@ -357,18 +369,4 @@ void window::updatePeekScreen(){
     }
 
     wrefresh(content);
-}
-
-void window::clear(){
-    wclear(content);
-    wclear(frame);
-    wrefresh(content);
-    wrefresh(frame);
-}
-
-void window::changeTitle(const char *title) {
-    werase(frame);
-    box(frame, 0, 0);
-    wprintw(frame, "%s", title);
-    wrefresh(frame);
 }

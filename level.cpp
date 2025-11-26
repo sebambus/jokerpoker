@@ -132,7 +132,7 @@ void level::win() {
     int earnings = handmoney + interest + roundreward;
 
     // display win popup
-    window winPopup = window(8, 30, 2, 35, "", g);
+    window winPopup = window(8, 30, 2, 35, "", g, SCREEN_TYPE_COUNT);
     winPopup.print("Cash Out: $%d\nBlind Reward: $%d\n", earnings, roundreward);
     if(handmoney > 0) winPopup.print("Remaining Hands: $%d\n", handmoney);
     if(interest > 0) winPopup.print("Interest: $%d\n", interest);
@@ -147,7 +147,7 @@ void level::win() {
 }
 
 void level::lose() {
-    window lossPopup = window(4, 40, 8, 30, "", g);
+    window lossPopup = window(4, 40, 8, 30, "", g, SCREEN_TYPE_COUNT);
     lossPopup.print("YOU LOSE (you ran out of hands)\nPress any key to quit\n");
     wrefresh(lossPopup.content);
     getchar();
