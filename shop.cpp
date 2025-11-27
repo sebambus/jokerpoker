@@ -121,6 +121,10 @@ void shop::open(pack p) {
         packItems.push_back(si);
     }
 
+    if (p.type == JOKER || p.type == CARD) // you dont modify any cards with joker or card packs
+        return;
+
+    g->d.shuffle();
     for (int i = 0; i < 10; i++)
     {
         modifyableCards.add(g->d.cards.back());
