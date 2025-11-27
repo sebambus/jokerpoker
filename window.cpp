@@ -326,8 +326,12 @@ void window::updateCardInfo(int index, int s){
 // needs to be it's own function for how much differently it works than updateCardInfo
 void window::updateShopCardInfo(int index){
     werase(content);
-    shopItem si = g->s->shopItems[index];
-    
+    shopItem si;
+    if (g->s->mode == DEFAULT_MODE)
+        si = g->s->shopItems[index];
+    else 
+        si = g->s->packItems[index];
+
     const char* desc;
 
     if (si.typeOfItem == 0){ // item
