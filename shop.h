@@ -2,6 +2,7 @@
 #include <vector>
 #include "item.h"
 #include <string>
+#include "hand.h"
 
 class game;
 
@@ -41,6 +42,8 @@ public:
     std::vector<pack> packs;
     std::vector<shopItem> shopItems;
     std::vector<shopItem> packItems;
+    hand modifyableCards;
+
     int rerollCount;
     shopMode mode = DEFAULT_MODE;
     int packUsesLeft = 0;
@@ -52,6 +55,7 @@ public:
     voucher generateVoucher();
     pack generatePack();
     void open(pack);
+    void closePack();
     void reroll();
     void reopen();
     void fillShopItems();

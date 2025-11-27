@@ -221,26 +221,15 @@ void window::updateShopScreen(int index) {
         return;
 
     werase(content);
-    // char menuchar =  'a';
-
-    // if(s->items.size() > 0)
-    //     print("Items:\n");
-    // for(item i : s->items)
-    //     print("%c - $%d %s\n", menuchar++, i.cost, i.name());
-
-    // if(s->packs.size() > 0)
-    //     print("Packs:\n");
-    // for(pack p : s->packs)
-    //     print("%c - $%d %s\n", menuchar++, 2*(p.size+2), name(p).c_str());
-
-    // if(s->v != VOUCHER_COUNT)
-    //     print("Vouchers:\n%c - $%d %s\n", menuchar++, 10, item(s->v).name());
 
     int currSection = -1;
     std::string sectionNames[3] = {"Items:","Packs:","Vouchers:"};
 
     std::vector<shopItem> items;
-    if (g->s->mode == DEFAULT_MODE) items = g->s->shopItems;
+    if (g->s->mode == DEFAULT_MODE){
+        items = g->s->shopItems;
+        changeTitle("Shop");
+    }
     else items = g->s->packItems;
 
     for (int i = 0; i < items.size(); i++){
@@ -259,6 +248,8 @@ void window::updateShopScreen(int index) {
         print("\n");
     }
 
+    if (g->s->mode == PACK_MODE)
+        g->s->modifyableCards.print(content);
     
     if (index != -1) g->cardInfo.updateShopCardInfo(index);
 

@@ -8,6 +8,7 @@
 #include "game.h"
 #include "item.h"
 #include "debug.h"
+#include "deck.h"
 
 std::string name(pack p) {
     std::string s = "";
@@ -119,7 +120,23 @@ void shop::open(pack p) {
         si.cost = 0;
         packItems.push_back(si);
     }
+
+    for (int i = 0; i < 10; i++)
+    {
+        modifyableCards.add(g->d.cards.back());
+        g->d.cards.pop_back();
+    }
+    
 }
+
+void shop::closePack(){
+    mode = DEFAULT_MODE;
+    for (card c : modifyableCards.cards) // add the cards put in the pack screen back into the deck
+        g->d.cards.push_back(c);
+    modifyableCards.cards.clear();
+
+}
+
 
 void shop::reroll() {
     items.clear();

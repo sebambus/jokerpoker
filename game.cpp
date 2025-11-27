@@ -110,12 +110,12 @@ void game::shopInput(char c){
                 if (s->mode == DEFAULT_MODE){
                     s->shopItems.erase(s->shopItems.begin()+currShopItem);
                     gain(si.i);
-                } else { 
+                } else { // gain item from pack, needs to redone because only certain packs allow you to obtain the item
                     s->packItems.erase(s->packItems.begin()+currShopItem);
                     gain(si.i);
                     s->packUsesLeft--;
                     if (s->packUsesLeft == 0){
-                        s->mode = DEFAULT_MODE;
+                        s->closePack();
                         currShopItem = 0;
                     }
                 }
@@ -124,6 +124,7 @@ void game::shopInput(char c){
         } else if (si.typeOfItem == 1){ // pack
             if (spend(si.cost)){
                 s->open(si.p);
+                mainScreen.changeTitle(name(si.p).c_str());
                 s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 currShopItem = 0;
                 s->mode = PACK_MODE;
@@ -144,10 +145,23 @@ void game::shopInput(char c){
         }
         break;
     case 'C':
-        running = false;
+        if (s->mode == PACK_MODE) s->closePack();
+        else running = false;
         break;
     case '1':
         changeFocus(MAIN_SCREEN);
+        break;
+    case 'h':
+        if (s->mode == PACK_MODE)
+            s->modifyableCards.moveCursor(-1);
+        break;
+    case 'l':
+        if (s->mode == PACK_MODE)
+            s->modifyableCards.moveCursor(1);
+        break;
+    case ' ':
+        if (s->mode == PACK_MODE)
+            s->modifyableCards.selectCursor();
         break;
     }
 }
