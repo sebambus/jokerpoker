@@ -7,6 +7,7 @@
 #include <ncursesw/ncurses.h>
 #include "game.h"
 #include "item.h"
+#include "debug.h"
 
 std::string name(pack p) {
     std::string s = "";
@@ -108,35 +109,15 @@ pack shop::generatePack() {
 }
 
 void shop::open(pack p) {
-    int n = 2;
-    int x = 1;
-    if(p.size != 0) n += 2;
-    if(p.size == 2) x++;   
-    std::vector<item> contents;
-    while(contents.size() < n)
-        contents.push_back(generateItem(p.type));
-
-    window packPopup = window(2+n, 26, 5-n/2, 47, name(p).c_str(), g, SCREEN_TYPE_COUNT);
-    while(x > 0) {
-        for(char c = 'a'; c < 'a' + contents.size(); c++)
-            packPopup.print("%c - %s\n", c, contents[c-'a'].name());
-        wrefresh(packPopup.content);
-
-        char c = getchar();
-        switch (c) {
-        case 'C':
-            return;
-        case 'q':
-            endwin();
-            exit(0);
-        case 'a':
-        case 'b':
-        case 'c':
-        case 'd':
-            g->gain(contents[c-'a']);
-            contents.erase(contents.begin()+c-'a');
-            x--;
-        }
+    packItems.clear();
+    int itemsInPack = 3;
+    packUsesLeft = 1;
+    if(p.size != 0) itemsInPack += 2;
+    if(p.size == 2) packUsesLeft++;   
+    while (packItems.size() != itemsInPack){
+        shopItem si(generateItem(p.type));
+        si.cost = 0;
+        packItems.push_back(si);
     }
 }
 
@@ -169,6 +150,10 @@ void shop::fillShopItems(){
 
     shopItem si(v);
     shopItems.push_back(si);
+
+}
+
+shopItem::shopItem(){
 
 }
 

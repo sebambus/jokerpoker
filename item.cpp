@@ -3,6 +3,10 @@
 #include "readcsv.h"
 #include "card.h"
 
+item::item(){
+    
+}
+
 item::item(planet p) {
     type = PLANET;
     val = p;

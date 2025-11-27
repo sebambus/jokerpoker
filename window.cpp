@@ -239,8 +239,12 @@ void window::updateShopScreen(int index) {
     int currSection = -1;
     std::string sectionNames[3] = {"Items:","Packs:","Vouchers:"};
 
-    for (int i = 0; i < g->s->shopItems.size(); i++){
-        shopItem si = g->s->shopItems[i];
+    std::vector<shopItem> items;
+    if (g->s->mode == DEFAULT_MODE) items = g->s->shopItems;
+    else items = g->s->packItems;
+
+    for (int i = 0; i < items.size(); i++){
+        shopItem si = items[i];
         if (si.typeOfItem > currSection){
             currSection = si.typeOfItem;
             print("%s\n",sectionNames[currSection].c_str());

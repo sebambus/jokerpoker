@@ -98,20 +98,35 @@ void game::universalInput(char c){
 }
 
 void game::shopInput(char c){
-    shopItem si = s->shopItems[currShopItem];
+    shopItem si;
+    if (s->mode == DEFAULT_MODE) si = s->shopItems[currShopItem];
+    else si = s->packItems[currShopItem];
+
     switch(c) {
-    case 'b': // buy item from shop
+    case 'b': // buy item from shop / obtain from pack
         if (focusScreen != MAIN_SCREEN) break;
         if (si.typeOfItem == 0){ // item
             if (spend(si.cost)){
-                gain(si.i);
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                if (s->mode == DEFAULT_MODE){
+                    s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                    gain(si.i);
+                } else { 
+                    s->packItems.erase(s->packItems.begin()+currShopItem);
+                    gain(si.i);
+                    s->packUsesLeft--;
+                    if (s->packUsesLeft == 0){
+                        s->mode = DEFAULT_MODE;
+                        currShopItem = 0;
+                    }
+                }
             }
             return;
         } else if (si.typeOfItem == 1){ // pack
             if (spend(si.cost)){
                 s->open(si.p);
                 s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                currShopItem = 0;
+                s->mode = PACK_MODE;
             }
             return;
         } else if (si.typeOfItem == 2){ // voucher
@@ -295,8 +310,12 @@ void game::changeJoker(int by){
 
 void game::changeShopItem(int by){
     int newShopItemInd = currShopItem + by;
-    int shopItemSize = s->shopItems.size() -1;
-    if (newShopItemInd > shopItemSize || newShopItemInd < 0)
+    int shopItemSize = 0;
+    if (s->mode == DEFAULT_MODE)
+        shopItemSize = s->shopItems.size();
+    else 
+        shopItemSize = s->packItems.size();
+    if (newShopItemInd > shopItemSize-1 || newShopItemInd < 0)
         return;
 
     currShopItem = newShopItemInd;
