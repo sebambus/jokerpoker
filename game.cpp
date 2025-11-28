@@ -197,42 +197,38 @@ void game::runupdate() {
 
 void game::useShopItem(shopItem si){
     if (s->mode == PACK_MODE){ // different behavior whether or not your in the shop or in a pack
+        s->packItems.erase(s->packItems.begin()+currShopItem);
         switch(si.typeOfItem){
             case SI_ITEM:
-                s->packItems.erase(s->packItems.begin()+currShopItem);
-
                 if (si.i.type == JOKER) // getting a joker from a pack adds it to your inventory
                     gain(si.i);
                 else { // other items (tarot, spectral, planet) are used immediately
 
-                }
-                
-                s->packUsesLeft--;
-                if (s->packUsesLeft == 0){
-                    s->closePack();
-                    currShopItem = 0;
                 }
                 break;
             case SI_CARD:
                 d.cards.push_back(si.c);
                 break;
         }
+        s->packUsesLeft--;
+        if (s->packUsesLeft == 0){
+            s->closePack();
+            currShopItem = 0;
+        }
     }
 
     else if (s->mode == DEFAULT_MODE && spend(si.cost)){ // if your in the shop mode and you have the money to buy
+        s->shopItems.erase(s->shopItems.begin()+currShopItem);        
         switch(si.typeOfItem){
             case SI_ITEM:
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 gain(si.i);
                 break;
             case SI_VOUCHER:
                 gain(si.v);
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 break;
             case SI_PACK:
                 s->open(si.p);
                 mainScreen.changeTitle(name(si.p).c_str());
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
                 currShopItem = 0;
                 s->mode = PACK_MODE;
                 break;

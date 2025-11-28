@@ -50,3 +50,4 @@ public:
     int suitToColor(suit s);
     char valueToChar(int v);
     std::string suitToString(suit s);
+    std::string valueToString(int v);

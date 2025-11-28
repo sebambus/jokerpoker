@@ -21,9 +21,7 @@ card::card(item i) {
 }
 
 std::string card::name(){
-    debug("name function of card called");
-    debug(suitToString(cardSuit));
-    return std::to_string(cardValue) + " of " + suitToString(cardSuit) + "s";
+    return valueToString(cardValue) + " of " + suitToString(cardSuit) + "s";
 }
 
 
@@ -166,4 +164,21 @@ std::string suitToString(suit s){
         case CLUB:
             return "Club";
     }
+}
+
+std::string valueToString(int v){
+    if (v > 1 && v < 11){
+        return std::to_string(v);
+    }
+    switch(v){
+        case 1:
+            return "Ace";
+        case 11:
+            return "Jack";
+        case 12:
+            return "Queen";
+        case 13:
+            return "King";
+    }
+    return "X";
 }
