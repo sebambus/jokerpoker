@@ -173,8 +173,6 @@ pack shop::generatePack() {
         s = 1;
     else s = 2;
 
-    std::string packDesc;
-
     return {i, s};
 }
 
@@ -215,6 +213,7 @@ void shop::reroll() {
     items.clear();
     while(items.size() < 3)
         items.push_back(generateItem());
+    fillShopItems();
 }
 
 void shop::reopen() {
@@ -248,19 +247,27 @@ shopItem::shopItem(){
 }
 
 shopItem::shopItem(item n){
-    typeOfItem = 0;
-    i = n;
-    cost = i.cost;
+    if (n.type != CARD){
+        typeOfItem = SI_ITEM;
+        i = n;
+        cost = i.cost;
+    }
+    else {
+        typeOfItem = SI_CARD;
+        c = card(4,(suit)3); // for now
+        cost = 1;
+    }
+    
 }
 
 shopItem::shopItem(pack n){
-    typeOfItem = 1;
+    typeOfItem = SI_PACK;
     p = n;
     cost = 2 * (n.size + 2);
 }
 
 shopItem::shopItem(voucher n){
-    typeOfItem = 2;
+    typeOfItem = SI_VOUCHER;
     v = n;
     cost = 10;
 }
@@ -269,16 +276,20 @@ std::string shopItem::getName(){
     const char* cstring;
     std::string s;
     switch (typeOfItem){
-    case 0:
+    case SI_ITEM:
         cstring = i.name();
         break;
-    case 1:
+    case SI_PACK:
         s = name(p);
         break;
-    case 2:
+    case SI_VOUCHER:
         cstring = item(v).name();
         break;
+    case SI_CARD:
+        s = c.name();
+        break;
     }
+
 
     if (!s.empty())
         return s;

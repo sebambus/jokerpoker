@@ -105,7 +105,7 @@ void game::shopInput(char c){
     switch(c) {
     case 'b': // buy item from shop / obtain from pack
         if (focusScreen != MAIN_SCREEN) break;
-        if (si.typeOfItem == 0){ // item
+        if (si.typeOfItem == SI_ITEM){ // item
             if (spend(si.cost)){
                 if (s->mode == DEFAULT_MODE){
                     s->shopItems.erase(s->shopItems.begin()+currShopItem);
@@ -121,7 +121,7 @@ void game::shopInput(char c){
                 }
             }
             return;
-        } else if (si.typeOfItem == 1){ // pack
+        } else if (si.typeOfItem == SI_PACK){ // pack
             if (spend(si.cost)){
                 s->open(si.p);
                 mainScreen.changeTitle(name(si.p).c_str());
@@ -130,7 +130,7 @@ void game::shopInput(char c){
                 s->mode = PACK_MODE;
             }
             return;
-        } else if (si.typeOfItem == 2){ // voucher
+        } else if (si.typeOfItem == SI_VOUCHER){ // voucher
             if (spend(si.cost)){
                 gain(si.v);
                 s->shopItems.erase(s->shopItems.begin()+currShopItem);

@@ -1,6 +1,11 @@
 #include "card.h"
 
 #include "color.h"
+#include "debug.h"
+
+card::card(){
+
+}
 
 // new card of value "v" and suit "s"
 card::card(int value, suit suit){
@@ -14,6 +19,13 @@ card::card(item i) {
     cardValue = i.val % 13;
     cardSuit = (suit) (i.val / 13);
 }
+
+std::string card::name(){
+    debug("name function of card called");
+    debug(suitToString(cardSuit));
+    return std::to_string(cardValue) + " of " + suitToString(cardSuit) + "s";
+}
+
 
 // prints card in color with one rank char and one suit wchar_t
 void card::print(WINDOW* win) {
@@ -141,4 +153,17 @@ char valueToChar(int v){
             return 'K';
     }
     return 'X';
+}
+
+std::string suitToString(suit s){
+    switch(s){
+        case DIAMOND:
+            return "Diamond";
+        case SPADE:
+            return "Spade";
+        case HEART:
+            return "Heart";
+        case CLUB:
+            return "CLUB";
+    }
 }

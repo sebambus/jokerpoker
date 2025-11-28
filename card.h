@@ -37,14 +37,16 @@ public:
     enhancement cardEnhancement = WILD_CARD;
     seal cardSeal = NO_SEAL;
 
+    card();
     // new card of value "v" and suit "s"
     card(int v, suit s);
     card(item);
     // prints card in color with one rank char and one suit wchar_t
     void print(WINDOW*);
-
+    std::string name();
 
 };
     char suitToChar(suit s);
     int suitToColor(suit s);
     char valueToChar(int v);
+    std::string suitToString(suit s);

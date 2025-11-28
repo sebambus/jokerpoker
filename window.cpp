@@ -222,9 +222,6 @@ void window::updateShopScreen(int index) {
 
     werase(content);
 
-    int currSection = -1;
-    std::string sectionNames[3] = {"Items:","Packs:","Vouchers:"};
-
     std::vector<shopItem> items;
     if (g->s->mode == DEFAULT_MODE){
         items = g->s->shopItems;
@@ -232,12 +229,23 @@ void window::updateShopScreen(int index) {
     }
     else items = g->s->packItems;
 
+    std::string header;
     for (int i = 0; i < items.size(); i++){
         shopItem si = items[i];
-        if (si.typeOfItem > currSection){
-            currSection = si.typeOfItem;
-            print("%s\n",sectionNames[currSection].c_str());
+        std::string newHeader;
+        if (si.typeOfItem == SI_CARD || si.typeOfItem == SI_ITEM)
+            newHeader = "Items:\n";
+        else if (si.typeOfItem == SI_PACK)
+            newHeader = "Packs:\n";
+        else if (si.typeOfItem == SI_VOUCHER)
+            newHeader = "Voucher:\n";
+        
+        if (newHeader != header){
+            print("%s", newHeader.c_str());
+            header = newHeader;
         }
+
+
         if (i == index)
             print("[x] ");
         else
@@ -325,12 +333,14 @@ void window::updateShopCardInfo(int index){
 
     std::string desc;
 
-    if (si.typeOfItem == 0){ // item
+    if (si.typeOfItem == SI_ITEM){
         desc = si.i.description();
-    } else if (si.typeOfItem == 1){
+    } else if (si.typeOfItem == SI_PACK){
         desc = description(si.p).c_str();
-    } else if (si.typeOfItem == 2){
+    } else if (si.typeOfItem == SI_VOUCHER){
         desc = item(si.v).description();
+    } else if (si.typeOfItem == SI_CARD){
+        desc = si.c.name();
     }
 
     printAndAutoColor(textWrap(desc).c_str());

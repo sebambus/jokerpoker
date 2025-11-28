@@ -13,13 +13,22 @@ typedef struct pack {
 std::string name(pack);
 std::string description(pack p);
 
+enum shopItemType : int {
+    SI_CARD,
+    SI_VOUCHER,
+    SI_PACK,
+    SI_ITEM,
+    SI_TYPE_SIZE
+};
+
 // this is a hacky solution to the hop, so i could have a vector of everything in the shop
 class shopItem{
 public:
-    int typeOfItem = 0; // 0 for item, 1 for pack, 2 for voucher
+    shopItemType typeOfItem = SI_CARD; // 0 for item, 1 for pack, 2 for voucher, 3 for card
     item i;
     pack p;
     voucher v;
+    card c;
     int cost = 0;
 
     std::string getName();
