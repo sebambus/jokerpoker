@@ -164,6 +164,6 @@ std::string suitToString(suit s){
         case HEART:
             return "Heart";
         case CLUB:
-            return "CLUB";
+            return "Club";
     }
 }

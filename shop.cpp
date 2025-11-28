@@ -247,17 +247,18 @@ shopItem::shopItem(){
 }
 
 shopItem::shopItem(item n){
-    if (n.type != CARD){
+    if (n.type != CARD){ // create it as an item
         typeOfItem = SI_ITEM;
         i = n;
         cost = i.cost;
     }
-    else {
+    else { // create it as a card
         typeOfItem = SI_CARD;
-        c = card(4,(suit)3); // for now
+        int cValue = n.val % 13;
+        int cSuit = n.val / 13;
+        c = card(cValue, (suit) cSuit); 
         cost = 1;
     }
-    
 }
 
 shopItem::shopItem(pack n){
