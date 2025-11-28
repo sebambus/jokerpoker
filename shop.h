@@ -11,6 +11,7 @@ typedef struct pack {
     int size;
 } pack;
 std::string name(pack);
+std::string description(pack p);
 
 // this is a hacky solution to the hop, so i could have a vector of everything in the shop
 class shopItem{

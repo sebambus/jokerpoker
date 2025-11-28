@@ -63,6 +63,7 @@ const char* item::name() {
     return info(this, 0);
 }
 
-const char* item::description(){
-    return info(this, 1);
+std::string item::description(){
+    std::string desc(info(this,1));
+    return desc;
 }

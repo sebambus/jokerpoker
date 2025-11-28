@@ -34,5 +34,5 @@ public:
     item(voucher);
     item(card);
     const char* name();
-    const char* description();
+    std::string description();
 };

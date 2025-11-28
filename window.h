@@ -31,7 +31,7 @@ public:
     void print(const char *format, ...);
     void printAndAutoColor(const char* str);
     void printWordInColor(const char* w, short fg, short bg);
-    std::string textWrap(const char*);
+    std::string textWrap(std::string s);
     void clear();
     void changeTitle(const char* title);
 

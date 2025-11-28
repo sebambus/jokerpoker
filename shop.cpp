@@ -41,6 +41,72 @@ std::string name(pack p) {
     return s;
 }
 
+std::string description(pack p){
+    int cardsInPack;
+    int cardsToChoose;
+    switch(p.type){
+        case TAROT:
+        case PLANET:
+        case CARD:
+            if (p.size == 0){
+                cardsToChoose = 1;
+                cardsInPack = 3;
+            } 
+            else if (p.size == 1){
+                cardsToChoose = 1;
+                cardsInPack = 5;
+            }
+            else if (p.size == 2){
+                cardsToChoose = 2;
+                cardsInPack = 5;                
+            }
+            break;
+        case JOKER:
+        case SPECTRAL:
+           if (p.size == 0){
+                cardsToChoose = 1;
+                cardsInPack = 2;
+            } 
+            else if (p.size == 1){
+                cardsToChoose = 1;
+                cardsInPack = 4;
+            }
+            else if (p.size == 2){
+                cardsToChoose = 2;
+                cardsInPack = 4;                
+            }
+            break;
+    }
+
+    std::string type;
+    std::string action;
+    switch(p.type){
+        case JOKER:
+            type = "Joker";
+            action = ".";
+            break;
+        case PLANET:
+            type = "Planet";
+            action = " to be used immediately.";
+            break;
+        case CARD:
+            type = "Playing";
+            action = " to add to your Deck.";
+            break;
+        case SPECTRAL:
+            type = "Spectral";
+            action = " to be used immediately.";
+            break;
+        case TAROT:
+            type = "Tarot";
+            action = " to be used immediately.";
+            break;
+    }
+    std::string out = "Choose " + std::to_string(cardsToChoose) + " of " + std::to_string(cardsInPack) + " " + type + " Cards" + action;
+
+    return out;
+}
+
 shop::shop(game *game){
     g = game;
     v = generateVoucher();
@@ -106,6 +172,9 @@ pack shop::generatePack() {
     else if(n/69%13 < 12)
         s = 1;
     else s = 2;
+
+    std::string packDesc;
+
     return {i, s};
 }
 

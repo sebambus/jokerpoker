@@ -113,8 +113,8 @@ void window::printWordInColor(const char* w, short fg, short bg){
     }
 }
 
-std::string window::textWrap(const char* cstring){
-    std::string newstr(cstring);
+std::string window::textWrap(std::string s){
+    std::string newstr = s;
     std::vector<std::string> lines;
 
     while (newstr.size() > width){
@@ -302,7 +302,7 @@ void window::updateCardInfo(int index, int s){
             return;
 
     werase(content);
-    const char* desc;
+    std::string desc;
     if (s == static_cast<int>(CONSUMABLE_SCREEN))
         desc = g->consumables[index].description();
     else
@@ -323,12 +323,12 @@ void window::updateShopCardInfo(int index){
     else 
         si = g->s->packItems[index];
 
-    const char* desc;
+    std::string desc;
 
     if (si.typeOfItem == 0){ // item
         desc = si.i.description();
     } else if (si.typeOfItem == 1){
-        desc = "";
+        desc = description(si.p).c_str();
     } else if (si.typeOfItem == 2){
         desc = "";
     }
