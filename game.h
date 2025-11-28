@@ -40,6 +40,7 @@ public:
     window jokerScreen;
     window cardInfo;
     window peekScreen;
+    window playingCardInfo;
     shop* s;
     level* l;
     

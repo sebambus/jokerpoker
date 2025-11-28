@@ -15,6 +15,7 @@ enum screentype : int{
     CARD_INFO_SCREEN,
     SHOP_CARD_INFO_SCREEN,
     PEEK_SCREEN,
+    PLAYING_CARD_INFO_SCREEN,
     SCREEN_TYPE_COUNT
 };
 
@@ -45,5 +46,6 @@ public:
     void updateJokerScreen(int index);
     void updateCardInfo(int index, int s);
     void updateShopCardInfo(int index);
+    void updatePlayingCardInfo(int index);
     void updatePeekScreen();
 };

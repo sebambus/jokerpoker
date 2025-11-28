@@ -138,9 +138,7 @@ std::string window::textWrap(std::string s){
 
 void window::clear(){
     wclear(content);
-    wclear(frame);
     wrefresh(content);
-    wrefresh(frame);
 }
 
 void window::changeTitle(const char *title) {
@@ -344,6 +342,20 @@ void window::updateShopCardInfo(int index){
     }
 
     printAndAutoColor(textWrap(desc).c_str());
+
+    wrefresh(content);
+}
+
+void window::updatePlayingCardInfo(int index){
+    werase(content);
+    debug("text func called");
+    card c;
+    if (g->phase == SHOP_PHASE && g->s->modifyableCards.cards.size() != 0)
+        c = g->s->modifyableCards.cards[index];
+    else if (g->phase == LEVEL_PHASE)
+        c = g->l->h.cards[index];
+
+    printAndAutoColor(textWrap(c.name()).c_str());
 
     wrefresh(content);
 }

@@ -14,7 +14,8 @@ game::game() :
     specialScreen(10, 20, 0, 100, "Consumables", this, CONSUMABLE_SCREEN),
     jokerScreen(10, 20, 0, 120, "Jokers", this, JOKER_SCREEN),
     cardInfo(10, 20, 10, 100, "Card Info", this, CARD_INFO_SCREEN),
-    peekScreen(8, 80, 12, 20, "Peek", this, PEEK_SCREEN) {
+    peekScreen(8, 80, 15, 20, "Peek", this, PEEK_SCREEN),
+    playingCardInfo(3,80,12,20, "", this, PLAYING_CARD_INFO_SCREEN){
     s = new shop(this);
     l = new level(this);
     d.fillDeck();
@@ -49,6 +50,7 @@ void game::runinit() {
         s->reopen();
         mainScreen.changeTitle("Shop");
         changeFocus(MAIN_SCREEN);
+        playingCardInfo.clear();
     }
     if(phase == LEVEL_PHASE) {
         l = new level(this);
@@ -63,6 +65,8 @@ void game::runinit() {
             changeFocus(JOKER_SCREEN);
         else   
             changeFocus(CONSUMABLE_SCREEN);
+
+        playingCardInfo.updatePlayingCardInfo(l->h.cursor);
     }
 }
 
@@ -114,7 +118,10 @@ void game::shopInput(char c){
         }
         break;
     case 'C':
-        if (s->mode == PACK_MODE) s->closePack();
+        if (s->mode == PACK_MODE){
+            s->closePack();
+            playingCardInfo.clear();
+        } 
         else running = false;
         break;
     case '1':
@@ -123,10 +130,12 @@ void game::shopInput(char c){
     case 'h':
         if (s->mode == PACK_MODE)
             s->modifyableCards.moveCursor(-1);
+            playingCardInfo.updatePlayingCardInfo(s->modifyableCards.cursor);
         break;
     case 'l':
         if (s->mode == PACK_MODE)
             s->modifyableCards.moveCursor(1);
+            playingCardInfo.updatePlayingCardInfo(s->modifyableCards.cursor);
         break;
     case ' ':
         if (s->mode == PACK_MODE)
@@ -139,9 +148,11 @@ void game::levelInput(char c){
     switch (c) {
         case 'h': // left (vim)
             l->h.moveCursor(-1);
+            playingCardInfo.updatePlayingCardInfo(l->h.cursor);
             break;
         case 'l': // right (vim)
             l->h.moveCursor(1);
+            playingCardInfo.updatePlayingCardInfo(l->h.cursor);
             break;
         case ' ': // select
             l->h.selectCursor();
@@ -180,6 +191,8 @@ void game::runupdate() {
     }
     if(phase == LEVEL_PHASE) {
         mainScreen.updateLevelScreen();
+        playingCardInfo.updatePlayingCardInfo(l->h.cursor);
+
     
         if (l->currentScore >= l->threshold) {
             l->win();
@@ -214,6 +227,7 @@ void game::useShopItem(shopItem si){
         if (s->packUsesLeft == 0){
             s->closePack();
             currShopItem = 0;
+            playingCardInfo.clear();
         }
     }
 
@@ -231,6 +245,7 @@ void game::useShopItem(shopItem si){
                 mainScreen.changeTitle(name(si.p).c_str());
                 currShopItem = 0;
                 s->mode = PACK_MODE;
+                playingCardInfo.updatePlayingCardInfo(s->modifyableCards.cursor);
                 break;
             case SI_CARD:
                 d.cards.push_back(si.c);
