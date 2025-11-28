@@ -184,7 +184,6 @@ void shop::open(pack p) {
     if(p.size == 2) packUsesLeft++;   
     while (packItems.size() != itemsInPack){
         shopItem si(generateItem(p.type));
-        si.cost = 0;
         packItems.push_back(si);
     }
 

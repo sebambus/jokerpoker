@@ -105,38 +105,7 @@ void game::shopInput(char c){
     switch(c) {
     case 'b': // buy item from shop / obtain from pack
         if (focusScreen != MAIN_SCREEN) break;
-        if (si.typeOfItem == SI_ITEM){ // item
-            if (spend(si.cost)){
-                if (s->mode == DEFAULT_MODE){
-                    s->shopItems.erase(s->shopItems.begin()+currShopItem);
-                    gain(si.i);
-                } else { // gain item from pack, needs to redone because only certain packs allow you to obtain the item
-                    s->packItems.erase(s->packItems.begin()+currShopItem);
-                    gain(si.i);
-                    s->packUsesLeft--;
-                    if (s->packUsesLeft == 0){
-                        s->closePack();
-                        currShopItem = 0;
-                    }
-                }
-            }
-            return;
-        } else if (si.typeOfItem == SI_PACK){ // pack
-            if (spend(si.cost)){
-                s->open(si.p);
-                mainScreen.changeTitle(name(si.p).c_str());
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
-                currShopItem = 0;
-                s->mode = PACK_MODE;
-            }
-            return;
-        } else if (si.typeOfItem == SI_VOUCHER){ // voucher
-            if (spend(si.cost)){
-                gain(si.v);
-                s->shopItems.erase(s->shopItems.begin()+currShopItem);
-            }
-            return;
-        }
+        useShopItem(si);
         break;
     case 'R':
         if(spend(5 + s->rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
@@ -222,6 +191,54 @@ void game::runupdate() {
             l->lose();
             running = false;
             return;
+        }
+    }
+}
+
+void game::useShopItem(shopItem si){
+    if (s->mode == PACK_MODE){ // different behavior whether or not your in the shop or in a pack
+        switch(si.typeOfItem){
+            case SI_ITEM:
+                s->packItems.erase(s->packItems.begin()+currShopItem);
+
+                if (si.i.type == JOKER) // getting a joker from a pack adds it to your inventory
+                    gain(si.i);
+                else { // other items (tarot, spectral, planet) are used immediately
+
+                }
+                
+                s->packUsesLeft--;
+                if (s->packUsesLeft == 0){
+                    s->closePack();
+                    currShopItem = 0;
+                }
+                break;
+            case SI_CARD:
+                d.cards.push_back(si.c);
+                break;
+        }
+    }
+
+    else if (s->mode == DEFAULT_MODE && spend(si.cost)){ // if your in the shop mode and you have the money to buy
+        switch(si.typeOfItem){
+            case SI_ITEM:
+                s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                gain(si.i);
+                break;
+            case SI_VOUCHER:
+                gain(si.v);
+                s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                break;
+            case SI_PACK:
+                s->open(si.p);
+                mainScreen.changeTitle(name(si.p).c_str());
+                s->shopItems.erase(s->shopItems.begin()+currShopItem);
+                currShopItem = 0;
+                s->mode = PACK_MODE;
+                break;
+            case SI_CARD:
+                d.cards.push_back(si.c);
+                break;
         }
     }
 }
