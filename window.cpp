@@ -330,7 +330,7 @@ void window::updateShopCardInfo(int index){
     } else if (si.typeOfItem == 1){
         desc = description(si.p).c_str();
     } else if (si.typeOfItem == 2){
-        desc = "";
+        desc = item(si.v).description();
     }
 
     printAndAutoColor(textWrap(desc).c_str());
