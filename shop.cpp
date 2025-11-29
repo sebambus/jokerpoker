@@ -191,6 +191,7 @@ void shop::open(pack p) {
         return;
 
     g->d.shuffle();
+
     for (int i = 0; i < 10; i++)
     {
         modifyableCards.add(g->d.cards.back());

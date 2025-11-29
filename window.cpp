@@ -348,12 +348,13 @@ void window::updateShopCardInfo(int index){
 
 void window::updatePlayingCardInfo(int index){
     werase(content);
-    debug("text func called");
     card c;
     if (g->phase == SHOP_PHASE && g->s->modifyableCards.cards.size() != 0)
         c = g->s->modifyableCards.cards[index];
     else if (g->phase == LEVEL_PHASE)
         c = g->l->h.cards[index];
+    else 
+        return;
 
     printAndAutoColor(textWrap(c.name()).c_str());
 

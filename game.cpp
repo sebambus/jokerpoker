@@ -128,14 +128,16 @@ void game::shopInput(char c){
         changeFocus(MAIN_SCREEN);
         break;
     case 'h':
-        if (s->mode == PACK_MODE)
+        if (s->mode == PACK_MODE){
             s->modifyableCards.moveCursor(-1);
             playingCardInfo.updatePlayingCardInfo(s->modifyableCards.cursor);
+        }
         break;
     case 'l':
-        if (s->mode == PACK_MODE)
+        if (s->mode == PACK_MODE){
             s->modifyableCards.moveCursor(1);
             playingCardInfo.updatePlayingCardInfo(s->modifyableCards.cursor);
+        }
         break;
     case ' ':
         if (s->mode == PACK_MODE)
