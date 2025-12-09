@@ -36,15 +36,16 @@ public:
     void clear();
     void changeTitle(const char* title);
 
-    void update(int, int);
+    void update(int);
 
+private:
     void updateLevelInfo();
     void updateGameInfo();
     void updateLevelScreen();
     void updateShopScreen(int index);
     void updateSpecialScreen(int index);
     void updateJokerScreen(int index);
-    void updateCardInfo(int index, int s);
+    void updateCardInfo(int index);
     void updateShopCardInfo(int index);
     void updatePlayingCardInfo(int index);
     void updatePeekScreen();

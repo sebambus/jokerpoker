@@ -148,32 +148,41 @@ void window::changeTitle(const char *title) {
     wrefresh(frame);
 }
 
-void window::update(int index, int s) {
+void window::update(int index) {
+    werase(content);
     switch(type) {
     case MAIN_SCREEN:
         if(g->phase == LEVEL_PHASE)
             updateLevelScreen();
         if(g->phase == SHOP_PHASE)
             updateShopScreen(index);
+	break;
     case CONSUMABLE_SCREEN:
         updateSpecialScreen(index);
+	break;
     case JOKER_SCREEN:
         updateJokerScreen(index);
+	break;
     case LEVEL_INFO_SCREEN:
         updateLevelInfo();
+	break;
     case GAME_INFO_SCREEN:
         updateGameInfo();
+	break;
     case CARD_INFO_SCREEN:
-        updateCardInfo(index, s);
+        updateCardInfo(index);
+	break;
     case SHOP_CARD_INFO_SCREEN:
         updateShopCardInfo(index);
+	break;
     case PEEK_SCREEN:
         updatePeekScreen();
+	break;
     }
+    wrefresh(content);
 }
 
 void window::updateLevelInfo() {
-    werase(content);
     print("Small Blind\n");
     print("Threshold: %d\n", g->l->threshold);
     print("Score: %d\n", g->l->currentScore);
@@ -190,11 +199,9 @@ void window::updateLevelInfo() {
     }
     print("Hands  Discards\n");
     print("  %d       %d\n", g->l->plays, g->l->discards);
-    wrefresh(content);
 }
 
 void window::updateGameInfo() {
-    werase(content);
     print("You start with\n");
     print("Hands Discards\n");
     print("  %d      %d\n", g->getPlays(), g->getDiscards());
@@ -203,22 +210,18 @@ void window::updateGameInfo() {
     print("$%d\n", g->money);
     unsetcolor(content, COLOR_YELLOW, COLOR_BLACK);
     print("Ante %d/%d, Round %d\n", g->ante, 8, g->round);
-    wrefresh(content);
 }
 
 void window::updateLevelScreen() {
-    werase(content);
     g->l->h.print(content);
     wmove(content, 5, 0);
     g->l->played.print(content);
-    wrefresh(content);
 }
 
 void window::updateShopScreen(int index) {
     if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
 
-    werase(content);
 
     std::vector<shopItem> items;
     if (g->s->mode == DEFAULT_MODE){
@@ -259,14 +262,12 @@ void window::updateShopScreen(int index) {
     
     if (index != -1) g->cardInfo.updateShopCardInfo(index);
 
-    wrefresh(content);
 }
 
 void window::updateSpecialScreen(int index){
     if (g->consumables.size() == 0) //for when you start a level without any consumables
         return;
 
-    werase(content);
     for (int i = 0; i < g->consumables.size(); i++){
         if (i == index)
             print("[x]");
@@ -274,16 +275,13 @@ void window::updateSpecialScreen(int index){
             print("[ ]");
         print("%s\n", g->consumables[i].name());
     }
-    if (index != -1) g->cardInfo.updateCardInfo(index, static_cast<int>(CONSUMABLE_SCREEN));
-    wrefresh(content);
+    if (index != -1) g->cardInfo.updateCardInfo(index);
 }
 
 void window::updateJokerScreen(int index){
-    werase(content);
     if (g->jokers.size() == 0) //for when you start a level without any consumables
         return;
 
-    werase(content);
     for (int i = 0; i < g->jokers.size(); i++){
         if (i == index)
             print("[x]");
@@ -292,37 +290,32 @@ void window::updateJokerScreen(int index){
         print("%s\n", g->jokers[i].name());
     }
 
-    if (index != -1) g->cardInfo.updateCardInfo(index, static_cast<int>(JOKER_SCREEN));
-    wrefresh(content);
+    if (index != -1) g->cardInfo.updateCardInfo(index);
 }
 
 // prints info on item based on game's focusScreen and the items position in it's respective vector
-// s is screen. when calling this, cast a screentype to an int
-void window::updateCardInfo(int index, int s){
-    if (s == static_cast<int>(CONSUMABLE_SCREEN)) // don't display anything if screen is empty
+void window::updateCardInfo(int index){
+    if (g->focusScreen == CONSUMABLE_SCREEN) // don't display anything if screen is empty
         if (g->consumables.size() == 0)
             return;
 
-    if (s == static_cast<int>(JOKER_SCREEN))
+    if (g->focusScreen == JOKER_SCREEN)
         if (g->jokers.size() == 0)
             return;
 
-    werase(content);
     std::string desc;
-    if (s == static_cast<int>(CONSUMABLE_SCREEN))
+    if (g->focusScreen == CONSUMABLE_SCREEN)
         desc = g->consumables[index].description();
     else
         desc = g->jokers[index].description();
 
     printAndAutoColor(textWrap(desc).c_str()); // wrap text and convert back to char* before printing;
     
-    wrefresh(content);
 }
 
 // specifically for printing out the description of the selected item in shop
 // needs to be it's own function for how much differently it works than updateCardInfo
 void window::updateShopCardInfo(int index){
-    werase(content);
     shopItem si;
     if (g->s->mode == DEFAULT_MODE)
         si = g->s->shopItems[index];
@@ -343,11 +336,9 @@ void window::updateShopCardInfo(int index){
 
     printAndAutoColor(textWrap(desc).c_str());
 
-    wrefresh(content);
 }
 
 void window::updatePlayingCardInfo(int index){
-    werase(content);
     card c;
     if (g->phase == SHOP_PHASE && g->s->modifyableCards.cards.size() != 0)
         c = g->s->modifyableCards.cards[index];
@@ -358,12 +349,10 @@ void window::updatePlayingCardInfo(int index){
 
     printAndAutoColor(textWrap(c.name()).c_str());
 
-    wrefresh(content);
 }
 
 
 void window::updatePeekScreen(){
-    werase(content);
     print("   ");
     for (int i = 1; i < 14; i++){ // 
         print("  %c ", valueToChar(i)); // print collumn headers
@@ -392,5 +381,4 @@ void window::updatePeekScreen(){
         print("  %d ", g->l->d.cardCount(i)); // print value collumn total
     }
 
-    wrefresh(content);
 }
