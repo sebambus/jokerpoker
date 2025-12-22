@@ -170,14 +170,17 @@ void window::update(int index) {
         updateGameInfo();
 	break;
     case CARD_INFO_SCREEN:
-        updateCardInfo(index);
-	break;
-    case SHOP_CARD_INFO_SCREEN:
-        updateShopCardInfo(index);
+        if (g->focusScreen == MAIN_SCREEN)
+            updateShopCardInfo(index);
+        else
+            updateCardInfo(index);
 	break;
     case PEEK_SCREEN:
         updatePeekScreen();
 	break;
+    case PLAYING_CARD_INFO_SCREEN:
+        updatePlayingCardInfo(index);
+    break;
     }
     wrefresh(content);
 }
@@ -219,6 +222,7 @@ void window::updateLevelScreen() {
 }
 
 void window::updateShopScreen(int index) {
+    debug(std::to_string(index));
     if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
 
@@ -260,8 +264,8 @@ void window::updateShopScreen(int index) {
     if (g->s->mode == PACK_MODE)
         g->s->modifyableCards.print(content);
     
-    if (index != -1) g->cardInfo.updateShopCardInfo(index);
 
+    if (index != -1) g->cardInfo.update(index);
 }
 
 void window::updateSpecialScreen(int index){
@@ -275,7 +279,7 @@ void window::updateSpecialScreen(int index){
             print("[ ]");
         print("%s\n", g->consumables[i].name());
     }
-    if (index != -1) g->cardInfo.updateCardInfo(index);
+    if (index != -1) g->cardInfo.update(index);
 }
 
 void window::updateJokerScreen(int index){
@@ -290,7 +294,7 @@ void window::updateJokerScreen(int index){
         print("%s\n", g->jokers[i].name());
     }
 
-    if (index != -1) g->cardInfo.updateCardInfo(index);
+    if (index != -1) g->cardInfo.update(index);
 }
 
 // prints info on item based on game's focusScreen and the items position in it's respective vector
@@ -335,7 +339,6 @@ void window::updateShopCardInfo(int index){
     }
 
     printAndAutoColor(textWrap(desc).c_str());
-
 }
 
 void window::updatePlayingCardInfo(int index){
