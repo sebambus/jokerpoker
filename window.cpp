@@ -342,6 +342,8 @@ void window::updateShopCardInfo(int index){
 }
 
 void window::updatePlayingCardInfo(int index){
+    if (index < 0) return;
+
     card c;
     if (g->phase == SHOP_PHASE && g->s->modifyableCards.cards.size() != 0)
         c = g->s->modifyableCards.cards[index];
