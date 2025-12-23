@@ -49,4 +49,5 @@ private:
     void updateShopCardInfo(int index);
     void updatePlayingCardInfo(int index);
     void updatePeekScreen();
+    void updateHandScreen();
 };

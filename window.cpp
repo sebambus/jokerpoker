@@ -3,6 +3,8 @@
 #include <cstdarg>
 #include <string>
 #include <sstream>
+#include <stdio.h>
+#include <string.h>
 #include "level.h"
 #include "game.h"
 #include "shop.h"
@@ -10,6 +12,7 @@
 #include "card.h"
 #include "color.h"
 #include "debug.h"
+#include "readcsv.h"
 
 window::window(int h, int w, int y, int x, const char *title, game *g, screentype type) {
     frame = newwin(h, w, y, x);
@@ -222,7 +225,6 @@ void window::updateLevelScreen() {
 }
 
 void window::updateShopScreen(int index) {
-    debug(std::to_string(index));
     if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
 
@@ -358,6 +360,7 @@ void window::updatePlayingCardInfo(int index){
 
 
 void window::updatePeekScreen(){
+    // printing out deck
     print("   ");
     for (int i = 1; i < 14; i++){ // 
         print("  %c ", valueToChar(i)); // print collumn headers
@@ -386,4 +389,48 @@ void window::updatePeekScreen(){
         print("  %d ", g->l->d.cardCount(i)); // print value collumn total
     }
 
+    // printing out hands
+    print("\n\n");
+    print("                 | Mult  | Chips | Level | Times Played\n");
+    for (int i = 0; i < 13; i++)
+    {
+        const char* handName = readcsv("handtable.csv", i, 0);
+        for (int j = 0; j < 15 - (int)strlen(handName); j++)
+        {
+            print(" ");
+        }
+        
+        print("%s: |", handName);
+
+        for (int x = 0; x < 4; x++)
+        {
+            std::string value = std::to_string(g->handTable[i][x]);
+            int valSize = value.size();
+            int leftPad = 0; int rightPad = 0;
+            int combined = valSize + leftPad + rightPad;
+            while (true){
+                if (combined >= 7)
+                    break;
+                leftPad++;
+                combined++;
+                if (combined >= 7)
+                    break;
+                rightPad++;
+                combined++;
+            }
+
+            for (int s = 0; s < leftPad; s++){
+                print(" ");
+            }
+            if (x == 0) setcolor(content, COLOR_RED, COLOR_BLACK);
+            if (x == 1) setcolor(content, COLOR_BLUE, COLOR_BLACK);
+            print(value.c_str());
+            setcolor(content, COLOR_WHITE, COLOR_BLACK);
+            for (int s = 0; s < rightPad; s++){
+                print(" ");
+            }
+            if (x != 3) print("|");
+        }
+        print("\n");
+    }
 }

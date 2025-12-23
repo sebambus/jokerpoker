@@ -14,15 +14,13 @@ game::game() :
     specialScreen(10, 20, 0, 100, "Consumables", this, CONSUMABLE_SCREEN),
     jokerScreen(10, 20, 0, 120, "Jokers", this, JOKER_SCREEN),
     cardInfo(10, 20, 10, 100, "Card Info", this, CARD_INFO_SCREEN),
-    peekScreen(8, 80, 15, 20, "Peek", this, PEEK_SCREEN),
+    peekScreen(25, 80, 15, 20, "Peek", this, PEEK_SCREEN),
     playingCardInfo(3,80,12,20, "", this, PLAYING_CARD_INFO_SCREEN){
     s = new shop(this);
     l = new level(this);
     d.fillDeck();
     initHandTable();
 }
-
-
 
 bool running;
 
@@ -267,8 +265,8 @@ int game::getDiscards() {
 void game::initHandTable(){
     for (int i = 0; i < HAND_TYPE_COUNT; i++)
     {
-        for (int j = 0; j < 4; j++){
-            handTable[i][j] = atoi(readcsv("handtable.csv", i, j));
+        for (int j = 1; j < 5; j++){
+            handTable[i][j-1] = atoi(readcsv("handtable.csv", i, j));
         }
     }
     
