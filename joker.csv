@@ -49,7 +49,7 @@ Burglar,When Blind is selected{ gain +3Hands and lose all discards,6,Uncommon,Av
 Blackboard,X3 Mult if all cards held in hand are Spades or Clubs,6,Uncommon,Available from start.,multiplicative mult jokers,independent,48,
 Runner,Gains +15 Chips if played hand contains a Straight (Currently +0 Chips),5,Common,Available from start.,chips jokers,mixed,49,
 Ice Cream,+100 Chips; -5 Chips for every hand played,5,Common,Available from start.,chips jokers,independent,50,
-DNA,If first hand of round has only 1 card{ add a permanent copy to deck and draw it to hand8,Rare,Available from start.,effect jokers,on played,51,
+DNA,If first hand of round has only 1 card{ add a permanent copy to deck and draw it to hand,8,Rare,Available from start.,effect jokers,on played,51,
 Splash,Every played card counts in scoring,3,Common,Available from start.,effect jokers,n/a,52,
 Blue Joker,+2 Chips for each remaining card in deck (Currently +104 Chips),5,Common,Available from start.,chips jokers,independent,53,
 Sixth Sense,If first hand of round is a single 6{ destroy it and create a Spectral card (Must have room),6,Uncommon,Available from start.,effect jokers,n/a,54,

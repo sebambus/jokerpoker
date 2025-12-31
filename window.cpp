@@ -3,6 +3,8 @@
 #include <cstdarg>
 #include <string>
 #include <sstream>
+#include <string>
+#include <cstring>
 #include <stdio.h>
 #include <string.h>
 #include "level.h"
@@ -24,10 +26,20 @@ window::window(int h, int w, int y, int x, const char *title, game *g, screentyp
     this->type = type;
 }
 
+const char* replaceChar(const char* s, char oldchar, char newchar) {
+    std::string str(s);
+    for(size_t i = 0; i < str.size(); i++)
+        if(str[i] == oldchar)
+            str[i] = newchar;
+    char* result = new char[str.size() + 1];
+    std::strcpy(result, str.c_str());
+    return result;
+}
+
 void window::print(const char* format, ...) {
     va_list args;
     va_start(args, format);
-    vw_printw(content, format, args);
+    vw_printw(content, replaceChar(format, '{', ','), args);
     va_end(args);
 }
 

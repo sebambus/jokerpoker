@@ -83,23 +83,23 @@ std::string description(pack p){
     switch(p.type){
         case JOKER:
             type = "Joker";
-            action = ".";
+            action = "";
             break;
         case PLANET:
             type = "Planet";
-            action = " to be used immediately.";
+            action = " to be used immediately";
             break;
         case CARD:
             type = "Playing";
-            action = " to add to your Deck.";
+            action = " to add to your Deck";
             break;
         case SPECTRAL:
             type = "Spectral";
-            action = " to be used immediately.";
+            action = " to be used immediately";
             break;
         case TAROT:
             type = "Tarot";
-            action = " to be used immediately.";
+            action = " to be used immediately";
             break;
     }
     std::string out = "Choose " + std::to_string(cardsToChoose) + " of " + std::to_string(cardsInPack) + " " + type + " Cards" + action;
@@ -164,7 +164,7 @@ pack shop::generatePack() {
         i = TAROT;
     else if(n%69 < 60)
         i = PLANET;
-    else if(n%69 < 66)
+    else if(n%69 <= 67) // nice
         i = JOKER;
     else i = SPECTRAL;
     if(n/69%13 < 8)
