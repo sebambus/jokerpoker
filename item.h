@@ -27,6 +27,7 @@ public:
     int cost;
 
     item();
+    item(itemtype);
     item(planet);
     item(tarot);
     item(spectral);

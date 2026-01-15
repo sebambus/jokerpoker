@@ -112,23 +112,6 @@ shop::shop(game *game){
     v = generateVoucher();
 }
 
-item shop::generateItem(itemtype i) {
-    switch (i)  {
-    case PLANET:
-        return item((planet) (rand()%PLANET_COUNT));
-    case TAROT:
-        return item((tarot) (rand()%TAROT_COUNT));
-    case SPECTRAL:
-        return item((spectral) (rand()%SPECTRAL_COUNT));
-    case JOKER:
-        return item((joker) (rand()%JOKER_COUNT));
-    case VOUCHER:
-        return item(generateVoucher());
-    case CARD:
-        return item(card(rand()%13, (suit) (rand()%4)));
-    }
-}
-
 item shop::generateItem() {
     int odds[TYPE_COUNT] = {20+28*g->vouchers[PLANET_MERCHANT]+112*g->vouchers[PLANET_TYCOON],
                             20+28*g->vouchers[TAROT_MERCHANT]+112*g->vouchers[TAROT_TYCOON],
@@ -138,7 +121,7 @@ item shop::generateItem() {
     int n = rand() % w;
     for(itemtype i = (itemtype)0; i < TYPE_COUNT; i = (itemtype) (i+1)) {
         if(n < odds[i])
-            return generateItem(i);
+            return item(i);
         else n -= odds[i];
     }
 }
@@ -183,7 +166,7 @@ void shop::open(pack p) {
     if(p.size != 0) itemsInPack += 2;
     if(p.size == 2) packUsesLeft++;   
     while (packItems.size() != itemsInPack){
-        shopItem si(generateItem(p.type));
+        shopItem si(item(p.type));
         packItems.push_back(si);
     }
 

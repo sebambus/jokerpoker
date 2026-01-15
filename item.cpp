@@ -2,9 +2,33 @@
 
 #include "readcsv.h"
 #include "card.h"
+#include "shop.h"
 
 item::item(){
     
+}
+
+item::item(itemtype i) {
+    switch (i)  {
+    case PLANET:
+        *this = item((planet) (rand()%PLANET_COUNT));
+		break;
+    case TAROT:
+        *this = item((tarot) (rand()%TAROT_COUNT));
+		break;
+    case SPECTRAL:
+        *this = item((spectral) (rand()%SPECTRAL_COUNT));
+		break;
+    case JOKER:
+        *this = item((joker) (rand()%JOKER_COUNT));
+		break;
+    case VOUCHER:
+        *this = item(shop(nullptr).generateVoucher());
+		break;
+    case CARD:
+        *this = item(card(rand()%13, (suit) (rand()%4)));
+		break;
+    }
 }
 
 item::item(planet p) {
