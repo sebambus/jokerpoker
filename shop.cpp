@@ -156,7 +156,10 @@ pack shop::generatePack() {
         s = 1;
     else s = 2;
 
-    return {i, s};
+    // cost of pack
+    int c = 4 + 2 * s;
+
+    return {i, s, c};
 }
 
 void shop::open(pack p) {
@@ -166,8 +169,7 @@ void shop::open(pack p) {
     if(p.size != 0) itemsInPack += 2;
     if(p.size == 2) packUsesLeft++;   
     while (packItems.size() != itemsInPack){
-        shopItem si(item(p.type));
-        packItems.push_back(si);
+        packItems.push_back(item(p.type));
     }
 
     if (p.type == JOKER || p.type == CARD) // you dont modify any cards with joker or card packs
@@ -196,89 +198,19 @@ void shop::reroll() {
     items.clear();
     while(items.size() < 3)
         items.push_back(generateItem());
-    fillShopItems();
 }
 
-// ???
+// opening the shop
 void shop::reopen() {
     reroll();
     packs.clear();
     while(packs.size() < 2)
         packs.push_back(generatePack());
-    fillShopItems();
     rerollCount = 0;
 }
 
-void shop::fillShopItems(){
-    shopItems.clear();
-    for (item i: items){
-        shopItem si(i);
-        shopItems.push_back(si);
-    }
-
-    for (pack p: packs){
-        shopItem si(p);
-        shopItems.push_back(si);
-    }
-
-    shopItem si(v);
-    shopItems.push_back(si);
-
+int shop::shopSize(){
+    return items.size() + packs.size();
 }
 
-shopItem::shopItem(){
 
-}
-
-shopItem::shopItem(item n){
-    if (n.type != CARD){ // create it as an item
-        typeOfItem = SI_ITEM;
-        i = n;
-        cost = i.cost;
-    }
-    else { // create it as a card
-        typeOfItem = SI_CARD;
-        int cValue = n.val % 13;
-        int cSuit = n.val / 13;
-        c = card(cValue, (suit) cSuit); 
-        cost = 1;
-    }
-}
-
-shopItem::shopItem(pack n){
-    typeOfItem = SI_PACK;
-    p = n;
-    cost = 2 * (n.size + 2);
-}
-
-shopItem::shopItem(voucher n){
-    typeOfItem = SI_VOUCHER;
-    v = n;
-    cost = 10;
-}
-
-std::string shopItem::getName(){
-    const char* cstring;
-    std::string s;
-    switch (typeOfItem){
-    case SI_ITEM:
-        cstring = i.name();
-        break;
-    case SI_PACK:
-        s = name(p);
-        break;
-    case SI_VOUCHER:
-        cstring = item(v).name();
-        break;
-    case SI_CARD:
-        s = c.name();
-        break;
-    }
-
-
-    if (!s.empty())
-        return s;
-    
-    std::string name(cstring);    
-    return name;
-}

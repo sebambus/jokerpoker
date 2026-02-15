@@ -57,7 +57,7 @@ public:
     void levelInput(char c);
     void shopInput(char c);
     void runupdate();
-    void useShopItem(shopItem si);
+    void useShopItem(int currItem);
     int getPlays();
     int getDiscards();
     void initHandTable();

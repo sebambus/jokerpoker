@@ -246,42 +246,88 @@ void window::updateShopScreen(int index) {
     if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
 
-    std::vector<shopItem> items;
-    if (g->s->mode == DEFAULT_MODE){
-        items = g->s->shopItems;
-        changeTitle("Shop");
-    }
-    else items = g->s->packItems;
-
-    std::string header;
-    for (int i = 0; i < items.size(); i++){
-        shopItem si = items[i];
-        std::string newHeader;
-        if (si.typeOfItem == SI_CARD || si.typeOfItem == SI_ITEM)
-            newHeader = "Items:\n";
-        else if (si.typeOfItem == SI_PACK)
-            newHeader = "Packs:\n";
-        else if (si.typeOfItem == SI_VOUCHER)
-            newHeader = "Voucher:\n";
-        
-        if (newHeader != header){
-            print("%s", newHeader.c_str());
-            header = newHeader;
+    // if we are now in pack mode
+    if (g->s->mode == PACK_MODE){
+        int shopIndex = 0;
+        for (item i : g->s->packItems)
+        {
+            if (shopIndex == index)
+                print("[x] ");
+            else
+                print("[ ] ");
+            print("%s\n", i.name());
+            shopIndex++;
         }
+        g->s->modifyableCards.print(content);
+        if (index != -1) g->cardInfo.update(index);
+        return;
+    }
 
-
-        if (i == index)
+    // if we are in default mode
+    int shopIndex = 0;
+    if (g->s->items.size() != 0) print("Items:\n");
+    for (item i : g->s->items)
+    {
+        if (shopIndex == index)
             print("[x] ");
         else
             print("[ ] ");
-        print("%s ", si.getName().c_str());
-        if (g->s->mode == DEFAULT_MODE)
-            printWordInColor(("$"+std::to_string(si.cost)).c_str(), COLOR_YELLOW, COLOR_BLACK);
+        print("%s ", i.name());
+        std::string costString = "$" + std::to_string(i.cost);
+        printWordInColor(costString.c_str(), COLOR_YELLOW, COLOR_BLACK);
         print("\n");
+        shopIndex++;
+    }
+    
+    if (g->s->packs.size() != 0) print("Packs:\n");
+    for (pack p : g->s->packs){
+        if (shopIndex == index)
+            print("[x] ");
+        else
+            print("[ ] ");
+        print("%s ", name(p).c_str());
+        std::string costString = "$" + std::to_string(p.cost);
+        printWordInColor(costString.c_str(), COLOR_YELLOW, COLOR_BLACK);
+        print("\n");
+        shopIndex++;
     }
 
-    if (g->s->mode == PACK_MODE)
-        g->s->modifyableCards.print(content);
+
+
+//     std::vector<shopItem> items;)
+//     if (g->s->mode == DEFAULT_MODE){
+//         items = g->s->shopItems;
+//         changeTitle("Shop");
+//     }
+//     else items = g->s->packItems;
+
+//     std::string header;
+//     for (int i = 0; i < items.size(); i++){
+//         shopItem si = items[i];
+//         std::string newHeader;
+//         if (si.typeOfItem == SI_CARD || si.typeOfItem == SI_ITEM)
+//             newHeader = "Items:\n";
+//         else if (si.typeOfItem == SI_PACK)
+//             newHeader = "Packs:\n";
+//         else if (si.typeOfItem == SI_VOUCHER)
+//             newHeader = "Voucher:\n";
+        
+//         if (newHeader != header){
+//             print("%s", newHeader.c_str());
+//             header = newHeader;
+//         }
+
+
+//         if (i == index)
+//             print("[x] ");
+//         else
+//             print("[ ] ");
+//         print("%s ", si.getName().c_str());
+//         if (g->s->mode == DEFAULT_MODE)
+//             printWordInColor(("$"+std::to_string(si.cost)).c_str(), COLOR_YELLOW, COLOR_BLACK);
+//         print("\n");
+//     }
+
     
 
     if (index != -1) g->cardInfo.update(index);
@@ -340,22 +386,24 @@ void window::updateCardInfo(int index){
 // specifically for printing out the description of the selected item in shop
 // needs to be it's own function for how much differently it works than updateCardInfo
 void window::updateShopCardInfo(int index){
-    shopItem si;
-    if (g->s->mode == DEFAULT_MODE)
-        si = g->s->shopItems[index];
-    else 
-        si = g->s->packItems[index];
-
     std::string desc;
 
-    if (si.typeOfItem == SI_ITEM){
-        desc = si.i.description();
-    } else if (si.typeOfItem == SI_PACK){
-        desc = description(si.p).c_str();
-    } else if (si.typeOfItem == SI_VOUCHER){
-        desc = item(si.v).description();
-    } else if (si.typeOfItem == SI_CARD){
-        desc = si.c.name();
+    // if we are in pack mode
+    if (g->s->mode == PACK_MODE){
+        desc = g->s->packItems[index].description();
+    }
+
+    // if we are looking at an item
+    else if (index >=0 && index < g->s->items.size()){
+        desc = g->s->items[index].description();
+    }
+    // if we are looking at a pack
+    else if (index >= g->s->items.size() && index < g->s->items.size() + g->s->packs.size()){
+        desc = description(g->s->packs[index - g->s->items.size()]);
+    }
+    // if we are looking at a voucher
+    else{
+        
     }
 
     printAndAutoColor(textWrap(desc).c_str());

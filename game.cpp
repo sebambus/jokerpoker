@@ -101,14 +101,10 @@ void game::universalInput(char c){
 }
 
 void game::shopInput(char c){
-    shopItem si;
-    if (s->mode == DEFAULT_MODE) si = s->shopItems[currShopItem];
-    else si = s->packItems[currShopItem];
-
     switch(c) {
     case 'b': // buy item from shop / obtain from pack
         if (focusScreen != MAIN_SCREEN) break;
-        useShopItem(si);
+        useShopItem(currShopItem);
         break;
     case 'R':
         if(spend(5 + s->rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
@@ -119,6 +115,7 @@ void game::shopInput(char c){
     case 'C':
         if (s->mode == PACK_MODE){ // if in pack mode, close pack
             s->closePack();
+            mainScreen.changeTitle("Shop");
             playingCardInfo.clear();
         } 
         else running = false; // if not, close shop
@@ -213,50 +210,56 @@ void game::runupdate() {
 
 // FIX: shop item is a dumb class, shop can just use multiple vectors and we can determine what kind of object
 // we are looking at based on which vector it is in
-void game::useShopItem(shopItem si){
-    if (s->mode == PACK_MODE){ // different behavior whether or not your in the shop or in a pack
+void game::useShopItem(int currItem){
+    // if we are in pack mode
+    if (s->mode == PACK_MODE){
+        item i = s->packItems[currShopItem];
         s->packItems.erase(s->packItems.begin()+currShopItem);
-        switch(si.typeOfItem){
-            case SI_ITEM:
-                if (si.i.type == JOKER) // getting a joker from a pack adds it to your inventory
-                    gain(si.i);
-                else { // other items (tarot, spectral, planet) are used immediately
-
-                }
-                break;
-            case SI_CARD:
-                d.cards.push_back(si.c);
-                break;
+        itemtype it = i.type;
+        switch (it)
+        {
+        case JOKER:
+            gain(i);
+            break;
+        
+        // tarots, spectrals, and planets are used, which is not yet implemented
+        default:
+            break;
         }
-        s->packUsesLeft--;
-        if (s->packUsesLeft == 0){
-            s->closePack();
+        s->closePack();
+        currShopItem = 0;
+        playingCardInfo.clear();
+        return;
+    }
+
+
+    // if item is an item
+    if (currItem >= 0 && currItem < s->items.size()){
+        item i = s->items[currItem];
+        if (spend(i.cost)){
+            gain(i);    
+            s->items.erase(s->items.begin() + currItem);
+        }
+    }
+
+    // if item is a pack
+    else if (currItem >= s->items.size() < s->packs.size()){
+        pack p = s->packs[currItem - s->items.size()];
+        if (spend(p.cost)){
+            s->open(p);
+            mainScreen.changeTitle(name(p).c_str());
             currShopItem = 0;
-            playingCardInfo.clear();
+            s->mode = PACK_MODE;
+            s->packs.erase(s->packs.begin() + currItem - s->items.size());
+            playingCardInfo.update(s->modifyableCards.cursor);
         }
     }
 
-    else if (s->mode == DEFAULT_MODE && spend(si.cost)){ // if your in the shop mode and you have the money to buy
-        s->shopItems.erase(s->shopItems.begin()+currShopItem);        
-        switch(si.typeOfItem){
-            case SI_ITEM:
-                gain(si.i);
-                break;
-            case SI_VOUCHER:
-                gain(si.v);
-                break;
-            case SI_PACK:
-                s->open(si.p);
-                mainScreen.changeTitle(name(si.p).c_str());
-                currShopItem = 0;
-                s->mode = PACK_MODE;
-                playingCardInfo.update(s->modifyableCards.cursor);
-                break;
-            case SI_CARD:
-                d.cards.push_back(si.c);
-                break;
-        }
+    // if item is a voucher
+    else {
+
     }
+    
 }
 
 int game::getPlays() {
@@ -362,7 +365,7 @@ void game::changeShopItem(int by){
     int newShopItemInd = currShopItem + by;
     int shopItemSize = 0;
     if (s->mode == DEFAULT_MODE)
-        shopItemSize = s->shopItems.size();
+        shopItemSize = s->shopSize();
     else 
         shopItemSize = s->packItems.size();
     if (newShopItemInd > shopItemSize-1 || newShopItemInd < 0)
@@ -374,7 +377,7 @@ void game::changeShopItem(int by){
 
 void game::changeFocus(screentype scr){
     if (scr == MAIN_SCREEN){
-        if (s->shopItems.size() == 0) return;
+        if (s->shopSize() == 0) return;
         focusScreen = MAIN_SCREEN;
         specialScreen.update(-1);
         jokerScreen.update(-1);
