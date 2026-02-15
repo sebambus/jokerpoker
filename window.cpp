@@ -26,6 +26,7 @@ window::window(int h, int w, int y, int x, const char *title, game *g, screentyp
     this->type = type;
 }
 
+// find and replace char function
 const char* replaceChar(const char* s, char oldchar, char newchar) {
     std::string str(s);
     for(size_t i = 0; i < str.size(); i++)
@@ -43,6 +44,7 @@ void window::print(const char* format, ...) {
     va_end(args);
 }
 
+// print string out and automatically color the correct words
 void window::printAndAutoColor(const char* str){
     std::string text(str);
     std::vector<std::string> words;
@@ -104,6 +106,7 @@ void window::printAndAutoColor(const char* str){
 
 }
 
+// helper function used by printAndAutoColor
 void window::printWordInColor(const char* w, short fg, short bg){
     char* word = (char*)w;
     setcolor(content, fg, bg);
@@ -128,6 +131,7 @@ void window::printWordInColor(const char* w, short fg, short bg){
     }
 }
 
+// returns a string with newlines that wraps the text based on this windows size
 std::string window::textWrap(std::string s){
     std::string newstr = s;
     std::vector<std::string> lines;
@@ -163,6 +167,7 @@ void window::changeTitle(const char *title) {
     wrefresh(frame);
 }
 
+// universal update function
 void window::update(int index) {
     werase(content);
     switch(type) {
@@ -236,10 +241,10 @@ void window::updateLevelScreen() {
     g->l->played.print(content);
 }
 
+// FIX: will need to be fixed when shopitem is gone
 void window::updateShopScreen(int index) {
     if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
-
 
     std::vector<shopItem> items;
     if (g->s->mode == DEFAULT_MODE){
@@ -282,6 +287,7 @@ void window::updateShopScreen(int index) {
     if (index != -1) g->cardInfo.update(index);
 }
 
+// update consumable screen
 void window::updateSpecialScreen(int index){
     if (g->consumables.size() == 0) //for when you start a level without any consumables
         return;
@@ -355,6 +361,7 @@ void window::updateShopCardInfo(int index){
     printAndAutoColor(textWrap(desc).c_str());
 }
 
+// update window below playing area that describes the playing cards
 void window::updatePlayingCardInfo(int index){
     if (index < 0) return;
 
@@ -369,7 +376,6 @@ void window::updatePlayingCardInfo(int index){
     printAndAutoColor(textWrap(c.name()).c_str());
 
 }
-
 
 void window::updatePeekScreen(){
     // printing out deck
@@ -398,7 +404,7 @@ void window::updatePeekScreen(){
 
     print("   ");
     for (int i = 1; i < 14; i++){
-        print("  %d ", g->l->d.cardCount(i)); // print value collumn total
+        print("  %d ", g->l->d.cardValueCount(i)); // print value collumn total
     }
 
     // printing out hands

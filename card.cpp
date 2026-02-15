@@ -15,6 +15,7 @@ card::card(int value, suit suit){
     cardSeal = NO_SEAL;
 }
 
+
 card::card(item i) {
     cardValue = i.val % 13;
     cardSuit = (suit) (i.val / 13);

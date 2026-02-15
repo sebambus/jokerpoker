@@ -104,7 +104,7 @@ void hand::print(WINDOW* w) {
     wmove(w, y+2, x);
 }
 
-// moves cursor right by moveBy
+// moves cursor by moveBy
 void hand::moveCursor(int moveBy){
     int newPosition = cursor + moveBy;
     if (newPosition > cards.size() -1 || newPosition < 0)
@@ -112,11 +112,13 @@ void hand::moveCursor(int moveBy){
     cursor += moveBy;
 }
 
+// select card at current cursor position
 void hand::selectCursor() {
     if(cursor >= 0 && cursor < selected.size())
         selected[cursor] = !selected[cursor] && cardsSelected() < 5;
 }
 
+// number of cards selected in hand
 int hand::cardsSelected() {
     int n = 0;
     for (int i = 0; i < selected.size(); i++)
@@ -216,7 +218,7 @@ std::vector<card> hand::subsortBySuit(std::vector<card> sub){
     return sub;
 }
 
-
+// swap the positions of two cards
 void hand::swapSelected(){
     if (cardsSelected() != 2) return; //if more than or less than 2 cards are selected
     std::vector<int> positions;
@@ -238,7 +240,7 @@ void hand::swapSelected(){
 }
 
 
-//returns poker hand and cards within hand that should be scored
+//returns cards in hand that should be scored, and changes the hands pokerHand variable to the correct type
 std::vector<card> hand::scoreCards(){
     std::vector<card> scoredCards;
     

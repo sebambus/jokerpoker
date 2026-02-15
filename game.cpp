@@ -24,6 +24,7 @@ game::game() :
 
 bool running;
 
+// ???
 void game::run() {
     for(ante = 1; ante <= 8; ante++) {
         s = new shop(this);
@@ -116,15 +117,17 @@ void game::shopInput(char c){
         }
         break;
     case 'C':
-        if (s->mode == PACK_MODE){
+        if (s->mode == PACK_MODE){ // if in pack mode, close pack
             s->closePack();
             playingCardInfo.clear();
         } 
-        else running = false;
+        else running = false; // if not, close shop
         break;
     case '1':
         changeFocus(MAIN_SCREEN);
         break;
+    
+    // the rest of these are for selecting cards inside of pack screens where that's a thing
     case 'h':
         if (s->mode == PACK_MODE){
             s->modifyableCards.moveCursor(-1);
@@ -208,6 +211,8 @@ void game::runupdate() {
     }
 }
 
+// FIX: shop item is a dumb class, shop can just use multiple vectors and we can determine what kind of object
+// we are looking at based on which vector it is in
 void game::useShopItem(shopItem si){
     if (s->mode == PACK_MODE){ // different behavior whether or not your in the shop or in a pack
         s->packItems.erase(s->packItems.begin()+currShopItem);
@@ -297,6 +302,7 @@ bool game::spend(int x) {
     return true;
 }
 
+// ???
 void game::updateMenuScreens(){
     if (focusScreen == CONSUMABLE_SCREEN){
         jokerScreen.update(-1);
@@ -336,6 +342,7 @@ void game::changeConsumable(int by){
     if (newConsumable > consSize || newConsumable < 0) // if player attempt to move outside of bounds
         return;
     
+    // if not moving beyond value, show that your have the next consumable selected
     currConsumable = newConsumable;
     specialScreen.update(currConsumable);
 }
@@ -350,6 +357,7 @@ void game::changeJoker(int by){
     jokerScreen.update(currJoker);
 }
 
+// FIX: this will be redone once shopitem is no longer a class 
 void game::changeShopItem(int by){
     int newShopItemInd = currShopItem + by;
     int shopItemSize = 0;

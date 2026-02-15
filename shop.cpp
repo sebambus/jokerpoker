@@ -199,6 +199,7 @@ void shop::reroll() {
     fillShopItems();
 }
 
+// ???
 void shop::reopen() {
     reroll();
     packs.clear();
