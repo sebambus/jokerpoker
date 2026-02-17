@@ -210,7 +210,10 @@ void shop::reopen() {
 }
 
 int shop::shopSize(){
-    return items.size() + packs.size();
+    // add 1 to shop size if voucher is available
+    int hasVoucher = 0; 
+    if (v != VOUCHER_COUNT) hasVoucher = 1;
+    return items.size() + packs.size() + hasVoucher;
 }
 
 

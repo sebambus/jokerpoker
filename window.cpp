@@ -241,7 +241,6 @@ void window::updateLevelScreen() {
     g->l->played.print(content);
 }
 
-// FIX: will need to be fixed when shopitem is gone
 void window::updateShopScreen(int index) {
     if (g->phase == LEVEL_PHASE) // dont do anything if your not in the shop
         return;
@@ -292,43 +291,19 @@ void window::updateShopScreen(int index) {
         shopIndex++;
     }
 
-
-
-//     std::vector<shopItem> items;)
-//     if (g->s->mode == DEFAULT_MODE){
-//         items = g->s->shopItems;
-//         changeTitle("Shop");
-//     }
-//     else items = g->s->packItems;
-
-//     std::string header;
-//     for (int i = 0; i < items.size(); i++){
-//         shopItem si = items[i];
-//         std::string newHeader;
-//         if (si.typeOfItem == SI_CARD || si.typeOfItem == SI_ITEM)
-//             newHeader = "Items:\n";
-//         else if (si.typeOfItem == SI_PACK)
-//             newHeader = "Packs:\n";
-//         else if (si.typeOfItem == SI_VOUCHER)
-//             newHeader = "Voucher:\n";
-        
-//         if (newHeader != header){
-//             print("%s", newHeader.c_str());
-//             header = newHeader;
-//         }
-
-
-//         if (i == index)
-//             print("[x] ");
-//         else
-//             print("[ ] ");
-//         print("%s ", si.getName().c_str());
-//         if (g->s->mode == DEFAULT_MODE)
-//             printWordInColor(("$"+std::to_string(si.cost)).c_str(), COLOR_YELLOW, COLOR_BLACK);
-//         print("\n");
-//     }
-
-    
+    // if shop has a voucher
+    if (g->s->v != VOUCHER_COUNT){
+        print("Voucher:\n");
+        if (index == g->s->packs.size() + g->s->items.size())
+            print("[x] ");
+        else    
+            print("[ ] ");
+        item vItem = item(g->s->v);
+        const char* str = vItem.name();
+        print("%s ", str);
+        std::string costString = "$" + std::to_string(vItem.cost);
+        printWordInColor(costString.c_str(), COLOR_YELLOW, COLOR_BLACK);
+    }
 
     if (index != -1) g->cardInfo.update(index);
 }
@@ -403,7 +378,8 @@ void window::updateShopCardInfo(int index){
     }
     // if we are looking at a voucher
     else{
-        
+        item voucherItem = item(g->s->v);
+        desc = voucherItem.description();
     }
 
     printAndAutoColor(textWrap(desc).c_str());

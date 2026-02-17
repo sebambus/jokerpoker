@@ -105,6 +105,7 @@ void game::shopInput(char c){
     case 'b': // buy item from shop / obtain from pack
         if (focusScreen != MAIN_SCREEN) break;
         useShopItem(currShopItem);
+        if (currShopItem > s->shopSize() - 1) currShopItem--; //if item bought was the last (positionally), move cursor back
         break;
     case 'R':
         if(spend(5 + s->rerollCount - vouchers[REROLL_SURPLUS] - vouchers[REROLL_GLUT])) {
@@ -208,8 +209,6 @@ void game::runupdate() {
     }
 }
 
-// FIX: shop item is a dumb class, shop can just use multiple vectors and we can determine what kind of object
-// we are looking at based on which vector it is in
 void game::useShopItem(int currItem){
     // if we are in pack mode
     if (s->mode == PACK_MODE){
@@ -243,7 +242,7 @@ void game::useShopItem(int currItem){
     }
 
     // if item is a pack
-    else if (currItem >= s->items.size() < s->packs.size()){
+    else if (currItem >= s->items.size() && currItem < s->packs.size() + s->items.size()){
         pack p = s->packs[currItem - s->items.size()];
         if (spend(p.cost)){
             s->open(p);
@@ -257,7 +256,11 @@ void game::useShopItem(int currItem){
 
     // if item is a voucher
     else {
-
+        item voucherItem = item(s->v);
+        if (spend(voucherItem.cost)){
+            gain(voucherItem);
+            s->v = VOUCHER_COUNT;
+        }
     }
     
 }
@@ -360,7 +363,7 @@ void game::changeJoker(int by){
     jokerScreen.update(currJoker);
 }
 
-// FIX: this will be redone once shopitem is no longer a class 
+// change selected shop item
 void game::changeShopItem(int by){
     int newShopItemInd = currShopItem + by;
     int shopItemSize = 0;
@@ -368,8 +371,9 @@ void game::changeShopItem(int by){
         shopItemSize = s->shopSize();
     else 
         shopItemSize = s->packItems.size();
-    if (newShopItemInd > shopItemSize-1 || newShopItemInd < 0)
+    if (newShopItemInd > shopItemSize -1 || newShopItemInd < 0){
         return;
+    }
 
     currShopItem = newShopItemInd;
     mainScreen.update(currShopItem);
