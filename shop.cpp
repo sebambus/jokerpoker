@@ -177,6 +177,7 @@ void shop::open(pack p) {
 
     g->d.shuffle();
 
+    // take 10 cards from the deck and temporarily put them in modifyableCards
     for (int i = 0; i < 10; i++)
     {
         modifyableCards.add(g->d.cards.back());

@@ -24,7 +24,6 @@ game::game() :
 
 bool running;
 
-// ???
 void game::run() {
     for(ante = 1; ante <= 8; ante++) {
         s = new shop(this);
@@ -308,7 +307,6 @@ bool game::spend(int x) {
     return true;
 }
 
-// ???
 void game::updateMenuScreens(){
     if (focusScreen == CONSUMABLE_SCREEN){
         jokerScreen.update(-1);
