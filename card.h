@@ -19,7 +19,8 @@ enum enhancement {
     STEEL_CARD,
     STONE_CARD,
     GOLD_CARD,
-    LUCKY_CARD
+    LUCKY_CARD,
+    ENHANCEMENT_COUNT
 };
 
 enum seal {
@@ -27,7 +28,8 @@ enum seal {
     GOLD_SEAL,
     RED_SEAL,
     BLUE_SEAL,
-    PURPLE_SEAL
+    PURPLE_SEAL,
+    SEAL_COUNT
 };
 
 class card{
@@ -40,6 +42,7 @@ public:
     card();
     // new card of value "v" and suit "s"
     card(int v, suit s);
+    card(int v, suit s, enhancement e, seal sl);
     card(item);
     // prints card in color with one rank char and one suit wchar_t
     void print(WINDOW*);
@@ -51,3 +54,5 @@ public:
     char valueToChar(int v);
     std::string suitToString(suit s);
     std::string valueToString(int v);
+    std::string enhancementToString(enhancement e);
+    std::string sealToString(seal sl);

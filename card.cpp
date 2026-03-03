@@ -15,14 +15,31 @@ card::card(int value, suit suit){
     cardSeal = NO_SEAL;
 }
 
+card::card(int v, suit s, enhancement e, seal sl){
+    cardValue = v;
+    cardSuit = s;
+    cardEnhancement = e;
+    cardSeal = sl;
+}
+
 
 card::card(item i) {
-    cardValue = i.val % 13;
-    cardSuit = (suit) (i.val / 13);
+    int id = i.val;
+
+    cardSeal = static_cast<seal>(id % SEAL_COUNT);
+    id /= SEAL_COUNT;
+
+    cardEnhancement = static_cast<enhancement>(id % ENHANCEMENT_COUNT);
+    id /= ENHANCEMENT_COUNT;
+
+    cardValue = id % 13;
+    id /= 13;
+
+    cardSuit = static_cast<suit>(id);
 }
 
 std::string card::name(){
-    return valueToString(cardValue) + " of " + suitToString(cardSuit) + "s";
+    return valueToString(cardValue) + " of " + suitToString(cardSuit) + "s" + enhancementToString(cardEnhancement) + sealToString(cardSeal);
 }
 
 
@@ -182,4 +199,30 @@ std::string valueToString(int v){
             return "King";
     }
     return "X";
+}
+
+std::string enhancementToString(enhancement e) {
+    switch (e) {
+        case BASE_CARD:   return "";
+        case BONUS_CARD:  return "(Bonus Card)";
+        case MULT_CARD:   return "(Mult Card)";
+        case WILD_CARD:   return "(Wild Card)";
+        case GLASS_CARD:  return "(Glass Card)";
+        case STEEL_CARD:  return "(Steel Card)";
+        case STONE_CARD:  return "(Stone Card)";
+        case GOLD_CARD:   return "(Gold Card)";
+        case LUCKY_CARD:  return "(Lucky Card)";
+        default:          return "(Unknown Enhancement)";
+    }
+}
+
+std::string sealToString(seal sl) {
+    switch (sl) {
+        case NO_SEAL:     return "";
+        case GOLD_SEAL:   return "(Gold Seal)";
+        case RED_SEAL:    return "(Red Seal)";
+        case BLUE_SEAL:   return "(Blue Seal)";
+        case PURPLE_SEAL: return "(Purple Seal)";
+        default:          return "(Unknown Seal)";
+    }
 }

@@ -1,5 +1,5 @@
 #include "item.h"
-
+#include "debug.h"
 #include "readcsv.h"
 #include "card.h"
 #include "shop.h"
@@ -26,7 +26,7 @@ item::item(itemtype i) {
         *this = item(shop(nullptr).generateVoucher());
 		break;
     case CARD:
-        *this = item(card(rand()%13, (suit) (rand()%4)));
+        *this = item(card(rand()%13, (suit)(rand()%4), (enhancement)(rand()%ENHANCEMENT_COUNT), (seal)(rand()%SEAL_COUNT)));
 		break;
     }
 }
@@ -63,7 +63,9 @@ item::item(voucher v) {
 
 item::item(card c) {
     type = CARD;
-    val = c.cardSuit*13 + c.cardValue;
+    val = (((c.cardSuit * 13 + c.cardValue) * ENHANCEMENT_COUNT
+        + c.cardEnhancement) * SEAL_COUNT
+        + c.cardSeal);
     cost = 1;
 }
 
@@ -84,6 +86,34 @@ static const char* info(item* i, int x) {
 }
 
 const char* item::name() {
+    if (type == CARD) {
+        static std::string playing_card_name;
+
+        int id = val;
+
+        std::string sealString =
+            sealToString(static_cast<seal>(id % SEAL_COUNT));
+        id /= SEAL_COUNT;
+
+        std::string enhancementString =
+            enhancementToString(static_cast<enhancement>(id % ENHANCEMENT_COUNT));
+        id /= ENHANCEMENT_COUNT;
+
+        std::string valString = valueToString(id % 13);
+        id /= 13;
+
+        std::string suitString =
+            suitToString(static_cast<suit>(id));
+
+        playing_card_name =
+            valString + " of " + suitString + "s " +
+            enhancementString + " " +
+            sealString;
+
+            debug("here");
+        return playing_card_name.c_str();
+    }
+
     return info(this, 0);
 }
 

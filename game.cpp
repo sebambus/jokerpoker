@@ -217,9 +217,9 @@ void game::useShopItem(int currItem){
         switch (it)
         {
         case JOKER:
+        case CARD:
             gain(i);
             break;
-        
         // tarots, spectrals, and planets are used, which is not yet implemented
         default:
             break;
@@ -297,6 +297,7 @@ void game::gain(item i) {
         break;
     case CARD:
         d.cards.push_back(card(i));
+        break;
     }
 }
 
