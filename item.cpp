@@ -92,37 +92,8 @@ static const char* info(item* i, int x) {
 
 const char* item::name() {
     if (type == CARD) {
-        static std::string playing_card_name;
-
-        int id = val;
-
-        std::string sealString =
-            sealToString(static_cast<seal>(id % SEAL_COUNT));
-        id /= SEAL_COUNT;
-
-        std::string enhancementString =
-            enhancementToString(static_cast<enhancement>(id % ENHANCEMENT_COUNT));
-        id /= ENHANCEMENT_COUNT;
-
-        std::string valString = valueToString(id % 13);
-        id /= 13;
-
-        std::string suitString = suitToString(static_cast<suit>(id));
-
-        if (enhancementString == "Stone "){
-            playing_card_name = "Stone Card " + sealString;
-            return playing_card_name.c_str();
-        }
-
-        if (enhancementString == "Wild "){
-            playing_card_name = "Wild of " + suitString + "s " + sealString;
-            return playing_card_name.c_str();
-        }
-
-        playing_card_name =
-            enhancementString + valString + " of " + suitString + "s " + sealString;
-
-        return playing_card_name.c_str();
+        std::string n = card(*this).name();
+        return n.c_str();
     }
 
     return info(this, 0);
