@@ -26,7 +26,12 @@ item::item(itemtype i) {
         *this = item(shop(nullptr).generateVoucher());
 		break;
     case CARD:
-        *this = item(card(rand()%13, (suit)(rand()%4), (enhancement)(rand()%ENHANCEMENT_COUNT), (seal)(rand()%SEAL_COUNT)));
+        enhancement randomEnhancement = BASE_CARD;
+        seal randomSeal = NO_SEAL;
+        if ((rand() % 100) < 40) randomEnhancement = static_cast<enhancement>(rand() % ENHANCEMENT_COUNT);
+        if ((rand() % 100) < 20) randomSeal = static_cast<seal>(rand() % SEAL_COUNT);
+        // (rand % 13) + 1 so that there is no card with value 1
+        *this = item(card((rand()%13)+1, (suit)(rand()%4), randomEnhancement, randomSeal));
 		break;
     }
 }
@@ -102,15 +107,21 @@ const char* item::name() {
         std::string valString = valueToString(id % 13);
         id /= 13;
 
-        std::string suitString =
-            suitToString(static_cast<suit>(id));
+        std::string suitString = suitToString(static_cast<suit>(id));
+
+        if (enhancementString == "Stone "){
+            playing_card_name = "Stone Card " + sealString;
+            return playing_card_name.c_str();
+        }
+
+        if (enhancementString == "Wild "){
+            playing_card_name = "Wild of " + suitString + "s " + sealString;
+            return playing_card_name.c_str();
+        }
 
         playing_card_name =
-            valString + " of " + suitString + "s " +
-            enhancementString + " " +
-            sealString;
+            enhancementString + valString + " of " + suitString + "s " + sealString;
 
-            debug("here");
         return playing_card_name.c_str();
     }
 

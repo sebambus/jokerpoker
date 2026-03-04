@@ -39,7 +39,26 @@ card::card(item i) {
 }
 
 std::string card::name(){
-    return valueToString(cardValue) + " of " + suitToString(cardSuit) + "s" + enhancementToString(cardEnhancement) + sealToString(cardSeal);
+    std::string playing_card_name;
+    std::string sealString = sealToString(cardSeal);
+    std::string enhancementString = enhancementToString(cardEnhancement);
+    std::string valString = valueToString(cardValue);
+    std::string suitString = suitToString(cardSuit);
+
+    if (enhancementString == "Stone "){
+        playing_card_name = "Stone Card " + sealString;
+        return playing_card_name;
+    }
+
+    if (enhancementString == "Wild "){
+        playing_card_name = "Wild of " + suitString + "s " + sealString;
+        return playing_card_name;
+    }
+
+    playing_card_name =
+        enhancementString + valString + " of " + suitString + "s " + sealString;
+
+    return playing_card_name;
 }
 
 
@@ -204,14 +223,14 @@ std::string valueToString(int v){
 std::string enhancementToString(enhancement e) {
     switch (e) {
         case BASE_CARD:   return "";
-        case BONUS_CARD:  return "(Bonus Card)";
-        case MULT_CARD:   return "(Mult Card)";
-        case WILD_CARD:   return "(Wild Card)";
-        case GLASS_CARD:  return "(Glass Card)";
-        case STEEL_CARD:  return "(Steel Card)";
-        case STONE_CARD:  return "(Stone Card)";
-        case GOLD_CARD:   return "(Gold Card)";
-        case LUCKY_CARD:  return "(Lucky Card)";
+        case BONUS_CARD:  return "Bonus ";
+        case MULT_CARD:   return "Mult ";
+        case WILD_CARD:   return "Wild ";
+        case GLASS_CARD:  return "Glass ";
+        case STEEL_CARD:  return "Steel ";
+        case STONE_CARD:  return "Stone ";
+        case GOLD_CARD:   return "Gold ";
+        case LUCKY_CARD:  return "Lucky ";
         default:          return "(Unknown Enhancement)";
     }
 }
@@ -219,10 +238,10 @@ std::string enhancementToString(enhancement e) {
 std::string sealToString(seal sl) {
     switch (sl) {
         case NO_SEAL:     return "";
-        case GOLD_SEAL:   return "(Gold Seal)";
-        case RED_SEAL:    return "(Red Seal)";
-        case BLUE_SEAL:   return "(Blue Seal)";
-        case PURPLE_SEAL: return "(Purple Seal)";
+        case GOLD_SEAL:   return "*Gold";
+        case RED_SEAL:    return "*Red";
+        case BLUE_SEAL:   return "*Blue";
+        case PURPLE_SEAL: return "*Purple";
         default:          return "(Unknown Seal)";
     }
 }

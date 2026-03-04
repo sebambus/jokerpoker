@@ -75,11 +75,11 @@ void window::printAndAutoColor(const char* str){
     {
         std::string w = words[i];
         const char* cstr = w.c_str();
-        if (w.find("Mult") != npos) // if word is "Mult"
+        if (w.find("Mult") != npos || w.find("Red") != npos) // if word is "Mult"
             printWordInColor(cstr, COLOR_RED, COLOR_BLACK);
-        else if (w.find("Chip") != npos) // if word is "Chips"
+        else if (w.find("Chip") != npos || w.find("Blue") != npos) // if word is "Chips"
             printWordInColor(cstr, COLOR_BLUE, COLOR_BLACK);
-        else if (w.find("$") != npos)
+        else if (w.find("$") != npos || w.find("Gold") != npos)
             printWordInColor(cstr, COLOR_YELLOW, COLOR_BLACK);
         else if (w.find("Spade") != npos)
             printWordInColor(cstr, COLOR_BLACK, COLOR_WHITE);
@@ -89,7 +89,7 @@ void window::printAndAutoColor(const char* str){
             printWordInColor(cstr, COLOR_BLACK, COLOR_BLUE);
         else if (w.find("Diamond") != npos)
             printWordInColor(cstr, COLOR_WHITE, COLOR_YELLOW);
-        else if (w.find("Tarot") != npos || w.find("Planet") != npos)
+        else if (w.find("Tarot") != npos || w.find("Planet") != npos || w.find("Purple") != npos)
             printWordInColor(cstr, COLOR_MAGENTA, COLOR_BLACK);
         else if (w.find("+") != npos || w.find("X") != npos || w.find("-") != npos){ // if word has a plus or X, check to see whats after
             if (words[i + 1].find("Mult") != npos)
@@ -254,7 +254,12 @@ void window::updateShopScreen(int index) {
                 print("[x] ");
             else
                 print("[ ] ");
-            print("%s\n", i.name());
+            // auto color only card names
+            if (i.type == CARD){
+                printAndAutoColor(i.name());
+                print("\n");
+            }
+            else print("%s\n", i.name());
             shopIndex++;
         }
         g->s->modifyableCards.print(content);
@@ -271,7 +276,12 @@ void window::updateShopScreen(int index) {
             print("[x] ");
         else
             print("[ ] ");
-        print("%s ", i.name());
+        if (i.type == CARD){
+            printAndAutoColor(i.name());
+            print("\n");
+        }
+        else print("%s ", i.name());
+        
         std::string costString = "$" + std::to_string(i.cost);
         printWordInColor(costString.c_str(), COLOR_YELLOW, COLOR_BLACK);
         print("\n");
