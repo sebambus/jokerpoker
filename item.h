@@ -34,6 +34,6 @@ public:
     item(joker);
     item(voucher);
     item(card);
-    const char* name();
+    std::string name();
     std::string description();
 };

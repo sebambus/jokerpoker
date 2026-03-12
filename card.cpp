@@ -58,6 +58,7 @@ std::string card::name(){
     playing_card_name =
         enhancementString + valString + " of " + suitString + "s " + sealString;
 
+    debug(playing_card_name);
     return playing_card_name;
 }
 

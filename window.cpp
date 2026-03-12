@@ -256,10 +256,10 @@ void window::updateShopScreen(int index) {
                 print("[ ] ");
             // auto color only card names
             if (i.type == CARD){
-                printAndAutoColor(i.name());
+                printAndAutoColor(i.name().c_str());
                 print("\n");
             }
-            else print("%s\n", i.name());
+            else print("%s\n", i.name().c_str());
             shopIndex++;
         }
         g->s->modifyableCards.print(content);
@@ -277,10 +277,10 @@ void window::updateShopScreen(int index) {
         else
             print("[ ] ");
         if (i.type == CARD){
-            printAndAutoColor(i.name());
+            printAndAutoColor(i.name().c_str());
             print("\n");
         }
-        else print("%s ", i.name());
+        else print("%s ", i.name().c_str());
         
         std::string costString = "$" + std::to_string(i.cost);
         printWordInColor(costString.c_str(), COLOR_YELLOW, COLOR_BLACK);
@@ -309,7 +309,7 @@ void window::updateShopScreen(int index) {
         else    
             print("[ ] ");
         item vItem = item(g->s->v);
-        const char* str = vItem.name();
+        const char* str = vItem.name().c_str();
         print("%s ", str);
         std::string costString = "$" + std::to_string(vItem.cost);
         printWordInColor(costString.c_str(), COLOR_YELLOW, COLOR_BLACK);
@@ -328,7 +328,7 @@ void window::updateSpecialScreen(int index){
             print("[x]");
         else
             print("[ ]");
-        print("%s\n", g->consumables[i].name());
+        print("%s\n", g->consumables[i].name().c_str());
     }
     if (index != -1) g->cardInfo.update(index);
 }
@@ -342,7 +342,7 @@ void window::updateJokerScreen(int index){
             print("[x]");
         else
             print("[ ]");
-        print("%s\n", g->jokers[i].name());
+        print("%s\n", g->jokers[i].name().c_str());
     }
 
     if (index != -1) g->cardInfo.update(index);

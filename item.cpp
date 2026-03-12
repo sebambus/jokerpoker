@@ -90,13 +90,14 @@ static const char* info(item* i, int x) {
     return "ERROR";
 }
 
-const char* item::name() {
+std::string item::name() {
     if (type == CARD) {
         std::string n = card(*this).name();
-        return n.c_str();
+        return n;
     }
 
-    return info(this, 0);
+    std::string inf = info(this,0);
+    return inf;
 }
 
 std::string item::description(){
