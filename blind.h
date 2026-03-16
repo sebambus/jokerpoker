@@ -39,14 +39,10 @@ class blind {
     public:
         std::string name;
         std::string description;
+        bossBlindType bossType;
         int reward = 0;
         float thresholdMultiplier = 0;
+        blind(int ante, std::vector<bossBlindType> completedBosses);
         blind(blindType bt);
         blind();
-};
-
-class bossBlind : public blind {
-    public:
-        bossBlindType bossType;
-        bossBlind(int ante, std::vector<bossBlindType> completedBosses);
 };

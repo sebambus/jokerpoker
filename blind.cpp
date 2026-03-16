@@ -4,7 +4,7 @@
 #include "debug.h"
 
 blind::blind(){
-    
+
 }
 
 // for small or big blinds
@@ -18,10 +18,12 @@ blind::blind(blindType bt){
         reward = 4;
         thresholdMultiplier = 1.5;
     }
+    description = "";
+    bossType = BOSS_BLIND_TYPE_COUNT;
 }
 
-// return an unplayed boss blind with an appropriate minimum ante
-bossBlind::bossBlind(int ante, std::vector<bossBlindType> completedBosses){
+// for boss blinds
+blind::blind(int ante, std::vector<bossBlindType> completedBosses){
     std::vector<bossBlindType> possibleTypes;
     for (int i = 0; i < (int)BOSS_BLIND_TYPE_COUNT; i++)
     {
@@ -43,5 +45,4 @@ bossBlind::bossBlind(int ante, std::vector<bossBlindType> completedBosses){
     thresholdMultiplier = atoi(readcsv("blind.csv", (int)bossType + 1, 3));
     reward = atoi(readcsv("blind.csv", (int)bossType + 1, 4));
 
-    //check for if there are no possible blinds
 }
