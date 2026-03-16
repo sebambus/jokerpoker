@@ -6,6 +6,7 @@
 #include "item.h"
 #include "shop.h"
 #include "level.h"
+#include "blind.h"
 
 enum handTableIndices : int{
     MULT,
@@ -30,6 +31,7 @@ public:
     int phase; 
     std::vector<item> consumables;
     std::vector<item> jokers;
+    std::vector<bossBlindType> completedBossBlinds;
     int handTable[13][4]; //13 hands, 4 fields, example: handtable[HIGH][MULT]
     std::bitset<VOUCHER_COUNT> vouchers;
     deck d;

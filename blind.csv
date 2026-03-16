@@ -1,0 +1,29 @@
+name,description,minimum_ante,threshold_multiplier,reward
+The Club,All Club cards are debuffed,1,2,5
+The Goad,All Spade cards are debuffed,1,2,5
+The Head,All Heart cards are debuffed,1,2,5
+The Window,All Diamond cards are debuffed,1,2,5
+The Hook,Discards 2 random cards held in hand after every played hand,1,2,5
+The Pillar,Cards played previously this Ante are debuffed,1,2,5
+The Psychic,Must play exactly 5 cards in each hand,1,2,5
+The Manacle,-1 hand size for the round,1,2,5
+The Arm,Decreases level of the played poker hand,2,2,5
+The Fish,Cards drawn after each hand are drawn face down,2,2,5
+The Flint,Base chips and mult are halved,2,2,5
+The House,First hand is drawn face down,2,2,5
+The Mark,Face cards are drawn face down,2,2,5
+The Mouth,Only one hand type can be played this round,2,2,5
+The Needle,Only one hand may be played,2,2,5
+The Wall,Extra large blind score requirement,2,4,5
+The Water,Start the round with zero discards,2,2,5
+The Wheel,1 in 7 cards are drawn face down,2,2,5
+The Eye,You cannot play the same hand type twice,3,2,5
+The Tooth,Lose 1 for every card played,3,2,5
+The Plant,All face cards are debuffed,4,2,5
+The Serpent,After playing or discarding always draw three cards,5,2,5
+The Ox,Playing your most played hand this run sets money to 0,6,2,5
+The Amber Acorn,Flips and shuffles all Jokers,8,2,8
+The Verdant Leaf,All cards are debuffed until one Joker is sold,8,2,8
+The Violet Vessel,Extremely large blind score requirement,8,6,8
+The Crimson Heart,One random Joker is disabled every hand,8,2,8
+The Cerulean Bell,Forces one card to always be selected,8,2,8

@@ -6,6 +6,7 @@
 #include "readcsv.h"
 #include "shop.h"
 #include "debug.h"
+#include "blind.h"
 
 game::game() :
     levelInfo(10, 20, 0, 0, "Level Info", this, LEVEL_INFO_SCREEN),
