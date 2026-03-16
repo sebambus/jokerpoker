@@ -5,8 +5,6 @@
 typedef enum {
     SMALL_BLIND,
     BIG_BLIND,
-    BOSS_BLIND,
-    FINSIHER_BOSS_BLIND,
     BLIND_TYPE_COUNT
 } blindType;
 
@@ -41,17 +39,14 @@ class blind {
     public:
         std::string name;
         std::string description;
-        blindType type;
         int reward = 0;
         float thresholdMultiplier = 0;
-
-        blind createSmallBlind();
-        blind createBigBlind();
+        blind(blindType bt);
+        blind();
 };
 
 class bossBlind : public blind {
     public:
         bossBlindType bossType;
+        bossBlind(int ante, std::vector<bossBlindType> completedBosses);
 };
-
-bossBlind createBossBlind(int ante, std::vector<bossBlindType> completedBosses);

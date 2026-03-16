@@ -3,30 +3,25 @@
 #include <algorithm>
 #include "debug.h"
 
-blind blind::createSmallBlind(){
-    blind b;
-    b.name = "Small Blind";
-    b.description = "";
-    b.reward = 3;
-    b.thresholdMultiplier = 1;
-    b.type = SMALL_BLIND;
-    return b;
+blind::blind(){
+    
 }
 
-blind blind::createBigBlind(){
-    blind b;
-    b.name = "Big Blind";
-    b.description = "";
-    b.reward = 4;
-    b.thresholdMultiplier = 1.5;
-    b.type = BIG_BLIND;
-    return b;
+// for small or big blinds
+blind::blind(blindType bt){
+    if (bt == SMALL_BLIND){
+        name = "Small Blind";
+        reward = 3;
+        thresholdMultiplier = 1;
+    } else {
+        name = "Big Blind";
+        reward = 4;
+        thresholdMultiplier = 1.5;
+    }
 }
 
-bossBlind createBossBlind(int ante, std::vector<bossBlindType> completedBosses){
-    bossBlind b;
-    b.type = BOSS_BLIND;
-
+// return an unplayed boss blind with an appropriate minimum ante
+bossBlind::bossBlind(int ante, std::vector<bossBlindType> completedBosses){
     std::vector<bossBlindType> possibleTypes;
     for (int i = 0; i < (int)BOSS_BLIND_TYPE_COUNT; i++)
     {
@@ -42,12 +37,11 @@ bossBlind createBossBlind(int ante, std::vector<bossBlindType> completedBosses){
         if (!isCompleted && inAnteRange) possibleTypes.push_back((bossBlindType)i);
     }
 
-    b.bossType = (bossBlindType)(rand() % possibleTypes.size());
-    b.name = std::string(readcsv("blind.csv", (int)b.bossType + 1, 0));
-    b.description = std::string(readcsv("blind.csv", (int)b.bossType + 1, 1));
-    b.thresholdMultiplier = atoi(readcsv("blind.csv", (int)b.bossType + 1, 3));
-    b.reward = atoi(readcsv("blind.csv", (int)b.bossType + 1, 4));
+    bossType = (bossBlindType)(rand() % possibleTypes.size());
+    name = std::string(readcsv("blind.csv", (int)bossType + 1, 0));
+    description = std::string(readcsv("blind.csv", (int)bossType + 1, 1));
+    thresholdMultiplier = atoi(readcsv("blind.csv", (int)bossType + 1, 3));
+    reward = atoi(readcsv("blind.csv", (int)bossType + 1, 4));
 
-    return b;
     //check for if there are no possible blinds
 }
