@@ -24,6 +24,8 @@ blind::blind(blindType bt){
 
 // for boss blinds
 blind::blind(int ante, std::vector<bossBlindType> completedBosses){
+    // currently does not work with endless mode, can change later
+    // create vector of boss blinds to choose from given those already completed and the ante
     std::vector<bossBlindType> possibleTypes;
     for (int i = 0; i < (int)BOSS_BLIND_TYPE_COUNT; i++)
     {

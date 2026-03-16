@@ -206,8 +206,8 @@ void window::update(int index) {
 }
 
 void window::updateLevelInfo() {
-    print("Small Blind\n");
-    print("Threshold: %d\n", g->l->threshold);
+    print(g->l->b.name.c_str()); // name of current blind
+    print("\nThreshold: %d\n", g->l->threshold);
     print("Score: %d\n", g->l->currentScore);
     if (g->l->played.pokerHand == HAND_TYPE_COUNT) // for when level starts
         print("\n\n\n");
