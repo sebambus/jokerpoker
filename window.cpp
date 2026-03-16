@@ -176,6 +176,8 @@ void window::update(int index) {
             updateLevelScreen();
         if(g->phase == SHOP_PHASE)
             updateShopScreen(index);
+        if(g->phase == BLINDS_PHASE)
+            updateBlindsScreen();
 	break;
     case CONSUMABLE_SCREEN:
         updateSpecialScreen(index);
@@ -317,6 +319,18 @@ void window::updateShopScreen(int index) {
 
     if (index != -1) g->cardInfo.update(index);
 }
+
+void window::updateBlindsScreen(){
+    for (int i = 0; i < 3; i++)
+    {
+        if (g->round == i +1) print("Next -> ");
+        print("%s\n", g->currBlinds[i].name.c_str());
+        if (i == 2) print("%s", g->currBlinds[i].description.c_str());
+        print("\n");
+    }
+    
+}
+
 
 // update consumable screen
 void window::updateSpecialScreen(int index){

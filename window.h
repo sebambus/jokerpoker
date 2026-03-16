@@ -43,6 +43,7 @@ private:
     void updateGameInfo();
     void updateLevelScreen();
     void updateShopScreen(int index);
+    void updateBlindsScreen();
     void updateSpecialScreen(int index);
     void updateJokerScreen(int index);
     void updateCardInfo(int index);

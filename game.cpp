@@ -52,6 +52,7 @@ void game::runinit() {
         changeFocus(MAIN_SCREEN);
         playingCardInfo.clear();
     }
+
     if(phase == LEVEL_PHASE) {
         l = new level(this);
 
@@ -68,6 +69,12 @@ void game::runinit() {
 
         playingCardInfo.update(l->h.cursor);
     }
+
+    if (phase == BLINDS_PHASE) {
+        mainScreen.changeTitle("Blinds");
+        mainScreen.update(0);
+        peekScreen.update(0);
+    }
 }
 
 void game::runswitch() {
@@ -75,6 +82,7 @@ void game::runswitch() {
     universalInput(c);
     if (phase == SHOP_PHASE) shopInput(c);
     if (phase == LEVEL_PHASE) levelInput(c);
+    if (phase == BLINDS_PHASE) blindsInput(c);
 }
 
 void game::universalInput(char c){
@@ -145,6 +153,16 @@ void game::shopInput(char c){
         break;
     }
 }
+
+void game::blindsInput(char c){
+    switch (c)
+    {
+    case 'e':
+        running = false;
+        break;
+    }
+}
+
 
 void game::levelInput(char c){
     switch (c) {

@@ -19,6 +19,7 @@ enum screentype;
 
 enum phase : int{
     SHOP_PHASE,
+    BLINDS_PHASE,
     LEVEL_PHASE,
     PHASE_COUNT
 };
@@ -58,6 +59,7 @@ public:
     void runswitch();
     void universalInput(char c);
     void levelInput(char c);
+    void blindsInput(char c);
     void shopInput(char c);
     void runupdate();
     void useShopItem(int currItem);
