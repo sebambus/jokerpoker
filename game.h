@@ -32,6 +32,7 @@ public:
     std::vector<item> consumables;
     std::vector<item> jokers;
     std::vector<bossBlindType> completedBossBlinds;
+    blind currBlinds[3];
     int handTable[13][4]; //13 hands, 4 fields, example: handtable[HIGH][MULT]
     std::bitset<VOUCHER_COUNT> vouchers;
     deck d;
@@ -72,4 +73,5 @@ public:
     void changeConsumable(int by);
     void changeJoker(int by);
     void changeShopItem(int by);
+    void makeBlinds();
 };

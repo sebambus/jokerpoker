@@ -5,6 +5,7 @@ class game;
 #include "deck.h"
 #include "hand.h"
 #include "window.h"
+#include "blind.h"
 
 
 class level {
@@ -17,6 +18,7 @@ public:
     int threshold;
     deck d;
     hand h;
+    blind b;
     hand played;
 
     int recentChips = 0;

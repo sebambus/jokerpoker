@@ -44,5 +44,4 @@ blind::blind(int ante, std::vector<bossBlindType> completedBosses){
     description = std::string(readcsv("blind.csv", (int)bossType + 1, 1));
     thresholdMultiplier = atoi(readcsv("blind.csv", (int)bossType + 1, 3));
     reward = atoi(readcsv("blind.csv", (int)bossType + 1, 4));
-
 }

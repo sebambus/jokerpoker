@@ -28,6 +28,7 @@ bool running;
 void game::run() {
     for(ante = 1; ante <= 8; ante++) {
         s = new shop(this);
+        makeBlinds();
         for(round = 1; round <= 3; round++) {
             for(phase = SHOP_PHASE; phase != PHASE_COUNT; phase++) {
                 if(phase == SHOP_PHASE && ante+round == 2) continue;
@@ -424,4 +425,11 @@ void game::swapFocus(){
         currConsumable = 0;
         specialScreen.update(0);
     }
+}
+
+void game::makeBlinds(){
+    currBlinds[0] = blind(SMALL_BLIND);
+    currBlinds[1] = blind(BIG_BLIND);
+    currBlinds[2] = blind(ante, completedBossBlinds);
+    completedBossBlinds.push_back(currBlinds[2].bossType);
 }

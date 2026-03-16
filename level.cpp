@@ -17,6 +17,7 @@ level::level(game* g) {
     d.shuffle();
     currentScore = 0;
     recentScore = 0;
+    b = g->currBlinds[g->round - 1];
 
     int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
     threshold = antebases[g->ante] * (g->round+1)/2;
