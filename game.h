@@ -55,6 +55,8 @@ public:
     int currJoker = 0;
     int currShopItem = 0;
 
+    bool running;
+
     game();
     void run();
     void runinit();
