@@ -15,6 +15,25 @@ enum handTableIndices : int{
     TIMES_PLAYED
 };
 
+enum decktype : int {
+    RED_DECK,
+    BLUE_DECK,
+    YELLOW_DECK,    // not implemented
+    GREEN_DECK,     // not implemented
+    BLACK_DECK,     // not implemented
+    MAGIC_DECK,     // not implemented
+    NEBULA_DECK,    // not implemented
+    GHOST_DECK,     // not implemented
+    ABANDONED_DECK, // not implemented
+    CHECKERED_DECK, // not implemented
+    ZODIAC_DECK,    // not implemented
+    PAINTED_DECK,   // not implemented
+    ANAGLYPH_DECK,  // not implemented
+    PLASMA_DECK,    // not implemented
+    ERRATIC_DECK,   // not implemented
+    DECK_TYPE_COUNT
+};
+
 enum screentype;
 
 enum phase : int{
@@ -49,6 +68,7 @@ public:
     window playingCardInfo;
     shop* s;
     level* l;
+    decktype currentDeck = DECK_TYPE_COUNT; // used to track which deck the player is currently using, if any. DECK_TYPE_COUNT means no deck is being used
     
     screentype focusScreen = CONSUMABLE_SCREEN;
     int currConsumable = 0;
