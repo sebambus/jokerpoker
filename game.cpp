@@ -29,13 +29,14 @@ void game::run() {
         makeBlinds();
         for(round = 1; round <= 3; round++) {
             for(phase = SHOP_PHASE; phase != PHASE_COUNT; phase++) {
-                if(phase == SHOP_PHASE && ante+round == 2) continue;
+                if(currentDeck == DECK_TYPE_COUNT) phase = DECK_PHASE; // if deck not selected, select deck
                 runinit();
                 running = true;
                 while(running) {
                     runswitch();
                     runupdate();
                 }
+                if (phase == DECK_PHASE) phase == LEVEL_PHASE-1; // skip to level phase after deck selection
             }
         }
     }

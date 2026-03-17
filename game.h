@@ -37,6 +37,7 @@ enum decktype : int {
 enum screentype;
 
 enum phase : int{
+    DECK_PHASE,
     SHOP_PHASE,
     BLINDS_PHASE,
     LEVEL_PHASE,
