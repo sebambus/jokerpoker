@@ -160,6 +160,10 @@ void game::blindsInput(char c){
     case 'e':
         running = false;
         break;
+    case 's':
+        if (round != 3) // only small and big blinds are skippable
+            skipBlind();
+        break;
     }
 }
 
@@ -450,4 +454,11 @@ void game::makeBlinds(){
     currBlinds[1] = blind(BIG_BLIND);
     currBlinds[2] = blind(ante, completedBossBlinds);
     completedBossBlinds.push_back(currBlinds[2].bossType);
+}
+
+void game::skipBlind(){
+    tags.push_back(currBlinds[round - 1].skipTag); // gain the skipped blinds tag
+    debug(tags[0].name);
+    round++;
+    runinit();
 }

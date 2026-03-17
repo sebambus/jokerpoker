@@ -20,6 +20,7 @@ blind::blind(blindType bt){
     }
     description = "";
     bossType = BOSS_BLIND_TYPE_COUNT;
+    skipTag = tag();
 }
 
 // for boss blinds
@@ -46,4 +47,40 @@ blind::blind(int ante, std::vector<bossBlindType> completedBosses){
     description = std::string(readcsv("blind.csv", (int)bossType + 1, 1));
     thresholdMultiplier = atoi(readcsv("blind.csv", (int)bossType + 1, 3));
     reward = atoi(readcsv("blind.csv", (int)bossType + 1, 4));
+    skipTag = tag(TAG_COUNT);
+}
+
+tag::tag(){
+    type = (tagType)(rand() % TAG_COUNT);
+    name = std::string(readcsv("tag.csv", (int)type + 1, 0));
+    description = std::string(readcsv("tag.csv", (int)type + 1, 1));
+    setImmediate();
+}
+
+tag::tag(tagType tt){
+    type = tt;
+    if (type = TAG_COUNT) return;
+    name = std::string(readcsv("tag.csv", (int)type + 1, 0));
+    description = std::string(readcsv("tag.csv", (int)type + 1, 1));
+    setImmediate();
+}
+
+void tag::setImmediate(){
+    switch(type){
+        case STANDARD_TAG:
+        case CHARM_TAG:
+        case METEOR_TAG:
+        case BUFFOON_TAG:
+        case HANDY_TAG:
+        case GARBAGE_TAG:
+        case ETHEREAL_TAG:
+        case TOP_UP_TAG:
+        case SPEED_TAG:
+        case ORBITAL_TAG:
+        case ECONOMY_TAG:
+            immediate = true;
+            break;
+        default:
+            immediate = false;
+    }
 }

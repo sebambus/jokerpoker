@@ -32,9 +32,11 @@ public:
     int phase; 
     std::vector<item> consumables;
     std::vector<item> jokers;
+    std::vector<tag> tags;
     std::vector<bossBlindType> completedBossBlinds;
     blind currBlinds[3];
     int handTable[13][4]; //13 hands, 4 fields, example: handtable[HIGH][MULT]
+    int antebases[9] = {100, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000};
     std::bitset<VOUCHER_COUNT> vouchers;
     deck d;
     window levelInfo;
@@ -76,4 +78,5 @@ public:
     void changeJoker(int by);
     void changeShopItem(int by);
     void makeBlinds();
+    void skipBlind();
 };

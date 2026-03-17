@@ -323,10 +323,22 @@ void window::updateShopScreen(int index) {
 void window::updateBlindsScreen(){
     for (int i = 0; i < 3; i++)
     {
-        if (g->round == i +1) print("Next -> ");
-        print("%s\n", g->currBlinds[i].name.c_str());
-        if (i == 2) print("%s", g->currBlinds[i].description.c_str());
-        print("\n");
+        std::string nextString = "Next -> ";
+        if (g->round == i +1) printWordInColor(nextString.c_str(), COLOR_BLACK, COLOR_WHITE);
+        print("%s", g->currBlinds[i].name.c_str());
+        print(" | Score: ");
+        std::string scoreString = std::to_string((int)(g->antebases[g->ante] * g->currBlinds[i].thresholdMultiplier));
+        printWordInColor(scoreString.c_str(), COLOR_BLUE, COLOR_BLACK);
+        print(" | Reward: ");
+        std::string rewardString = "$" + std::to_string(g->currBlinds[i].reward);
+        printWordInColor(rewardString.c_str(), COLOR_YELLOW, COLOR_BLACK);
+        if (i == 2) print("\n%s", g->currBlinds[i].description.c_str());
+        else {
+            tag t = g->currBlinds[i].skipTag;
+            std::string skipText = "\nSkip: " +  t.name + ", " + t.description;
+            print(skipText.c_str());
+        }
+        print("\n\n");
     }
     
 }
