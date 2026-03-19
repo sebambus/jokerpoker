@@ -45,6 +45,13 @@ void game::run() {
 void game::runinit() {
     gameInfo.update(0);
 
+    if(phase == DECK_PHASE) {
+        mainScreen.changeTitle("Deck Selection");
+        currentDeck = RED_DECK;
+        mainScreen.update(0);
+        peekScreen.update(0);
+    }
+
     if(phase == SHOP_PHASE) {
         s->reopen();
         mainScreen.changeTitle("Shop");

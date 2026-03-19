@@ -28,6 +28,9 @@ void game::universalInput(char c){
         case 'k':
             moveMenuCursor(-1);
             break;
+        case 'P':
+            running = false;
+            break;
     }
  
 }
