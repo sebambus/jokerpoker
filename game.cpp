@@ -165,11 +165,11 @@ void game::useShopItem(int currItem){
 }
 
 int game::getPlays() {
-    return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG] + currentDeck == BLUE_DECK;
+    return 3 + vouchers[GRABBER] + vouchers[NACHO_TONG] + (currentDeck == BLUE_DECK);
 }
 
 int game::getDiscards() {
-    return 3 + vouchers[WASTEFUL] + vouchers[RECYCLOMANCY] + currentDeck == RED_DECK;
+    return 3 + vouchers[WASTEFUL] + vouchers[RECYCLOMANCY] + (currentDeck == RED_DECK);
 }
 
 void game::initHandTable(){
